@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- 
+	To add: 
+		Formatter to format test results
+		Coverage of production code based on the tests
+-->		
+<project name="calemeam" basedir=".." default="run_tests">
+  <target name="run_tests">
+    <phpunit2 haltonfailure="true" > <!-- printsummary="true">  -->
+      <formatter type="plain" usefile="false"/>
+      <!-- this is not working <formatter todir="reports" type="xml"/> -->
+      <batchtest>
+        <fileset dir="./test/server">
+          <include name="**/*Test.php"/>
+          <exclude name="**/temp/*"/>
+        </fileset>
+      </batchtest>
+    </phpunit2>
+  </target>
+</project>
