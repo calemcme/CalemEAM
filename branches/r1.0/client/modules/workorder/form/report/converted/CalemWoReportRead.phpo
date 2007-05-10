@@ -1,0 +1,1 @@
+a:1:{s:13:"CalemFormInfo";a:7:{s:2:"id";s:17:"CalemWoReportRead";s:5:"title";s:9:"workorder";s:4:"icon";s:7:"CalemWo";s:10:"controller";s:15:"CalemReportRead";s:5:"model";s:9:"workorder";s:4:"view";a:1:{s:16:"CalemViewRefInfo";a:1:{s:2:"id";s:17:"CalemWoReportRead";}}s:11:"replaceType";N;}}
