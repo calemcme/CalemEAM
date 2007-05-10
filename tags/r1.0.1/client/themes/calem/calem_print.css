@@ -1,0 +1,178 @@
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+ 
+body {
+	background: white;
+	font-size: 10pt;
+}
+
+.CalemReportMainDiv {
+	width: 8.25in; /* height: 11.75in; */
+	border: 1px solid gray;
+}	
+
+.CalemReportHeaderTable {
+	width: 100%;
+}
+
+.CalemReportIcon { width: 25%; }
+      
+.CalemReportIconImg { cursor:pointer; cursor:hand; }
+
+.CalemReportPrintIconImg {  cursor:pointer; cursor:hand;}
+
+.CalemReportTitle {
+	width: 50%;
+	text-align: center;
+        font-size: 12pt;
+        font-family: Tahoma, Arial, Helvetica, sans-serif;
+        font-weight: bold;
+}
+
+.CalemReportCommand {
+	width: 25%;
+}
+
+.DwtLabel {
+        background-color: #C6C5D7;
+        vertical-align: top;
+        text-align: left;
+        padding-left: 3px;
+        border: 1px solid gray; /* rgb(102, 102, 102) */;
+} 
+
+.CalemReportCol {
+      vertical-align: top;
+}
+
+.CalemReadDefault {
+       vertical-align: top;
+       text-align: left;
+       border-bottom: 1px solid gray;
+       /* border: 1px solid gray; */ /* rgb(102, 102, 102) */;
+}
+
+.CalemReadText {
+      vertical-align: top;
+      text-align: left;
+      border: 1px solid gray; /* rgb(102, 102, 102) */;
+}
+
+
+/**
+ * copied from calem.css
+ */
+ 
+.CalemViewEditRender TD {
+        vertical-align: top;
+        text-align: left;
+        padding: 1px;
+} 
+
+.CalemViewSearchEditRender TD {
+        vertical-align: top;
+        text-align: left;
+        padding: 1px;
+} 
+
+.CalemViewReadRender TD {
+        vertical-align: top;
+        text-align: left;
+        padding: 1px;
+} 
+
+.CalemViewEditRender .COLUMN-EVEN {
+}
+
+.CalemViewEditRender .COLUMN-ODD {
+
+}
+
+.CalemEditCaption {
+        font-size: 10pt;
+        font-family: Tahoma, Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        text-align: left;
+}
+
+.CalemEditSection {
+        font-size: 8pt;
+        font-family: Tahoma, Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        text-align: left;
+}
+
+.CalemEditSection {
+   border-bottom: 1px solid rgb(102, 102, 102);
+}
+
+.CalemDateLookupTd {padding-left: 2px;}
+.CalemEditLookupTd {padding-left: 2px;}
+
+.FormEditError {background-image:url("icons/flag_red.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+.CalemDatePrompt {padding-left: 4px;}
+
+.CalemTimeLabel {padding-left: 4px;}
+
+.CalemModuleLabel {
+        font-weight: bold;
+        color: blue;
+} 
+
+/**
+ * copied from dwt.ccs
+ */
+
+/*
+* List views
+*/
+
+/* Common styles */
+.DwtListView {
+	width: 100%;
+}
+
+.DwtListView-Column {
+   background-color: #C6C5D7;
+   border: 1px solid gray;
+}
+
+.DwtListView-ColumnDiv {
+        padding-left: 4;
+        font-weight: bold;
+        font-size: 8pt;
+        font-family: Tahoma, Arial, Helvetica, sans-serif;
+        text-align: left;
+}
+
+.CalemListView-DataTd {
+   border: 1px solid gray;
+}
+
+.CalemListViewCol_varchar {padding-left: 4px;}
+.CalemListViewCol_text {padding-left: 4px;}
+.CalemListViewCol_int {text-align: right; padding-right: 2px;}
+.CalemListViewCol_double {text-align: right; padding-right: 2px;}
+.CalemListViewCol_currency {text-align: right; padding-right: 2px;}
+.CalemListViewCol_sys_currency {text-align: right; padding-right: 2px;}
+.CalemListViewCol_tinyint {text-align: center;} /* this is boolean */
+
+
+

@@ -1,0 +1,145 @@
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+ 
+/* module icons */
+.ImgCalemHome 	{background-image:url("icons/house.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemWo   	{background-image:url("icons/script.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemAsset	{background-image:url("icons/building.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemPm {background-image:url("icons/time.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemIn	{background-image:url("icons/bricks.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemPo		{background-image:url("icons/money_dollar.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemBudget {background-image:url("icons/money.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemAdmin	{background-image:url("icons/group.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemMoreIcon	{background-image:url("icons/arrow_right.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemDoc	{background-image:url("icons/book.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemSched	{background-image:url("icons/clock.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemRcm	{background-image:url("icons/building_error.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemInspection	{background-image:url("icons/user_suit.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemTraining	{background-image:url("icons/cd.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemContact	{background-image:url("icons/vcard.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemContractor	{background-image:url("icons/group_gear.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemProject	{background-image:url("icons/page.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemReq	{background-image:url("icons/script_gear.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+/* generic bar */
+.ImgCalemLogout	{background-image:url("icons/door_out.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemHelp	{background-image:url("icons/help.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+/* module bar */
+.ImgCalemForm	{background-image:url("icons/application_form.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemProcedure	{background-image:url("icons/plugin_go.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemReport	{background-image:url("icons/report.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemConfiguration	{background-image:url("icons/bricks.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemCloseTab	{background-image:url("icons/bullet_blue.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemCloseTabHover	{background-image:url("icons/door.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+/* shared tool bar buttons */
+.ImgCalemNew	{background-image:url("icons/add.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemOpen	{background-image:url("icons/application_form.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemEdit	{background-image:url("icons/application_form_edit.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemCancel	{background-image:url("icons/cancel.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemClose	{background-image:url("icons/door.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemSave	{background-image:url("icons/disk.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemDelete	{background-image:url("icons/cross.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemPrint	{background-image:url("icons/printer.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemNext	{background-image:url("icons/arrow_down.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemPrev	{background-image:url("icons/arrow_up.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemRefresh {background-image:url("icons/arrow_refresh.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+/* Required field label */
+.ImgCalemRequired	{background-image:url("icons/bullet_purple.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemDateLookup {background-image:url("icons/date.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Budget update */
+.ImgCalemBudgetUpdate {background-image:url("icons/arrow_refresh.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Lookup icon */
+.ImgCalemLookup	{background-image:url("icons/application_form_magnify.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+/** Lookup select */
+.ImgCalemSelect	{background-image:url("icons/accept.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+/** Customize */
+.ImgCalemCustomize	{background-image:url("icons/layout_edit.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemCustomizeReset	{background-image:url("icons/layout_delete.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Search */
+.ImgCalemSearch	{background-image:url("icons/zoom.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemSearchClear  	{background-image:url("icons/zoom_out.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Apply */
+.ImgCalemApply	{background-image:url("icons/accept.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+.ImgCalemApplySave	{background-image:url("icons/tick.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Form Builder */
+.ImgCalemBuilder	{background-image:url("icons/application_form_add.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Row */
+.ImgCalemRow	{background-image:url("icons/tag.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Toolbar */
+.ImgCalemToolbar	{background-image:url("icons/wrench.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Table */
+.ImgCalemTable	{background-image:url("icons/table.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemTableExtesion	{background-image:url("icons/table_lightning.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** caption */
+.ImgCalemCaption	{background-image:url("icons/text_allcaps.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemTreeLabel  	{background-image:url("icons/text_smallcaps.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemLabelEdit  	{background-image:url("icons/textfield_key.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Data fields */
+.ImgCalemTreeField	{background-image:url("icons/database.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Separator */
+.ImgCalemSeparator	{background-image:url("icons/page_white.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** form tab */
+.ImgCalemFormTab	{background-image:url("icons/tab.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemFormTabCustomize	{background-image:url("icons/tab_edit.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Admin */
+.ImgCalemUser	{background-image:url("icons/user.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemGroup	{background-image:url("icons/group.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemDataDesign	{background-image:url("icons/database_edit.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemTableDesign	{background-image:url("icons/table_edit.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+/** Access design */
+.ImgCalemAclDesign	{background-image:url("icons/lock_edit.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemModule	{background-image:url("icons/application.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemLayout	{background-image:url("icons/chart_organisation.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemFolder	{background-image:url("icons/folder.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemMenu	{background-image:url("icons/page_link.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+/** Table design */
+.ImgCalemFieldAdd	{background-image:url("icons/database_add.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemFieldDelete	{background-image:url("icons/database_delete.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/** Custom dropdown */
+.ImgCalemDropdownCustom	{background-image:url("icons/database_lightning.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+/** modules */
+.ImgCalemCraft	{background-image:url("icons/user_gray.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemDataRefresh  {background-image:url("icons/database_refresh.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemCodes  {background-image:url("icons/page_green.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemReopen  {background-image:url("icons/arrow_undo.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+.ImgCalemInCheckout  {background-image:url("icons/cog_delete.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemInReturn  {background-image:url("icons/cog_add.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemInReceive  {background-image:url("icons/cog_add.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemInCheckin  {background-image:url("icons/cog_add.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemInPhysical  {background-image:url("icons/cog_edit.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemInMove  {background-image:url("icons/cog_go.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+.ImgCalemPoItemAdd  {background-image:url("icons/script_add.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemPoItemRemove  {background-image:url("icons/script_delete.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+

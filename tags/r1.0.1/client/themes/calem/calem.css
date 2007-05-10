@@ -1,0 +1,218 @@
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+ 
+/**
+ * Theme styles
+ */
+.screen_layout {background-color:rgb(228,228,228);}
+.screen_layout_table {margin:0px; padding:0px; border-collapse:collapse;}
+
+.screen_layout_table .DwtToolBar {
+   padding-top: 0px;
+   padding-bottom: 0px;
+   border-top: 1px solid blue; /* rgb(102, 102, 102) */;
+}
+
+
+/**
+ * Theme components styles
+ */ 
+.ThemeHeadlineTable {margin: 0px; padding:0px; border-collapse:collapse; width:100%;}
+
+#theme_headline_tr {background-color:rgb(238,238,238); border: 1px solid; border-color:gray;}
+/* #theme_headline_tr {background-color:rgb(255, 255, 204); border: 1px solid; border-color:gray;}  */
+#theme_healine_logo_td {text-align:left; vertical-align:middle; cursor:pointer; cursor:hand;}
+/* #theme_headline_logo {height:48px;} */
+#theme_headline_td {width:100%;}
+#theme_headline_center_td {width:100%;}
+#theme_headline_common_td {width:100%;}
+
+/**
+ * Main client area
+ */
+#theme_main_td { border: 0px;}
+
+/**
+ * ScrollBar
+ */
+.CalemScrollBarTable {height:100%; width:16px; background-image:url("scrollbar/background.png");background-position:0px 0px;background-repeat:repeat-y;width:16px;overflow:hidden;}
+/**
+ * Scroll buttons
+ */
+.CalemScrollButtonUp {width:16px; height:16px;background-image:url("scrollbar/go-up.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;} 
+.CalemScrollButtonUp_Over {width:16px; height:16px;background-image:url("scrollbar/go-up_hover.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.CalemScrollButtonUp_Down {width:16px; height:16px;background-image:url("scrollbar/go-up_depressed.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.CalemScrollButtonUp_Disable {width:16px; height:16px;background-image:url("scrollbar/go-up_dis.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+
+.CalemScrollButtonDown {width:16px; height:16px;background-image:url("scrollbar/go-down.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.CalemScrollButtonDown_Over {width:16px; height:16px;background-image:url("scrollbar/go-down_hover.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.CalemScrollButtonDown_Down {width:16px; height:16px;background-image:url("scrollbar/go-down_depressed.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.CalemScrollButtonDown_Disable {width:16px; height:16px;background-image:url("scrollbar/go-down_dis.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+/**
+ * Scroll sliders
+ */ 
+.CalemScrollSlider_Top    {background-image:url("scrollbar/scroll_fill.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:4px;overflow:hidden;}
+.CalemScrollSlider_Fill   {background-image:url("scrollbar/scroll_fill.png");background-position:0px 0px;background-repeat:repeat-y;width:16px;overflow:hidden;}
+.CalemScrollSlider_Grip   {background-image:url("scrollbar/scroll_grip.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:8px;overflow:hidden;}
+.CalemScrollSlider_Bottom {background-image:url("scrollbar/scroll_fill.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:4px;overflow:hidden;}
+
+.CalemScrollSlider_Top_Over    {background-image:url("scrollbar/scroll_fill_hover.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:4px;overflow:hidden;}
+.CalemScrollSlider_Fill_Over   {background-image:url("scrollbar/scroll_fill_hover.png");background-position:0px 0px;background-repeat:repeat-y;width:16px;overflow:hidden;}
+.CalemScrollSlider_Grip_Over   {background-image:url("scrollbar/scroll_grip_hover.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:8px;overflow:hidden;}
+.CalemScrollSlider_Bottom_Over {background-image:url("scrollbar/scroll_fill_hover.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:4px;overflow:hidden;}
+
+.CalemScrollSlider_Top_Move    {background-image:url("scrollbar/scroll_fill_move.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:4px;overflow:hidden;}
+.CalemScrollSlider_Fill_Move   {background-image:url("scrollbar/scroll_fill_move.png");background-position:0px 0px;background-repeat:repeat-y;width:16px;overflow:hidden;}
+.CalemScrollSlider_Grip_Move   {background-image:url("scrollbar/scroll_grip_move.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:8px;overflow:hidden;}
+.CalemScrollSlider_Bottom_Move {background-image:url("scrollbar/scroll_fill_move.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:4px;overflow:hidden;}
+
+/**
+ * Data Grid 
+ */
+/**
+ * Common data grid
+ */
+.CalemDataGridTable {height:100%; width:100%;}
+.CalemDataGridListViewTd {width:100%;}
+
+.CalemListViewActionMenu {background-color: white;}
+
+.CalemListViewTable {table-layout:fixed;} 
+/** note: setting height/width will cause a gap between layout so let's leave it blank and let the rows fill it
+  {height:100%; width:100%; background-color:green;}
+**/
+.CalemListViewTableTr {}
+.CalemListViewTableDataTd {height:100%; width:100%;}
+.CalemListViewTableScrollBarTd {height:100%; width:16px;}
+
+/**
+ * View layout
+ */
+/* Containing div for view layout */
+.CalemView {
+        overflow: auto;
+}
+
+.DwtToolBar {
+   padding-top: 2px;
+   padding-bottom: 2px;
+   border-top: 1px solid blue; /* rgb(102, 102, 102) */;
+}
+
+.CalemToolBarSeparator {
+    width: 10px;
+    height: 100%;
+}
+
+ 
+.CalemViewEditRender TD {
+        vertical-align: top;
+        text-align: left;
+        padding: 1px;
+} 
+
+.CalemViewSearchEditRender TD {
+        vertical-align: top;
+        text-align: left;
+        padding: 1px;
+} 
+
+.CalemViewReadRender TD {
+        vertical-align: top;
+        text-align: left;
+        padding: 1px;
+} 
+
+.CalemViewEditRender .COLUMN-EVEN {
+}
+
+.CalemViewEditRender .COLUMN-ODD {
+
+}
+
+.CalemEditCaption .Text{
+        font-size: 10pt;
+        font-family: Tahoma, Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        text-align: left;
+}
+
+.CalemEditSection .Text{
+        font-size: 8pt;
+        font-family: Tahoma, Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        text-align: left;
+}
+
+.CalemEditSection {
+   border-bottom: 1px solid rgb(102, 102, 102);
+}
+
+/**
+ * right-alignment for numeric fields
+ */
+.CalemListViewCol_int {text-align: right; padding-right: 2px;}
+.CalemListViewCol_double {text-align: right; padding-right: 2px;}
+.CalemListViewCol_percent {text-align: right; padding-right: 2px;}
+.CalemListViewCol_currency {text-align: right; padding-right: 2px;}
+.CalemListViewCol_sys_currency {text-align: right; padding-right: 2px;}
+.CalemListViewCol_tinyint {text-align: center;} /* this is boolean */
+
+
+.CalemDateLookupTd {padding-left: 2px;}
+.CalemEditLookupTd {padding-left: 2px;}
+
+.FormEditError {background-image:url("icons/flag_red.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+.CalemDatePrompt {padding-left: 4px;}
+
+.CalemTimeLabel {padding-left: 4px;}
+
+/**
+ * Design styles
+ */
+.CalemFieldDesign .Text {border: 1px solid blue; background-color: white;}
+
+.CalemTextDesign-Div {border: 1px solid blue; background-color: white;}
+
+.CalemFieldLabelDesign .Text {border: 1px dotted black;}
+.CalemLabelDesign .Text {border: 1px dotted black;}
+.CalemViewRecordDesignRender .CalemEditCaption .Text {border: 1px dotted black;}
+.CalemRowDesign .Text {border: 1px dotted black;}
+.CalemColDesign .Text {border: 1px dotted black;}
+
+.CalemRecordDesignTree {
+        border: 1px solid rgb(102, 102, 102);
+        background-color: white;
+}
+
+.CalemDndAllowed {
+       border: 2px solid green; 
+}
+
+.CalemSearchSelectTable TD {
+       padding: 1px;
+}
+
+.CalemModuleLabel .Text {
+        font-weight: bold;
+        color: blue;
+}
