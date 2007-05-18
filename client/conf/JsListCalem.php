@@ -134,6 +134,12 @@ $_CALEM_scripts=array(
 			'/common/form/widget/edit/CalemEditText.js',
 			'/common/form/widget/edit/CalemDateLookup.js',
 			'/common/form/widget/edit/CalemEditDate.js',
+
+			//AC
+			'/common/form/widget/edit/ac/CalemInputAc.js',
+			'/common/form/widget/edit/ac/CalemAcCached.js',
+			'/common/form/widget/edit/ac/CalemAcDb.js',
+			
 			'/common/form/widget/edit/CalemEditLookup.js',
 			'/common/form/widget/edit/CalemEditDropdown.js',
 			'/common/form/widget/edit/CalemEditTime.js',
