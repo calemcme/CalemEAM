@@ -67,6 +67,11 @@ function(param) {
 	return new CalemInputField(param);
 }
 
+CalemEditLookup.prototype.getEditField =
+function() {
+	return this._editField;
+}
+
 //Some initialization
 CalemEditLookup.prototype.setValidStringLengths =
 function(min, max) {
@@ -90,7 +95,7 @@ function(id, val) {
 	this._validity.set(id, val, true);
 	this._editField.setValue(val, true);
 	//Also notify controller
-	this._vcCallback.run(this._editField, true, val);
+	if (this._vcCallback) this._vcCallback.run(this._editField, true, val);
 	//clear errors if any.
 	this._editField._clearFieldError();
 }
@@ -113,6 +118,18 @@ CalemEditLookup.prototype.setController =
 function(controller) {
 	this._controller=controller;
 	this._editLookup.setController(controller);
+}
+
+//Setup AC
+CalemEditLookup.prototype.setupAc =
+function(fld, lkupFld, lkupDd) {
+	if (this._controller.getInputAcEnabled(fld)) {
+		if (lkupDd.isMemoryCached()) {
+			this._ac=new CalemAcCached(fld, lkupFld, lkupDd, this._controller, this);
+		} else {
+			this._ac=new CalemAcDb(fld, lkupFld, lkupDd, this._controller, this);
+		}
+	}
 }
 
 CalemEditLookup.prototype.focus =
