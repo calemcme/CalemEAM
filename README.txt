@@ -1,8 +1,7 @@
 This is the readme for r1.0.1ac.
 
 What's the difference from r1.0.1 to r1.0.1ac?
-The only difference is that r1.0.1ac adds Input Auto-Completion 
-to all fields that take value in another table (or lookup table).
+The only difference is that r1.0.1ac adds Input Auto-Completion for lookup fields.
 
 What is CalemEAM Open Source?
 
