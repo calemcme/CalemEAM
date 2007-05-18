@@ -1097,3 +1097,43 @@ CalemForm.prototype.getActiveController =
 function() {
 	return this._viewHolder.getActiveController();
 }
+
+/**
+ * Auto-completion (enable search as well)
+ * - Use disabled to turn it off.
+ */
+CalemForm.prototype.getInputAcEnabled =
+function(fld) {
+	return (!this._acDisabled || !this._acDisabled[fld]);
+}
+
+CalemForm.prototype.loadCachedRecList =
+function(tbId) {
+	var ci=CalemContext.getInstance().getRegistry().getCache().get(tbId);
+	return (ci ? ci.getRecordList().getList() : null);
+}
+
+CalemForm.prototype.fetchAcList =
+function(match, lkupFld, lkupDd, cb) {
+	var dbQuery=new CalemDbQuery();
+	//constructing an efficient query here
+	var tbn=lkupDd.getTableName();
+	var qry=new CalemTableQuery(tbn, tbn);
+	var selId=new CalemSelectField(tbn, 'id');
+	var sel=new CalemSelectField(tbn, lkupFld);
+	qry.addSelect(selId);
+	qry.addSelect(sel); //Select id and lookup field.
+	
+	var fld=new CalemDbField(tbn, lkupFld);
+	var val=new CalemDbString(match);
+	var expr=new CalemDbExpr(fld, CalemDbExpr.LIKE, val);
+	qry.setWhere(tbn, expr);
+	
+	var orderBy=new CalemQueryOrderBy(sel, CalemQueryOrderBy.ASC);
+	qry.setOrderBy(orderBy);
+	var range=new CalemQueryRange(0, CalemConf['auto_completion']['maxMatch']);
+	qry.setRange(range);
+	
+	dbQuery.add(qry);
+	this._cache.bulkLoad(dbQuery, cb);
+}
