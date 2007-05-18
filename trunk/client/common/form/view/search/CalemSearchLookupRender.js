@@ -37,6 +37,7 @@ CalemSearchLookupRender.prototype._createControl =
 function(parentEl) {
 	this._initFieldInfo();
 	var len=this._lkupDd.getTextInputLength(this._lkupFld); //This is the lookup info.
+	var doAc=false; //Auto-completion.
 	if (this._lkupDd.isTextField(this._lkupFld)) {
 		this._control=new CalemEditTextLookup({parent: this._parent, type: DwtInputField.STRING, 
 	              size: this._lkupDd.getTextDisplayLength(this._lkupFld),
@@ -44,6 +45,7 @@ function(parentEl) {
 	              //Note: must have error icon set so DwtInputField will render it as a string first.
 	              errorIconStyle: CalemConf['view_engine']['field']['inputErrorIcon']});
 	} else {
+		doAc=true; //Do AC for normal edit only.
 		this._control=new CalemEditLookup({parent: this._parent, type: DwtInputField.STRING, 
 	              size: len, errorIconStyle: CalemConf['view_engine']['field']['inputErrorIcon']});
 	}
@@ -56,6 +58,10 @@ function(parentEl) {
 	//set up validator here
 	this._control.setValidator(this, this._onValidator);
 	this.resumeView();	
+	//Init AC
+	if (doAc) {
+		this._control.setupAc(this._field, this._lkupFld, this._lkupDd);
+        }
 }
 
 CalemSearchLookupRender.prototype._getFieldOps =
