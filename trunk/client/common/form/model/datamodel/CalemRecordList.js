@@ -232,6 +232,11 @@ function() {
 	return this._recMap;
 }
 
+CalemRecordList.prototype.getList =
+function() {
+	return this._recList;
+}
+
 /**
  * Update by record list
  * @param updatedRecList - updates including modified and new records
