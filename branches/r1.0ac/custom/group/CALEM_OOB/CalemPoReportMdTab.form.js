@@ -1,0 +1,1 @@
+CalemFormCustomDef['CalemPoReportMdTab_CALEM_OOB']= {CalemFormCustomInfo: {id: 'CalemPoReportMdTab', acl: {CalemFormAclInfo: {tabAcl: {}, formAcl: {}}}, layout: {CalemMdTabLayoutInfo: {tabList: ['tab_main', 'CUSTOMIZE_TAB'], tabMap: {tab_main: {CalemTabLayoutInfo: ['CalemPoReportRead', 'CalemPoItemReportList']}}}}}};
