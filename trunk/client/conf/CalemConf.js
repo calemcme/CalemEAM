@@ -841,3 +841,11 @@ CalemConf['report_window_conf'] = "width=1050,height=800,scrollbars=1,screenX=50
 CalemConf['desktop_keymap'] = {
 	'c' : {cmd: 'CalemCmdCustomize', note: 'key_customize'}
 };
+
+/**
+ * Auto-completion
+ */
+CalemConf['auto_completion']={
+	maxMatch: 15,
+	fetchDelay: 600
+};
