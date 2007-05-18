@@ -38,6 +38,7 @@ function(parentEl, yOff) {
 	this._initFieldInfo();
 	//Use text field if the length of text is over a limit.
 	var len=this._lkupDd.getTextInputLength(this._lkupFld); //This is the lookup info.
+	var doAc=false; //Auto-completion.
 	if (this._lkupDd.isTextField(this._lkupFld)) {
 		this._control=new CalemEditTextLookup({parent: this._parent, type: DwtInputField.STRING, 
 	              size: this._lkupDd.getTextDisplayLength(this._lkupFld),
@@ -45,6 +46,7 @@ function(parentEl, yOff) {
 	              //Note: must have error icon set so DwtInputField will render it as a string first.
 	              errorIconStyle: CalemConf['view_engine']['field']['inputErrorIcon']});
 	} else {
+		doAc=true; //Do AC for normal edit only.
 		this._control=new CalemEditLookup({parent: this._parent, type: DwtInputField.STRING, 
 	              size: len, errorIconStyle: CalemConf['view_engine']['field']['inputErrorIcon']});
 	}
@@ -62,6 +64,10 @@ function(parentEl, yOff) {
 	this._control.setValidator(this, this._onValidator);
 	//Now get both id and value here.
 	this.resumeView();          
+	//Init AC
+	if (doAc) {
+		this._control.setupAc(this._field, this._lkupFld, this._lkupDd);
+	}
 }
 
 //Impl for edit lookup.
