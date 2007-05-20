@@ -289,7 +289,16 @@ $_CALEM_dist=array(
    	'dev_admin_id'=>'1000001',
    	'devDesignPhase'=>true,
 		'devDesignGroup'=>CALEM_OOB,
-	)   
+	),
+	/**
+	 * JsMin configuration
+	 * Note: jsmin.exe is about 6 times faster in C than in PHP so the default is jsmin.exe
+	 * In platforms where jsmin.exe is not working, use php version:
+	 * CalemJsMinExe - use jsmin exe version (exe defined in jsmin_exe)
+	 * CalemJsMinPhp - use jsmin php version
+	 */ 
+	'jsminClass'=>array('path'=>'build', 'class'=>'CalemJsMinExe'),
+	'jsmin_exe'=>'build/jsmin.exe',  
 );
 
 //Get module configuration
