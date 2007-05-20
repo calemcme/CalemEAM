@@ -30,10 +30,15 @@ class CalemZipBaseJs {
 	protected $textjs;
 	protected $jsmin;
 	protected $gzjs;
+	protected $minHdlr;
 	
 	//Construction
 	public function __construct() {
 		$this->logger=&LoggerManager::getLogger('CalemZipBaseJs');
+		global $_CALEM_conf;
+		$jsconf=$_CALEM_conf['jsminClass'];
+		require_once _CALEM_DIR_ . $jsconf['path'] . '/' . $jsconf['class'] . '.php';
+		$this->minHdlr=new $jsconf['class'];
 	}
 	
 	public function process() {
@@ -55,14 +60,11 @@ class CalemZipBaseJs {
 		}
 		//Store off the source and min, gz
 		$this->textjs= $path . $target;
-		$handle=fopen($this->textjs, 'w');
-		fwrite($handle, $js);
-		fclose($handle);
+		file_put_contents($this->textjs, $js);
 		if ($this->logger->isDebugEnabled()) $this->logger->debug("Saved off file in " . $this->textjs);
 		
 		//Now store off the data in a plain and gz file	
 		$this->gzjs=$this->textjs . '.gz';
-		
 		$this->jsmin=$this->textjs . '.min';
 		
 		//further processing here.
@@ -85,8 +87,7 @@ class CalemZipBaseJs {
 	}
 	
 	public function jsmin($src, $dest) {
-		exec(_CALEM_DIR_ . 'build/jsmin.exe < ' . $src . ' > ' . $dest);
-		return is_file($dest);
+		return $this->minHdlr->jsmin($src, $dest);
 	}
 	
 	public function gz($src, $dest) {		
