@@ -161,8 +161,20 @@ CalemInputAc.handleBlur = function(event) {
 	}
 }//handleBlur()
 
+//This is to act as the blur handler in DwtInputField
+CalemInputAc.prototype.onBlurInputField =
+function(e) {
+	var calemInputField=this._lkupEditFld.getEditField();
+	if (calemInputField && calemInputField._validationStyle == DwtInputField.ONEXIT_VALIDATION) {
+		calemInputField._validateInput(this._inputEl.value);
+	}
+}
+
 CalemInputAc.prototype.onBlur =
 function(e) {
+	//Handle validation here whenever a blur event is fired
+	this.onBlurInputField(e);
+	//Hide floating stuff
 	if (this._siw && !this._siw.selectingSomething) {
 		this.hideSmartInputFloater();
 		CalemInputAc._acFloater._inputEl=null; //no current field associated with it for now.
