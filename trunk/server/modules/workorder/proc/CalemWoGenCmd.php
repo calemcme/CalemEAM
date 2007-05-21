@@ -23,7 +23,7 @@
 if (!defined('_CALEM_DIR_')) {
 	chdir('../../../..');
 	define('_CALEM_DIR_', getcwd() . '/');	
-	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'log4php.properties');
+	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'etc/log4php.properties');
 }
 
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);

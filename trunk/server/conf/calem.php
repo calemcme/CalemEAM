@@ -298,7 +298,7 @@ $_CALEM_dist=array(
 	 * CalemJsMinPhp - use jsmin php version
 	 */ 
 	'jsminClass'=>array('path'=>'build', 'class'=>'CalemJsMinExe'),
-	'jsmin_exe'=>'build/jsmin.exe',  
+	'jsmin_exe'=>'build/jsmin/jsmin.exe',  
 );
 
 //Get module configuration
