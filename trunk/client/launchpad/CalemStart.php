@@ -53,7 +53,7 @@
    require _CALEM_DIR_ . 'client/launchpad/CalemJsResource.php';
    //Load custom info
    print "<script type=\"text/javascript\" src=\"" . $calemRootUrl 
-   		   . "/client/JsPkgCustom.php?sessionId=" . $sid . "&loadmode=" . $loadmode . "\"></script>";
+   		   . "/public/JsPkgCustom.php?sessionId=" . $sid . "&loadmode=" . $loadmode . "\"></script>";
 ?>	
 	<script language="JavaScript">
 		function launch() {

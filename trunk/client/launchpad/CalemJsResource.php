@@ -30,10 +30,10 @@ $loaded=false;
 if ($loadmode=='indv') {
 	//Meta data in package mode
 	if ($_CALEM_conf['calem_mode']==CALEM_DEVELOPMENT) { //dev-mode using individual files.
-	   print "<script type=\"text/javascript\" src=\"" . $calemRootUrl . "/client/JsPkg.php?js=Metadata" . "&loadmode=aggr" . "\"></script>";
-   	print "<script type=\"text/javascript\" src=\"" . $calemRootUrl . "/client/JsMessages.php?lang=" . $lang . "\"></script>";
-		require_once _CALEM_DIR_ . 'client/JsAjax.php';
-		require_once _CALEM_DIR_ . 'client/JsCalem.php';
+	   print "<script type=\"text/javascript\" src=\"" . $calemRootUrl . "/public/JsPkg.php?js=Metadata" . "&loadmode=aggr" . "\"></script>";
+   	print "<script type=\"text/javascript\" src=\"" . $calemRootUrl . "/public/JsMessages.php?lang=" . $lang . "\"></script>";
+		require_once _CALEM_DIR_ . 'public/JsAjax.php';
+		require_once _CALEM_DIR_ . 'public/JsCalem.php';
 		$loaded=true;
 	} else {
 	  $loadmode='aggr'; //for custom loading below.	
@@ -42,12 +42,12 @@ if ($loadmode=='indv') {
 
 if (!$loaded) {
    print "<script type=\"text/javascript\" src=\"" . $calemRootUrl 
-   		   . "/client/JsPkg.php?js=Metadata" . "&loadmode=" . $loadmode . "\"></script>";
+   		   . "/public/JsPkg.php?js=Metadata" . "&loadmode=" . $loadmode . "\"></script>";
    print "<script type=\"text/javascript\" src=\"" . $calemRootUrl 
-   		   . "/client/JsPkg.php?js=CalemMsg&lang=" . $lang . "&loadmode=" . $loadmode . "\"></script>";      		   
+   		   . "/public/JsPkg.php?js=CalemMsg&lang=" . $lang . "&loadmode=" . $loadmode . "\"></script>";      		   
    print "<script type=\"text/javascript\" src=\"" . $calemRootUrl 
-   		   . "/client/JsPkg.php?js=Ajax" . "&loadmode=" . $loadmode . "\"></script>";
+   		   . "/public/JsPkg.php?js=Ajax" . "&loadmode=" . $loadmode . "\"></script>";
    print "<script type=\"text/javascript\" src=\"" . $calemRootUrl 
-   		   . "/client/JsPkg.php?js=Calem" . "&loadmode=" . $loadmode . "\"></script>";
+   		   . "/public/JsPkg.php?js=Calem" . "&loadmode=" . $loadmode . "\"></script>";
 }
 ?>
