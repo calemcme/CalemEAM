@@ -33,7 +33,7 @@
 if (!defined('_CALEM_DIR_')) {
 	chdir('../..');
 	define('_CALEM_DIR_', getcwd() . '/'); 
-	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'log4php.properties');
+	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'etc/log4php.properties');
 }
 
 require_once _CALEM_DIR_ . 'server/conf/calem.php';
