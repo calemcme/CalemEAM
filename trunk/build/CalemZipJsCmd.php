@@ -36,7 +36,7 @@ if (!defined('_CALEM_DIR_')) {
 	} else {
 		define('_CALEM_DIR_', $_ENV['CALEM_DIR']);	
 	}
-	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'log4php.properties');
+	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'etc/log4php.properties');
 }
 
 require_once _CALEM_DIR_ . 'build/CalemZipMetadataJs.php';
