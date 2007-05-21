@@ -59,6 +59,8 @@ function createDir($d, $r=0666) {
 }
 
 // -- client directories
+createDir(_CALEM_DIR_ . 'logs');
+
 createDir(_CALEM_DIR_ . 'client/launchpad/resource');
 
 // -- server directories
