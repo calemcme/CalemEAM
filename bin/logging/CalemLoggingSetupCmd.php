@@ -28,12 +28,12 @@ if (!defined('_CALEM_DIR_')) {
 }
 
 define('LOG_PLACE_HOLDER', '_CALEM_LOG_PATH_');
-define('LOG4PHP_CONF', 'log4php.properties');
+define('LOG4PHP_CONF', 'etc/log4php.properties');
 
 if (is_file(_CALEM_DIR_ . LOG4PHP_CONF)) {
 	$cnt=file_get_contents(_CALEM_DIR_ . LOG4PHP_CONF);
 	if (false!==($pos=strpos($cnt, LOG_PLACE_HOLDER))) {
-		$nc=str_replace(LOG_PLACE_HOLDER, _CALEM_DIR_ . 'calem.log', $cnt);
+		$nc=str_replace(LOG_PLACE_HOLDER, _CALEM_DIR_ . 'logs/calem.log', $cnt);
 		file_put_contents(_CALEM_DIR_ . LOG4PHP_CONF, $nc);
 		echo "Logging is configured\n";	
 	} else {

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-. ./env.sh
+. env.sh
+$PHP_EXE $CALEM_HOME/build/CalemZipJsCmd.php
 
-$PHP_EXE ../build/CalemZipJsCmd.php
 
 
 
