@@ -1,6 +1,7 @@
 #!/bin/bash
 
-. env.sh
+. ./env.sh
+
 $PHP_EXE logging/CalemLoggingSetupCmd.php
 
 

@@ -1,4 +1,5 @@
 #!/bin/bash
 
 . ../env.sh
-$PHP_EXE $CALEM_HOME/server/setup/LoadSampleDataCmd.php
+
+$PHP_EXE ../../server/setup/LoadSampleDataCmd.php

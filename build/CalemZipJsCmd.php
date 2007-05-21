@@ -36,7 +36,7 @@ if (!defined('_CALEM_DIR_')) {
 	} else {
 		define('_CALEM_DIR_', $_ENV['CALEM_DIR']);	
 	}
-	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'etc/log4php.properties');
+	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'log4php.properties');
 }
 
 require_once _CALEM_DIR_ . 'build/CalemZipMetadataJs.php';
@@ -59,8 +59,6 @@ function createDir($d, $r=0666) {
 }
 
 // -- client directories
-createDir(_CALEM_DIR_ . 'logs');
-
 createDir(_CALEM_DIR_ . 'client/launchpad/resource');
 
 // -- server directories
