@@ -63,8 +63,8 @@ function() {
    ar[i++]=["<td id=", CalemLogin.errorTextEl, " class=errorText></td>"].join('');
    ar[i++]="<td width=10></td></table></div></td></tr>";
    ar[i++]="<tr><td><table id=loginTable align=center>";
-   ar[i++]=["<tr><td align=right class=fieldLable>", CalemMsg.username, ":</td>"].join('');
-   ar[i++]=["<td align=left><input id=", CalemLogin.usernameEl, 
+   ar[i++]=["<tr><td align=right class=fieldLable nowrap>", CalemMsg.username, ":</td>"].join('');
+   ar[i++]=["<td align=left nowrap><input id=", CalemLogin.usernameEl, 
                  " value='' size=", CalemLogin.USERNAME_LENGTH, ' maxlength=', CalemLogin.userFldLength, 
                  " class=editField type=\"text\"></td></tr>"].join('');
    ar[i++]=["<tr><td align=right class=fieldLable>", CalemMsg.password, ":</td>"].join('');
@@ -74,7 +74,7 @@ function() {
    ar[i++]=["<input id=", CalemLogin.loginEl, " class=loginButton type=\"button\" value=\"", 
                CalemMsg.login, "\" onclick='CalemLogin._attemptLogin()'>"].join('');
    ar[i++]="</td></tr></table></td></tr>";
-   ar[i++]=["<tr><td align=center class=copyRightText>", CalemMsg.copyright, "</td></tr>"].join('');
+   ar[i++]=["<tr><td align=center class=copyRightText nowrap>", CalemMsg.copyright, "</td></tr>"].join('');
    ar[i++]="</table></td></tr></table>";
    document.body.innerHTML=ar.join('');
    //set focus on username
