@@ -1,16 +1,21 @@
 This is the readme for r1.0.1x.
 
 What's the new in r1.0.1x?
-r1.0.1x can use PHP to compress deployment packages so there's no dependency on jsmin.exe
-which is not available on Linux. see detailed change logs below:
+A few changes have been made in r1.0.1x to facilitate installation on Linux servers.
+See http://www.calemeam.com/support_setup.html for updated instructions for Linux.
 
-1. Added configuration to use PHP to compress deployment packages. This is done to support Linux servers.
-(see http://www.calemeam.com/support_setup.html for details)
+1. Added jsmin_x86 to support jsmin on x86 based Linux servers. A PHP based jsmin is also provided.
+See setup guide for instructions how to prepare a jsmin executable.
 
-2. Fixed build/database/createSchema.bat to use env.bat (not init.bat).
+2. Corrected a lookup data entry issue where lookup field changes via keys are not reported.
 
-3. Corrected a lookup data entry issue where change event is not sent to field object so 
-   a change in lookup field might be lost.
+3. Fixed build/database/createSchema.bat to use env.bat (not init.bat).
+
+4. Modified shell scripts (.sh files) under CalemEAM/bin to get rid of control chars.
+
+5. Reorganized directory structures to facilitate access control configuration for Apache.
+
+6. Provided a sample access control configuration (at CalemEAM/etc/httpd-calemeam.conf).
    
    
 What is CalemEAM Open Source?
