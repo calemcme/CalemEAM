@@ -6,16 +6,9 @@ Upgrade from CalemEAM r1.0.1/r1.0.1ac to r1.0.1x
 1. Unzip the archive file to the same directory of r1.0.1/r1.0.1ac
 2. Edit CalemEAM/bin/env.bat (env.sh) to fix the settings for your installation.
 3. Verify that CalemEAM/server/conf/install.php and custom.php are correct.
-4. If you have problem running build/jsmin.exe in Windows or Linux, use PHP to 
-   compress the packages. This is accomplished by setting 'jsminClass' as below in 
-   your custom.php (under server/conf, if you don't have a custom.php, copy from custom.sample.php
-   at the same directory first):
-
-   $_CALEM_dist['jsminClass']=array('path'=>'build', 'class'=>'CalemJsMinPhp');
-   
-4. Run setup.bat (setup.sh) to configure logging.
+4. See setup guide at http://www.calemeam/support_setup.html to configure jsmin properly.  
+5. Run setup.bat (setup.sh) to configure logging.
    Run deploy.bat (deploy.sh) to deploy r1.0.1x release.
-5. Launch a browser to use r1.0.1x. Open asset list, click New to add asset, type values 
-   in lookup fields (such as type, cost code, etc.) and see auto-completion in action.
+6. Launch a browser to use r1.0.1x.
 
   
