@@ -59,7 +59,12 @@ class CalemText {
 		if (!$str) return null;
 		$dt=CalemText::parseServerDateTime($str); //Got to neutral time format.
 		$datefmt=CalemText::getDateTimeFormat();
-		return date($datefmt, $dt);	
+		if (substr($str, 11)=='00:00:00') {
+			$rtn=gmdate($datefmt, $dt);
+		} else {
+			$rtn= date($datefmt, $dt);
+		}
+		return $rtn;	
 	}
 	
 	/**
