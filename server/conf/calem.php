@@ -303,17 +303,33 @@ $_CALEM_dist=array(
 
 //Get module configuration
 @include _CALEM_DIR_ . 'server/modules/inventory/in_conf.php';
+@include _CALEM_DIR_ . 'server/modules/inventory/in_conf.custom.php';
+
 @include _CALEM_DIR_ . 'server/modules/workorder/wo_conf.php';
+@include _CALEM_DIR_ . 'server/modules/workorder/wo_conf.custom.php';
+
 @include _CALEM_DIR_ . 'server/modules/pm/pm_conf.php';
+@include _CALEM_DIR_ . 'server/modules/pm/pm_conf.custom.php';
+
 @include _CALEM_DIR_ . 'server/modules/report/report_conf.php';
+@include _CALEM_DIR_ . 'server/modules/report/report_conf.custom.php';
+
 @include _CALEM_DIR_ . 'server/modules/requisition/req_conf.php';
+@include _CALEM_DIR_ . 'server/modules/requisition/req_conf.custom.php';
+
 @include _CALEM_DIR_ . 'server/modules/purchase/po_conf.php';
+@include _CALEM_DIR_ . 'server/modules/purchase/po_conf.custom.php';
+
 @include _CALEM_DIR_ . 'server/modules/budget/budget_conf.php';
+@include _CALEM_DIR_ . 'server/modules/budget/budget_conf.custom.php';
 
 //Finally get the custom and install conf.
 //The custom/installation files are included here.
-@include_once _CALEM_DIR_ . 'server/conf/custom.php';
-@include_once _CALEM_DIR_ . 'server/conf/install.php';
+@include_once _CALEM_DIR_ . 'server/conf/custom.php';  //@depreciated
+@include_once _CALEM_DIR_ . 'server/conf/install.php'; //@depreciated
+
+//recommended format
+@include_once _CALEM_DIR_ . 'server/conf/calem.custom.php';
 
 $GLOBALS['_CALEM_conf']= $_CALEM_dist;
 ?>
