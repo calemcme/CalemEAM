@@ -44,7 +44,7 @@ class CalemCustomHandler extends CalemSoapRequest {
  		foreach ($param as $key => $customObj) {
  			$path=$this->getPath($customObj) . $customObj->target;
  			if (!is_dir($path)) {
- 				if (!mkdir($path, 0666)) { //Read/write rights granted.
+ 				if (!mkdir($path, DIR_WRITE_RIGHTS)) { //Read/write rights granted.
  					$result[]=array('id'=>$customObj->id, 
  									    'status'=> ERROR_CREATE_DIR,
  					                'errorInfo'=>array('id'=>'CalemCreateDirException'));
@@ -58,7 +58,7 @@ class CalemCustomHandler extends CalemSoapRequest {
  				//Creating a backup directory if it's not created yet.
  				$doIt=true;
  				if (!is_dir($path . "/backup")) {
- 					$doIt=mkdir($path . "/backup", 0666);		
+ 					$doIt=mkdir($path . "/backup", DIR_WRITE_RIGHTS);		
  				}
  				if ($doIt) {
  					copy($fullPath, $path . "/backup/" . $fileName. '_' . date('Y_M_d__H_i_s', time()));

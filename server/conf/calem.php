@@ -89,6 +89,9 @@ define('TAB_CUSTOMIZE', 'CUSTOMIZE_TAB');
 
 define('EMPTY_REC', '__NULL_REC__');
 	
+//Must have x rights for directory.
+define('DIR_WRITE_RIGHTS', 0775);
+	
 /**
  * Configuration from the distribution. 
  * All initial configuration is defined in <code>_CALEM_dist</code> 

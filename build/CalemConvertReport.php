@@ -50,7 +50,7 @@ class CalemConvertReport {
 	public function getDstFile($srcPath, $srcFile) {
 		if (!isset($this->dirChecked[$srcPath])) {
 			if (!file_exists($srcPath . REPORT_PATH)) {
-				mkdir($srcPath . REPORT_PATH);
+				mkdir($srcPath . REPORT_PATH, DIR_WRITE_RIGHTS);
 				if (!file_exists($srcPath . REPORT_PATH)) {
 					die("Error in creating path at: " . $srcPath . REPORT_PATH);	
 				}				
