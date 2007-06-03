@@ -326,7 +326,7 @@ class CalemCustomFieldSo extends CalemSoapRequest {
 			//Creating a backup directory if it's not created yet.
 			$doIt=true;
 			if (!is_dir($path . "backup")) {
-				$doIt=mkdir($path . "backup", 0666);		
+				$doIt=mkdir($path . "backup", DIR_WRITE_RIGHTS);		
 			}
 			if ($doIt) {
 				copy($path . $file, $path . "backup/" . $file . '_' . date('Y_M_d__H_i_s', time()));

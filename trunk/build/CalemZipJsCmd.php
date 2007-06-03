@@ -54,7 +54,7 @@ require_once _CALEM_DIR_ . 'build/CalemConvertReportBatch.php';
 
 $tmBuild=microtime(true);
 
-function createDir($d, $r=0666) {
+function createDir($d, $r=DIR_WRITE_RIGHTS) {
 	if (!is_dir($d)) mkdir($d, $r);	
 }
 
