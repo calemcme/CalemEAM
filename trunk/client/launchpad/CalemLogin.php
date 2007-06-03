@@ -46,6 +46,7 @@
 <html>
   <head>
     <title>CalemEAM - Open Source Enterprise Asset Management</title>
+	<link rel="shortcut icon" href="<?php print $calemRootUrl ?>/client/themes/favicon.ico" type="image/x-icon" />
     <style type="text/css">
       <!--
         @import url(<?php print $calemRootUrl ?>/client/themes/image/hiRes/dwtimgs.css);
