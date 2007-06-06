@@ -33,9 +33,19 @@ require_once _CALEM_DIR_ . 'server/include/jsmin/jsmin.php';
  */
 class CalemJsMinPhp {
 	public function jsmin($src, $dest) {
+		try {
 		$min=JSMin::minify(file_get_contents($src));
+		} catch (Exception $e) {
+			$min='';
+		}
+		$rtn= (isset($min) && strlen($min)>0);
+		if ($rtn) {
 		file_put_contents($dest, $min);
-		return is_file($dest);
+		}
+		if (!$rtn) {
+			echo "WARNING: script minification failed. CalemEAM is configured to work without it for now.<br>\n";	
+		}
+		return $rtn;
 	}	
 }
 ?>

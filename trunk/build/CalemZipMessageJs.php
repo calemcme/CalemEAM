@@ -31,7 +31,7 @@ require_once _CALEM_DIR_ . 'build/CalemZipBaseJs.php';
 class CalemZipMessageJs extends CalemZipBaseJs {
 	
 	public function getJsmin() {
-		return true;	
+		return false;	
 	}
 	
 	public function package() {
