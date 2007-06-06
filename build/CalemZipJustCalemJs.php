@@ -26,6 +26,10 @@ require_once _CALEM_DIR_ . 'build/CalemZipJustJs.php';
 
 class CalemZipJustCalemJs extends CalemZipJustJs {
 	
+	public function getJsmin() {
+		return true;	
+	}
+	
 	public function getJsConf() {
 		$ar=array();
 		$ar[]= _CALEM_DIR_ . 'client/conf/JsListCalem.php';

@@ -68,18 +68,18 @@ class CalemZipBaseJs {
 		$this->jsmin=$this->textjs . '.min';
 		
 		//further processing here.
-		$jf=$this->textjs;
 		if ($this->getJsmin()) {
-			$this->jsmin($jf, $this->jsmin);
-			$jf=$this->jsmin;	
+			$this->jsmin($this->textjs, $this->jsmin);	
+		} else {
+			$this->copyJsmin();
 		}
 		if ($this->getGzip()) {
-			$this->gz($jf, $this->gzjs);
+			$this->gz($this->jsmin, $this->gzjs);
 		}	
 	}
 	
 	public function getJsmin() {
-		return true;	
+		return false;	
 	}
 	
 	public function getGzip() {
@@ -87,7 +87,17 @@ class CalemZipBaseJs {
 	}
 	
 	public function jsmin($src, $dest) {
-		return $this->minHdlr->jsmin($src, $dest);
+		if (!$this->minHdlr->jsmin($src, $dest)) {//do without jsmin here
+			$this->copyJsmin();
+		}
+	}
+	
+	public function copyJsmin() {
+		if (!copy($this->textjs, $this->jsmin)) {
+			$err="Error in copying file from " . $this->textjs . " -> " . $this->jsmin;
+			$this->logger->error($err);
+			echo $err . "<br>\n";	
+		}	
 	}
 	
 	public function gz($src, $dest) {		

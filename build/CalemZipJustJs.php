@@ -29,10 +29,6 @@ require_once _CALEM_DIR_ . 'build/CalemZipBaseJs.php';
 class CalemZipJustJs extends CalemZipBaseJs {
 	private $resultMap;
 	
-	public function getJsmin() {
-		return true;	
-	}
-	
 	public function package() {
 		//Getting the script list
 		$conf=$this->getJsConf();

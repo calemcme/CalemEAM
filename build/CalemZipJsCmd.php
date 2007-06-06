@@ -53,6 +53,7 @@ require_once _CALEM_DIR_ . 'build/CalemZipCustomMessageAllJs.php';
 require_once _CALEM_DIR_ . 'build/CalemConvertReportBatch.php';
 
 $tmBuild=microtime(true);
+$build= (isset($_ENV['CALEM_BUILD']) && $_ENV['CALEM_BUILD']==1);
 
 function createDir($d, $r=DIR_WRITE_RIGHTS) {
 	if (!is_dir($d)) mkdir($d, $r);	
@@ -80,41 +81,45 @@ createDir(_CALEM_DIR_ . 'custom/group/CUSTOM_SYSTEM');
 createDir(_CALEM_DIR_ . 'custom/user');
 
 // -- start deployment.
-echo date("F j, Y, g:i:s a") . " - Start merging and compressing JS scripts - <br>\n";
-$metadata=new CalemZipMetadataJs();
-$metadata->process();
-$message=new CalemZipMessageJs();
-$message->process();
-$ajax=new CalemZipJustAjaxJs();
-$ajax->process();
-$calemeam=new CalemZipJustCalemJs();
-$calemeam->process();
-$groupUser=new CalemZipGroupUserJs();
-$groupUser->package();
-
-//Global custom info
-$md=new CalemZipCustomMetadataJs();
-$md->package();
-
-$md=new CalemZipCustomDropdownJs();
-$md->package();
-
-$md=new CalemZipCustomMessageAllJs();
-$md->package();
+echo date("F j, Y, g:i:s a") . " - Start deployment - <br>\n";
+if ($build) {
+   echo " - Start merging and compressing JS scripts - <br>\n";
+	$ajax=new CalemZipJustAjaxJs();
+	$ajax->process();
+	$calemeam=new CalemZipJustCalemJs();
+	$calemeam->process();
+	
+	$metadata=new CalemZipMetadataJs();
+	$metadata->process();
+	$message=new CalemZipMessageJs();
+	$message->process();
+		
+	$groupUser=new CalemZipGroupUserJs();
+	$groupUser->package();
+	
+	//Global custom info
+	$md=new CalemZipCustomMetadataJs();
+	$md->package();
+	
+	$md=new CalemZipCustomDropdownJs();
+	$md->package();
+	
+	$md=new CalemZipCustomMessageAllJs();
+	$md->package();
+	
+	//Converting report
+	$tmRpt=microtime(true);
+	$rpt=new CalemConvertReportBatch();
+	$countRpt=$rpt->process();
+	$tmRtpTaken=microtime(true)  - $tmRpt;
+	$avg= ($tmRtpTaken) / ($countRpt > 0 ? $countRpt : 1);
+	echo "Report converted: count=" . $countRpt . ", time=" . $tmRtpTaken . ', avg time=' . $avg . "<br>\n";
+}
 
 //Data cache building
 $cacheBuilder=new CalemBuildCache();
 $cacheBuilder->buildCache();
 
-//Converting report
-$tmRpt=microtime(true);
-$rpt=new CalemConvertReportBatch();
-$countRpt=$rpt->process();
-
 $tmTaken=microtime(true) - $tmBuild;
-$tmRtpTaken=microtime(true)  - $tmRpt;
-$avg= ($tmRtpTaken) / ($countRpt > 0 ? $countRpt : 1);
-echo "Report converted: count=" . $countRpt . ", time=" . $tmRtpTaken . ', avg time=' . $avg . "<br>\n";
-
-echo date("F j, Y, g:i:s a") . " - Completed merging and compressing JS scripts. Time: " . $tmTaken . "<br>\n";
+echo date("F j, Y, g:i:s a") . " - Completed deploy. Time: " . $tmTaken . "<br>\n";
 ?>

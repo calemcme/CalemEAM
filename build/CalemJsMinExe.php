@@ -33,9 +33,18 @@ if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 class CalemJsMinExe {
 	public function jsmin($src, $dest) {
 		global $_CALEM_conf;
-		$exe=$_CALEM_conf['jsmin_exe'];
-		exec(_CALEM_DIR_ . $exe . ' < ' . $src . ' > ' . $dest);
-		return is_file($dest);
+		$exe= _CALEM_DIR_ . $_CALEM_conf['jsmin_exe'];
+		$rtn=false;
+		if (is_file($exe)) {
+			$ar=array();
+			$status=1;
+			exec($exe . ' < ' . $src . ' > ' . $dest, $ar, $status);
+		   $rtn=($status==0 && filesize($dest)>0);
+		}
+		if (!$rtn) {
+			echo "WARNING: script minification failed. The jsmin executable is missing or not functional for your platform. CalemEAM is configured to work without it for now. file=" . $src . "<br>\n";	
+		}
+		return $rtn;
 	}	
 }
 ?>
