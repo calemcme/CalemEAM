@@ -43,5 +43,5 @@ require_once _CALEM_DIR_ . 'server/setup/CalemCreateSchema.php';
 	$dbSetup=new CalemCreateSchema();
 	$dbSetup->setupDatabase();
 	$dbSetup->validate();
-	echo date("F j, Y, g:i:s a") . ' - Schema created!<br>';
+echo date("F j, Y, g:i:s a") . " - Schema created!<br>\n";
 ?>

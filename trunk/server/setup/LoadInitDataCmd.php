@@ -47,7 +47,7 @@ require_once _CALEM_DIR_ . 'server/setup/CalemDataLoader.php';
 global $_CALEM_conf;
 $loadConf=new CalemDataLoadConf();
 $loadConf->init($_CALEM_conf['calem_data_load_init']);
-echo date("F j, Y, g:i:s a") . ' - Loading init data...<br>';
+echo date("F j, Y, g:i:s a") . " - Loading init data...<br>\n";
 $sampleLoad=new CalemDataLoader();
 $sampleLoad->load($loadConf);
 $sampleLoad->validate($loadConf);
