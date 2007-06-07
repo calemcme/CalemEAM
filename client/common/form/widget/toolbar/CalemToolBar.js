@@ -85,6 +85,10 @@ function(tbInfo, listenerFactory, controller, customInfo) {
 	
 	for (var i=0; i< this._layout.length; i++) {
 		var itemInfo=this._map[this._layout[i]];
+		
+		//m06 - customize for admin
+		if (this._layout[i]==CalemConst.TB_CUSTOMIZE && !CalemBoUtil.isUserInAdminGroup()) continue;
+		
 		//Check acl here
 		if (!this._checkAcl(this._layout[i])) continue; //Acled out.
 		

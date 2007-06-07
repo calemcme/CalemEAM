@@ -57,7 +57,11 @@ function() {
 	var addCustomizeTab=false;
 	for (var i=0; i< tabList.length; i++) {
 		var tabId=tabList[i];
+		//m06 - customize for admin
+		if (tabId==CalemConst._TAB_CUSTOMIZE && !CalemBoUtil.isUserInAdminGroup()) continue;
+		
 		if (!this._checkTabAcl(tabId)) continue;
+		
 		if (tabId==CalemConst._TAB_CUSTOMIZE) {
 			addCustomizeTab=true;
 			continue;
