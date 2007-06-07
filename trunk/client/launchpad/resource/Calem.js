@@ -16639,6 +16639,10 @@ function(tbInfo, listenerFactory, controller, customInfo) {
 	
 	for (var i=0; i< this._layout.length; i++) {
 		var itemInfo=this._map[this._layout[i]];
+		
+		//m06 - customize for admin
+		if (this._layout[i]==CalemConst.TB_CUSTOMIZE && !CalemBoUtil.isUserInAdminGroup()) continue;
+		
 		//Check acl here
 		if (!this._checkAcl(this._layout[i])) continue; //Acled out.
 		
@@ -26973,7 +26977,11 @@ function() {
 	var addCustomizeTab=false;
 	for (var i=0; i< tabList.length; i++) {
 		var tabId=tabList[i];
+		//m06 - customize for admin
+		if (tabId==CalemConst._TAB_CUSTOMIZE && !CalemBoUtil.isUserInAdminGroup()) continue;
+		
 		if (!this._checkTabAcl(tabId)) continue;
+		
 		if (tabId==CalemConst._TAB_CUSTOMIZE) {
 			addCustomizeTab=true;
 			continue;
