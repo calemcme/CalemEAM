@@ -20,7 +20,12 @@
 
 if (!defined('_CALEM_DIR_')) {
 	if (!isset($_ENV['CALEM_DIR'])) {
+		$cr=getcwd();
+		if (strpos($cr, 'logging')!==false) {
 		chdir('../..');
+		} else {
+			chdir('..');
+		}
 		define('_CALEM_DIR_', getcwd() . '/');	
 	} else {
 		define('_CALEM_DIR_', $_ENV['CALEM_DIR']);	
