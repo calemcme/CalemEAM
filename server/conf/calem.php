@@ -150,7 +150,7 @@ $_CALEM_dist=array(
 	//Actions allowed when not logged on - using key/value pair to avoid using array_key_exists function for performance
 	'default_noses_action'=>'LoginAction',
 	'noses_allowed_actions'=>array(
-		'LoginAction'=>'client/launchpad/CalemLogin.php',
+		'LoginAction'=>'client/launchpad/CalemLoginLite.php',
 	),
 	'ses_launch_app'=>'client/launchpad/CalemStart.php',
 	//Other handlers
