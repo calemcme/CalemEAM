@@ -49,6 +49,15 @@
         @import url(<?php print $calemRootUrl ?>/client/themes/dv.css);
        -->
     </style>
+</head>
+    <body>
+    <?php 
+    	require _CALEM_DIR_ . 'client/themes/' . $theme . '/' . $theme . '.html';
+    ?>
+    </body>
+</html>
+
+   	
 <?php
    //Load common resources
    require _CALEM_DIR_ . 'client/launchpad/CalemJsResource.php';
@@ -70,10 +79,3 @@
 		calemUseAlternateColor = <?php print $calemAlternateColor ?>;
 	   AjxCore.addOnloadListener(launch);
 	</script>
-</head>
-    <body>
-    <?php 
-    	require _CALEM_DIR_ . 'client/themes/' . $theme . '/' . $theme . '.html';
-    ?>
-    </body>
-</html>
