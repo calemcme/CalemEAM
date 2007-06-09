@@ -50852,6 +50852,7 @@ CalemViewDef['CalemManufacturerViewLookup']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{CalemButtonInfo: {id: 'CalemTbDataRefresh'}},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -52163,6 +52164,7 @@ CalemViewDef['CalemMeterTypeViewLookup']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{CalemButtonInfo: {id: 'CalemTbDataRefresh'}},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -82232,6 +82234,7 @@ CalemViewDef['CalemCraftViewLookup']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{CalemButtonInfo: {id: 'CalemTbDataRefresh'}},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -109438,6 +109441,7 @@ CalemViewDef['CalemDocViewLookup']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{CalemButtonInfo: {id: 'CalemTbDataRefresh'}},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -110098,6 +110102,7 @@ CalemViewDef['CalemDocTypeViewLookup']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{CalemButtonInfo: {id: 'CalemTbDataRefresh'}},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -123676,6 +123681,7 @@ CalemViewDef['CalemTrainingCertificateViewLookup']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{CalemButtonInfo: {id: 'CalemTbDataRefresh'}},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -124998,6 +125004,7 @@ CalemViewDef['CalemTrainingCourseViewLookup']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{CalemButtonInfo: {id: 'CalemTbDataRefresh'}},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
