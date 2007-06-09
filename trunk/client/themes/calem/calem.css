@@ -20,7 +20,12 @@
 /**
  * Theme styles
  */
-.screen_layout {background-color:rgb(228,228,228);}
+
+.splash_screen_inner {background: #f1f1f6; border: 2px solid #585470;}
+#splash_screen_wait_div {display: inline; font-size: 10pt; color: #ab3c49; vertical-align: top;}
+.splash_copyRightText {font-family: Verdana, Helvetica, Arial, sans-serif;font-size: 8pt; padding-bottom: 10px; padding-top: 10px;}
+ 
+.screen_layout {background-color:rgb(228,228,228); display: none;} 
 .screen_layout_table {margin:0px; padding:0px; border-collapse:collapse;}
 
 .screen_layout_table .DwtToolBar {

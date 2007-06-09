@@ -1,4 +1,20 @@
 <!-- This is the theme html for Calem -->
+<div id=splash_screen style='display: block;'>
+   <table width='100%' height='100%' class=splash_screen_outer>
+    <tr><td>
+       <table width=550 height=320 cellpadding=0 cellspacing=0 border=0 align=center class=splash_screen_inner>
+         <tr><td>
+          <div align=center><img src="<?php print $calemRootUrl ?>/client/themes/calemeam.png"><div>
+          <div style='padding-top: 10px; padding-bottom: 10px;'>
+             <img src="<?php print $calemRootUrl ?>/client/themes/image/animated/wait_32.gif">
+             <div id=splash_screen_wait_div><?php print CalemMsg::getMsg('splash_wait_text') ?></div>
+          </div>
+          <div class=splash_copyRightText nowrap><?php print CalemMsg::getMsg('copyright') ?></div>
+         </td></tr>
+       </table>
+    </td></tr>
+   </table>
+</div>
 <div id=theme_layout class=screen_layout style="width:100%;height:100%">
   <table id=theme_layout_table class=screen_layout_table style="width:100%;height:100%">
   <!-- Headline: logo, welcome message, etc. -->

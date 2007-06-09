@@ -313,8 +313,12 @@ function() {
  */
 CalemDesktop.launch =
 function() {
+	//Close down splash screen
+	var splash=document.getElementById('splash_screen');
+	if (splash) Dwt.setDisplay(splash, 'none'); 
    //Creating the shell.
    var domShell= CalemDesktop._getDomShell();
+   Dwt.setDisplay(domShell, 'block');
    var cf=CalemConf['desktop_mainView']['shell'];
    var shell = new DwtShell(cf.className, cf.scrollable, CalemDesktop.onExitDesktop, domShell);
    //get CalemContext
