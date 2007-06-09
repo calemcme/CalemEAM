@@ -18,13 +18,13 @@
  */
  
 /* Login form */
-.LoginOuter {background:gray}
-.LoginInner {background:white}
+.LoginOuter {background: #585470;}
+.LoginInner {background: #f0eef8; border-collapse: collapse;}
   	/* password edit field */
 	.editPassword  {font-family: Verdana, Helvetica, Arial, sans-serif;font-size: 10pt;}
 
 /* Form field lable */
-.fieldLable {font-family: Verdana, Helvetica, Arial, sans-serif;font-size: 10pt;}
+.loginFieldLable {font-family: Verdana, Helvetica, Arial, sans-serif;font-size: 10pt; padding-right: 10px;}
 
 /* Form edit field */
 .editField  {font-family: Verdana, Helvetica, Arial, sans-serif;font-size: 10pt;}
@@ -36,4 +36,11 @@
 .pushButton {font-family: Verdana, Helvetica, Arial, sans-serif;font-size: 10pt;}
 
 /* Copy right text */
-.copyRightText {font-family: Verdana, Helvetica, Arial, sans-serif;font-size: 8pt;}
+.copyRightText {font-family: Verdana, Helvetica, Arial, sans-serif;font-size: 8pt; padding-bottom: 10px; padding-top: 10px;}
+
+.calem-login-info {
+	font-size: 12pt; 
+	border:1px solid #cedff2;  
+	text-align: left; 
+	padding: 20px 5px 20px 5px;
+}
