@@ -51,13 +51,8 @@ class CalemLoginSo extends CalemSoapRequest {
  		//Use BO to check login.
  		$rtn=false;
  		try {
-	 		$securityBo=CalemFactory::getSecurityBo();
-			list($succ, $userDbo)=$securityBo->verifyLogin($user, $passwd);
+ 			list($succ, $ses) = CalemLoginSo::doLogin($user, $passwd);
 			if ($succ) {//Login is successful.
-				//Creating a session
-				$ses=new CalemSession();
-				$ses->set('user', $userDbo->getRow()); //Store off the user.
-				$ses->save();
 				//@todo - creating theme & language (load from user input or last time stored).
 				global $_CALEM_conf;
 				return array('sessionId'=>$ses->getSid(), 'validityPeriod'=>$_CALEM_conf['calem_session_config']['lifeTime']);
@@ -66,6 +61,18 @@ class CalemLoginSo extends CalemSoapRequest {
  			$this->logger->error("Exception in processing login. Error msg=" . $e->getTraceAsString());
  		}
 		$this->sendFault(CALEM_SF_INVALID_LOGIN);
+ 	}
+ 	
+ 	public static function doLogin($user, $passwd) {
+ 		$securityBo=CalemFactory::getSecurityBo();
+		list($succ, $userDbo)=$securityBo->verifyLogin($user, $passwd);
+		if ($succ) {//Login is successful.
+			//Creating a session
+			$ses=new CalemSession();
+			$ses->set('user', $userDbo->getRow()); //Store off the user.
+			$ses->save();
+		} 
+		return array($succ, $ses);
  	}
 }
 ?>
