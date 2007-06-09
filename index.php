@@ -32,12 +32,44 @@ require_once _CALEM_DIR_ . 'server/conf/calem.php'; //Configuration
 require_once _CALEM_DIR_ . 'server/include/log4php/LoggerManager.php'; //Logger
 require_once _CALEM_DIR_ . 'server/include/core/session/CalemSession.php';
 require_once _CALEM_DIR_ . 'server/include/util/CalemExit.php';
+require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 	
 	//Disable browser side cache
 	header('Cache-Control', 'no-cache');
 	//Start handling the request.
 	$logger=&LoggerManager::getLogger('main');
 	$sid=isset($_REQUEST['sessionId'])?$_REQUEST['sessionId']:null;
+	if ($logger->isDebugEnabled()) {
+		require_once _CALEM_DIR_ . 'server/include/util/CalemHttpHelper.php';
+		$logger->debug("sid=$sid; Post data=" . CalemHttpHelper::getPostData());
+	}
+	$action=isset($_REQUEST['calemAction']) ? $_REQUEST['calemAction'] : null;
+	//This is the only action supported so far so make it simple at this point.
+	if ($action) {
+		$succ=false;
+		if ($action=='LoginAction') {
+			$login_username=$_REQUEST['username'];	
+			$login_password=$_REQUEST['password'];
+			require_once _CALEM_DIR_ . 'server/modules/admin/soap/CalemLoginSo.php';
+			$ex='';
+			try {
+				list($succ, $ses)=CalemLoginSo::doLogin($login_username, $login_password);
+			} catch (Exception $e) {
+				$ex=$e->getTraceAsString();
+				$logger->error("Exception in processing login. Error msg=" . $ex);
+			}
+			$loginErrorText= CalemMsg::getMsg('soap_InvalidLogin');
+		} else {
+			$loginErrorText=CalemMsg::getMsg("login_reqd");
+		}
+		if (!$succ) {
+			require _CALEM_DIR_ . $_CALEM_conf['noses_allowed_actions']['LoginAction'];
+			//Close down logger
+			CalemExit::exitCalem();
+		}
+		//Set the sid
+		$sid=$ses->getSid();	
+	}
 	$hasCookie=false;
 	if (!$sid) { //Check for cookie
 		$calemSid=isset($_COOKIE['CALEM_SID']) ? $_COOKIE['CALEM_SID'] : null;
@@ -51,10 +83,7 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemExit.php';
 			$sid=$phpo['sid'];	
 		}
 	}
-	if ($logger->isDebugEnabled()) {
-		require_once _CALEM_DIR_ . 'server/include/util/CalemHttpHelper.php';
-		$logger->debug("sid=$sid; Post data=" . CalemHttpHelper::getPostData());
-	}
+	
 	if ($sid) {//Let's verify session validity
 		$sesReload=CalemSession::load($sid);
 		if ($sesReload) {//Found a valid session so let's grant access
