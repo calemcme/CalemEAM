@@ -63,7 +63,7 @@ define('CALEM_DEVELOPMENT', 'development');
 define('CALEM_PRODUCTION', 'production');
 //Default groups
 define('CALEM_OOB', 'CALEM_OOB');
-define('CUSTOM_SYS', 'CUSTOM_SYSTEM');
+define('CUSTOM_SYSTEM', 'CUSTOM_SYSTEM');
 
 
 //File operations
