@@ -258,7 +258,7 @@ require_once 'XML/Serializer.php';
  		global $_CALEM_conf;
  		$zip=false;
  		if ($zipIt && $_CALEM_conf['calem_soap_allow_gzip'] 
- 		    && ($encoding=$encoding=CalemGzip::canGzip())) {
+ 		    && ($encoding=CalemGzip::canGzip())) {
  			$zip=true;    	
  		}
  		//Output data

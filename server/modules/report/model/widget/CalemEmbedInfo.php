@@ -52,7 +52,7 @@ class CalemDesignTargetInfo {
 		global $_CALEM_conf;
 		if (CalemReportUtil::getUid() == $_CALEM_conf['design_target']['dev_admin_id'] 
 		    && $_CALEM_conf['design_target']['devDesignPhase']
-		    && CalemReportUtil::getGid() == CUSTOM_SYS) {
+			    && CalemReportUtil::getGid() == CUSTOM_SYSTEM) {
 			$grp=$_CALEM_conf['design_target']['devDesignGroup'];
 			$rtn=new CalemDesignTargetInfo(CalemDesignTargetInfo::GROUP, $grp, '');		
 		} else {//Design for CUSTOM_SYSTEM
