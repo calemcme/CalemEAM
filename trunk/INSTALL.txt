@@ -2,13 +2,16 @@ Install CalemEAM
 Installation guide is available at http://www.calemeam.com/support_setup.html if you
 are installing CalemEAM the first time.
 
-Upgrade from CalemEAM r1.0.1/r1.0.1ac to r1.0.1x
-1. Unzip the archive file to the same directory of r1.0.1/r1.0.1ac
-2. Edit CalemEAM/bin/env.bat (env.sh) to fix the settings for your installation.
-3. Verify that CalemEAM/server/conf/install.php and custom.php are correct.
-4. See setup guide at http://www.calemeam.com/support_setup.html to configure jsmin properly.  
-5. Run setup.bat (setup.sh) to configure logging.
-   Run deploy.bat (deploy.sh) to deploy r1.0.1x release.
-6. Launch a browser to use r1.0.1x.
+Upgrade from CalemEAM r1.0.1/r1.0.1ac/r1.0.1x to r1.0.2:
+1. Unzip the archive file to the same directory of r1.0.1/r1.0.1ac/r1.0.1x
+2. Merge the contents of CalemEAM/server/conf/custom.bat (or .sh) and install.bat (.sh)
+   into one file and name this file calem.custom.bat (or .sh).
+   These files are no longer needed in the CalemEAM/server/conf, move them to 
+   another directory for future reference:
+    install.php, custom.php, install.sample.php, custom.sample.php
+3. Run setup.bat (setup.sh) to configure logging.
+   Run deploy.bat (deploy.sh) to deploy r1.0.2 release.
+4. Launch a browser to use r1.0.2.
+
 
   
