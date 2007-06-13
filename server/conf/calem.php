@@ -63,7 +63,7 @@ define('CALEM_DEVELOPMENT', 'development');
 define('CALEM_PRODUCTION', 'production');
 //Default groups
 define('CALEM_OOB', 'CALEM_OOB');
-define('CUSTOM_SYSTEM', 'CUSTOM_SYSTEM');
+define('CUSTOM_SYS', 'CUSTOM_SYSTEM');
 
 
 //File operations
@@ -333,6 +333,9 @@ $_CALEM_dist=array(
 
 //recommended format
 @include_once _CALEM_DIR_ . 'server/conf/calem.custom.php';
+
+// used to bundle pear libraries and preserve existing include path (mantis ref 0000010)
+set_include_path(get_include_path() . PATH_SEPARATOR . _CALEM_DIR_ . 'server/include');
 
 $GLOBALS['_CALEM_conf']= $_CALEM_dist;
 ?>
