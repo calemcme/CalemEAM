@@ -28,8 +28,8 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemExit.php';
 require_once _CALEM_DIR_ . 'server/include/core/session/CalemSession.php';
 require_once _CALEM_DIR_ . 'server/include/util/CalemGzip.php';
 
-require_once 'SOAP/Base.php';
-require_once 'XML/Serializer.php';
+require_once _CALEM_DIR_ . 'server/include/SOAP/Base.php';
+require_once _CALEM_DIR_ . 'server/include/XML/Serializer.php';
 
 /**
  * This is the CalemSoapRequest handler base
