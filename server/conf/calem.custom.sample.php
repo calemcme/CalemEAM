@@ -7,9 +7,8 @@ $_CALEM_dist['calem_db_host'] = 'localhost';
 $_CALEM_dist['calem_db_user'] = 'calemeam';
 $_CALEM_dist['calem_db_password'] = 'calemeam';
 
-//Application host
+//Application host for db use
 $_CALEM_dist['calem_application_host'] = 'localhost';
-$_CALEM_dist['calem_application_port'] = '';
 
 //Admin user name and password to create Calem DB
 $_CALEM_dist['db_admin_user'] = 'root';
