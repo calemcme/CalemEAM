@@ -30,8 +30,6 @@
    $calemAlternateColor=isset($_REQUEST['alternatecolor']) ? $_REQUEST['alternatecolor'] : 0;
    $url= isset($_SERVER['HTTPS']) ? $_CALEM_conf['calem_host']['https'] : $_CALEM_conf['calem_host']['http'];
    $url .= $_SERVER['HTTP_HOST'];
-   $port = ($_SERVER['SERVER_PORT']==80) ? '' : (":" . $_SERVER['SERVER_PORT']);
- 	$url .= $port;
  	//$query= (isset($_SERVER['argv']) && isset($_SERVER['argv'][0])) ? ('?' . $_SERVER['argv'][0]) : '';
 	$calemRootUrl=$url . $_CALEM_conf['calem_root_uri'];
 	$calemRequestUrl=$url . $_CALEM_conf['calem_request_uri']; // . $query;
