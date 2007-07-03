@@ -396,7 +396,7 @@ CalemDbLookup.prototype.getJson =
 function() {
 	return ["{CalemDbLookup: {", 
 	       (this._id ? ["id: '", this._id, "', "].join('') : ''),
-	       "value: '", escape(this._value), "'}"].join('');
+	       "value: '", escape(this._value), "'}}"].join('');
 }
 
 //deserialize
