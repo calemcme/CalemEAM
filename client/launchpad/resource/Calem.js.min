@@ -981,7 +981,7 @@ return["'",val,"'"].join('');}
 CalemDbString.prototype.getLikeValue=function(){var rtn=this._value;if(this._value&&!CalemViewUtil.sortCaseSensitive()){rtn=this._value.toLowerCase();}
 return rtn;}
 function CalemDbLookup(id,val){if(arguments.length==0)return;this._id=id;CalemDbString.call(this,val);}
-CalemDbLookup.prototype=new CalemDbString;CalemDbLookup.prototype.constructor=CalemDbLookup;CalemDbLookup.prototype.getJson=function(){return["{CalemDbLookup: {",(this._id?["id: '",this._id,"', "].join(''):''),"value: '",escape(this._value),"'}"].join('');}
+CalemDbLookup.prototype=new CalemDbString;CalemDbLookup.prototype.constructor=CalemDbLookup;CalemDbLookup.prototype.getJson=function(){return["{CalemDbLookup: {",(this._id?["id: '",this._id,"', "].join(''):''),"value: '",escape(this._value),"'}}"].join('');}
 CalemDbLookup.prototype.setJson=function(obj){this._id=obj.id;this._value=unescape(obj.value);}
 CalemDbLookup.prototype.getId=function(){return this._id;}
 CalemDbLookup.prototype.getValue=function(){return this._value;}
