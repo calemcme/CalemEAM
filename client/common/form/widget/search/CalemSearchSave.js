@@ -29,6 +29,8 @@ function CalemSearchSave(parent, search) {
 	this._vdCallback=new AjxCallback(this, this.onVdCallback);
 	this._createControl(parent);
 	this.setupSearch(search);
+	this._sQuoteReg=new RegExp("'", 'g');
+	this._sQuoteRep=CalemConf['view_engine']['searchSave']['sQuote'];
 } 
 
 CalemSearchSave.prototype = new DwtComposite;
@@ -135,7 +137,7 @@ function(vcCallback) {
 
 CalemSearchSave.prototype.onVdCallback =
 function(field, isValid, value) {
-	if (isValid) this._saveValue._name=value;
+	if (isValid) this._saveValue._name= value ? value.replace(this._sQuoteReg, this._sQuoteRep) : value;
 	this._parentVdCallback.run(field, isValid, value);
 }
 
