@@ -585,7 +585,7 @@ CalemConf['view_engine'] = {
 	},
 	
 	//ViewSearchEdit
-	searchSave: {display: 30, max: 30},
+	searchSave: {display: 30, max: 30, sQuote: '`'},
 	viewSearchEditRender: {
 		dropdownRows: 4,
 		CalemViewInfo: 'CalemViewSearchEditRender',
