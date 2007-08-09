@@ -1182,7 +1182,7 @@ function CalemDropdownField(rec,name,value){if(arguments.length==0)return;CalemF
 CalemDropdownField.prototype=new CalemField;CalemDropdownField.prototype.constructor=CalemDropdownField;CalemDropdownField.prototype.toString=function(){return'CalemDropdownField';}
 CalemDropdownField.prototype._getValue=function(){return CalemMsg.getMsg(this._value);}
 CalemDropdownField.prototype._getEditValue=function(){return this._getValue();}
-CalemDropdownField.prototype._compareSafe=function(fld){return CalemField.compare(this.getValue(),fld.getValue());}
+CalemDropdownField.prototype._compareSafe=function(fld){return CalemField.compareString(this.getValue(),fld.getValue());}
 CalemDropdownField.prototype._sameType=function(fld){return(fld instanceof CalemDropdownField);}
 CalemDropdownField.prototype.valueEquals=function(raw){raw=raw?raw.trim():'';var myRaw=this._value?this._value.trim():'';return(raw==myRaw);}
 function CalemCachedJoinField(rec,name,value){if(arguments.length==0)return;CalemField.call(this,rec,name,value);}

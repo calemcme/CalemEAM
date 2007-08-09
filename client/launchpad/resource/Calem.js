@@ -9256,7 +9256,7 @@ function() {
 //Compare - to compare about priority (P1, P2, etc.)
 CalemDropdownField.prototype._compareSafe =
 function(fld) {
-	return CalemField.compare(this.getValue(), fld.getValue());
+	return CalemField.compareString(this.getValue(), fld.getValue());
 }
 
 //Type comparison
