@@ -269,7 +269,7 @@ DIV.vSpace {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	overflow: auto;
+	overflow: hidden; /* auto; */
 	background-color: #FFFFFF;
 }
 

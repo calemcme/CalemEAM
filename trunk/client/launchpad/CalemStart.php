@@ -43,7 +43,6 @@
       <!--
         @import url(<?php print $calemRootUrl ?>/client/themes/image/hiRes/dwtimgs.css);
         @import url(<?php print $calemRootUrl ?>/client/themes/dwt.css);
-        @import url(<?php print $calemRootUrl ?>/client/themes/common.css);
         @import url(<?php print $calemRootUrl ?>/client/themes/<?php print $theme ?>/<?php print $theme.'_img' ?>.css);
         @import url(<?php print $calemRootUrl ?>/client/themes/<?php print $theme ?>/<?php print $theme ?>.css);
         @import url(<?php print $calemRootUrl ?>/client/themes/dv.css);
