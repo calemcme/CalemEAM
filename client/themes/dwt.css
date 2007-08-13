@@ -133,22 +133,6 @@
 .hover_tip_top 		{	position: absolute;	}
 .hover_tip_bottom 	{	position: relative;	}
 
-/*
-* Sashes
-*/
-.DwtSash, .AppSash-horiz, .AppSash-vert { background-color: rgb(37,87,173); }
-/*
-.DwtSash, .AppSash-horiz, .AppSash-vert { 
-	background-color: #666666;
-}
-*/
-
-.AppSash-horiz { width: 5px; }
-.AppSash-vert { 
-	height: 5px;
-	width: 100%;
-	font-size: 5px; /* WEIRD IE QUIRK */
-}
 
 /*
 * Trees
@@ -383,110 +367,6 @@
 	cursor: default;
 }
 */
-
-/*
-* List views
-*/
-
-/* Common styles */
-.DwtListView {
-	width: 100%;
-}
-
-.DwtListView-Rows {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-}
-
-.DwtListView-Rows td {
-	color:black;
-	padding: 2px;
-}
-
-.DwtListView-Sash {
-	width: 1px; 
-	height: 100%;
-	vertical-align: top;
-}
-
-.DwtListView-ColHeader {
-	background-color:#eeeeee;border-bottom:1px solid #dddddd
-	position: relative;
-	height: 24px;
-}
-
-.DwtListView-Column {
-	padding: 0 0 0 2;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.DwtListView-Column td {
-	color:black;
-}
-
-.DwtListView-ColumnEmpty {
-}
-
-.DwtListView-ColumnSash {
-	width: 2px;
-	background-color: #000000;
-}
-
-.DwtListView .DwtListView-ColumnHover TD {
-	color:#FFC600;
-}
-
-.DwtListView-ColumnActive {
-
-}
-
-/* Row display and highlighting */
-.Row, .Row-selected, .Row-matched, .Row-matched-drag, 
-.Row-drag, .Row-selected-drag, .Row-selected-right {
-	border-bottom: 1px solid rgb(198, 197, 215);
-}
-
-.Row-selected, .Row-selected-drag { 
-  background-color: rgb(37, 87, 173); 
-  color: white;
-}
-.Row-matched, .Row-matched-dnd { background-color: rgb(255, 247, 176); }
-.Row-selected-right, .Row-drag, .Row-matched-drag { background-color: #AFAFAF; }
-
-.Row-selected table, .Row-selected-drag table, .Row-drag table, 
-.Row-matched-drag table, .Row-selected-right table { 
-	color: white; 
-}
-
-.Row table, .Row-selected table, .Row-matched table, .Row-matched-drag table, .Row-dnd table, 
-.Row-selected-drag table, .Row-drag table, .Row-selected-right table {
-	table-layout: fixed;
-}
-
-.Row td, .Row div, .Row-selected td, .Row-matched td, .Row-dnd td, .Row-selected-drag td, 
-.Row-drag td, .Row-matched-drag td, .Row-selected-right td {
-	vertical-align: top;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.Row td.Flag, .Row td.Attach, .Row td.Tag, .Row td.Icon,
-.Row-dnd td.Flag, .Row-dnd td.Attach, .Row-dnd td.Tag, .Row-dnd td.Icon, 
-.Row-selected-drag td.Flag, .Row-selected-drag td.Attach, .Row-selected-drag td.Tag, .Row-selected-drag td.Icon, 
-.Row-matched-drag td.Flag, .Row-matched-drag td.Attach, .Row-matched-drag td.Tag, .Row-matched-drag td.Icon, 
-.Row-drag td.Flag, .Row-drag td.Attach,.Row-drag td.Tag, .Row-drag td.Icon {
-	text-align: center;
-}
-
-.nobreak {
-	white-space: nowrap;
-	overflow: hidden;
-}
 
 /*
  *  DwtAddRemove
