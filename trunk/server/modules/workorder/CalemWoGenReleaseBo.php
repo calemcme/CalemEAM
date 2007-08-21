@@ -51,6 +51,10 @@ class CalemWoGenReleaseBo extends CalemBo {
 		$woRow['planned_start_time']=CalemText::getServerDateTime($dueDate);
 		$woRow['planned_finish_time']=CalemText::getServerDateTime($finishTime);
 		$woRow['status_id']=$this->releaseConf['wo_status'];
+		
+		$woRow['orig_time']=CalemText::getServerDateTime(); //It's today
+		$woRow['time_needed']=$woRow['planned_finish_time'];
+		
 		$woRow=$this->copyPmToWo($woRow, $pmRow, $pmAssetRow);
 		$woRow=$this->woDbo->beforeInsert('workorder', $woRow, null, null);
 		//Start a transaction here

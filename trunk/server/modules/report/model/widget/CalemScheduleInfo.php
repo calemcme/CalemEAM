@@ -111,7 +111,14 @@ class CalemScheduleInfo {
 	}
 	
 	public function getNextDueDate($dt) {
-		return ($this->isValid() ? $this->elements[$this->selection]->getNextDueDate($dt) : null);	
+		$rtn=null;
+		if ($this->isValid()) {
+			$ndt=	$this->elements[$this->selection]->getNextDueDate($dt);
+			if ($this->isDateInRange($ndt)) {
+				$rtn=$ndt;
+			}
+		}
+		return $rtn;	
 	}
 	
 	public function adjustReleaseDate($dt) {
@@ -182,22 +189,25 @@ class CalemScheduleWeekly implements CalemScheduleInterface {
 		return ($this->dows && count($this->dows)>0);	
 	}
 	
-	public function getNextDueDate($dt) {
-		$data=getdate($dt);
-		$w=$data['wday'];
-		$ndt=null;
-		for ($i=0; $i< 7; $i++) {
-			if ($this->inDow(self::$DOW[$w])) {
-				$ndt= ($i>0) ? strtotime('+' . $i . ' day', $dt) : $dt;
+	/**
+	 * Craw till next day slot.
+	 */
+	public function getNextDueDate($dt, $delta=1) {
+		$rtn=null;
+		for ($i=$delta; $i<=7; $i++) {
+			$ndt=strtotime('+' . $i . ' day', $dt);
+			$data=getdate($ndt);
+			if ($this->inDow(self::$DOW[$data['wday']])) {
+				$rtn=$ndt;
 				break;	
 			}	
-			$w= ($w+1)%7;
 		}
-		return $ndt;
+		return $rtn;
 	}
 	
+	//Go for next due day.
 	public function adjustReleaseDate($dt) {
-		return $this->getNextDueDate($dt);
+		return $this->getNextDueDate($dt, 0);
 	}
 }
 	
@@ -314,6 +324,9 @@ class CalemScheduleDates {
 	protected $start;
 	protected $end;
 	
+	/**
+	 * yyyy-mm-dd are of the formats of start and end dates here.
+	 */
 	public function __construct($start=null, $end=null) {
 		$this->start=$start;
 		$this->end=$end;

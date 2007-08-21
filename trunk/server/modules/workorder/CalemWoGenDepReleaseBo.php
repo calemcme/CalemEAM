@@ -100,9 +100,6 @@ class CalemWoGenDepReleaseBo extends CalemBo {
 			
 			if ($depWoId) {
 				$wogenBo->incWoCount();
-				/* Not supported
-				 $this->addProcessed($depPmRow['id'], $depPmAssetRow['id'], $releasedPmAsset);
-				 */
 				$this->setDepWoId($typeId, $woId, $depWoId);
 				//Need to recursively release for dependency
 				$wogenBo->releaseByDependency($depWoId, $depDueDate, $depFinishTime, $depPmRow, $depPmAssetRow);
