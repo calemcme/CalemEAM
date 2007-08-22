@@ -48,7 +48,7 @@ class CalemIncludeJsPkg {
 	public function downloadBulk($bulkList, $jsList=null) { 		
 	 	//language
 	 	global $_CALEM_conf;
-		$lang=isset($_REQUEST['lang'])?$_REQUEST['lang']:$_CALEM_conf['client_language'];
+		$lang=isset($_REQUEST['lang'])?$_REQUEST['lang']:null;
 		$ext=false;
 		if ($lang) {
 			$ext='_' . $lang;	
