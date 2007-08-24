@@ -30,7 +30,7 @@ $_CALEM_table=array(
     	'path'=>'server/modules/workorder/',
     	'name'=>'CalemWoDbo',
     ),
-    'order_by'=>array('field'=>'sched_finish_time', 'order'=>'DESC'),
+    'order_by'=>array('field'=>'time_needed', 'order'=>'DESC'),
     'primary_key'=>array(
     	'id'
     ),
@@ -39,6 +39,7 @@ $_CALEM_table=array(
     ),
     'indexes'=>array(
     	'idx_wo_sched_completion_time'=>array('sched_finish_time'),
+    	'idx_wo_time_needed'=>array('time_needed'),
     	'idx_wo_asset'=>array('asset_id'),
     	'idx_wo_pm'=>array('pm_id'),
     	'idx_wo_costcode'=>array('costcode_id'),
