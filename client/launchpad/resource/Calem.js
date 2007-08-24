@@ -10361,13 +10361,24 @@ function(recNo) {
 CalemRecordListDbCache.prototype.add =
 function(rec) {
 	if (this._recMap[rec.id]) {
-		this._recMap[rec.id]=rec;
+		this._replace(rec);
 	} else {
 		this._cached[this._recList.length]=CalemConst._CACHED; //Record it.
 	   this._recList.push(rec);
 		this._recMap[rec.id]=rec;	
 	}
 	this._total++;
+}
+
+//Must go through the whole list (m-31)
+CalemRecordListDbCache.prototype._replace =
+function(rec) {
+	this._recMap[rec.id]=rec;
+	for (var i=0; i< this._recList.length; i++) {
+		if (this._recList[i].id==rec.id) {
+			this._recList[i]=rec;
+		}
+	}
 }
 
 CalemRecordListDbCache.prototype.getTotal =
