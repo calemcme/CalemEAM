@@ -1336,8 +1336,9 @@ CalemRecordListDbCache.prototype=new CalemRecordList;CalemRecordListDbCache.prot
 CalemRecordListDbCache.prototype._clearCache=function(){this._cached=new Array();this._recList=new Array();this._recMap=new Object();}
 CalemRecordListDbCache.prototype.sort=function(ob,callback,start){if(this.getTotal()<CalemConfUtil.getBulkFetchSize()){CalemRecordList.prototype.sort.call(this,ob,callback,start);}else{this._clearCache();var range=new CalemQueryRange(start);this._tblQuery.setOrderBy(ob);var fetchCallback=new AjxCallback(this,this.onBulkFetchCallback,{callback:callback,count:1,start:start});this._executeBulkFetch(range,fetchCallback);}}
 CalemRecordListDbCache.prototype.atLast=function(recNo){return(recNo==this._total-1);}
-CalemRecordListDbCache.prototype.add=function(rec){if(this._recMap[rec.id]){this._recMap[rec.id]=rec;}else{this._cached[this._recList.length]=CalemConst._CACHED;this._recList.push(rec);this._recMap[rec.id]=rec;}
+CalemRecordListDbCache.prototype.add=function(rec){if(this._recMap[rec.id]){this._replace(rec);}else{this._cached[this._recList.length]=CalemConst._CACHED;this._recList.push(rec);this._recMap[rec.id]=rec;}
 this._total++;}
+CalemRecordListDbCache.prototype._replace=function(rec){this._recMap[rec.id]=rec;for(var i=0;i<this._recList.length;i++){if(this._recList[i].id==rec.id){this._recList[i]=rec;}}}
 CalemRecordListDbCache.prototype.getTotal=function(rec){return this._total;}
 CalemRecordListDbCache.prototype.deleteRecord=function(id){for(var i=0;i<this._recList.length;i++){if(this._recList[i].id==id){this._recList.splice(i,1);delete this._recMap[id];this._cached.splice(i,1);}}
 this._total--;}
