@@ -14263,6 +14263,8 @@ function CalemListView(parent, className, posStyle, tableDd, customInfo, control
 	this._createListView();
 	//padding for ie
 	this._ieWidthPadding=CalemConf['widget_listview']['ieWidthPadding'];
+	//Set up wheel listener
+	this.setHandler(DwtEvent.ONMOUSEWHEEL, CalemListView._mouseWheelHdlr);
 }
 
 CalemListView.prototype = new DwtListView;
@@ -14603,6 +14605,36 @@ function(colId) {
 		this._headerListMap[colId]._width=this._tableDd.getWidth(colId);
 	}
 }
+
+/**
+ * Mouse wheel handler
+ */
+CalemListView._mouseWheelHdlr =
+function(ev) {
+    //To handle various browsers.
+	ev=DwtUiEvent.getEvent(ev);
+	var listView=DwtUiEvent.getDwtObjFromEvent(ev);
+	if (listView && listView instanceof CalemListView) {
+		listView.onWheelEvent(ev);
+	}
+}
+
+CalemListView.prototype.onWheelEvent =
+function(event) {
+	if (this._controller && this._controller.onWheelEvent) {
+		if (event.wheelDelta) { // IE/Opera.
+      	delta = event.wheelDelta/120;
+         // In Opera 9, delta differs in sign as compared to IE.
+         if (window.opera) delta = -delta;
+     	} else if (event.detail) { /** Mozilla case. */
+         //In Mozilla, sign of delta is different than in IE.
+         //Also, delta is multiple of 3.
+         delta = -event.detail/3;
+     	}
+		this._controller.onWheelEvent(delta);
+	}
+}
+ 
 
 /**
  CalemListHeaderItem
@@ -15811,6 +15843,25 @@ function() {
 	this._redrawSlider();
 	AjxTimedAction.scheduleAction(this._onDataScrollAction, this._conf['dataScrollDelay']);
 }	
+
+/**
+ * Wheel scroll event
+ */
+CalemScrollBar.prototype.scrollByWheel =
+function(delta) {
+	if (!this._scrollSlider.getVisible()) return; //No scrollSlider.
+	//Cannot scroll anymore.
+	if ( (this._start==0 && delta > 0) || (this._start==(this._dataSize-1) && delta < 0) ) return;
+	if (delta > 0) {
+   	this._start -= delta;
+   	if (this._start<1) this._start=0;
+   } else {
+   	this._start -= delta;
+   	if (this._start>this._dataSize-1) this._start=this._dataSize-1;
+   }   
+   this._redrawSlider(); //change UI properly.
+   AjxTimedAction.scheduleAction(this._onDataScrollAction, this._conf['dataScrollDelay']);
+}
 
 CalemScrollBar.prototype.onMouseDownEvent =
 function(ev) {
@@ -31101,7 +31152,15 @@ function(param, list) {
 	} else {
 		this._listView.set(list);
 	}
-}  
+}
+
+/**
+ * Scroll by mouse wheeler
+ */  
+CalemDataGrid.prototype.onWheelEvent =
+function(delta) {
+	this._scrollBar.scrollByWheel(delta);
+}
 
 /**
  * Data sort

@@ -277,6 +277,25 @@ function() {
 	AjxTimedAction.scheduleAction(this._onDataScrollAction, this._conf['dataScrollDelay']);
 }	
 
+/**
+ * Wheel scroll event
+ */
+CalemScrollBar.prototype.scrollByWheel =
+function(delta) {
+	if (!this._scrollSlider.getVisible()) return; //No scrollSlider.
+	//Cannot scroll anymore.
+	if ( (this._start==0 && delta > 0) || (this._start==(this._dataSize-1) && delta < 0) ) return;
+	if (delta > 0) {
+   	this._start -= delta;
+   	if (this._start<1) this._start=0;
+   } else {
+   	this._start -= delta;
+   	if (this._start>this._dataSize-1) this._start=this._dataSize-1;
+   }   
+   this._redrawSlider(); //change UI properly.
+   AjxTimedAction.scheduleAction(this._onDataScrollAction, this._conf['dataScrollDelay']);
+}
+
 CalemScrollBar.prototype.onMouseDownEvent =
 function(ev) {
 	if (!this._scrollSlider.getVisible()) return; //No scrollSlider.
