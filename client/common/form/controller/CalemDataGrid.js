@@ -217,7 +217,15 @@ function(param, list) {
 	} else {
 		this._listView.set(list);
 	}
-}  
+}
+
+/**
+ * Scroll by mouse wheeler
+ */  
+CalemDataGrid.prototype.onWheelEvent =
+function(delta) {
+	this._scrollBar.scrollByWheel(delta);
+}
 
 /**
  * Data sort
