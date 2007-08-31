@@ -15,7 +15,7 @@ CalemConf['dialog_text_wrap']={len:55,eol:'<br>'}
 CalemConf['form_data_change']={atPos:CalemConst.NEW_AT_TOP,deletePrompt:CalemConst.DELETE_PROMPT}
 CalemConf['default_currency']={id:'USD'}
 CalemConf['dropdowns']={admin_type:{admin_none:'admin_none',admin_group:'admin_group',admin_system:'admin_system'}}
-CalemConf['edit_schedule']={'dow_short':['dow_short_sun','dow_short_mon','dow_short_tue','dow_short_wed','dow_short_thu','dow_short_fri','dow_short_sat'],'week_no':['schedule_w1','schedule_w2','schedule_w3','schedule_w4','schedule_wl'],'defaultSelection':'months','defaultReadSize':50}
+CalemConf['edit_schedule']={'dow_short':['dow_short_sun','dow_short_mon','dow_short_tue','dow_short_wed','dow_short_thu','dow_short_fri','dow_short_sat'],'week_no':['schedule_w1','schedule_w2','schedule_w3','schedule_w4','schedule_wl'],'defaultSelection':'months','defaultReadSize':75}
 CalemConf['widget_listview']={ieWidthPadding:4}
 CalemConf['report_window_conf']="width=1050,height=800,scrollbars=1,screenX=50,screenY=50,titlebar=1,menubar=1,toolbar=1,resizable=1";CalemConf['desktop_keymap']={'c':{cmd:'CalemCmdCustomize',note:'key_customize'}};CalemConf['auto_completion']={maxMatch:15,fetchDelay:600};CalemConf["temp"]="temp";function CalemCurrency(){}
 CalemCurrency['USD']={symbol:'$',thousandSep:',',decimalSep:'.',before:'$',after:''};CalemCurrency['CAD']={symbol:'CAD',thousandSep:',',decimalSep:'.',before:'CAD',after:''};CalemCurrency['MXN']={symbol:'MXN',thousandSep:',',decimalSep:'.',before:'MXN',after:''};function CalemDebug(){}

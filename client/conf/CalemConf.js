@@ -823,7 +823,7 @@ CalemConf['edit_schedule'] = {
                           'dow_short_fri', 'dow_short_sat'],
 	'week_no'  : ['schedule_w1', 'schedule_w2', 'schedule_w3', 'schedule_w4', 'schedule_wl'],
 	'defaultSelection'  : 'months',
-	'defaultReadSize': 50
+	'defaultReadSize': 75
 }
                           
 /**
