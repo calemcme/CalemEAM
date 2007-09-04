@@ -1229,7 +1229,7 @@ CalemTextUtil.formatters = new Array();
 CalemTextUtil._init = 
 function() {
 	CalemTextUtil._timezone = AjxTimezone._guessMachineTimezone();
-	CalemTextUtil._clientId = AjxTimezone.getClientId(CalemTextUtil.timezone);
+	CalemTextUtil._clientId = AjxTimezone.getClientId(CalemTextUtil._timezone);
 	
 	var conf=CalemConf["text_formatter"];
 	var i=0;
@@ -1269,7 +1269,7 @@ function(date) {
 CalemTextUtil.getNoDateTimeOffset =
 function() {
 	var rule = AjxTimezone.getRule(CalemTextUtil.getClientId());
-	return rule ? rule.stdOffset : 0;
+	return rule ? -1*rule.stdOffset : 0;
 }
 /**
  * Persistence functions for formatting for server storage.
@@ -1384,6 +1384,19 @@ function(dateStr, toGmt) {
 }
 
 /**
+ * Get local time presentation out of server time
+ */
+CalemTextUtil._getLocalTimeFromServerTime =
+function(serverTime) {
+	var rtn=null;
+	if (serverTime) {
+		var dt=CalemTextUtil.parseServerTimeLocal(serverTime);
+		rtn=CalemTextUtil.formatTimeEdit(dt);
+	}
+	return rtn;
+}
+
+/**
  * Server datetime is of the format: yyyy-mm-dd hh:mi:ss
  * Server time is in UTC so let's convert to local time.
  */
@@ -1469,6 +1482,18 @@ function(date) {
 		gmtDate.setMinutes(mm);
 	}
 	return gmtDate;
+}
+
+//Parse local time to GMT - make it consistent with CalemTextUtio._parseServerTime
+CalemTextUtil.localTimeToGmt =
+function(date) {
+	if (!date) return null;
+	var ldate=new Date();
+	ldate.setTime(date.getTime());
+	var mm=date.getMinutes();
+	mm += CalemTextUtil.getNoDateTimeOffset();
+	ldate.setMinutes(mm);
+	return ldate;
 }
 
 //Get current GMT time
@@ -19064,8 +19089,8 @@ function() {
 CalemEditTime.prototype.getFieldValue =
 function() {
 	var date=this.getFieldLocalValue();
-	//Keep time as is, no time zone conversion for now.
-	//if (date) date=CalemTextUtil.localDateTimeToGmt(date);
+	//m-38 convert to GMT
+	if (date) date=CalemTextUtil.localTimeToGmt(date);
 	return date;
 } 
 
