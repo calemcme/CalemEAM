@@ -132,8 +132,8 @@ function() {
 CalemEditTime.prototype.getFieldValue =
 function() {
 	var date=this.getFieldLocalValue();
-	//Keep time as is, no time zone conversion for now.
-	//if (date) date=CalemTextUtil.localDateTimeToGmt(date);
+	//m-38 convert to GMT
+	if (date) date=CalemTextUtil.localTimeToGmt(date);
 	return date;
 } 
 
