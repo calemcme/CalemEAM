@@ -236,7 +236,7 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
 		$i=1;
 		foreach ($this->changed as $key=>$value) {
 			if (!$value) continue; //Do not include items that are not changed.
-			$val=($this->row[$key]==null || $this->row[$key]=='') ? null : $this->row[$key];
+			$val=($this->row[$key]===null || $this->row[$key]==='') ? null : $this->row[$key];
 			$stmt->bindValue($i++, $val);
 		}
 	}
