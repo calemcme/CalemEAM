@@ -452,6 +452,11 @@ CalemMsg["schedule_wl"] = "Last";
 
 CalemMsg["schedule_start"] = "Start from";
 CalemMsg["schedule_until"] = "Until";
+CalemMsg["schedule_start_time"] = "Start time";
+CalemMsg["schedule_repeat"] = "Repeat";
+CalemMsg["schedule_every"] = "Every";
+CalemMsg["schedule_minutes"] = "minutes";
+CalemMsg["schedule_hours"] = "hours";
 
 CalemMsg["schedule_weekly_text"] = "Every week on {0}";
 CalemMsg["schedule_weeks_text"] = "Every {0} weeks on {1}";
@@ -460,6 +465,12 @@ CalemMsg["schedule_months_text"] = "Every {0} months on {1} {2}";
 CalemMsg["schedule_dates_from"] = "from {0}";
 CalemMsg["schedule_dates_till"] = "until {0}";
 CalemMsg["schedule_dates_from_till"] = "from {0} until {1}";
+
+CalemMsg["schedule_time_start"] = "Start at {0}";
+CalemMsg["schedule_time_start_end"] = "Start at {0} till {1}";
+CalemMsg["schedule_time_minutes"] = "every {0} minutes";
+CalemMsg["schedule_time_hours"] = "every {0} hours";
+CalemMsg["schedule_time_full"] = "{0}, {1}";
 
 
 CalemMsg["form_design"] = "Form design";
@@ -486,6 +497,7 @@ CalemMsg["form_tab"] = "Form tab";
 CalemMsg["form"] = "Form";
 
 CalemMsg["fixed"] = "(Fixed)";
+CalemMsg["scheduler_job_list"] = "Job list";
 
 CalemMsg["search_select"] = "Select search";
 CalemMsg["my_search"] = "My search:";
@@ -517,6 +529,10 @@ CalemMsg["new_no_parent"] = "The data cannot be created without a valid parent r
 CalemMsg["data_refresh"] = "Refresh data";
 
 CalemMsg["admin_codes"] = "Codes";
+CalemMsg["admin_scheduler"] = "Scheduler";
+
+CalemMsg["tab_scheduler_job_main"] = "Main";
+CalemMsg["tab_scheduler_job_run"] = "Job runs";
 
 CalemMsg["data_design"] = "Data design";
 CalemMsg["table_design"] = "Table design";
@@ -628,6 +644,27 @@ CalemMsg["city"] = "City";
 CalemMsg["state"] = "State";
 CalemMsg["zip"] = "Zip";
 CalemMsg["country"] = "Country";
+
+CalemMsg["scheduler_task"] = "Tasks";
+CalemMsg["task"] = "Task";
+CalemMsg["scheduler_task_note"] = "Note";
+CalemMsg["class_name"] = "Class";
+CalemMsg["class_path"] = "Class path";
+
+CalemMsg["scheduler_job"] = "Jobs";
+CalemMsg["scheduler_job_note"] = "Note";
+CalemMsg["is_active"] = "Active";
+CalemMsg["start_seq"] = "Seq";
+CalemMsg["release_time"] = "Release time";
+CalemMsg["release_day"] = "Release days";
+CalemMsg["time_due"] = "Time due";
+
+CalemMsg["scheduler_job_run"] = "Job run";
+CalemMsg["scheduler_time_taken"] = "Time taken";
+CalemMsg["results"] = "Result";
+
+CalemMsg["semaphore"] = "Semaphore";
+CalemMsg["expire_time"] = "Time to expire";
 
 CalemMsg["user_type"] = "User type";
 CalemMsg["ut_maint_staff"] = "Maintenance staff";
@@ -1738,7 +1775,6 @@ CalemMsg["part_in_id"] = "Part no.";
 CalemMsg["qty_used"] = "Qty used";
 
 CalemMsg["wo_meter"] = "Meter";
-CalemMsg["time_taken"] = "Time taken";
 CalemMsg["reading"] = "Reading";
 
 CalemMsg["wo_planned_labor"] = "Planned labor";
