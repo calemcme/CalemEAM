@@ -513,6 +513,10 @@ CalemFormDef['users'] = {
 	lookup: 'CalemUserFormLookup'	
 } 
 
+CalemFormDef['scheduler_task'] = {
+	lookup: 'CalemSchedulerTaskFormLookup'	
+}
+
 CalemFormDef['team'] = {
 	lookup: 'CalemTeamFormLookup'	
 } 

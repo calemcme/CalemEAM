@@ -422,3 +422,27 @@ CalemEditScheduleInfo.prototype.getField =
 function() {
 	return this._field;
 }
+
+//Edit schedule time info
+function CalemEditScheduleTimeInfo(fld) {
+	if (arguments.length==0) return;
+	this._field=fld;
+}
+
+CalemEditScheduleTimeInfo.prototype.toString = function() {return "CalemEditScheduleTimeInfo";}
+CalemEditScheduleTimeInfo.prototype.getClassName = function() {return "CalemEditScheduleTimeInfo";}
+
+CalemEditScheduleTimeInfo.prototype.setJson =
+function(obj) {
+	this._field=obj.field;
+}
+
+CalemEditScheduleTimeInfo.prototype.getJson = 
+function() {
+	return ["{CalemEditScheduleTimeInfo: {field: '", this._field, "'}}"].join('');
+}
+
+CalemEditScheduleTimeInfo.prototype.getField =
+function() {
+	return this._field;
+}

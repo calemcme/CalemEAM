@@ -60,6 +60,7 @@ function(min, max) {
 
 CalemEditRender.prototype._validateRange =
 function(value) {
+	if (value==null || value == '') return;
 	if (this._minNumVal && value < this._minNumVal)
 		throw AjxMessageFormat.format(AjxMsg.numberLessThanMin, this._minNumVal);
 	if (this._maxNumVal && value > this._maxNumVal)
