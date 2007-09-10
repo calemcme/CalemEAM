@@ -143,3 +143,5 @@
 .ImgCalemPoItemAdd  {background-image:url("icons/script_add.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
 .ImgCalemPoItemRemove  {background-image:url("icons/script_delete.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
 
+.ImgCalemScheduler  {background-image:url("icons/date_go.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemSchedulerTask  {background-image:url("icons/application_lightning.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
