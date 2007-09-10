@@ -227,6 +227,7 @@ CalemConf['view_engine'] = {
 		CalemViewInfo: 'CalemViewReadRender',
 		CalemFieldInfo: 'CalemFieldReadRender',
 		CalemEditScheduleInfo: 'CalemReadScheduleRender',
+		CalemEditScheduleTimeInfo: 'CalemReadScheduleTimeRender',
 		FieldRenders: {
 	   	'text'  : 	'CalemReadTextRender',
 	   	'boolean' : 'CalemReadBooleanRender',
@@ -238,6 +239,7 @@ CalemConf['view_engine'] = {
 		CalemViewInfo: 'CalemViewEditRender',
 		CalemFieldInfo: 'CalemEditRenderFacade',
 		CalemEditScheduleInfo: 'CalemEditScheduleRender',
+		CalemEditScheduleTimeInfo: 'CalemEditScheduleTimeRender',
 		CalemEditInCheckoutToInfo: 'CalemEditInCheckoutToRender',
 		FieldRenders: {
 			//String type
@@ -289,6 +291,7 @@ CalemConf['view_engine'] = {
 		CalemFieldLabelInfo: 'CalemFieldLabelDesignRender',
 	   CalemFormErrorInfo: 'CalemFormErrorDesignRender',
 	   CalemEditScheduleInfo: 'CalemTextDesignRender',
+	   CalemEditScheduleTimeInfo: 'CalemTextDesignRender',
 	   CalemEditInCheckoutToInfo: 'CalemTextDesignRender',
 	   FieldRenders: {			
 			'text'  : 	'CalemTextDesignRender',
@@ -591,6 +594,7 @@ CalemConf['view_engine'] = {
 		CalemViewInfo: 'CalemViewSearchEditRender',
 		CalemFieldInfo: 'CalemSearchFieldRenderFacade',
 		CalemEditScheduleInfo: 'CalemSearchScheduleRender',
+		CalemEditScheduleTimeInfo: 'CalemSearchScheduleTimeRender',
 		FieldRenders: {
 			//String type
 			'varchar': 	'CalemSearchStringRender',
@@ -824,6 +828,13 @@ CalemConf['edit_schedule'] = {
 	'week_no'  : ['schedule_w1', 'schedule_w2', 'schedule_w3', 'schedule_w4', 'schedule_wl'],
 	'defaultSelection'  : 'months',
 	'defaultReadSize': 75
+}
+                          
+CalemConf['edit_schedule_time'] = {
+	'int_field_len': 2,
+	'hour_range': {min: 1, max: 24},
+	'minute_range': {min: 1, max: 60},
+	'defaultReadSize': 50
 }
                           
 /**
