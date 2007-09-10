@@ -1,29 +1,19 @@
 /*
- * The contents of this file are subject to the CalemEAM Public License Version
- * 1.0 ("License"); You may not use this file except in compliance with the
- * License. You may obtain a copy of the License at http://www.calemeam.com/license
- *
- * Software distributed under the License is distributed on an "AS IS" basis,
- * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
- * for the specific language governing rights and limitations under the
- * License.
- *
- * The Original Code is: CalemEAM Open Source
- *
- * The Initial Developer of the Original Code is CalemEAM Inc.
- * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
- * All Rights Reserved.
- 
- * Contributor(s): 
- */
- 
+* License Boilerplate Start
+*
+* License Boilerplate End
+* 
+* 
+* Author(s): CL
+*
+*/ 
 
 /**
  * List views
  */
-CalemViewDef['CalemPmCommentViewList']={
+CalemViewDef['CalemSchedulerTaskViewList']={
 	CalemViewInfo: {
-		id: 'CalemPmCommentViewList',
+		id: 'CalemSchedulerTaskViewList',
 		type: 'CalemView',
 		layout: {
 			CalemLayoutInfo: {
@@ -39,15 +29,14 @@ CalemViewDef['CalemPmCommentViewList']={
 		itemMap : {
 			CalemItemMap: {
 			'lb_caption': {
-				CalemLabelInfo: {id: 'pm_comment', className: 'CalemEditCaption'}
+				CalemLabelInfo: {id: 'scheduler_task', className: 'CalemEditCaption'}
 			},
 			toolbar: {
 				CalemToolBarInfo: {
-					layout: ['CalemTbNew', 'CalemTbOpen', 'CalemTbDelete', 'sep','CalemTbCustomize'],
+					layout: ['CalemTbNew', 'CalemTbOpen', 'CalemTbDelete', 'sep', 'CalemTbDataRefresh', 'sep2', 'CalemTbSearch', 'CalemTbSearchClear', 'sep3', 'CalemTbCustomize'],
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
-					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -81,6 +70,28 @@ CalemViewDef['CalemPmCommentViewList']={
 					},
 					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
 					
+					{CalemButtonInfo: { id: 'CalemTbDataRefresh'}},
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+				
+					{ CalemButtonInfo: { id: 'CalemTbSearch' }},
+					
+					{ CalemButtonInfo: {
+						id: 'CalemTbSearchClear', 
+						customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_APPLIED, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_REMOVED, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }  
+					},
+					
+					{CalemSeparator: {id: 'sep3', className: 'CalemToolBarSeparator'}},
+					
 					{CalemButtonInfo: { id: 'CalemTbCustomize'}}
 				]
 			} },
@@ -90,7 +101,7 @@ CalemViewDef['CalemPmCommentViewList']={
 			  	   CalemListInfo: {
 			  			noMaximize: true,
 			  			colList: [
-			  			   {CalemCol: {id: 'comment', width: 300}}
+			  			   {CalemCol: {id: 'task', width: 130}}
 			  			]	 
 			  		} 		
 		      }

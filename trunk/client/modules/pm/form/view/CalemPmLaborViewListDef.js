@@ -47,6 +47,7 @@ CalemViewDef['CalemPmLaborViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 

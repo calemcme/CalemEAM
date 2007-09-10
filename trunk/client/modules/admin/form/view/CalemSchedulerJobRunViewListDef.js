@@ -15,15 +15,14 @@
  * All Rights Reserved.
  
  * Contributor(s): 
- */
- 
+ */ 
 
 /**
  * List views
  */
-CalemViewDef['CalemPmCommentViewList']={
+CalemViewDef['CalemSchedulerJobRunViewList']={
 	CalemViewInfo: {
-		id: 'CalemPmCommentViewList',
+		id: 'CalemSchedulerJobRunViewList',
 		type: 'CalemView',
 		layout: {
 			CalemLayoutInfo: {
@@ -39,7 +38,7 @@ CalemViewDef['CalemPmCommentViewList']={
 		itemMap : {
 			CalemItemMap: {
 			'lb_caption': {
-				CalemLabelInfo: {id: 'pm_comment', className: 'CalemEditCaption'}
+				CalemLabelInfo: {id: 'scheduler_job_run', className: 'CalemEditCaption'}
 			},
 			toolbar: {
 				CalemToolBarInfo: {
@@ -90,7 +89,7 @@ CalemViewDef['CalemPmCommentViewList']={
 			  	   CalemListInfo: {
 			  			noMaximize: true,
 			  			colList: [
-			  			   {CalemCol: {id: 'comment', width: 300}}
+			  			   {CalemCol: {id: 'start_time', width: 300}}
 			  			]	 
 			  		} 		
 		      }

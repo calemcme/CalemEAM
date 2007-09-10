@@ -15,12 +15,11 @@
  * All Rights Reserved.
  
  * Contributor(s): 
- */
- 
+ */ 
 
-CalemViewDef['CalemSchedUserViewRead']={
+CalemViewDef['CalemSchedulerJobRunViewRead']={
 	CalemViewInfo: {
-		id: 'CalemSchedUserViewRead',
+		id: 'CalemSchedulerJobRunViewRead',
 		type: 'CalemView',
 		layout: {
 		 CalemLayoutInfo: {
@@ -29,7 +28,7 @@ CalemViewDef['CalemSchedUserViewRead']={
 			rows: [
 					{CalemTrInfo: {cols: ['lb_caption']}},
 					{CalemTrInfo: {cols: ['toolbar']}},
-               {CalemTrInfo: {cols: ['err']}}                                                                                                            				                               				                               
+               {CalemTrInfo: {cols: ['err']}}                                                                                                              				                               				                               
 				   ]
 			}
 		},
@@ -42,7 +41,6 @@ CalemViewDef['CalemSchedUserViewRead']={
 					list: [
 					
 					{ CalemButtonInfo: { id: 'CalemTbNew' } },
-					{CalemButtonInfo: { id: 'CalemTbDataRefresh'}},
 					
 					{ CalemButtonInfo: {
 						  id: 'CalemTbEdit',
@@ -114,7 +112,7 @@ CalemViewDef['CalemSchedUserViewRead']={
 				]
 			} },
 			'lb_caption': {
-				CalemLabelInfo: {id: 'sched_user', className: 'CalemEditCaption'}
+				CalemLabelInfo: {id: 'scheduler_job_run', className: 'CalemEditCaption'}
 			},
 			'err': {
 				CalemFormErrorInfo: {id: 'form_error'}

@@ -463,3 +463,233 @@ CalemItemDef['CalemTeamFormSearch']={
 		replaceType: CalemItemDef.REPLACE_BY_ID
 	}
 }
+
+/**
+ * Scheduler tasks
+ */
+CalemItemDef['CalemSchedulerTaskFormList']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormList',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerTaskFormList',
+		model: 'scheduler_task', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemSchedulerTaskFormSearch'
+	}
+}
+
+CalemItemDef['CalemSchedulerTaskFormLookup']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormLookup',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerTaskFormLookup',
+		model: 'scheduler_task', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewLookup'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemSchedulerTaskFormSearch'
+	}
+}
+
+CalemItemDef['CalemSchedulerTaskFormNew']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormNew',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerTaskFormNew',
+		model: 'scheduler_task', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewNew'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerTaskFormEdit']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormEdit',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerTaskFormEdit',
+		model: 'scheduler_task', 
+   	view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewEdit'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerTaskFormRead']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormRead',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerTaskFormRead',
+		model: 'scheduler_task', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewRead'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerTaskFormSearch']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormSearch',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemFormSearchEdit',
+		model: 'scheduler_task', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewSearch'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+/**
+ * CalemSchedulerFormMdTab
+ */
+CalemItemDef['CalemSchedulerJobFormMdTab']={
+	CalemFormMdTabInfo: {
+		id: 'CalemSchedulerJobFormMdTab',
+		title: 'scheduler_job',
+		icon: 'CalemSchedulerTask',
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		//Three portions of info: layout, model and itemMap.
+		layout: {
+			CalemMdTabLayoutInfo: {
+				tabList: ['tab_main', 'tab_run', 'CUSTOMIZE_TAB'],
+				tabMap: {
+					'tab_main': {CalemTabLayoutInfo: ['CalemSchedulerJobFormRead']},
+					'tab_run' : {CalemTabLayoutInfo: ['CalemSchedulerJobRunFormList']}
+				}
+			} },
+		model: {
+				CalemFormModelInfo: {
+					master: 'CalemSchedulerJobFormRead',
+			      items: 
+			             [{CalemFormLinkInfo: {id: 'CalemSchedulerJobRunFormList', link: {CalemFieldMdInfo: {fld: 'job_id', parentFld: 'id'}}} }
+			             ]
+				}
+		}, 
+		itemMap : { //Default layout conf.
+		  CalemItemMap :{
+			 'CalemSchedulerJobFormRead' : {
+			 	CalemFormLayoutInfo: {
+			 		id: 'CalemSchedulerJobFormRead',
+			 		fixed: true, //Move not allowed.
+			 		layout: {CalemBlockLayoutInfo: {width: '100%', height: '-2'}}
+			 	}
+			 },
+			 
+			 'CalemSchedulerJobRunFormList' : {
+			 	 CalemFormLayoutInfo: {
+			 	 	id: 'CalemSchedulerJobRunFormList',
+			 	 	layout: {CalemBlockLayoutInfo: {width: '100%', rows: 20}}
+			 	 }
+			 },
+			 
+		  'tab_main': {
+		  		CalemTabInfo: {id: 'tab_scheduler_job_main', fixed: 1}
+		  },
+		  
+		  'tab_run': {
+		  		CalemTabInfo: {id: 'tab_scheduler_job_run'}
+		  },
+		  
+		  'CUSTOMIZE_TAB' : {
+		  		CalemTabInfo: {id: 'CUSTOMIZE_TAB'}
+		  }
+		  
+		  }
+		  
+		} //itemMap
+	} //MdTabInfo
+}
+
+/**
+ * Scheduler job
+ */
+CalemItemDef['CalemSchedulerJobFormList']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobFormList',
+		title: 'scheduler_job_list',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobFormList',
+		model: 'scheduler_job', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemSchedulerJobFormSearch'
+	}
+}
+
+CalemItemDef['CalemSchedulerJobFormNew']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobFormNew',
+		title: 'scheduler_job',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobFormNew',
+		model: 'scheduler_job', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobViewNew'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerJobFormEdit']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobFormEdit',
+		title: 'scheduler_job',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobFormEdit',
+		model: 'scheduler_job', 
+   	view: {CalemViewRefInfo: {id: 'CalemSchedulerJobViewEdit'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerJobFormRead']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobFormRead',
+		title: 'scheduler_job',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobFormRead',
+		model: 'scheduler_job', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobViewRead'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerJobFormSearch']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobFormSearch',
+		title: 'scheduler_job',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemFormSearchEdit',
+		model: 'scheduler_job', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobViewSearch'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+/**
+ * Scheduler job Run
+ */
+CalemItemDef['CalemSchedulerJobRunFormList']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobRunFormList',
+		title: 'scheduler_job_run',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobRunFormList',
+		model: 'scheduler_job_run', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobRunViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemSchedulerJobRunFormSearch'
+	}
+}
+
+CalemItemDef['CalemSchedulerJobRunFormRead']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobRunFormRead',
+		title: 'scheduler_job_run',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobRunFormRead',
+		model: 'scheduler_job_run', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobRunViewRead'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}

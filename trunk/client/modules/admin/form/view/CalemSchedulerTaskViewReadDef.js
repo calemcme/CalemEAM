@@ -16,11 +16,10 @@
  
  * Contributor(s): 
  */
- 
 
-CalemViewDef['CalemSchedUserViewRead']={
+CalemViewDef['CalemSchedulerTaskViewRead']={
 	CalemViewInfo: {
-		id: 'CalemSchedUserViewRead',
+		id: 'CalemSchedulerTaskViewRead',
 		type: 'CalemView',
 		layout: {
 		 CalemLayoutInfo: {
@@ -42,7 +41,6 @@ CalemViewDef['CalemSchedUserViewRead']={
 					list: [
 					
 					{ CalemButtonInfo: { id: 'CalemTbNew' } },
-					{CalemButtonInfo: { id: 'CalemTbDataRefresh'}},
 					
 					{ CalemButtonInfo: {
 						  id: 'CalemTbEdit',
@@ -114,7 +112,7 @@ CalemViewDef['CalemSchedUserViewRead']={
 				]
 			} },
 			'lb_caption': {
-				CalemLabelInfo: {id: 'sched_user', className: 'CalemEditCaption'}
+				CalemLabelInfo: {id: 'scheduler_task', className: 'CalemEditCaption'}
 			},
 			'err': {
 				CalemFormErrorInfo: {id: 'form_error'}
