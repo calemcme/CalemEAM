@@ -87,6 +87,7 @@ $_CALEM_scripts=array(
 			'/common/form/model/widget/CalemSearchInfo.js',
 			'/common/form/model/widget/CalemModuleCustomInfo.js',
 			'/common/form/model/widget/CalemScheduleInfo.js',
+			'/common/form/model/widget/CalemScheduleTimeInfo.js',
          
 			//Database-query
 			'/common/form/model/database/query/CalemDbExpr.js',
@@ -147,6 +148,7 @@ $_CALEM_scripts=array(
 			'/common/form/widget/edit/CalemEditMultiSelect.js',
 			'/common/form/widget/edit/CalemEditPassword.js',
 			'/common/form/widget/edit/CalemEditSchedule.js',
+			'/common/form/widget/edit/CalemEditScheduleTime.js',
 			//Read
 			'/common/form/widget/read/CalemReadText.js',
 			'/common/form/widget/read/CalemReadDefault.js',
@@ -250,6 +252,7 @@ $_CALEM_scripts=array(
          '/common/form/view/edit/CalemEditBooleanRender.js',
          '/common/form/view/edit/CalemEditPasswordRender.js',
          '/common/form/view/edit/CalemEditScheduleRender.js',
+         '/common/form/view/edit/CalemEditScheduleTimeRender.js',
          //list
          '/common/form/view/list/CalemViewListRender.js',
          //read
@@ -260,6 +263,7 @@ $_CALEM_scripts=array(
          '/common/form/view/read/CalemReadLookupRender.js',
          '/common/form/view/read/CalemReadBooleanRender.js',
          '/common/form/view/read/CalemReadScheduleRender.js',
+         '/common/form/view/read/CalemReadScheduleTimeRender.js',
          
          //mdtab
          '/common/form/view/mdtab/CalemViewMd.js',
@@ -319,6 +323,7 @@ $_CALEM_scripts=array(
          '/common/form/view/search/CalemSearchNumberRender.js',
          '/common/form/view/search/CalemSearchPercentRender.js',
          '/common/form/view/search/CalemSearchScheduleRender.js',
+         '/common/form/view/search/CalemSearchScheduleTimeRender.js',
          '/common/form/view/search/CalemSearchDateRender.js',
                   
          //search view renders
