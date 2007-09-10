@@ -121,12 +121,35 @@ class CalemScheduleInfo {
 		return $rtn;	
 	}
 	
+	public function getNextDueDateInFuture($dt) {
+		$rtn=null;
+		if ($this->isValid()) {
+			$now=gmmktime();
+			while (true) {
+				$dt=	$this->elements[$this->selection]->getNextDueDate($dt);
+				if ($dt < $now) continue;
+				else {
+					$ndt=$dt;
+					break;
+				}
+			}	
+			if ($this->isDateInRange($ndt)) {
+				$rtn=$ndt;
+			}
+		}
+		return $rtn;	
+	}
+	
 	public function adjustReleaseDate($dt) {
 		return ($this->isValid() ? $this->elements[$this->selection]->adjustReleaseDate($dt) : $dt);	
 	}
 	
 	public function isDateInRange($dt) {
 		return ( !$this->dates || !$this->dates->isValid() || $this->dates->isDateInRange($dt)); 	
+	}
+	
+	public function isDateRangePast() {
+		return ($this->dates && $this->dates->isRangePast());
 	}
 }
 
@@ -351,10 +374,16 @@ class CalemScheduleDates {
 	}
 	
 	public function isDateInRange($dt) {
+		if (!$dt) return false;
 		$dtStr=date('Y-m-d', $dt);
 		$rtn= ($this->start)? $dtStr >= $this->start : true;
 		$rtn = $rtn ? ($this->end ? $dtStr<= $this->end : true) : $rtn;
 		return $rtn;	
+	}
+	
+	public function isRangePast() {
+		$today=date('Y-m-d');
+		return ($this->end ? $this->end < $today : false);
 	}
 }
 ?>
