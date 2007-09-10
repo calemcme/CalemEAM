@@ -81,6 +81,8 @@ class CalemWoGenReleaseBo extends CalemBo {
 		$days=$this->getDurationInDays($durHours);
 		if ($days > 0) {
 			$finishDate=strtotime('+' . $days . " day", $dueDate);
+		} else if ($durHours) {//Use calendar time
+			$finishDate=strtotime('+' . $durHours . ' hours', $dueDate);			
 		}
 		return $finishDate;
 	}
@@ -90,7 +92,9 @@ class CalemWoGenReleaseBo extends CalemBo {
 		$startDate=$finishDate;
 		$days=$this->getDurationInDays($durHours);
 		if ($days > 0) {
-			$startDate=strtotime('-' . $days . " day", $finishDate);
+			$startDate=strtotime($days . ' days ago', $finishDate);
+		} else if ($durHours) { //Use calendar time
+			$startDate=strtotime($durHours . ' hours ago', $finishDate);
 		}
 		return $startDate;
 	}

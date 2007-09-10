@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) {
 	chdir('../../../..');
@@ -30,28 +29,23 @@ if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 require_once _CALEM_DIR_ . 'server/conf/calem.php';
 require_once _CALEM_DIR_ . 'server/include/log4php/LoggerManager.php';
+require_once _CALEM_DIR_ . 'server/include/core/CalemTaskInterface.php';
 require_once _CALEM_DIR_ . 'server/modules/workorder/CalemWoGenBo.php';
 
 /**
  * This is the Calem table DD class.
  */
-class CalemWoGenCmd {
+class CalemWoGenTask implements CalemTaskInterface {
 	private $woGenBo;
 	
-	public function execute() {
+	public function execute() {		
 		$this->woGenBo=new CalemWoGenBo();
 		$this->woGenBo->generateWo();
+		return 'CalemWoGenTask is done. WO count=' . $this->woGenBo->getWoCount();
 	}
 	
 	public function getWoCount() {
 		return ($this->woGenBo) ? $this->woGenBo->getWoCount() : 0;	
 	}
 }
-
-$logger=LoggerManager::getLogger('CalemWoGenCmd');
-$timeStart=microtime(true);
-$wogen=new CalemWoGenCmd();
-$wogen->execute();
-$timeTaken=microtime(true) - $timeStart;
-$logger->info("W.O generation takes " . $timeTaken . ", woCount=" . $wogen->getWoCount());
 ?>
