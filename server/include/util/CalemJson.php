@@ -34,6 +34,7 @@ require_once _CALEM_DIR_ . 'server/modules/report/model/widget/CalemViewCustomIn
 require_once _CALEM_DIR_ . 'server/modules/report/model/widget/CalemFormInfo.php';
 require_once _CALEM_DIR_ . 'server/modules/report/model/widget/CalemFormCustomInfo.php';
 require_once _CALEM_DIR_ . 'server/modules/report/model/widget/CalemScheduleInfo.php';
+require_once _CALEM_DIR_ . 'server/modules/report/model/widget/CalemScheduleTimeInfo.php';
 
 require_once _CALEM_DIR_ . 'server/include/JSON/JSON.php'; //Pear's JSON
 
