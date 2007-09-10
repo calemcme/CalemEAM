@@ -15,12 +15,11 @@
  * All Rights Reserved.
  
  * Contributor(s): 
- */
- 
+ */ 
 
-CalemViewDef['CalemSchedUserViewRead']={
+CalemViewDef['CalemSchedulerJobViewRead']={
 	CalemViewInfo: {
-		id: 'CalemSchedUserViewRead',
+		id: 'CalemSchedulerJobViewRead',
 		type: 'CalemView',
 		layout: {
 		 CalemLayoutInfo: {
@@ -114,11 +113,13 @@ CalemViewDef['CalemSchedUserViewRead']={
 				]
 			} },
 			'lb_caption': {
-				CalemLabelInfo: {id: 'sched_user', className: 'CalemEditCaption'}
+				CalemLabelInfo: {id: 'scheduler_job', className: 'CalemEditCaption'}
 			},
 			'err': {
 				CalemFormErrorInfo: {id: 'form_error'}
-			}
+			},
+			'release_time': {CalemEditScheduleTimeInfo: {field: 'release_time'}},
+			'release_day': {CalemEditScheduleInfo: {field: 'release_day'}}
 	}
  } //ItemMap	
 }

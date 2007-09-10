@@ -173,3 +173,33 @@ CalemMenuDef['CalemTbDropdownDesign'] = {
 	tooltip: null,  				   
 	onSelect: {CalemMenuSelect: {listener: 'DropdownDesignListener'}}
 };
+
+// scheduler
+CalemMenuDef['CalemAdminScheduler'] = {
+	id: 'CalemAdminScheduler',
+	title: 'admin_scheduler',
+	icon: 'CalemScheduler',
+	disIcon: null,
+	enabled: true,
+	tooltip: null
+};
+
+CalemMenuDef['CalemSchedulerTaskFormList'] = {
+	id: 'CalemSchedulerTaskFormList',
+	title: 'scheduler_task',
+	icon: 'CalemSchedulerTask',
+	disIcon: null,
+	enabled: true,
+	tooltip: null,  				   
+	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}
+};
+
+CalemMenuDef['CalemSchedulerJobFormList'] = {
+	id: 'CalemSchedulerJobFormList',
+	title: 'scheduler_job_list',
+	icon: 'CalemSchedulerTask',
+	disIcon: null,
+	enabled: true,
+	tooltip: null,  				   
+	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}
+};

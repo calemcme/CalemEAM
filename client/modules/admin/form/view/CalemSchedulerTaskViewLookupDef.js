@@ -16,14 +16,13 @@
  
  * Contributor(s): 
  */
- 
 
 /**
- * List views
+ * Lookup views
  */
-CalemViewDef['CalemPmCommentViewList']={
+CalemViewDef['CalemSchedulerTaskViewLookup']={
 	CalemViewInfo: {
-		id: 'CalemPmCommentViewList',
+		id: 'CalemSchedulerTaskViewLookup',
 		type: 'CalemView',
 		layout: {
 			CalemLayoutInfo: {
@@ -39,15 +38,14 @@ CalemViewDef['CalemPmCommentViewList']={
 		itemMap : {
 			CalemItemMap: {
 			'lb_caption': {
-				CalemLabelInfo: {id: 'pm_comment', className: 'CalemEditCaption'}
+				CalemLabelInfo: {id: 'scheduler_task', className: 'CalemEditCaption'}
 			},
 			toolbar: {
 				CalemToolBarInfo: {
-					layout: ['CalemTbNew', 'CalemTbOpen', 'CalemTbDelete', 'sep','CalemTbCustomize'],
+					layout: ['CalemTbSelect', 'CalemTbCancel', 'sep', 'CalemTbSearch', 'CalemTbSearchClear', 'sep3', 'CalemTbCustomize'],
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
-					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -65,23 +63,49 @@ CalemViewDef['CalemPmCommentViewList']={
 					  }
 					},
 					      			
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{CalemButtonInfo: { id: 'CalemTbDataRefresh'}},
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+				
+					{ CalemButtonInfo: { id: 'CalemTbSearch' }},
+					
 					{ CalemButtonInfo: {
-						id: 'CalemTbDelete', 
+						id: 'CalemTbSearchClear', 
 						customInfo: {
 						  	   CalemMenuCustomInfo: {
 						  	   	enabled: false,
 						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_APPLIED, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_REMOVED, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }  
+					},
+					
+					{CalemSeparator: {id: 'sep3', className: 'CalemToolBarSeparator'}},
+					
+					{CalemButtonInfo: { id: 'CalemTbCustomize'}},
+					
+					{ CalemButtonInfo: {
+						 id: 'CalemTbSelect', 
+						 customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
 						  	   		{CalemEventInfo: {id: CalemEvent.SINGLE_SELECTION, func: '_enableIt'}},
-						  	   		{CalemEventInfo: {id: CalemEvent.MULTI_SELECTION, func: '_enableIt'}},
-						  	   		{CalemEventInfo: {id: CalemEvent.NO_SELECTION, func: '_disableIt'}}
+						  	   		{CalemEventInfo: {id: CalemEvent.MULTI_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.NO_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.DBL_CLICK_SELECTION, func: '_clickIt'}}
 						  	   	]
 						  	   }
 						  }
 					  }
 					},
-					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
 					
-					{CalemButtonInfo: { id: 'CalemTbCustomize'}}
+					{ CalemButtonInfo: { id: 'CalemTbCancel'}}
 				]
 			} },
 			grid: {
@@ -90,7 +114,7 @@ CalemViewDef['CalemPmCommentViewList']={
 			  	   CalemListInfo: {
 			  			noMaximize: true,
 			  			colList: [
-			  			   {CalemCol: {id: 'comment', width: 300}}
+			  			   {CalemCol: {id: 'task', width: 130}}
 			  			]	 
 			  		} 		
 		      }

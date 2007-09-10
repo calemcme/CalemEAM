@@ -16,14 +16,13 @@
  
  * Contributor(s): 
  */
- 
 
 /**
  * List views
  */
-CalemViewDef['CalemPmCommentViewList']={
+CalemViewDef['CalemSchedulerJobViewList']={
 	CalemViewInfo: {
-		id: 'CalemPmCommentViewList',
+		id: 'CalemSchedulerJobViewList',
 		type: 'CalemView',
 		layout: {
 			CalemLayoutInfo: {
@@ -39,15 +38,14 @@ CalemViewDef['CalemPmCommentViewList']={
 		itemMap : {
 			CalemItemMap: {
 			'lb_caption': {
-				CalemLabelInfo: {id: 'pm_comment', className: 'CalemEditCaption'}
+				CalemLabelInfo: {id: 'scheduler_job', className: 'CalemEditCaption'}
 			},
 			toolbar: {
 				CalemToolBarInfo: {
-					layout: ['CalemTbNew', 'CalemTbOpen', 'CalemTbDelete', 'sep','CalemTbCustomize'],
+					layout: ['CalemTbNew', 'CalemTbOpen', 'CalemTbDelete', 'sep', 'CalemTbDataRefresh', 'sep2', 'CalemTbSearch', 'CalemTbSearchClear', 'sep3', 'CalemTbCustomize'],
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
-					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -81,6 +79,28 @@ CalemViewDef['CalemPmCommentViewList']={
 					},
 					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
 					
+					{CalemButtonInfo: { id: 'CalemTbDataRefresh'}},
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+				
+					{ CalemButtonInfo: { id: 'CalemTbSearch' }},
+					
+					{ CalemButtonInfo: {
+						id: 'CalemTbSearchClear', 
+						customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_APPLIED, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_REMOVED, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }  
+					},
+					
+					{CalemSeparator: {id: 'sep3', className: 'CalemToolBarSeparator'}},
+					
 					{CalemButtonInfo: { id: 'CalemTbCustomize'}}
 				]
 			} },
@@ -90,7 +110,7 @@ CalemViewDef['CalemPmCommentViewList']={
 			  	   CalemListInfo: {
 			  			noMaximize: true,
 			  			colList: [
-			  			   {CalemCol: {id: 'comment', width: 300}}
+			  			   {CalemCol: {id: 'task_id', width: 130}}
 			  			]	 
 			  		} 		
 		      }

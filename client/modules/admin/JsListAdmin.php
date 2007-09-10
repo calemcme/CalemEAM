@@ -32,6 +32,8 @@ $_CALEM_scripts=array(
 			'/modules/admin/bo/CalemDropdownBo.js',
 			'/modules/admin/bo/CalemDeptBo.js',
 			'/modules/admin/bo/CalemTeamBo.js',
+			'/modules/admin/bo/CalemSchedulerTaskBo.js',
+			'/modules/admin/bo/CalemSchedulerJobBo.js',
 			
 			 //Menu
 			'/modules/admin/form/CalemAdminMenuDef.js',
@@ -119,6 +121,25 @@ $_CALEM_scripts=array(
 			'/modules/admin/form/view/CalemTeamViewLookupDef.js',
 			'/modules/admin/form/view/CalemTeamViewSearchDef.js',
 			
+			//scheduler task
+			'/modules/admin/form/view/CalemSchedulerTaskViewListDef.js',
+			'/modules/admin/form/view/CalemSchedulerTaskViewNewDef.js',
+			'/modules/admin/form/view/CalemSchedulerTaskViewEditDef.js',
+			'/modules/admin/form/view/CalemSchedulerTaskViewReadDef.js',
+			'/modules/admin/form/view/CalemSchedulerTaskViewLookupDef.js',
+			'/modules/admin/form/view/CalemSchedulerTaskViewSearchDef.js',
+			
+			//scheduler job
+			'/modules/admin/form/view/CalemSchedulerJobViewListDef.js',
+			'/modules/admin/form/view/CalemSchedulerJobViewNewDef.js',
+			'/modules/admin/form/view/CalemSchedulerJobViewEditDef.js',
+			'/modules/admin/form/view/CalemSchedulerJobViewReadDef.js',
+			'/modules/admin/form/view/CalemSchedulerJobViewSearchDef.js',
+			
+			//scheduler job run
+			'/modules/admin/form/view/CalemSchedulerJobRunViewListDef.js',
+			'/modules/admin/form/view/CalemSchedulerJobRunViewReadDef.js',
+			
 			//module/form
 			'/modules/admin/form/view/CalemModuleViewListDef.js',
 			//table design
@@ -183,6 +204,24 @@ $_CALEM_scripts=array(
 			'/modules/admin/form/controller/CalemTeamFormEdit.js',
 			'/modules/admin/form/controller/CalemTeamFormRead.js',
 			'/modules/admin/form/controller/CalemTeamFormLookup.js',
+			
+			// -- scheduler task
+			'/modules/admin/form/controller/CalemSchedulerTaskFormList.js',
+			'/modules/admin/form/controller/CalemSchedulerTaskFormNew.js',
+			'/modules/admin/form/controller/CalemSchedulerTaskFormEdit.js',
+			'/modules/admin/form/controller/CalemSchedulerTaskFormRead.js',
+			'/modules/admin/form/controller/CalemSchedulerTaskFormLookup.js',
+			
+			// -- scheduler job
+			'/modules/admin/form/controller/CalemSchedulerJobFormMdTab.js',
+			'/modules/admin/form/controller/CalemSchedulerJobFormList.js',
+			'/modules/admin/form/controller/CalemSchedulerJobFormNew.js',
+			'/modules/admin/form/controller/CalemSchedulerJobFormEdit.js',
+			'/modules/admin/form/controller/CalemSchedulerJobFormRead.js',
+			
+			// -- scheduler job run
+			'/modules/admin/form/controller/CalemSchedulerJobRunFormList.js',
+			'/modules/admin/form/controller/CalemSchedulerJobRunFormRead.js',
 			
 			// - module/form
 			'/modules/admin/form/controller/CalemModuleFormList.js',
