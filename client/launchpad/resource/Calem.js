@@ -228,6 +228,7 @@ CalemConf['view_engine'] = {
 		CalemViewInfo: 'CalemViewReadRender',
 		CalemFieldInfo: 'CalemFieldReadRender',
 		CalemEditScheduleInfo: 'CalemReadScheduleRender',
+		CalemEditScheduleTimeInfo: 'CalemReadScheduleTimeRender',
 		FieldRenders: {
 	   	'text'  : 	'CalemReadTextRender',
 	   	'boolean' : 'CalemReadBooleanRender',
@@ -239,6 +240,7 @@ CalemConf['view_engine'] = {
 		CalemViewInfo: 'CalemViewEditRender',
 		CalemFieldInfo: 'CalemEditRenderFacade',
 		CalemEditScheduleInfo: 'CalemEditScheduleRender',
+		CalemEditScheduleTimeInfo: 'CalemEditScheduleTimeRender',
 		CalemEditInCheckoutToInfo: 'CalemEditInCheckoutToRender',
 		FieldRenders: {
 			//String type
@@ -290,6 +292,7 @@ CalemConf['view_engine'] = {
 		CalemFieldLabelInfo: 'CalemFieldLabelDesignRender',
 	   CalemFormErrorInfo: 'CalemFormErrorDesignRender',
 	   CalemEditScheduleInfo: 'CalemTextDesignRender',
+	   CalemEditScheduleTimeInfo: 'CalemTextDesignRender',
 	   CalemEditInCheckoutToInfo: 'CalemTextDesignRender',
 	   FieldRenders: {			
 			'text'  : 	'CalemTextDesignRender',
@@ -592,6 +595,7 @@ CalemConf['view_engine'] = {
 		CalemViewInfo: 'CalemViewSearchEditRender',
 		CalemFieldInfo: 'CalemSearchFieldRenderFacade',
 		CalemEditScheduleInfo: 'CalemSearchScheduleRender',
+		CalemEditScheduleTimeInfo: 'CalemSearchScheduleTimeRender',
 		FieldRenders: {
 			//String type
 			'varchar': 	'CalemSearchStringRender',
@@ -825,6 +829,13 @@ CalemConf['edit_schedule'] = {
 	'week_no'  : ['schedule_w1', 'schedule_w2', 'schedule_w3', 'schedule_w4', 'schedule_wl'],
 	'defaultSelection'  : 'months',
 	'defaultReadSize': 75
+}
+                          
+CalemConf['edit_schedule_time'] = {
+	'int_field_len': 2,
+	'hour_range': {min: 1, max: 24},
+	'minute_range': {min: 1, max: 60},
+	'defaultReadSize': 50
 }
                           
 /**
@@ -5346,6 +5357,30 @@ CalemEditScheduleInfo.prototype.getField =
 function() {
 	return this._field;
 }
+
+//Edit schedule time info
+function CalemEditScheduleTimeInfo(fld) {
+	if (arguments.length==0) return;
+	this._field=fld;
+}
+
+CalemEditScheduleTimeInfo.prototype.toString = function() {return "CalemEditScheduleTimeInfo";}
+CalemEditScheduleTimeInfo.prototype.getClassName = function() {return "CalemEditScheduleTimeInfo";}
+
+CalemEditScheduleTimeInfo.prototype.setJson =
+function(obj) {
+	this._field=obj.field;
+}
+
+CalemEditScheduleTimeInfo.prototype.getJson = 
+function() {
+	return ["{CalemEditScheduleTimeInfo: {field: '", this._field, "'}}"].join('');
+}
+
+CalemEditScheduleTimeInfo.prototype.getField =
+function() {
+	return this._field;
+}
 /*
  * The contents of this file are subject to the CalemEAM Public License Version
  * 1.0 ("License"); You may not use this file except in compliance with the
@@ -7406,6 +7441,158 @@ function() {
 	} else if (end) {
 		text=AjxMessageFormat.format(CalemMsg.getMsg('schedule_dates_till'), [end]);
 	}
+	return text;
+}
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * CalemScheduleTimeInfo
+ * @param
+ * startTime and endTime are server time format.
+ * repeat: 0/1 (1 is repeat)
+ * selection: m/h (minutes or hour)
+ * minutes (1 to 60) and hours (1 to 24) are integers
+ */
+function CalemScheduleTimeInfo(startTime, repeat, endTime, selection, minutes, hours) {
+	if (arguments.length==0) return;
+	this._startTime=startTime;
+	this._repeat=repeat;
+	this._endTime=endTime;
+	this._selection=selection
+	this._minutes=minutes;
+	this._hours=hours;
+}
+
+CalemScheduleTimeInfo._MINUTES = 'm';
+CalemScheduleTimeInfo._HOURS = 'h';
+
+CalemScheduleTimeInfo._decode =
+function(val) {
+	var rtn;
+	var info = val ? Base64.decode(val) : null;
+	if (info) {
+		eval("var obj="+info);
+		rtn=CalemJson.setJson(obj);
+	} else {
+		rtn=new CalemScheduleTimeInfo();
+	}
+	return rtn;	
+}
+
+CalemScheduleTimeInfo.prototype.toString = function() {return "CalemScheduleTimeInfo";}
+CalemScheduleTimeInfo.prototype.getClassName = function() {return "CalemScheduleTimeInfo";}
+
+//Deserialize the object
+CalemScheduleTimeInfo.prototype.setJson =
+function(obj) {
+	this._startTime=obj.startTime;
+	this._repeat=obj.repeat;
+	this._endTime=obj.endTime;
+	this._selection=obj.selection;
+	this._minutes=obj.minutes;
+	this._hours=obj.hours;
+}
+
+//Serialization - for PHP use as well.
+CalemScheduleTimeInfo.prototype.getJsonPhp =
+function() {
+	return ["{\"CalemScheduleTimeInfo\": {\"startTime\": '", this.getStartTime(), "'",
+			  ", \"repeat\": ", this.getRepeat(),
+			  ", \"endTime\": '", this.getEndTime(), "'",
+			  ", \"selection\": '", this.getSelection(), "'",
+			  ", \"minutes\": ", this.getMinutes(), 
+			  ", \"hours\": ", this.getHours(),"}}"].join('');
+}
+
+CalemScheduleTimeInfo.prototype.getStartTime =
+function() {
+	return this._startTime;
+}
+
+CalemScheduleTimeInfo.prototype.getRepeat =
+function() {
+	return this._repeat;
+}
+
+CalemScheduleTimeInfo.prototype.getEndTime =
+function() {
+	return this._endTime;
+}
+
+CalemScheduleTimeInfo.prototype.getSelection =
+function() {
+	return this._selection ? this._selection : CalemScheduleTimeInfo._MINUTES;
+}
+
+
+
+CalemScheduleTimeInfo.prototype.getMinutes =
+function() {
+	return this._minutes ? this._minutes : 0;
+}
+
+CalemScheduleTimeInfo.prototype.getHours =
+function() {
+	return this._hours ? this._hours : 0;
+}
+
+CalemScheduleTimeInfo.prototype.isRepeatValid =
+function() {
+	return (this._repeat && (this.isMinValid() || this.isHourValid()));
+}
+
+CalemScheduleTimeInfo.prototype.isMinValid =
+function() {
+	return (this._selection==CalemScheduleTimeInfo._MINUTES && this._minutes > 0 && this._minutes <=60);
+}
+
+CalemScheduleTimeInfo.prototype.isHourValid =
+function() {
+	return (this._selection==CalemScheduleTimeInfo._HOURS && this._hours > 0 && this._hours <=24);
+}
+
+CalemScheduleTimeInfo.prototype.getText =
+function() {
+	var text='';
+	if (!this._startTime) {
+		return text;
+	}
+	var start=CalemTextUtil._getLocalTimeFromServerTime(this._startTime);
+	var tm=AjxMessageFormat.format(CalemMsg.getMsg('schedule_time_start'), [start]);
+	if (!this.isRepeatValid()) {
+		return tm;
+	}
+	//We've got valid repeat
+	if (this._endTime) {
+		var end=CalemTextUtil._getLocalTimeFromServerTime(this._endTime);
+		tm=AjxMessageFormat.format(CalemMsg.getMsg('schedule_time_start_end'), [start, end]);
+	} 
+	//construct mins/hours
+	var iv;
+	if (this.isMinValid()) {
+		iv=AjxMessageFormat.format(CalemMsg.getMsg('schedule_time_minutes'), [this._minutes]);
+	} else {
+		iv=AjxMessageFormat.format(CalemMsg.getMsg('schedule_time_hours'), [this._hours]);
+	}
+	//Now combine the text together
+	text=AjxMessageFormat.format(CalemMsg.getMsg('schedule_time_full'), [tm, iv]);
 	return text;
 }
 /*
@@ -14042,6 +14229,10 @@ CalemFormDef['users'] = {
 	lookup: 'CalemUserFormLookup'	
 } 
 
+CalemFormDef['scheduler_task'] = {
+	lookup: 'CalemSchedulerTaskFormLookup'	
+}
+
 CalemFormDef['team'] = {
 	lookup: 'CalemTeamFormLookup'	
 } 
@@ -14222,7 +14413,8 @@ CalemItemDef['CalemFormSearchSelect']={
 		view: {CalemViewRefInfo: {id: 'CalemViewSearchSelect'}}, 
 		replaceType: CalemItemDef.REPLACE_BY_ID
 	}
-} /*
+} 
+/*
  * The contents of this file are subject to the CalemEAM Public License Version
  * 1.0 ("License"); You may not use this file except in compliance with the
  * License. You may obtain a copy of the License at http://www.calemeam.com/license
@@ -20090,6 +20282,329 @@ function(ev) {
  
  * Contributor(s): 
  */
+
+/**
+ * CalemEditScheduleTime
+ * This is the time edit control
+ */
+function CalemEditScheduleTime(param) {
+	if (arguments.length==0) return;
+	DwtComposite.call(this, param.parent);
+	this._param=param;
+	this._createControl();
+	this._formatter=CalemTextUtil.getFormatter(CalemTextUtil.INTEGER_FORMATTER);
+	//Validation callback
+	this._vdCallbackProxy = new AjxCallback(this, this.onVdCallbackProxy);
+} 
+
+CalemEditScheduleTime.START_TIME=0;
+CalemEditScheduleTime.REPEAT=1;
+CalemEditScheduleTime.END_TIME=2;
+CalemEditScheduleTime.MINUTES=3;
+CalemEditScheduleTime.HOURS=4;
+CalemEditScheduleTime.RM=5;
+CalemEditScheduleTime.RH=6;
+CalemEditScheduleTime.OBJ_COUNT=7;
+
+CalemEditScheduleTime.TIME_FLDS=[CalemEditScheduleTime.START_TIME, CalemEditScheduleTime.END_TIME];
+CalemEditScheduleTime.R_FLDS=[CalemEditScheduleTime.RM, CalemEditScheduleTime.RH];
+CalemEditScheduleTime.E_FLDS=[CalemEditScheduleTime.START_TIME, CalemEditScheduleTime.END_TIME,
+										CalemEditScheduleTime.MINUTES, CalemEditScheduleTime.HOURS];
+
+CalemEditScheduleTime.prototype = new DwtComposite;
+CalemEditScheduleTime.prototype.constructor = CalemEditScheduleTime;
+
+CalemEditScheduleTime.prototype.toString = function() { return "CalemEditScheduleTime"; }
+
+//create control
+CalemEditScheduleTime.prototype._createControl  =
+function() {	
+	//internal data mappings
+	this._map=new Array();
+	for (var i=0; i< CalemEditScheduleTime.OBJ_COUNT; i++) {
+		var obj=new Object();
+		obj._id=Dwt.getNextId();
+		this._map.push(obj);
+	}
+	
+	var html=new Array();
+	var i=0;
+	html[i++]="<table class=CalemScheduleTimeTable>";
+	//Start time
+	html[i++]=["<tr><td class=CalemScheduleTimeLabel>", CalemMsg.getMsg("schedule_start_time"), ":", "</td>"].join('');
+	html[i++]=["<td class=CalemScheduleTimeTd id=", this._map[CalemEditScheduleTime.START_TIME]._id, "></td>"].join('');
+	//Repeat check box
+	html[i++]=["<td><input class=CalemScheduleTimeCheckBox type='checkbox' id=", this._map[CalemEditScheduleTime.REPEAT]._id, 
+		           ">", CalemMsg.getMsg("schedule_repeat"), "</td></tr>"].join('');
+	//Till time
+	html[i++]=["<tr><td></td><td></td><td><table class=CalemScheduleUntilTable><tr><td class=CalemScheduleTimeLabel>", CalemMsg.getMsg("schedule_until"), ":", "</td>"].join('');
+	html[i++]=["<td class=CalemScheduleTimeTd id=", this._map[CalemEditScheduleTime.END_TIME]._id, "></td></tr></table></td><tr>"].join('');
+	//Radio group for minutes		           
+	html[i++]="<tr><td></td><td></td><td><table class=CalemScheduleTimeMHTable>";
+	html[i++]=["<tr><td><input type='radio' class=CalemEditScheduleTimeRadio name='schedule_time', id=", this._map[CalemEditScheduleTime.RM]._id,
+			     ">", CalemMsg.getMsg("schedule_every"), "</td>"].join('');
+	html[i++]=["<td class=CalemScheduleTimeTd id=", this._map[CalemEditScheduleTime.MINUTES]._id, "></td>"].join('');
+	html[i++]=["<td class=CalemScheduleTimeLabel>", CalemMsg.getMsg("schedule_minutes"), "</td></tr>"].join('');
+	//Radio group for hours
+	html[i++]=["<tr><td><input type='radio' class=CalemEditScheduleTimeRadio name='schedule_time', id=", this._map[CalemEditScheduleTime.RH]._id,
+			     ">", CalemMsg.getMsg("schedule_every"), "</td>"].join('');
+	html[i++]=["<td class=CalemScheduleTimeTd id=", this._map[CalemEditScheduleTime.HOURS]._id, "></td>"].join('');
+	html[i++]=["<td class=CalemScheduleTimeLabel>", CalemMsg.getMsg("schedule_hours"), "</td></tr>"].join('');
+	//End table doms
+	html[i++]="</table></td></tr></table>";
+	
+	//Set html layout.
+	var el=this.getHtmlElement();
+	el.innerHTML=html.join('');
+	//Now continue layout and binding
+	for (var i=0; i< this._map.length; i++) {
+		this._map[i]._el=document.getElementById(this._map[i]._id);
+	}
+	//startTime and endTime fields
+	this._bindTimeFields(CalemEditScheduleTime.TIME_FLDS);
+	//Min and hour fields
+	this._bindIntField(CalemEditScheduleTime.MINUTES, CalemConf['edit_schedule_time']['int_field_len'], this.minuteValidator);
+	this._bindIntField(CalemEditScheduleTime.HOURS, CalemConf['edit_schedule_time']['int_field_len'], this.hourValidator);
+	//Handle click events on repeat check box and radio buttons
+	this._map[CalemEditScheduleTime.REPEAT]._el.onclick = CalemEditScheduleTime._onRepeatClick;
+	this._map[CalemEditScheduleTime.RM]._el.onclick = CalemEditScheduleTime._onRadioClick;
+	this._map[CalemEditScheduleTime.RM]._eFld = this._map[CalemEditScheduleTime.MINUTES]._fld;
+	this._map[CalemEditScheduleTime.RH]._el.onclick = CalemEditScheduleTime._onRadioClick;
+	this._map[CalemEditScheduleTime.RH]._eFld = this._map[CalemEditScheduleTime.HOURS]._fld;
+	
+}
+
+CalemEditScheduleTime.prototype._bindTimeFields =
+function(arFlds) {
+	var timeLen=CalemConf['view_record_size']['edit']['time'];
+	for (var i=0; i< arFlds.length; i++) {
+		var idx=arFlds[i];
+		this._map[idx]._fld=new CalemEditTime({parent: this.parent, type: DwtInputField.STRING, 
+	              size: timeLen,
+	              errorIconStyle: CalemConf['view_engine']['field']['inputErrorIcon']});
+		this._map[idx]._fld.setValidStringLengths(null, timeLen);
+		this._map[idx]._fld.reparentHtmlElement(this._map[idx]._el);	
+	}
+}
+
+CalemEditScheduleTime.prototype._bindIntField =
+function(idx, fldLen, validator) {
+	this._map[idx]._fld=new CalemInputField({parent: this.parent, type: DwtInputField.STRING, 
+	              size: fldLen,
+	              errorIconStyle: CalemConf['view_engine']['field']['inputErrorIcon']});              
+	this._map[idx]._fld.setValidatorFunction(this, validator);
+	this._map[idx]._fld.reparentHtmlElement(this._map[idx]._el);  
+}
+
+/**
+ * minute and hour validator
+ */
+CalemEditScheduleTime.prototype.minuteValidator = 
+function(value) {	
+	return this.intValidator(value, CalemConf['edit_schedule_time']['minute_range']);
+} 
+
+CalemEditScheduleTime.prototype.hourValidator = 
+function(value) {
+	return this.intValidator(value, CalemConf['edit_schedule_time']['hour_range']);
+} 
+
+CalemEditScheduleTime.prototype.intValidator = 
+function(value, range) {
+	var val=CalemTextUtil.isIntegerValid(value);
+	if (val==null || val=='') return;
+	if (range.min && value < range.min)
+		throw AjxMessageFormat.format(AjxMsg.numberLessThanMin, range.min);
+	if (range.max && value > range.max)
+		throw AjxMessageFormat.format(AjxMsg.numberMoreThanMax, range.max);
+	return val ? this._formatter.format(val) : val;
+}
+
+/**
+ * To display.
+ */
+CalemEditScheduleTime.prototype.setValue =
+function(val, noValidate) {
+	var sti=CalemScheduleTimeInfo._decode(val);
+	//start/end time
+	this._setLocalTime(CalemEditScheduleTime.START_TIME, sti.getStartTime());
+	this._setLocalTime(CalemEditScheduleTime.END_TIME, sti.getEndTime());
+	//mins/hours
+	this._map[CalemEditScheduleTime.MINUTES]._fld.setValue(sti.getMinutes(), true);
+	this._map[CalemEditScheduleTime.HOURS]._fld.setValue(sti.getHours(), true);
+	//radio buttons
+	if (sti.getSelection() == CalemScheduleTimeInfo._MINUTES) {
+		this._map[CalemEditScheduleTime.RM]._el.checked=true;
+	} else {
+		this._map[CalemEditScheduleTime.RH]._el.checked=true;
+	}
+	//check box
+	this._map[CalemEditScheduleTime.REPEAT]._el.checked=sti.getRepeat();
+	this.onRepeatClick(true);
+}
+
+CalemEditScheduleTime.prototype._setLocalTime =
+function(idx, val) {	
+	val=(val) ? CalemTextUtil._getLocalTimeFromServerTime(val) : CalemTextUtil.getNullReplacement();
+	this._map[idx]._fld.setValue(val, true);
+}
+
+CalemEditScheduleTime.prototype.setRequired =
+function() {
+	//Do not support for now.
+}
+
+CalemEditScheduleTime.prototype.focus =
+function() {
+	this._map[CalemEditScheduleTime.START_TIME]._el.focus();
+}
+
+/**
+ * Validation
+ */
+CalemEditScheduleTime.prototype.setValidationCallback =
+function(callback) {
+	this._vdCallback=callback;
+	//Now set up callback in all fields.
+	for (var i=0; i< CalemEditScheduleTime.E_FLDS.length; i++) {
+		var idx=CalemEditScheduleTime.E_FLDS[i];
+		this._map[idx]._fld.setValidationCallback(this._vdCallbackProxy);
+	}	
+} 
+
+CalemEditScheduleTime.prototype.onVdCallbackProxy =
+function(fld, isValid, value) {
+	if (isValid) {
+		try {
+			this.isValid();
+		} catch (ex) {
+			if (CalemDebug.isDebug()) CalemDebug.debug("CalemEditScheduleTime, got exception in vdCallbackProxy: "+ex);
+			isValid=false;
+		}
+	}
+	this._vdCallback.run(this, isValid, value)
+}
+
+CalemEditScheduleTime.prototype.setFieldInfo =
+function(info) {
+	this._fieldInfo=info;
+} 
+
+CalemEditScheduleTime.prototype.getFieldInfo =
+function(info) {
+	return this._fieldInfo;
+}
+
+CalemEditScheduleTime.prototype.isValid =
+function() {
+	for (var i=0; i< CalemEditScheduleTime.E_FLDS.length; i++) {
+		var idx=CalemEditScheduleTime.E_FLDS[i];
+		this._map[idx]._fld.isValid();
+	}
+	return true;
+}
+
+//This is native type
+CalemEditScheduleTime.prototype.getFieldValue =
+function() {
+	var startTime=this._map[CalemEditScheduleTime.START_TIME]._fld.getEditFieldServerValue();
+	var repeat=this._map[CalemEditScheduleTime.REPEAT]._el.checked;
+	var selection=CalemScheduleTimeInfo._MINUTES;
+	var endTime=null;
+	var mins=0;
+	var hours=0;
+	if (repeat) {
+		endTime=this._map[CalemEditScheduleTime.END_TIME]._fld.getEditFieldServerValue();
+		if (this._map[CalemEditScheduleTime.RM]._el.checked) {
+			mins=this._map[CalemEditScheduleTime.MINUTES]._fld.getEditFieldServerValue();
+		} else {
+			hours=this._map[CalemEditScheduleTime.HOURS]._fld.getEditFieldServerValue();
+			selection=CalemScheduleTimeInfo._HOURS;
+		}
+	}
+	var sti=new CalemScheduleTimeInfo(startTime, repeat, endTime, selection, mins, hours);
+	if (CalemDebug.isDebug()) CalemDebug.debug("EditScheduleTime info="+sti.getJsonPhp());
+	return Base64.encode(sti.getJsonPhp());
+} 
+
+//This is server type.
+CalemEditScheduleTime.prototype.getEditFieldServerValue =
+function() {
+	return this.getFieldValue();
+} 
+
+CalemEditScheduleTime.prototype.setFieldError =
+function(errMsg) {
+	//
+} 
+
+CalemEditScheduleTime.prototype.clearFieldError =
+function() {
+	//
+} 
+
+//Handle radio button clicked.
+CalemEditScheduleTime.prototype.onRadioClicked =
+function(enabled, noReport) {
+	for (var i=0; i< CalemEditScheduleTime.R_FLDS.length; i++) {
+		var idx=CalemEditScheduleTime.R_FLDS[i];
+		this._map[idx]._el.disabled=!enabled; //radio button enablement.
+		if (this._map[idx]._el.disabled || !this._map[idx]._el.checked) {
+			this._map[idx]._eFld.disable();
+		} else {
+			this._map[idx]._eFld.enable();
+		}
+	}
+	if (!noReport) {
+		this.onVdCallbackProxy(this, true, null);
+	}
+} 
+
+CalemEditScheduleTime.prototype.onRepeatClick =
+function(noReport) {
+	var enabled=this._map[CalemEditScheduleTime.REPEAT]._el.checked;
+	//Util field enablement
+	if (enabled) this._map[CalemEditScheduleTime.END_TIME]._fld.enable();
+	else this._map[CalemEditScheduleTime.END_TIME]._fld.disable();
+	this.onRadioClicked(enabled, true);
+	if (!noReport) {
+		this.onVdCallbackProxy(this, true, null);
+	}
+}
+
+/**
+ * radio click function
+ */
+CalemEditScheduleTime._onRadioClick =
+function(ev) {
+	var obj = DwtUiEvent.getDwtObjFromEvent(ev);
+	if (obj) obj.onRadioClicked(true);
+} 
+
+CalemEditScheduleTime._onRepeatClick =
+function(ev) {
+	var obj = DwtUiEvent.getDwtObjFromEvent(ev);
+	if (obj) obj.onRepeatClick();
+}
+
+ /*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
  
 
 /**
@@ -25207,6 +25722,7 @@ function(min, max) {
 
 CalemEditRender.prototype._validateRange =
 function(value) {
+	if (value==null || value == '') return;
 	if (this._minNumVal && value < this._minNumVal)
 		throw AjxMessageFormat.format(AjxMsg.numberLessThanMin, this._minNumVal);
 	if (this._maxNumVal && value > this._maxNumVal)
@@ -25301,7 +25817,8 @@ function() {
 CalemEditRender.prototype.setFieldValue =
 function(fv) {
 	this._control.setValue(fv, true);
-}/*
+}
+/*
  * The contents of this file are subject to the CalemEAM Public License Version
  * 1.0 ("License"); You may not use this file except in compliance with the
  * License. You may obtain a copy of the License at http://www.calemeam.com/license
@@ -26404,6 +26921,54 @@ function(parentEl, yOff) {
  
  * Contributor(s): 
  */
+
+/**
+ * CalemEditScheduleTimeRender
+ * Render Schedule edit field.
+ *  
+ */
+function CalemEditScheduleTimeRender(parent, id, fldInfo, controller) {
+	if (arguments.length==0) return;
+	CalemEditRender.call(this, parent, id, fldInfo, controller);
+}
+
+CalemEditScheduleTimeRender.prototype=new CalemEditRender;
+CalemEditScheduleTimeRender.prototype.constructor=CalemEditScheduleTimeRender;
+
+CalemEditScheduleTimeRender.prototype.toString = function() { return "CalemEditScheduleTimeRender"; }
+
+CalemEditScheduleTimeRender.prototype.render =
+function(parentEl, yOff) {	
+	this._control=new CalemEditScheduleTime({parent: this._parent});
+	if (this._tableDd.isRequired(this._field)) {
+		this._control.setRequired(true);
+	}
+	this._control.reparentHtmlElement(parentEl);
+	//Need to set up validation here.
+	this.setupValidation();
+	
+	var val= this._getFieldEditValueByRec();
+	this._control.setValue(val, true);           
+}
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
  
 
 /**
@@ -26760,6 +27325,56 @@ CalemReadScheduleRender.prototype._refreshField =
 function() {
 	var val= this._getFieldRawValue();
 	var schedule=CalemScheduleInfo._decode(val);
+	this._control.setValue(schedule.getText());
+}
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */ 
+
+/**
+ * CalemReadScheduleTimeRender
+ * Render string edit field.
+ *  
+ */
+function CalemReadScheduleTimeRender(parent, id, fldInfo, controller) {
+	if (arguments.length==0) return;
+	CalemFieldReadRender.call(this, parent, id, fldInfo, controller);
+	this._render=this;
+}
+
+CalemReadScheduleTimeRender.prototype=new CalemFieldReadRender;
+CalemReadScheduleTimeRender.prototype.constructor=CalemReadScheduleTimeRender;
+
+CalemReadScheduleTimeRender.prototype.toString = function() { return "CalemReadScheduleTimeRender"; }
+
+CalemReadScheduleTimeRender.prototype.render =
+function(parentEl, yOff) {
+	this._control=new CalemReadDefault({parent: this._parent, type: DwtInputField.STRING, 
+	              size: CalemConf['edit_schedule']['defaultReadSize']});
+	this._control.reparentHtmlElement(parentEl);
+	this._refreshField();            
+}
+
+//Default implementation for all the read renders.
+CalemReadScheduleTimeRender.prototype._refreshField =
+function() {
+	var val= this._getFieldRawValue();
+	var schedule=CalemScheduleTimeInfo._decode(val);
 	this._control.setValue(schedule.getText());
 }
 /*
@@ -30339,6 +30954,75 @@ function() {
 
 //resumeView
 CalemSearchScheduleRender.prototype.resumeView =
+function() {
+	var val= this._getSearchValue();
+   this._control.setValue(val, true);  //No validation
+}
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * CalemSearchScheduleTimeRender
+ * Render Schedule Search field.
+ *  
+ */
+function CalemSearchScheduleTimeRender(parent, id, fldInfo, controller) {
+	if (arguments.length==0) return;
+	CalemSearchFieldRender.call(this, parent, id, fldInfo, controller);
+}
+
+CalemSearchScheduleTimeRender.prototype=new CalemSearchFieldRender;
+CalemSearchScheduleTimeRender.prototype.constructor=CalemSearchScheduleTimeRender;
+
+CalemSearchScheduleTimeRender.prototype.toString = function() { return "CalemSearchScheduleTimeRender"; }
+
+CalemSearchScheduleTimeRender.prototype._createControl =
+function(parentEl) {
+	this._control=new CalemEditSchedule({parent: this._parent});
+	this._control.reparentHtmlElement(parentEl);
+	//Do the work that facade is doing
+	this._render=this;
+	this.setupValidation();
+	
+	this.resumeView();
+}
+
+CalemSearchScheduleTimeRender.prototype._getFieldOps =
+function() {
+	return this._ops['schedule'];
+}
+
+//fieldValue
+CalemSearchScheduleTimeRender.prototype.getFieldValue =
+function() {
+	return this._control.getFieldValue();
+}
+
+//Value for server (such as Schedule for date)
+CalemSearchScheduleTimeRender.prototype.getFieldDbValue =
+function() {
+	var val=this.getFieldValue();
+	return new CalemDbString(val);
+} 
+
+//resumeView
+CalemSearchScheduleTimeRender.prototype.resumeView =
 function() {
 	var val= this._getSearchValue();
    this._control.setValue(val, true);  //No validation
@@ -37265,6 +37949,88 @@ function(rec, callback) {
  
  * Contributor(s): 
  */
+
+/**
+ * CalemSchedulerTaskBo - business logic
+ */
+function CalemSchedulerTaskBo() {
+}
+
+CalemSchedulerTaskBo._details = ['scheduler_job'];
+
+CalemSchedulerTaskBo.getInstance =
+function() {
+	if (!CalemSchedulerTaskBo.singleton) {
+		CalemSchedulerTaskBo.singleton = new CalemSchedulerTaskBo();
+	}
+	return CalemSchedulerTaskBo.singleton;
+}
+
+//Asset deletion check
+CalemSchedulerTaskBo.prototype.canDelete =
+function(rec, callback) {
+	var boUtil=CalemBoUtil.getInstance();
+	boUtil.canDeleteByLookup(CalemSchedulerTaskBo._details, 'task_id', rec.id, callback);
+}
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * CalemSchedulerJobBo - business logic
+ */
+function CalemSchedulerJobBo() {
+}
+
+CalemSchedulerJobBo._details = ['scheduler_job_run'];
+
+CalemSchedulerJobBo.getInstance =
+function() {
+	if (!CalemSchedulerJobBo.singleton) {
+		CalemSchedulerJobBo.singleton = new CalemSchedulerJobBo();
+	}
+	return CalemSchedulerJobBo.singleton;
+}
+
+//Asset deletion check
+CalemSchedulerJobBo.prototype.canDelete =
+function(rec, callback) {
+	var boUtil=CalemBoUtil.getInstance();
+	boUtil.canDeleteByLookup(CalemSchedulerJobBo._details, 'job_id', rec.id, callback);
+}
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
  
 
 /**
@@ -37421,6 +38187,36 @@ CalemMenuDef['CalemTbDropdownDesign'] = {
 	enabled: true,
 	tooltip: null,  				   
 	onSelect: {CalemMenuSelect: {listener: 'DropdownDesignListener'}}
+};
+
+// scheduler
+CalemMenuDef['CalemAdminScheduler'] = {
+	id: 'CalemAdminScheduler',
+	title: 'admin_scheduler',
+	icon: 'CalemScheduler',
+	disIcon: null,
+	enabled: true,
+	tooltip: null
+};
+
+CalemMenuDef['CalemSchedulerTaskFormList'] = {
+	id: 'CalemSchedulerTaskFormList',
+	title: 'scheduler_task',
+	icon: 'CalemSchedulerTask',
+	disIcon: null,
+	enabled: true,
+	tooltip: null,  				   
+	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}
+};
+
+CalemMenuDef['CalemSchedulerJobFormList'] = {
+	id: 'CalemSchedulerJobFormList',
+	title: 'scheduler_job_list',
+	icon: 'CalemSchedulerTask',
+	disIcon: null,
+	enabled: true,
+	tooltip: null,  				   
+	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}
 };
 /*
  * The contents of this file are subject to the CalemEAM Public License Version
@@ -42885,6 +43681,1369 @@ CalemViewDef['CalemTeamViewSearch']={
 };
 
 /*
+* License Boilerplate Start
+*
+* License Boilerplate End
+* 
+* 
+* Author(s): CL
+*
+*/ 
+
+/**
+ * List views
+ */
+CalemViewDef['CalemSchedulerTaskViewList']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerTaskViewList',
+		type: 'CalemView',
+		layout: {
+			CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {width: '100%'}},
+			colLayout: {CalemColLayoutInfo: {colCount: 1}}, //Potentially col width definition.
+			rows: [
+			      {CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {height: -2,   cols: ['toolbar']}},
+					{CalemTrInfo: {height: -1,   cols: ['grid']}}
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_task', className: 'CalemEditCaption'}
+			},
+			toolbar: {
+				CalemToolBarInfo: {
+					layout: ['CalemTbNew', 'CalemTbOpen', 'CalemTbDelete', 'sep', 'CalemTbDataRefresh', 'sep2', 'CalemTbSearch', 'CalemTbSearchClear', 'sep3', 'CalemTbCustomize'],
+					list: [
+				   //New
+					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+						  					 
+					{ CalemButtonInfo: {
+						 id: 'CalemTbOpen', 
+						 customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SINGLE_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.MULTI_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.NO_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.DBL_CLICK_SELECTION, func: '_clickIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }
+					},
+					      			
+					{ CalemButtonInfo: {
+						id: 'CalemTbDelete', 
+						customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SINGLE_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.MULTI_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.NO_SELECTION, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }
+					},
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{CalemButtonInfo: { id: 'CalemTbDataRefresh'}},
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+				
+					{ CalemButtonInfo: { id: 'CalemTbSearch' }},
+					
+					{ CalemButtonInfo: {
+						id: 'CalemTbSearchClear', 
+						customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_APPLIED, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_REMOVED, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }  
+					},
+					
+					{CalemSeparator: {id: 'sep3', className: 'CalemToolBarSeparator'}},
+					
+					{CalemButtonInfo: { id: 'CalemTbCustomize'}}
+				]
+			} },
+			grid: {
+			  CalemDataGridInfo: {
+				listInfo: {
+			  	   CalemListInfo: {
+			  			noMaximize: true,
+			  			colList: [
+			  			   {CalemCol: {id: 'task', width: 130}}
+			  			]	 
+			  		} 		
+		      }
+			}
+		} 
+	}
+ } //ItemMap	
+}
+};
+
+/*
+* License Boilerplate Start
+*
+* License Boilerplate End
+* 
+* 
+* Author(s): CL
+*
+*/ 
+
+CalemViewDef['CalemSchedulerTaskViewNew']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerTaskViewNew',
+		type: 'CalemView',
+		layout: {
+		 CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {}},
+			colLayout: {CalemColLayoutInfo: {colCount: 4}}, //Potentially col width definition.
+			rows: [
+					{CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {cols: ['toolbar']}},
+               {CalemTrInfo: {cols: ['err']}}                                                                                                             				                               				                               
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			toolbar: {
+				CalemToolBarInfo: {
+					type: 'CalemToolBar',
+					layout: ['CalemTbSave', 'CalemTbCancel', 'sep', 'CalemTbCustomize'],
+					list: [	  					 
+					{ CalemButtonInfo: {
+						 id: 'CalemTbSave', 
+						 customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.DATA_VALID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.DATA_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }
+					},
+					      			
+					{ CalemButtonInfo: {id: 'CalemTbCancel'}},
+					
+					//Add a separator
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: {id: 'CalemTbCustomize'}}					
+				]
+			} },
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_task', className: 'CalemEditCaption'}
+			},
+			'err': {
+				CalemFormErrorInfo: {id: 'form_error'}
+			}
+	}
+ } //ItemMap	
+}
+};
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */ 
+
+CalemViewDef['CalemSchedulerTaskViewEdit']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerTaskViewEdit',
+		type: 'CalemView',
+		layout: {
+		 CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {}},
+			colLayout: {CalemColLayoutInfo: {colCount: 4}}, //Potentially col width definition.
+			rows: [
+					{CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {cols: ['toolbar']}},
+               {CalemTrInfo: {cols: ['err']}}                                                                                                         				                               				                               
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			toolbar: {
+				CalemToolBarInfo: {
+					type: 'CalemToolBar',
+					layout: ['CalemTbSave', 'CalemTbCancel', 'sep', 'CalemTbCustomize'],
+					list: [	  					 
+					  { CalemButtonInfo: {
+							 id: 'CalemTbSave', 
+							 customInfo: {
+							  	   CalemMenuCustomInfo: {
+							  	   	enabled: false,
+							  	   	events: [
+							  	   		{CalemEventInfo: {id: CalemEvent.EDIT_CHANGED, func: '_enableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.EDIT_NO_CHANGE, func: '_disableIt'}}
+							  	   	]
+							  	   }
+							  }
+						  }
+						},  			
+					
+					{ CalemButtonInfo: { id: 'CalemTbCancel'}},
+					
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: { id: 'CalemTbCustomize'}}				
+				]
+			} },
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_task', className: 'CalemEditCaption'}
+			},
+			'err': {
+				CalemFormErrorInfo: {id: 'form_error'}
+			}
+	}
+ } //ItemMap	
+}
+};
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+CalemViewDef['CalemSchedulerTaskViewRead']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerTaskViewRead',
+		type: 'CalemView',
+		layout: {
+		 CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {}},
+			colLayout: {CalemColLayoutInfo: {colCount: 4}}, //Potentially col width definition.
+			rows: [
+					{CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {cols: ['toolbar']}},
+               {CalemTrInfo: {cols: ['err']}}                                                                                                            				                               				                               
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			toolbar: {
+				CalemToolBarInfo: {
+					type: 'CalemToolBar',
+					layout: ['CalemTbNew', 'CalemTbEdit', 'CalemTbDelete', 'CalemTbPrev', 'CalemTbNext', 'sep', 'CalemTbCancel', 'sep2', 'CalemTbCustomize'],
+					list: [
+					
+					{ CalemButtonInfo: { id: 'CalemTbNew' } },
+					
+					{ CalemButtonInfo: {
+						  id: 'CalemTbEdit',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_VALID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},						  	   	
+					{ CalemButtonInfo: {
+						  id: 'CalemTbDelete',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 enabled: false,
+						  	  	 events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_VALID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},
+					
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: {
+						  id: 'CalemTbPrev',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_LAST, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_MID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST_LAST, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},
+					{ CalemButtonInfo: {
+						  id: 'CalemTbNext',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 events: [
+						  	  	 		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST, func: '_enableIt'}},
+						  	  	 		{CalemEventInfo: {id: CalemEvent.RECORD_POS_MID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_LAST, func: '_disableIt'}},	
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST_LAST, func: '_disableIt'}},		  	   		
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: {
+						  id: 'CalemTbCancel'
+					  }		
+					},
+					
+					{ CalemButtonInfo: {id: 'CalemTbCustomize'}}
+				]
+			} },
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_task', className: 'CalemEditCaption'}
+			},
+			'err': {
+				CalemFormErrorInfo: {id: 'form_error'}
+			}
+	}
+ } //ItemMap	
+}
+};
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * Lookup views
+ */
+CalemViewDef['CalemSchedulerTaskViewLookup']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerTaskViewLookup',
+		type: 'CalemView',
+		layout: {
+			CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {width: '100%'}},
+			colLayout: {CalemColLayoutInfo: {colCount: 1}}, //Potentially col width definition.
+			rows: [
+			      {CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {height: -2,   cols: ['toolbar']}},
+					{CalemTrInfo: {height: -1,   cols: ['grid']}}
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_task', className: 'CalemEditCaption'}
+			},
+			toolbar: {
+				CalemToolBarInfo: {
+					layout: ['CalemTbSelect', 'CalemTbCancel', 'sep', 'CalemTbSearch', 'CalemTbSearchClear', 'sep3', 'CalemTbCustomize'],
+					list: [
+				   //New
+					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+						  					 
+					{ CalemButtonInfo: {
+						 id: 'CalemTbOpen', 
+						 customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SINGLE_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.MULTI_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.NO_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.DBL_CLICK_SELECTION, func: '_clickIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }
+					},
+					      			
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{CalemButtonInfo: { id: 'CalemTbDataRefresh'}},
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+				
+					{ CalemButtonInfo: { id: 'CalemTbSearch' }},
+					
+					{ CalemButtonInfo: {
+						id: 'CalemTbSearchClear', 
+						customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_APPLIED, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_REMOVED, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }  
+					},
+					
+					{CalemSeparator: {id: 'sep3', className: 'CalemToolBarSeparator'}},
+					
+					{CalemButtonInfo: { id: 'CalemTbCustomize'}},
+					
+					{ CalemButtonInfo: {
+						 id: 'CalemTbSelect', 
+						 customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SINGLE_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.MULTI_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.NO_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.DBL_CLICK_SELECTION, func: '_clickIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }
+					},
+					
+					{ CalemButtonInfo: { id: 'CalemTbCancel'}}
+				]
+			} },
+			grid: {
+			  CalemDataGridInfo: {
+				listInfo: {
+			  	   CalemListInfo: {
+			  			noMaximize: true,
+			  			colList: [
+			  			   {CalemCol: {id: 'task', width: 130}}
+			  			]	 
+			  		} 		
+		      }
+			}
+		} 
+	}
+ } //ItemMap	
+}
+};
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+CalemViewDef['CalemSchedulerTaskViewSearch']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerTaskViewSearch',
+		type: 'CalemView',
+		layout: {
+		 CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {}},
+			colLayout: {CalemColLayoutInfo: {colCount: 4}}, //Potentially col width definition.
+			rows: [
+					{CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {cols: ['toolbar']}},
+               {CalemTrInfo: {cols: ['err']}},		
+               {CalemTrInfo: {cols: ['lb_save_search', '_save_search']}}                                                                                                 				                               				                               
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			toolbar: {
+				CalemToolBarInfo: {
+					type: 'CalemToolBar',
+					layout: ['CalemTbApplySave', 'sep2', 'CalemTbApply', 'CalemTbSave',  'CalemTbCancel', 'sep', 'CalemTbCustomize'],
+					list: [	
+					   { CalemButtonInfo: {
+							 id: 'CalemTbApplySave', 
+							 customInfo: {
+							  	   CalemMenuCustomInfo: {
+							  	   	enabled: false,
+							  	   	events: [
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_VALID_ALL, func: '_enableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_NOT_VALID, func: '_disableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_NAME_NOT_VALID, func: '_disableIt'}}
+							  	   	]
+							  	   }
+							  }
+						  }
+						},
+						
+						{ CalemButtonInfo: {
+							id: 'CalemTbApply', 
+							customInfo: {
+							  	   CalemMenuCustomInfo: {
+							         enabled: false,
+							         events: [
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_VALID, func: '_enableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_NOT_VALID, func: '_disableIt'}}
+							  	   	]
+							  	   }
+							  }
+						  }
+						},
+							  					 
+						{ CalemButtonInfo: {
+							 id: 'CalemTbSave', 
+							 customInfo: {
+							  	   CalemMenuCustomInfo: {
+							  	   	enabled: false,
+							  	   	events: [
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_VALID_ALL, func: '_enableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_NOT_VALID, func: '_disableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_NAME_NOT_VALID, func: '_disableIt'}}
+							  	   	]
+							  	   }
+							  }
+						  }
+						},
+					
+					
+					   
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},   			
+					
+					{ CalemButtonInfo: { id: 'CalemTbCancel'}},
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: { id: 'CalemTbCustomize'}}
+				]
+			} },
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_task', className: 'CalemEditCaption'}
+			},
+			'err': {
+				CalemFormErrorInfo: {id: 'form_error'}
+			},
+			
+			'lb_save_search': {
+				CalemLabelInfo: {id: 'save_search', className: 'CalemEditSection'}
+			},
+			'_save_search': {
+				CalemSearchSaveInfo: {size: 30}
+			}
+	}
+ } //ItemMap	
+}
+};
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * List views
+ */
+CalemViewDef['CalemSchedulerJobViewList']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerJobViewList',
+		type: 'CalemView',
+		layout: {
+			CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {width: '100%'}},
+			colLayout: {CalemColLayoutInfo: {colCount: 1}}, //Potentially col width definition.
+			rows: [
+			      {CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {height: -2,   cols: ['toolbar']}},
+					{CalemTrInfo: {height: -1,   cols: ['grid']}}
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_job', className: 'CalemEditCaption'}
+			},
+			toolbar: {
+				CalemToolBarInfo: {
+					layout: ['CalemTbNew', 'CalemTbOpen', 'CalemTbDelete', 'sep', 'CalemTbDataRefresh', 'sep2', 'CalemTbSearch', 'CalemTbSearchClear', 'sep3', 'CalemTbCustomize'],
+					list: [
+				   //New
+					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+						  					 
+					{ CalemButtonInfo: {
+						 id: 'CalemTbOpen', 
+						 customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SINGLE_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.MULTI_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.NO_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.DBL_CLICK_SELECTION, func: '_clickIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }
+					},
+					      			
+					{ CalemButtonInfo: {
+						id: 'CalemTbDelete', 
+						customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SINGLE_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.MULTI_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.NO_SELECTION, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }
+					},
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{CalemButtonInfo: { id: 'CalemTbDataRefresh'}},
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+				
+					{ CalemButtonInfo: { id: 'CalemTbSearch' }},
+					
+					{ CalemButtonInfo: {
+						id: 'CalemTbSearchClear', 
+						customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_APPLIED, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_REMOVED, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }  
+					},
+					
+					{CalemSeparator: {id: 'sep3', className: 'CalemToolBarSeparator'}},
+					
+					{CalemButtonInfo: { id: 'CalemTbCustomize'}}
+				]
+			} },
+			grid: {
+			  CalemDataGridInfo: {
+				listInfo: {
+			  	   CalemListInfo: {
+			  			noMaximize: true,
+			  			colList: [
+			  			   {CalemCol: {id: 'task_id', width: 130}}
+			  			]	 
+			  		} 		
+		      }
+			}
+		} 
+	}
+ } //ItemMap	
+}
+};
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+CalemViewDef['CalemSchedulerJobViewNew']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerJobViewNew',
+		type: 'CalemView',
+		layout: {
+		 CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {}},
+			colLayout: {CalemColLayoutInfo: {colCount: 4}}, //Potentially col width definition.
+			rows: [
+					{CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {cols: ['toolbar']}},
+               {CalemTrInfo: {cols: ['err']}}                                                                                                             				                               				                               
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			toolbar: {
+				CalemToolBarInfo: {
+					type: 'CalemToolBar',
+					layout: ['CalemTbSave', 'CalemTbCancel', 'sep', 'CalemTbCustomize'],
+					list: [	  					 
+					{ CalemButtonInfo: {
+						 id: 'CalemTbSave', 
+						 customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.DATA_VALID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.DATA_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }
+					},
+					      			
+					{ CalemButtonInfo: {id: 'CalemTbCancel'}},
+					
+					//Add a separator
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: {id: 'CalemTbCustomize'}}					
+				]
+			} },
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_job', className: 'CalemEditCaption'}
+			},
+			'err': {
+				CalemFormErrorInfo: {id: 'form_error'}
+			},
+			
+			'release_time': {CalemEditScheduleTimeInfo: {field: 'release_time'}},
+			'release_day': {CalemEditScheduleInfo: {field: 'release_day'}}
+	}
+ } //ItemMap	
+}
+};
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+CalemViewDef['CalemSchedulerJobViewEdit']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerJobViewEdit',
+		type: 'CalemView',
+		layout: {
+		 CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {}},
+			colLayout: {CalemColLayoutInfo: {colCount: 4}}, //Potentially col width definition.
+			rows: [
+					{CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {cols: ['toolbar']}},
+               {CalemTrInfo: {cols: ['err']}}                                                                                                         				                               				                               
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			toolbar: {
+				CalemToolBarInfo: {
+					type: 'CalemToolBar',
+					layout: ['CalemTbSave', 'CalemTbCancel', 'sep', 'CalemTbCustomize'],
+					list: [	  					 
+					  { CalemButtonInfo: {
+							 id: 'CalemTbSave', 
+							 customInfo: {
+							  	   CalemMenuCustomInfo: {
+							  	   	enabled: false,
+							  	   	events: [
+							  	   		{CalemEventInfo: {id: CalemEvent.EDIT_CHANGED, func: '_enableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.EDIT_NO_CHANGE, func: '_disableIt'}}
+							  	   	]
+							  	   }
+							  }
+						  }
+						},  			
+					
+					{ CalemButtonInfo: { id: 'CalemTbCancel'}},
+					
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: { id: 'CalemTbCustomize'}}				
+				]
+			} },
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_job', className: 'CalemEditCaption'}
+			},
+			'err': {
+				CalemFormErrorInfo: {id: 'form_error'}
+			},
+			'release_time': {CalemEditScheduleTimeInfo: {field: 'release_time'}},
+			'release_day': {CalemEditScheduleInfo: {field: 'release_day'}}
+	}
+ } //ItemMap	
+}
+};
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */ 
+
+CalemViewDef['CalemSchedulerJobViewRead']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerJobViewRead',
+		type: 'CalemView',
+		layout: {
+		 CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {}},
+			colLayout: {CalemColLayoutInfo: {colCount: 4}}, //Potentially col width definition.
+			rows: [
+					{CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {cols: ['toolbar']}},
+               {CalemTrInfo: {cols: ['err']}}                                                                                                            				                               				                               
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			toolbar: {
+				CalemToolBarInfo: {
+					type: 'CalemToolBar',
+					layout: ['CalemTbNew', 'CalemTbEdit', 'CalemTbDelete', 'CalemTbPrev', 'CalemTbNext', 'sep', 'CalemTbCancel', 'sep2', 'CalemTbCustomize'],
+					list: [
+					
+					{ CalemButtonInfo: { id: 'CalemTbNew' } },
+					{CalemButtonInfo: { id: 'CalemTbDataRefresh'}},
+					
+					{ CalemButtonInfo: {
+						  id: 'CalemTbEdit',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_VALID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},						  	   	
+					{ CalemButtonInfo: {
+						  id: 'CalemTbDelete',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 enabled: false,
+						  	  	 events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_VALID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},
+					
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: {
+						  id: 'CalemTbPrev',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_LAST, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_MID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST_LAST, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},
+					{ CalemButtonInfo: {
+						  id: 'CalemTbNext',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 events: [
+						  	  	 		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST, func: '_enableIt'}},
+						  	  	 		{CalemEventInfo: {id: CalemEvent.RECORD_POS_MID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_LAST, func: '_disableIt'}},	
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST_LAST, func: '_disableIt'}},		  	   		
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: {
+						  id: 'CalemTbCancel'
+					  }		
+					},
+					
+					{ CalemButtonInfo: {id: 'CalemTbCustomize'}}
+				]
+			} },
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_job', className: 'CalemEditCaption'}
+			},
+			'err': {
+				CalemFormErrorInfo: {id: 'form_error'}
+			},
+			'release_time': {CalemEditScheduleTimeInfo: {field: 'release_time'}},
+			'release_day': {CalemEditScheduleInfo: {field: 'release_day'}}
+	}
+ } //ItemMap	
+}
+};
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */ 
+
+CalemViewDef['CalemSchedulerJobViewSearch']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerJobViewSearch',
+		type: 'CalemView',
+		layout: {
+		 CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {}},
+			colLayout: {CalemColLayoutInfo: {colCount: 4}}, //Potentially col width definition.
+			rows: [
+					{CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {cols: ['toolbar']}},
+               {CalemTrInfo: {cols: ['err']}},		
+               {CalemTrInfo: {cols: ['lb_save_search', '_save_search']}}                                                                                                 				                               				                               
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			toolbar: {
+				CalemToolBarInfo: {
+					type: 'CalemToolBar',
+					layout: ['CalemTbApplySave', 'sep2', 'CalemTbApply', 'CalemTbSave',  'CalemTbCancel', 'sep', 'CalemTbCustomize'],
+					list: [	
+					   { CalemButtonInfo: {
+							 id: 'CalemTbApplySave', 
+							 customInfo: {
+							  	   CalemMenuCustomInfo: {
+							  	   	enabled: false,
+							  	   	events: [
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_VALID_ALL, func: '_enableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_NOT_VALID, func: '_disableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_NAME_NOT_VALID, func: '_disableIt'}}
+							  	   	]
+							  	   }
+							  }
+						  }
+						},
+						
+						{ CalemButtonInfo: {
+							id: 'CalemTbApply', 
+							customInfo: {
+							  	   CalemMenuCustomInfo: {
+							         enabled: false,
+							         events: [
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_VALID, func: '_enableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_NOT_VALID, func: '_disableIt'}}
+							  	   	]
+							  	   }
+							  }
+						  }
+						},
+							  					 
+						{ CalemButtonInfo: {
+							 id: 'CalemTbSave', 
+							 customInfo: {
+							  	   CalemMenuCustomInfo: {
+							  	   	enabled: false,
+							  	   	events: [
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_VALID_ALL, func: '_enableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_NOT_VALID, func: '_disableIt'}},
+							  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_NAME_NOT_VALID, func: '_disableIt'}}
+							  	   	]
+							  	   }
+							  }
+						  }
+						},
+					
+					
+					   
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},   			
+					
+					{ CalemButtonInfo: { id: 'CalemTbCancel'}},
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: { id: 'CalemTbCustomize'}}
+				]
+			} },
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_job', className: 'CalemEditCaption'}
+			},
+			'err': {
+				CalemFormErrorInfo: {id: 'form_error'}
+			},
+			
+			'lb_save_search': {
+				CalemLabelInfo: {id: 'save_search', className: 'CalemEditSection'}
+			},
+			'_save_search': {
+				CalemSearchSaveInfo: {size: 30}
+			},
+			'release_time': {CalemEditScheduleTimeInfo: {field: 'release_time'}},
+			'release_day': {CalemEditScheduleInfo: {field: 'release_day'}}
+	}
+ } //ItemMap	
+}
+};
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */ 
+
+/**
+ * List views
+ */
+CalemViewDef['CalemSchedulerJobRunViewList']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerJobRunViewList',
+		type: 'CalemView',
+		layout: {
+			CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {width: '100%'}},
+			colLayout: {CalemColLayoutInfo: {colCount: 1}}, //Potentially col width definition.
+			rows: [
+			      {CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {height: -2,   cols: ['toolbar']}},
+					{CalemTrInfo: {height: -1,   cols: ['grid']}}
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_job_run', className: 'CalemEditCaption'}
+			},
+			toolbar: {
+				CalemToolBarInfo: {
+					layout: ['CalemTbNew', 'CalemTbOpen', 'CalemTbDelete', 'sep','CalemTbCustomize'],
+					list: [
+				   //New
+					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
+						  					 
+					{ CalemButtonInfo: {
+						 id: 'CalemTbOpen', 
+						 customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SINGLE_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.MULTI_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.NO_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.DBL_CLICK_SELECTION, func: '_clickIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }
+					},
+					      			
+					{ CalemButtonInfo: {
+						id: 'CalemTbDelete', 
+						customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SINGLE_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.MULTI_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.NO_SELECTION, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }
+					},
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{CalemButtonInfo: { id: 'CalemTbCustomize'}}
+				]
+			} },
+			grid: {
+			  CalemDataGridInfo: {
+				listInfo: {
+			  	   CalemListInfo: {
+			  			noMaximize: true,
+			  			colList: [
+			  			   {CalemCol: {id: 'start_time', width: 300}}
+			  			]	 
+			  		} 		
+		      }
+			}
+		} 
+	}
+ } //ItemMap	
+}
+};
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */ 
+
+CalemViewDef['CalemSchedulerJobRunViewRead']={
+	CalemViewInfo: {
+		id: 'CalemSchedulerJobRunViewRead',
+		type: 'CalemView',
+		layout: {
+		 CalemLayoutInfo: {
+			tableLayout: {CalemTableLayoutInfo: {}},
+			colLayout: {CalemColLayoutInfo: {colCount: 4}}, //Potentially col width definition.
+			rows: [
+					{CalemTrInfo: {cols: ['lb_caption']}},
+					{CalemTrInfo: {cols: ['toolbar']}},
+               {CalemTrInfo: {cols: ['err']}}                                                                                                              				                               				                               
+				   ]
+			}
+		},
+		itemMap : {
+			CalemItemMap: {
+			toolbar: {
+				CalemToolBarInfo: {
+					type: 'CalemToolBar',
+					layout: ['CalemTbNew', 'CalemTbEdit', 'CalemTbDelete', 'CalemTbPrev', 'CalemTbNext', 'sep', 'CalemTbCancel', 'sep2', 'CalemTbCustomize'],
+					list: [
+					
+					{ CalemButtonInfo: { id: 'CalemTbNew' } },
+					
+					{ CalemButtonInfo: {
+						  id: 'CalemTbEdit',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_VALID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},						  	   	
+					{ CalemButtonInfo: {
+						  id: 'CalemTbDelete',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 enabled: false,
+						  	  	 events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_VALID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},
+					
+					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: {
+						  id: 'CalemTbPrev',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_LAST, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_MID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST_LAST, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},
+					{ CalemButtonInfo: {
+						  id: 'CalemTbNext',
+						  customInfo: {
+						  	  CalemMenuCustomInfo: {
+						  	  	 events: [
+						  	  	 		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST, func: '_enableIt'}},
+						  	  	 		{CalemEventInfo: {id: CalemEvent.RECORD_POS_MID, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_LAST, func: '_disableIt'}},	
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_FIRST_LAST, func: '_disableIt'}},		  	   		
+						  	   		{CalemEventInfo: {id: CalemEvent.RECORD_POS_INVALID, func: '_disableIt'}}
+						  	   	]
+						  	  }
+						  }  
+					  }		
+					},
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+					
+					{ CalemButtonInfo: {
+						  id: 'CalemTbCancel'
+					  }		
+					},
+					
+					{ CalemButtonInfo: {id: 'CalemTbCustomize'}}
+				]
+			} },
+			'lb_caption': {
+				CalemLabelInfo: {id: 'scheduler_job_run', className: 'CalemEditCaption'}
+			},
+			'err': {
+				CalemFormErrorInfo: {id: 'form_error'}
+			}
+	}
+ } //ItemMap	
+}
+};
+
+/*
  * The contents of this file are subject to the CalemEAM Public License Version
  * 1.0 ("License"); You may not use this file except in compliance with the
  * License. You may obtain a copy of the License at http://www.calemeam.com/license
@@ -45284,6 +47443,535 @@ function(evt) {
  
  * Contributor(s): 
  */
+
+/**
+ * CalemSchedulerTaskFormList
+ */
+function CalemSchedulerTaskFormList(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormList.call(this, parent, formId, data);
+}
+
+CalemSchedulerTaskFormList.prototype = new CalemFormList;
+CalemSchedulerTaskFormList.prototype.constructor = CalemSchedulerTaskFormList;
+
+CalemSchedulerTaskFormList.prototype.toString = function() { return "CalemSchedulerTaskFormList";}
+
+/**
+ * Business APIs
+ */
+CalemSchedulerTaskFormList.prototype._getFormNewId =
+function(evt) {
+    return 'CalemSchedulerTaskFormNew';
+} 
+
+CalemSchedulerTaskFormList.prototype._getFormReadId =
+function(evt) {	
+	return 'CalemSchedulerTaskFormRead';
+} 
+
+/**
+ * Deletion must be handled specially
+ */
+CalemSchedulerTaskFormList.prototype.onDelete =
+function(evt) {
+	//If there're detailed records do not allow a deletion.
+	var rec=CalemEvent.getItem(evt);
+	CalemSchedulerTaskBo.getInstance().canDelete(rec, new AjxCallback(this, this.onDeleteBoCallback, {evt: evt}));
+}
+
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * CalemSchedulerTaskFormNew
+ */
+function CalemSchedulerTaskFormNew(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormNew.call(this, parent, formId, data);
+}
+
+CalemSchedulerTaskFormNew.prototype = new CalemFormNew;
+CalemSchedulerTaskFormNew.prototype.constructor = CalemSchedulerTaskFormNew;
+
+CalemSchedulerTaskFormNew.prototype.toString = function() { return "CalemSchedulerTaskFormNew";}
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * CalemSchedulerTaskFormEdit
+ */
+function CalemSchedulerTaskFormEdit(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormEdit.call(this, parent, formId, data);
+}
+
+CalemSchedulerTaskFormEdit.prototype = new CalemFormEdit;
+CalemSchedulerTaskFormEdit.prototype.constructor = CalemSchedulerTaskFormEdit;
+
+CalemSchedulerTaskFormEdit.prototype.toString = function() { return "CalemSchedulerTaskFormEdit";}
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * CalemSchedulerTaskFormRead
+ */
+function CalemSchedulerTaskFormRead(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormRead.call(this, parent, formId, data);
+}
+
+CalemSchedulerTaskFormRead.prototype = new CalemFormRead;
+CalemSchedulerTaskFormRead.prototype.constructor = CalemSchedulerTaskFormRead;
+
+CalemSchedulerTaskFormRead.prototype.toString = function() { return "CalemSchedulerTaskFormRead";}
+
+/**
+ * Business APIs
+ */
+CalemSchedulerTaskFormRead.prototype._getFormNewId =
+function() {
+	return 'CalemSchedulerTaskFormNew';
+} 
+
+CalemSchedulerTaskFormRead.prototype._getFormEditId =
+function() {
+	return 'CalemSchedulerTaskFormEdit';
+}
+
+/**
+ * Deletion must be handled specially
+ */
+CalemSchedulerTaskFormRead.prototype.onDelete =
+function(evt) {
+	//If there're detailed records do not allow a deletion.
+	var rec=CalemEvent.getItem(evt);
+	CalemSchedulerTaskBo.getInstance().canDelete(rec, new AjxCallback(this, this.onDeleteBoCallback, {evt: evt}));
+}
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * CalemSchedulerTaskFormLookup
+ */
+function CalemSchedulerTaskFormLookup(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormLookup.call(this, parent, formId, data);
+}
+
+CalemSchedulerTaskFormLookup.prototype = new CalemFormLookup;
+CalemSchedulerTaskFormLookup.prototype.constructor = CalemSchedulerTaskFormLookup;
+
+CalemSchedulerTaskFormLookup.prototype.toString = function() { return "CalemSchedulerTaskFormLookup";}
+
+/**
+ * Business APIs
+ */
+CalemSchedulerTaskFormLookup.prototype._getFormNewId =
+function() {
+   return 'CalemSchedulerTaskFormNew';
+} 
+
+/**
+ * Open a master detailed view with recordlist and current record position.
+ */
+CalemSchedulerTaskFormLookup.prototype._getFormReadId =
+function(evt) {
+	return 'CalemSchedulerTaskFormRead';
+} 
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * CalemSchedulerJobFormMdTab
+ */
+function CalemSchedulerJobFormMdTab(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormMdTab.call(this, parent, formId, data);
+}
+
+CalemSchedulerJobFormMdTab.prototype = new CalemFormMdTab;
+CalemSchedulerJobFormMdTab.prototype.constructor = CalemSchedulerJobFormMdTab;
+
+CalemSchedulerJobFormMdTab.prototype.toString = function() { return "CalemSchedulerJobFormMdTab";}
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */ 
+
+/**
+ * CalemSchedulerJobFormList
+ */
+function CalemSchedulerJobFormList(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormList.call(this, parent, formId, data);
+}
+
+CalemSchedulerJobFormList.prototype = new CalemFormList;
+CalemSchedulerJobFormList.prototype.constructor = CalemSchedulerJobFormList;
+
+CalemSchedulerJobFormList.prototype.toString = function() { return "CalemSchedulerJobFormList";}
+
+/**
+ * Business APIs
+ */
+CalemSchedulerJobFormList.prototype._getFormNewId =
+function(evt) {
+    return 'CalemSchedulerJobFormNew';
+} 
+
+/**
+ * Open a master detailed view with recordlist and current record position.
+ */
+CalemSchedulerJobFormList.prototype._onOpen =
+function(evt) {
+	//Get the selection event
+    var item=CalemEvent.getItem(evt);
+	//Prepare data for master detail view.
+	var data = {modelItem: this._modelItem, item: item};
+	//pass-through current data model and selection
+	this._openForm('CalemSchedulerJobFormMdTab', data);
+} 
+
+/**
+ * Deletion must be handled specially
+ */
+CalemSchedulerJobFormList.prototype.onDelete =
+function(evt) {
+	//If there're detailed records do not allow a deletion.
+	var rec=CalemEvent.getItem(evt);
+	CalemSchedulerJobBo.getInstance().canDelete(rec, new AjxCallback(this, this.onDeleteBoCallback, {evt: evt}));
+}
+
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */ 
+
+/**
+ * CalemSchedulerJobFormNew
+ */
+function CalemSchedulerJobFormNew(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormNew.call(this, parent, formId, data);
+}
+
+CalemSchedulerJobFormNew.prototype = new CalemFormNew;
+CalemSchedulerJobFormNew.prototype.constructor = CalemSchedulerJobFormNew;
+
+CalemSchedulerJobFormNew.prototype.toString = function() { return "CalemSchedulerJobFormNew";}
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */ 
+
+/**
+ * CalemSchedulerJobFormEdit
+ */
+function CalemSchedulerJobFormEdit(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormEdit.call(this, parent, formId, data);
+}
+
+CalemSchedulerJobFormEdit.prototype = new CalemFormEdit;
+CalemSchedulerJobFormEdit.prototype.constructor = CalemSchedulerJobFormEdit;
+
+CalemSchedulerJobFormEdit.prototype.toString = function() { return "CalemSchedulerJobFormEdit";}
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * CalemSchedulerJobFormRead
+ */
+function CalemSchedulerJobFormRead(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormRead.call(this, parent, formId, data);
+}
+
+CalemSchedulerJobFormRead.prototype = new CalemFormRead;
+CalemSchedulerJobFormRead.prototype.constructor = CalemSchedulerJobFormRead;
+
+CalemSchedulerJobFormRead.prototype.toString = function() { return "CalemSchedulerJobFormRead";}
+
+/**
+ * Business APIs
+ */
+CalemSchedulerJobFormRead.prototype._getFormNewId =
+function() {
+	return 'CalemSchedulerJobFormNew';
+} 
+
+CalemSchedulerJobFormRead.prototype._getFormEditId =
+function() {
+	return 'CalemSchedulerJobFormEdit';
+}
+
+/**
+ * Deletion must be handled specially
+ */
+CalemSchedulerJobFormRead.prototype.onDelete =
+function(evt) {
+	//If there're detailed records do not allow a deletion.
+	var rec=CalemEvent.getItem(evt);
+	CalemSchedulerJobBo.getInstance().canDelete(rec, new AjxCallback(this, this.onDeleteBoCallback, {evt: evt}));
+}
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+/**
+ * CalemSchedulerJobRunFormList
+ */
+function CalemSchedulerJobRunFormList(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormListDet.call(this, parent, formId, data);
+}
+
+CalemSchedulerJobRunFormList.prototype = new CalemFormListDet;
+CalemSchedulerJobRunFormList.prototype.constructor = CalemSchedulerJobRunFormList;
+
+CalemSchedulerJobRunFormList.prototype.toString = function() { return "CalemSchedulerJobRunFormList";}
+
+/**
+ * Business APIs
+ */
+CalemSchedulerJobRunFormList.prototype._getFormNewId =
+function(evt) {
+    return 'CalemSchedulerJobRunFormNew';
+} 
+
+/**
+ * Open a master detailed view with recordlist and current record position.
+ */
+CalemSchedulerJobRunFormList.prototype._getFormReadId =
+function(evt) {
+	return 'CalemSchedulerJobRunFormRead';
+} 
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */ 
+
+/**
+ * CalemSchedulerJobRunFormRead
+ */
+function CalemSchedulerJobRunFormRead(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormReadDet.call(this, parent, formId, data);
+}
+
+CalemSchedulerJobRunFormRead.prototype = new CalemFormReadDet;
+CalemSchedulerJobRunFormRead.prototype.constructor = CalemSchedulerJobRunFormRead;
+
+CalemSchedulerJobRunFormRead.prototype.toString = function() { return "CalemSchedulerJobRunFormRead";}
+
+/**
+ * Business APIs
+ */
+CalemSchedulerJobRunFormRead.prototype._getFormNewId =
+function() {
+	return 'CalemSchedulerJobRunFormNew';
+} 
+
+CalemSchedulerJobRunFormRead.prototype._getFormEditId =
+function() {
+	return 'CalemSchedulerJobRunFormEdit';
+}
+
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
  
 
 /**
@@ -47146,7 +49834,238 @@ CalemItemDef['CalemTeamFormSearch']={
 		view: {CalemViewRefInfo: {id: 'CalemTeamViewSearch'}}, 
 		replaceType: CalemItemDef.REPLACE_BY_ID
 	}
-}/*
+}
+
+/**
+ * Scheduler tasks
+ */
+CalemItemDef['CalemSchedulerTaskFormList']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormList',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerTaskFormList',
+		model: 'scheduler_task', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemSchedulerTaskFormSearch'
+	}
+}
+
+CalemItemDef['CalemSchedulerTaskFormLookup']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormLookup',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerTaskFormLookup',
+		model: 'scheduler_task', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewLookup'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemSchedulerTaskFormSearch'
+	}
+}
+
+CalemItemDef['CalemSchedulerTaskFormNew']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormNew',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerTaskFormNew',
+		model: 'scheduler_task', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewNew'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerTaskFormEdit']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormEdit',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerTaskFormEdit',
+		model: 'scheduler_task', 
+   	view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewEdit'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerTaskFormRead']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormRead',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerTaskFormRead',
+		model: 'scheduler_task', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewRead'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerTaskFormSearch']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerTaskFormSearch',
+		title: 'scheduler_task',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemFormSearchEdit',
+		model: 'scheduler_task', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerTaskViewSearch'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+/**
+ * CalemSchedulerFormMdTab
+ */
+CalemItemDef['CalemSchedulerJobFormMdTab']={
+	CalemFormMdTabInfo: {
+		id: 'CalemSchedulerJobFormMdTab',
+		title: 'scheduler_job',
+		icon: 'CalemSchedulerTask',
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		//Three portions of info: layout, model and itemMap.
+		layout: {
+			CalemMdTabLayoutInfo: {
+				tabList: ['tab_main', 'tab_run', 'CUSTOMIZE_TAB'],
+				tabMap: {
+					'tab_main': {CalemTabLayoutInfo: ['CalemSchedulerJobFormRead']},
+					'tab_run' : {CalemTabLayoutInfo: ['CalemSchedulerJobRunFormList']}
+				}
+			} },
+		model: {
+				CalemFormModelInfo: {
+					master: 'CalemSchedulerJobFormRead',
+			      items: 
+			             [{CalemFormLinkInfo: {id: 'CalemSchedulerJobRunFormList', link: {CalemFieldMdInfo: {fld: 'job_id', parentFld: 'id'}}} }
+			             ]
+				}
+		}, 
+		itemMap : { //Default layout conf.
+		  CalemItemMap :{
+			 'CalemSchedulerJobFormRead' : {
+			 	CalemFormLayoutInfo: {
+			 		id: 'CalemSchedulerJobFormRead',
+			 		fixed: true, //Move not allowed.
+			 		layout: {CalemBlockLayoutInfo: {width: '100%', height: '-2'}}
+			 	}
+			 },
+			 
+			 'CalemSchedulerJobRunFormList' : {
+			 	 CalemFormLayoutInfo: {
+			 	 	id: 'CalemSchedulerJobRunFormList',
+			 	 	layout: {CalemBlockLayoutInfo: {width: '100%', rows: 20}}
+			 	 }
+			 },
+			 
+		  'tab_main': {
+		  		CalemTabInfo: {id: 'tab_scheduler_job_main', fixed: 1}
+		  },
+		  
+		  'tab_run': {
+		  		CalemTabInfo: {id: 'tab_scheduler_job_run'}
+		  },
+		  
+		  'CUSTOMIZE_TAB' : {
+		  		CalemTabInfo: {id: 'CUSTOMIZE_TAB'}
+		  }
+		  
+		  }
+		  
+		} //itemMap
+	} //MdTabInfo
+}
+
+/**
+ * Scheduler job
+ */
+CalemItemDef['CalemSchedulerJobFormList']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobFormList',
+		title: 'scheduler_job_list',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobFormList',
+		model: 'scheduler_job', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemSchedulerJobFormSearch'
+	}
+}
+
+CalemItemDef['CalemSchedulerJobFormNew']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobFormNew',
+		title: 'scheduler_job',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobFormNew',
+		model: 'scheduler_job', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobViewNew'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerJobFormEdit']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobFormEdit',
+		title: 'scheduler_job',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobFormEdit',
+		model: 'scheduler_job', 
+   	view: {CalemViewRefInfo: {id: 'CalemSchedulerJobViewEdit'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerJobFormRead']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobFormRead',
+		title: 'scheduler_job',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobFormRead',
+		model: 'scheduler_job', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobViewRead'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemSchedulerJobFormSearch']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobFormSearch',
+		title: 'scheduler_job',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemFormSearchEdit',
+		model: 'scheduler_job', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobViewSearch'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+/**
+ * Scheduler job Run
+ */
+CalemItemDef['CalemSchedulerJobRunFormList']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobRunFormList',
+		title: 'scheduler_job_run',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobRunFormList',
+		model: 'scheduler_job_run', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobRunViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemSchedulerJobRunFormSearch'
+	}
+}
+
+CalemItemDef['CalemSchedulerJobRunFormRead']={
+	CalemFormInfo: {
+		id: 'CalemSchedulerJobRunFormRead',
+		title: 'scheduler_job_run',
+		icon: 'CalemSchedulerTask',
+		controller: 'CalemSchedulerJobRunFormRead',
+		model: 'scheduler_job_run', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobRunViewRead'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+/*
  * The contents of this file are subject to the CalemEAM Public License Version
  * 1.0 ("License"); You may not use this file except in compliance with the
  * License. You may obtain a copy of the License at http://www.calemeam.com/license
@@ -47177,7 +50096,7 @@ CalemModuleDef["modCalemAdmin"]= {
       toolBar: {
         CalemToolBarInfo: {
         	  type: 'CalemToolBar',
-        	  layout: ['modCalemAdmin', 'sep', 'CalemUserFormReadMine', 'CalemUserFormList', 'CalemAclGroupFormList', 'CalemModAdminDataDesign', 'CalemAdminCodes'],
+        	  layout: ['modCalemAdmin', 'sep', 'CalemUserFormReadMine', 'CalemUserFormList', 'CalemAclGroupFormList', 'CalemModAdminDataDesign', 'CalemAdminCodes', 'CalemAdminScheduler'],
         	  list: [
 	         {CalemLabelInfo: {id: 'modCalemAdmin', className: 'CalemModuleLabel'}},
 	         
@@ -47201,6 +50120,14 @@ CalemModuleDef["modCalemAdmin"]= {
 	      		menuButton: {CalemMenuButtonInfo: {id: 'CalemAdminCodes'}},
 		      	menuList: [{CalemMenuItemInfo: {id: 'CalemTeamFormList'}},
 			      	       {CalemMenuItemInfo: {id: 'CalemDeptFormList'}}
+			      	      ]
+	      		}
+	      	},
+	      	
+	      	{CalemMenuInfo: {
+	      		menuButton: {CalemMenuButtonInfo: {id: 'CalemAdminScheduler'}},
+		      	menuList: [{CalemMenuItemInfo: {id: 'CalemSchedulerTaskFormList'}},
+			      	       {CalemMenuItemInfo: {id: 'CalemSchedulerJobFormList'}}
 			      	      ]
 	      		}
 	      	}
@@ -60062,6 +62989,7 @@ CalemViewDef['CalemPmLaborViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -60438,6 +63366,7 @@ CalemViewDef['CalemPmToolViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -60814,6 +63743,7 @@ CalemViewDef['CalemPmPartViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -61190,6 +64120,7 @@ CalemViewDef['CalemPmDowntimeViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -61566,6 +64497,7 @@ CalemViewDef['CalemPmStepViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -61942,6 +64874,7 @@ CalemViewDef['CalemPmSafetyViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -62318,6 +65251,7 @@ CalemViewDef['CalemPmDocViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -62694,6 +65628,7 @@ CalemViewDef['CalemPmAuditViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -63070,6 +66005,7 @@ CalemViewDef['CalemPmCommentViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -63446,6 +66382,7 @@ CalemViewDef['CalemPmDependencyViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -63822,6 +66759,7 @@ CalemViewDef['CalemPmAssetViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -64238,6 +67176,7 @@ CalemViewDef['CalemPmAssetMeterViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -64615,6 +67554,7 @@ CalemViewDef['CalemPmAssetSeasonViewList']={
 					list: [
 				   //New
 					{ CalemButtonInfo: {id: 'CalemTbNew'}},
+					{ CalemButtonInfo: { id: 'CalemTbDataRefresh' }},
 						  					 
 					{ CalemButtonInfo: {
 						 id: 'CalemTbOpen', 
@@ -111832,6 +114772,7 @@ CalemViewDef['CalemSchedUserViewRead']={
 					list: [
 					
 					{ CalemButtonInfo: { id: 'CalemTbNew' } },
+					{CalemButtonInfo: { id: 'CalemTbDataRefresh'}},
 					
 					{ CalemButtonInfo: {
 						  id: 'CalemTbEdit',
