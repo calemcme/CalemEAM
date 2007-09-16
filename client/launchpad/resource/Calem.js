@@ -33575,8 +33575,15 @@ CalemFormNew.prototype._loadData =
 function() {
 	//Create new record
 	this._dataModel.createNewRecord();
+	var rec=this._dataModel.getCurrentRecord();
+	this._initNewRec(rec);
 	this.onDataLoaded(); //Mimic a callback so form opening can continue.
 } 
+
+//Give form a chance to initialize a new record form.
+CalemFormNew.prototype._initNewRec =
+function(rec) {
+}
 
 //Event handlers
 CalemFormNew.prototype.getSaveListener =
@@ -33866,6 +33873,8 @@ CalemFormNewCacheLoad.prototype.toString = function() { return "CalemFormNewCach
 CalemFormNewCacheLoad.prototype._loadData =
 function() {//Record should have been set already.
 	if (!this._dataModel.getCurrentRecord()) this._dataModel.createNewRecord();
+	var rec=this._dataModel.getCurrentRecord();
+	this._initNewRec(rec);
 	this._cache.bulkLoadCacheForTable(this._modelItem.getId(), this._cacheLoadedCb);
 } 
 
@@ -96281,6 +96290,13 @@ function(action) {
 	//Force a repaint.
 	this.onRecChanged();
 }
+
+CalemWoReqFormNew.prototype._getInputDataRow =
+function() {
+	var row= CalemFormNew.prototype._getInputDataRow.call(this);
+	row['origin_id']='woo_request';
+	return row;
+}
 /*
  * The contents of this file are subject to the CalemEAM Public License Version
  * 1.0 ("License"); You may not use this file except in compliance with the
@@ -96314,11 +96330,17 @@ CalemWoNoPmFormNew.prototype.constructor = CalemWoNoPmFormNew;
 
 CalemWoNoPmFormNew.prototype.toString = function() { return "CalemWoNoPmFormNew";}
 
+CalemWoNoPmFormNew.prototype._initNewRec =
+function(rec) {
+	rec.getField('origin_id').setRawValue('woo_other');
+}
+
 CalemWoNoPmFormNew.prototype._render =
 function() {
 	CalemFormNewCacheLoad.prototype._render.call(this);
 	this._setFieldsReadOnly(['pm_id']);
-}/*
+}
+/*
  * The contents of this file are subject to the CalemEAM Public License Version
  * 1.0 ("License"); You may not use this file except in compliance with the
  * License. You may obtain a copy of the License at http://www.calemeam.com/license

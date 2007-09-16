@@ -50,8 +50,15 @@ CalemFormNew.prototype._loadData =
 function() {
 	//Create new record
 	this._dataModel.createNewRecord();
+	var rec=this._dataModel.getCurrentRecord();
+	this._initNewRec(rec);
 	this.onDataLoaded(); //Mimic a callback so form opening can continue.
 } 
+
+//Give form a chance to initialize a new record form.
+CalemFormNew.prototype._initNewRec =
+function(rec) {
+}
 
 //Event handlers
 CalemFormNew.prototype.getSaveListener =

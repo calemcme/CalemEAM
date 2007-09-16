@@ -31,6 +31,11 @@ CalemWoNoPmFormNew.prototype.constructor = CalemWoNoPmFormNew;
 
 CalemWoNoPmFormNew.prototype.toString = function() { return "CalemWoNoPmFormNew";}
 
+CalemWoNoPmFormNew.prototype._initNewRec =
+function(rec) {
+	rec.getField('origin_id').setRawValue('woo_other');
+}
+
 CalemWoNoPmFormNew.prototype._render =
 function() {
 	CalemFormNewCacheLoad.prototype._render.call(this);

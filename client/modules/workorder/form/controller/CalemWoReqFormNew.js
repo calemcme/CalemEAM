@@ -36,3 +36,10 @@ function(action) {
 	//Force a repaint.
 	this.onRecChanged();
 }
+
+CalemWoReqFormNew.prototype._getInputDataRow =
+function() {
+	var row= CalemFormNew.prototype._getInputDataRow.call(this);
+	row['origin_id']='woo_request';
+	return row;
+}

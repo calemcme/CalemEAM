@@ -3698,7 +3698,8 @@ CalemFormListDetNoMd.prototype._instantiate=function(data){this.setParentRec(dat
 function CalemFormNew(parent,formId,data){if(arguments.length==0)return;CalemForm.call(this,parent,formId,data);this._saveListener=new AjxListener(this,this.onSave);this._cancelListener=new AjxListener(this,this.onCancel);this._validationCallback=new AjxCallback(this,this.onDataValidationEvent);this._closePromptCallback=new AjxCallback(this,this.onClosePrompt);this._soapNewSaveCallback=new AjxCallback(this,this.onSoapNewSaveCallback);}
 CalemFormNew.prototype=new CalemForm;CalemFormNew.prototype.constructor=CalemFormNew;CalemFormNew.prototype.toString=function(){return"CalemFormNew";}
 CalemFormNew.prototype.createView=function(){CalemForm.prototype.createView.call(this);this._view.setScrollStyle(Dwt.SCROLL);}
-CalemFormNew.prototype._loadData=function(){this._dataModel.createNewRecord();this.onDataLoaded();}
+CalemFormNew.prototype._loadData=function(){this._dataModel.createNewRecord();var rec=this._dataModel.getCurrentRecord();this._initNewRec(rec);this.onDataLoaded();}
+CalemFormNew.prototype._initNewRec=function(rec){}
 CalemFormNew.prototype.getSaveListener=function(){return this._saveListener;}
 CalemFormNew.prototype.getCancelListener=function(){return this._cancelListener;}
 CalemFormNew.prototype.onCancel=function(){this._onCancel();}
@@ -3733,7 +3734,7 @@ CalemFormNew.prototype._resumeView=function(){this._view.setFocus();}
 CalemFormNew.prototype.getDesign=function(){return'CalemFormRecordDesign';}
 function CalemFormNewCacheLoad(parent,formId,data){if(arguments.length==0)return;CalemFormNew.call(this,parent,formId,data);this._cacheLoadedCb=new AjxCallback(this,this.onCacheLoaded);this._cache=CalemContext.getInstance().getRegistry().getCache();}
 CalemFormNewCacheLoad.prototype=new CalemFormNew;CalemFormNewCacheLoad.prototype.constructor=CalemFormNewCacheLoad;CalemFormNewCacheLoad.prototype.toString=function(){return"CalemFormNewCacheLoad";}
-CalemFormNewCacheLoad.prototype._loadData=function(){if(!this._dataModel.getCurrentRecord())this._dataModel.createNewRecord();this._cache.bulkLoadCacheForTable(this._modelItem.getId(),this._cacheLoadedCb);}
+CalemFormNewCacheLoad.prototype._loadData=function(){if(!this._dataModel.getCurrentRecord())this._dataModel.createNewRecord();var rec=this._dataModel.getCurrentRecord();this._initNewRec(rec);this._cache.bulkLoadCacheForTable(this._modelItem.getId(),this._cacheLoadedCb);}
 CalemFormNewCacheLoad.prototype.onCacheLoaded=function(){this.onDataLoaded();}
 function CalemFormEdit(parent,formId,data){if(arguments.length==0)return;CalemFormNew.call(this,parent,formId,data);this._deleteListener=new AjxListener(this,this.onDelete);this._soapEditSaveCallback=new AjxCallback(this,this.onSoapEditSaveCallback);}
 CalemFormEdit.prototype=new CalemFormNew;CalemFormEdit.prototype.constructor=CalemFormEdit;CalemFormEdit.prototype.toString=function(){return"CalemFormEdit";}
@@ -5915,8 +5916,10 @@ CalemWoMyTeamAssignmentFormList.prototype.initQueryByForm=function(tblQuery){var
 function CalemWoReqFormNew(parent,formId,data){if(arguments.length==0)return;CalemFormNewCacheLoad.call(this,parent,formId,data);}
 CalemWoReqFormNew.prototype=new CalemFormNewCacheLoad;CalemWoReqFormNew.prototype.constructor=CalemWoReqFormNew;CalemWoReqFormNew.prototype.toString=function(){return"CalemWoReqFormNew";}
 CalemWoReqFormNew.prototype._onSoapSaveSuccess=function(action){this.onRecChanged();}
+CalemWoReqFormNew.prototype._getInputDataRow=function(){var row=CalemFormNew.prototype._getInputDataRow.call(this);row['origin_id']='woo_request';return row;}
 function CalemWoNoPmFormNew(parent,formId,data){if(arguments.length==0)return;CalemFormNewCacheLoad.call(this,parent,formId,data);}
 CalemWoNoPmFormNew.prototype=new CalemFormNewCacheLoad;CalemWoNoPmFormNew.prototype.constructor=CalemWoNoPmFormNew;CalemWoNoPmFormNew.prototype.toString=function(){return"CalemWoNoPmFormNew";}
+CalemWoNoPmFormNew.prototype._initNewRec=function(rec){rec.getField('origin_id').setRawValue('woo_other');}
 CalemWoNoPmFormNew.prototype._render=function(){CalemFormNewCacheLoad.prototype._render.call(this);this._setFieldsReadOnly(['pm_id']);}
 function CalemNewWoAssetFormNew(parent,formId,data){if(arguments.length==0)return;CalemFormNew.call(this,parent,formId,data);}
 CalemNewWoAssetFormNew.prototype=new CalemFormNew;CalemNewWoAssetFormNew.prototype.constructor=CalemNewWoAssetFormNew;CalemNewWoAssetFormNew.prototype.toString=function(){return"CalemNewWoAssetFormNew";}

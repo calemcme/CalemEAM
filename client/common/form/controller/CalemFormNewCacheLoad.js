@@ -39,6 +39,8 @@ CalemFormNewCacheLoad.prototype.toString = function() { return "CalemFormNewCach
 CalemFormNewCacheLoad.prototype._loadData =
 function() {//Record should have been set already.
 	if (!this._dataModel.getCurrentRecord()) this._dataModel.createNewRecord();
+	var rec=this._dataModel.getCurrentRecord();
+	this._initNewRec(rec);
 	this._cache.bulkLoadCacheForTable(this._modelItem.getId(), this._cacheLoadedCb);
 } 
 
