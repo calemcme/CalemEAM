@@ -53,7 +53,6 @@ class CalemLoginSo extends CalemSoapRequest {
  		try {
  			list($succ, $ses) = CalemLoginSo::doLogin($user, $passwd);
 			if ($succ) {//Login is successful.
-				//@todo - creating theme & language (load from user input or last time stored).
 				global $_CALEM_conf;
 				return array('sessionId'=>$ses->getSid(), 'validityPeriod'=>$_CALEM_conf['calem_session_config']['lifeTime']);
 			} 
@@ -69,6 +68,23 @@ class CalemLoginSo extends CalemSoapRequest {
 		if ($succ) {//Login is successful.
 			//Creating a session
 			$ses=new CalemSession();
+			//setup session info.	
+			//1. language	
+			global $_CALEM_conf;	
+			$lang=isset($_REQUEST[CALEM_PARAM_LANG])?$_REQUEST[CALEM_PARAM_LANG]:$_CALEM_conf['client_language'];
+			//Verify $lang to exist first.
+			if ($lang) {
+				if (!is_file(_CALEM_DIR_ . 'client/launchpad/resource/CalemMsg_' . $lang . ".js")) {
+					$lang=$_CALEM_conf['client_language'];
+				}	
+			}
+   		//2. theme
+   		$theme=isset($_REQUEST[CALEM_PARAM_THEME])?$_REQUEST[CALEM_PARAM_THEME]:$_CALEM_conf['client_theme'];
+   		if (!is_dir(_CALEM_DIR_ . 'client/themes/' . $theme)) {
+			 	$theme=$_CALEM_conf['client_theme'];
+			}
+   		//configure session settings
+   		$ses->set('setting', array('lang'=>$lang, 'theme'=>$theme));
 			$ses->set('user', $userDbo->getRow()); //Store off the user.
 			$ses->save();
 		} 

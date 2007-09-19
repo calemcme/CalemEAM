@@ -41,7 +41,7 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 	$sid=isset($_REQUEST['sessionId'])?$_REQUEST['sessionId']:null;
 	if ($logger->isDebugEnabled()) {
 		require_once _CALEM_DIR_ . 'server/include/util/CalemHttpHelper.php';
-		$logger->debug("sid=$sid; Post data=" . CalemHttpHelper::getPostData());
+		$logger->debug("sid=$sid; aid=" . $_REQUEST['aid']. ", Post data=" . CalemHttpHelper::getPostData());
 	}
 	$action=isset($_REQUEST['calemAction']) ? $_REQUEST['calemAction'] : null;
 	//This is the only action supported so far so make it simple at this point.
@@ -91,23 +91,8 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 			if ($logger->isInfoEnabled()) $logger->info("Found the correct session: " . $sesReload->toString());
 			//setup session info.
 			$si=$sesReload->get('setting');		
-			$lang=isset($si) ? $si['lang'] : $_CALEM_conf['client_language'];	
-			$lang=isset($_REQUEST[CALEM_PARAM_LANG])?$_REQUEST[CALEM_PARAM_LANG]:$lang;
-			//Verify $lang to exist first.
-			if ($lang) {
-				if (!is_file(_CALEM_DIR_ . 'client/launchpad/resource/CalemMsg_' . $lang . ".js")) {
-					$lang=$_CALEM_conf['client_language'];
-				}	
-			}
-   		//theme
-   		$theme = isset($si) ? $si['theme'] : $_CALEM_conf['client_theme'];
-   		$theme=isset($_REQUEST[CALEM_PARAM_THEME])?$_REQUEST[CALEM_PARAM_THEME]:$theme;
-   		if (!is_dir(_CALEM_DIR_ . 'client/themes/' . $theme)) {
-			 	$theme=$_CALEM_conf['client_theme'];
-			}
-   		//Update session
-   		$sesReload->set('setting', array('lang'=>$lang, 'theme'=>$theme));
-   		$sesReload->save();
+			$lang=$si['lang'];	
+   		$theme = $si['theme'];
    		//load mode
    		$loadmode=isset($_REQUEST[CALEM_PARAM_LOAD_MODE])?$_REQUEST[CALEM_PARAM_LOAD_MODE]: $_CALEM_conf['client_js_load_mode'];
 		}
@@ -126,6 +111,7 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 		}
 	} else {
 		if (isset($_REQUEST['aid'])) {
+			$logger->error('Session expired, need to log in first, aid=' . $_REQUEST['aid']);
 			die("Session expired. Please login first.");	
 		}
 		$action=$_CALEM_conf['default_noses_action'];
@@ -133,7 +119,7 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 				?$_CALEM_conf['noses_allowed_actions'][$action]
 				:$_CALEM_conf['noses_allowed_actions'][$_CALEM_conf['default_noses_action']];
 	}
-	if ($logger->isInfoEnabled()) $logger->info("Received request to launch: " . $launch);
+	if ($logger->isInfoEnabled()) $logger->info("Received request to launch: " . $launch . ", aid=".$_REQUEST['aid']);
 	require_once _CALEM_DIR_ . $launch;				
 	//Close down logger
 	CalemExit::exitCalem(); 
