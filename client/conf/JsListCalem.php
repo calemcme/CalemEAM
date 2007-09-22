@@ -41,6 +41,7 @@ $_CALEM_scripts=array(
          '/common/util/CalemTextUtil.js',
 			'/common/util/CalemJson.js',
 			'/common/util/WebToolkitBase64.js',
+			'/common/util/swfobject.js',
 			//Other utils
 			'/common/form/model/CalemDropdownUtil.js',
 			'/common/form/model/widget/CalemCustomInfoManager.js',
@@ -82,6 +83,7 @@ $_CALEM_scripts=array(
 			'/common/form/model/widget/CalemViewInfo.js',
 			'/common/form/model/widget/CalemViewCustomInfo.js',
 			'/common/form/model/widget/CalemFormInfo.js',
+			'/common/form/model/widget/CalemFormPeerTabInfo.js',
 			'/common/form/model/widget/CalemFormCustomInfo.js',
 			'/common/form/model/widget/CalemEmbedInfo.js',
 			'/common/form/model/widget/CalemSearchInfo.js',
@@ -103,6 +105,7 @@ $_CALEM_scripts=array(
 			'/common/form/model/datamodel/CalemDataModel.js',
 			//form model
 			'/common/form/model/formmodel/CalemFormModel.js',
+			'/common/form/model/formmodel/CalemFormPeerModel.js',
 			//Database
 			'/common/form/model/database/CalemDb.js',
 			'/common/form/model/database/CalemTableDd.js',
@@ -199,6 +202,13 @@ $_CALEM_scripts=array(
          '/common/form/widget/design/tree/mdtab/CalemLayoutTreeTabFixed.js',
          '/common/form/widget/design/tree/mdtab/CalemLayoutTreeTabCustomize.js',
                    
+         //peertab
+         '/common/form/widget/design/tree/peertab/CalemLayoutTreeCol.js',
+         '/common/form/widget/design/tree/peertab/CalemLayoutTreePeerTab.js',
+         '/common/form/widget/design/tree/peertab/CalemLayoutTreePeerTabFixed.js',
+         '/common/form/widget/design/tree/peertab/CalemDesignTreeFormPeerTab.js',
+         '/common/form/widget/design/tree/peertab/CalemLayoutTreeFormPeerTab.js',
+                   
          //base, record, list, mdtab design tree
 			'/common/form/widget/design/tree/CalemViewDesignTree.js',
          '/common/form/widget/design/tree/CalemLabelLayoutTree.js',
@@ -210,6 +220,9 @@ $_CALEM_scripts=array(
 			//MdTab design tree
 			'/common/form/widget/design/tree/mdtab/CalemMdTabDesignTree.js',			
 			'/common/form/widget/design/tree/mdtab/CalemMdTabLayoutTree.js',
+            //PeerTab design tree
+			'/common/form/widget/design/tree/peertab/CalemPeerTabDesignTree.js',			
+			'/common/form/widget/design/tree/peertab/CalemPeerTabLayoutTree.js',
 			
 			//Search
 			'/common/form/widget/search/CalemSearchSelect.js',
@@ -234,6 +247,13 @@ $_CALEM_scripts=array(
 			'/common/form/view/CalemFieldRender.js',
 			'/common/form/view/CalemFieldLabelRender.js',
 			'/common/form/view/CalemFormErrorRender.js',
+			
+			//chart
+			'/common/form/view/chart/CalemChartRender.js',
+			'/common/form/view/chart/CalemChartLineRender.js',
+         '/common/form/view/chart/CalemChartPieRender.js',
+         '/common/form/view/chart/CalemChartColumnRender.js',
+			
          //edit
          '/common/form/view/edit/CalemViewEditRender.js',
          '/common/form/view/edit/CalemEditRenderFacade.js',
@@ -272,6 +292,12 @@ $_CALEM_scripts=array(
 			'/common/form/view/mdtab/CalemViewMdRender.js', 
 			'/common/form/view/mdtab/CalemViewMdTabRender.js',
 			
+			//peertab
+         '/common/form/view/peertab/CalemViewPeer.js',
+			'/common/form/view/peertab/CalemViewPeerTab.js', 
+			'/common/form/view/peertab/CalemViewTabPeerRender.js',
+			'/common/form/view/peertab/CalemViewPeerRender.js',
+			
          //Design
          '/common/form/view/design/CalemUiDesignRender.js',
          '/common/form/view/design/CalemGridDesignRenderFacade.js',
@@ -307,6 +333,10 @@ $_CALEM_scripts=array(
          '/common/form/view/design/mdtab/CalemMdTabDesignTreeRender.js',
          '/common/form/view/design/mdtab/CalemMdTabLayoutTreeRender.js',
          '/common/form/view/design/mdtab/CalemViewMdTabDesignRender.js',
+         //peertab
+         '/common/form/view/design/peertab/CalemPeerTabDesignTreeRender.js',
+         '/common/form/view/design/peertab/CalemPeerTabLayoutTreeRender.js',
+         '/common/form/view/design/peertab/CalemViewPeerTabDesignRender.js',
          
          //search control renders
          '/common/form/view/search/CalemSearchSelectRender.js',
@@ -352,7 +382,9 @@ $_CALEM_scripts=array(
 			'/common/form/controller/CalemFormEditDet.js',
 			'/common/form/controller/CalemFormRead.js',
 			'/common/form/controller/CalemFormReadDet.js',
+			'/common/form/controller/CalemFormChart.js',
 			'/common/form/controller/CalemFormMdTab.js',
+			'/common/form/controller/CalemFormPeerTab.js',
 			'/common/form/controller/CalemFormLookup.js',
 			'/common/form/controller/CalemFormLookupNoMd.js',
 			'/common/desktop/main/CalemMainController.js',	
@@ -368,6 +400,7 @@ $_CALEM_scripts=array(
 			'/common/form/controller/design/CalemFormRecordDesign.js',
 			'/common/form/controller/design/CalemFormListDesign.js',
 			'/common/form/controller/design/CalemFormMdTabDesign.js',
+            '/common/form/controller/design/CalemFormPeerTabDesign.js',
 			
 			//Search
 			'/common/form/controller/search/CalemFormSearch.js',	
