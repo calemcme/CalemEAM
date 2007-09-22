@@ -89,6 +89,8 @@ define('TAB_CUSTOMIZE', 'CUSTOMIZE_TAB');
 
 define('EMPTY_REC', '__NULL_REC__');
 	
+define('KEY_PREFIX', '___');
+
 //Must have x rights for directory.
 define('DIR_WRITE_RIGHTS', 0775);
 	
@@ -155,12 +157,14 @@ $_CALEM_dist=array(
 	'ses_launch_app'=>'client/launchpad/CalemStart.php',
 	//Other handlers
 	'CalemReport'=>'server/modules/report/CalemReport.php',
+	'CalemDashboard'=>'server/modules/dashboard/CalemDashboard.php',
+	'CalemDashboardExport'=>'server/include/charts/share/export.php',
 	
 	//Module list
 	'modules'=>array(
 		'admin', 'asset', 'budget', 'pm', 'inventory', 'workorder', 'requisition', 'purchase', 
       'document','schedule', 'rcm','contact', 'contractor', 'inspection', 'training',
-		'project'
+		'project', 'dashboard'
 	),
 	//Default SOAP return format - must be XML for unit tests to pass.
 	'default_soap_output_format'=>'XML',
@@ -230,6 +234,7 @@ $_CALEM_dist=array(
 		'automaticSerialization'=>true,
 		'automaticCleaningFactor'=>0,
 		'readControl'=>false,
+        'writeControl'=>false,
 		'fileNameProtection'=>false,
 		'hashedDirectoryLevel'=>1	
 	),
@@ -238,6 +243,8 @@ $_CALEM_dist=array(
 		'cacheDir'=>_CALEM_DIR_ . 'server/cache/session/',
 		'lifeTime'=>3600, //1 hour
 		'fileNameProtection'=>false,
+        'readControl'=>false,
+        'writeControl'=>false,
 		'automaticSerialization'=>true,
 		'automaticCleaningFactor'=>200,
 		'hashedDirectoryLevel'=>1	
@@ -328,6 +335,9 @@ $_CALEM_dist=array(
 
 @include _CALEM_DIR_ . 'server/modules/budget/budget_conf.php';
 @include _CALEM_DIR_ . 'server/modules/budget/budget_conf.custom.php';
+
+@include _CALEM_DIR_ . 'server/modules/dashboard/dash_conf.php';
+@include _CALEM_DIR_ . 'server/modules/dashboard/dash_conf.custom.php';
 
 //Finally get the custom and install conf.
 //The custom/installation files are included here.
