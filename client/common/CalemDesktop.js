@@ -147,6 +147,10 @@ function() {
 	this._setupMainController();
    //start displaying the screen
    this.onLayoutChange();
+   //Show first form
+   if (this._conf['showFirstMod'] && this._modules.length > 0) {
+   	this.onModuleSelect(this._modules[0]);
+   }
    /**
     * Key support to consider later
     */
