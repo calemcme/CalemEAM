@@ -556,14 +556,14 @@ CalemItemDef['CalemSchedulerJobFormMdTab']={
 				tabList: ['tab_main', 'tab_run', 'CUSTOMIZE_TAB'],
 				tabMap: {
 					'tab_main': {CalemTabLayoutInfo: ['CalemSchedulerJobFormRead']},
-					'tab_run' : {CalemTabLayoutInfo: ['CalemSchedulerJobRunFormList']}
+					'tab_run' : {CalemTabLayoutInfo: ['CalemSchedulerJobLogFormList']}
 				}
 			} },
 		model: {
 				CalemFormModelInfo: {
 					master: 'CalemSchedulerJobFormRead',
 			      items: 
-			             [{CalemFormLinkInfo: {id: 'CalemSchedulerJobRunFormList', link: {CalemFieldMdInfo: {fld: 'job_id', parentFld: 'id'}}} }
+			             [{CalemFormLinkInfo: {id: 'CalemSchedulerJobLogFormList', link: {CalemFieldMdInfo: {fld: 'job_id', parentFld: 'id'}}} }
 			             ]
 				}
 		}, 
@@ -577,9 +577,9 @@ CalemItemDef['CalemSchedulerJobFormMdTab']={
 			 	}
 			 },
 			 
-			 'CalemSchedulerJobRunFormList' : {
+			 'CalemSchedulerJobLogFormList' : {
 			 	 CalemFormLayoutInfo: {
-			 	 	id: 'CalemSchedulerJobRunFormList',
+			 	 	id: 'CalemSchedulerJobLogFormList',
 			 	 	layout: {CalemBlockLayoutInfo: {width: '100%', rows: 20}}
 			 	 }
 			 },
@@ -589,7 +589,7 @@ CalemItemDef['CalemSchedulerJobFormMdTab']={
 		  },
 		  
 		  'tab_run': {
-		  		CalemTabInfo: {id: 'tab_scheduler_job_run'}
+		  		CalemTabInfo: {id: 'tab_scheduler_job_log'}
 		  },
 		  
 		  'CUSTOMIZE_TAB' : {
@@ -669,27 +669,27 @@ CalemItemDef['CalemSchedulerJobFormSearch']={
 /**
  * Scheduler job Run
  */
-CalemItemDef['CalemSchedulerJobRunFormList']={
+CalemItemDef['CalemSchedulerJobLogFormList']={
 	CalemFormInfo: {
-		id: 'CalemSchedulerJobRunFormList',
-		title: 'scheduler_job_run',
+		id: 'CalemSchedulerJobLogFormList',
+		title: 'scheduler_job_log',
 		icon: 'CalemSchedulerTask',
-		controller: 'CalemSchedulerJobRunFormList',
-		model: 'scheduler_job_run', 
-		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobRunViewList'}}, 
+		controller: 'CalemSchedulerJobLogFormList',
+		model: 'scheduler_job_log', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobLogViewList'}}, 
 		replaceType: CalemItemDef.REPLACE_BY_ID,
-		searchFormId: 'CalemSchedulerJobRunFormSearch'
+		searchFormId: 'CalemSchedulerJobLogFormSearch'
 	}
 }
 
-CalemItemDef['CalemSchedulerJobRunFormRead']={
+CalemItemDef['CalemSchedulerJobLogFormRead']={
 	CalemFormInfo: {
-		id: 'CalemSchedulerJobRunFormRead',
-		title: 'scheduler_job_run',
+		id: 'CalemSchedulerJobLogFormRead',
+		title: 'scheduler_job_log',
 		icon: 'CalemSchedulerTask',
-		controller: 'CalemSchedulerJobRunFormRead',
-		model: 'scheduler_job_run', 
-		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobRunViewRead'}}, 
+		controller: 'CalemSchedulerJobLogFormRead',
+		model: 'scheduler_job_log', 
+		view: {CalemViewRefInfo: {id: 'CalemSchedulerJobLogViewRead'}}, 
 		replaceType: CalemItemDef.REPLACE_BY_ID
 	}
 }

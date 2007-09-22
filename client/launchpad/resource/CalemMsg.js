@@ -533,7 +533,7 @@ CalemMsg["admin_codes"] = "Codes";
 CalemMsg["admin_scheduler"] = "Scheduler";
 
 CalemMsg["tab_scheduler_job_main"] = "Main";
-CalemMsg["tab_scheduler_job_run"] = "Job runs";
+CalemMsg["tab_scheduler_job_log"] = "Job runs";
 
 CalemMsg["data_design"] = "Data design";
 CalemMsg["table_design"] = "Table design";
@@ -660,7 +660,7 @@ CalemMsg["release_time"] = "Release time";
 CalemMsg["release_day"] = "Release days";
 CalemMsg["time_due"] = "Time due";
 
-CalemMsg["scheduler_job_run"] = "Job run";
+CalemMsg["scheduler_job_log"] = "Job run";
 CalemMsg["scheduler_time_taken"] = "Time taken";
 CalemMsg["results"] = "Result";
 

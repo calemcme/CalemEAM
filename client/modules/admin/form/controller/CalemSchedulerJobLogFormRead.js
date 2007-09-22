@@ -15,33 +15,31 @@
  * All Rights Reserved.
  
  * Contributor(s): 
- */
+ */ 
 
 /**
- * CalemSchedulerJobRunFormList
+ * CalemSchedulerJobLogFormRead
  */
-function CalemSchedulerJobRunFormList(parent, formId, data) {
+function CalemSchedulerJobLogFormRead(parent, formId, data) {
 	if (arguments.length==0) return;
-	CalemFormListDet.call(this, parent, formId, data);
+	CalemFormReadDet.call(this, parent, formId, data);
 }
 
-CalemSchedulerJobRunFormList.prototype = new CalemFormListDet;
-CalemSchedulerJobRunFormList.prototype.constructor = CalemSchedulerJobRunFormList;
+CalemSchedulerJobLogFormRead.prototype = new CalemFormReadDet;
+CalemSchedulerJobLogFormRead.prototype.constructor = CalemSchedulerJobLogFormRead;
 
-CalemSchedulerJobRunFormList.prototype.toString = function() { return "CalemSchedulerJobRunFormList";}
+CalemSchedulerJobLogFormRead.prototype.toString = function() { return "CalemSchedulerJobLogFormRead";}
 
 /**
  * Business APIs
  */
-CalemSchedulerJobRunFormList.prototype._getFormNewId =
-function(evt) {
-    return 'CalemSchedulerJobRunFormNew';
+CalemSchedulerJobLogFormRead.prototype._getFormNewId =
+function() {
+	return 'CalemSchedulerJobLogFormNew';
 } 
 
-/**
- * Open a master detailed view with recordlist and current record position.
- */
-CalemSchedulerJobRunFormList.prototype._getFormReadId =
-function(evt) {
-	return 'CalemSchedulerJobRunFormRead';
-} 
+CalemSchedulerJobLogFormRead.prototype._getFormEditId =
+function() {
+	return 'CalemSchedulerJobLogFormEdit';
+}
+

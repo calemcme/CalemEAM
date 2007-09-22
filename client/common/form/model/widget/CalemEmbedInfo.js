@@ -78,8 +78,8 @@ function() {
         && userInfo.gid==CalemConst.CUSTOM_SYSTEM) {
 		var grp=CalemConf['view_engine'].devDesignGroup;
 		targetInfo=new CalemDesignTargetInfo(CalemDesignTargetInfo.GROUP, grp, CalemMsg.getMsg(grp));		
-	} else {//Design for self.
-		targetInfo=new CalemDesignTargetInfo(CalemDesignTargetInfo.USER, userInfo.uid, userInfo.uname);
+	} else {
+		targetInfo=new CalemDesignTargetInfo(CalemDesignTargetInfo.GROUP, CalemConst.CUSTOM_SYSTEM, CalemMsg.getMsg(CalemConst.CUSTOM_SYSTEM));
 	}
 	return targetInfo;
 }
@@ -92,7 +92,7 @@ function() {
         && userInfo.gid==CalemConst.CUSTOM_SYSTEM) {
 		var grp=CalemConf['view_engine'].devDesignGroup;
 		targetInfo=new CalemDesignTargetInfo(CalemDesignTargetInfo.GROUP, grp, CalemMsg.getMsg(grp));		
-	} else {//Design for self.
+	} else {
 		targetInfo=new CalemDesignTargetInfo(CalemDesignTargetInfo.GROUP, CalemConst.CUSTOM_SYSTEM, CalemMsg.getMsg(CalemConst.CUSTOM_SYSTEM));
 	}
 	return targetInfo;
