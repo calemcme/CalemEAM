@@ -359,6 +359,7 @@ CalemMsg["modCalemContractor"] = "Contractor";
 CalemMsg["modCalemProject"] = "Project";
 CalemMsg["modCalemTraining"] = "Training";
 CalemMsg["modCalemReq"] = "Requisition";
+CalemMsg["modCalemDash"] = "Dashboard";
 
 CalemMsg["txtCalemMore"] = "More";
 
@@ -886,6 +887,23 @@ CalemMsg["cnt_tenant"] = "Tenant";
 CalemMsg["cnt_other"] = "Other";
 
 CalemMsg["contractor"] = "Contractor";
+
+CalemMsg["dash_title"] = "Dashboard";
+CalemMsg["tab_dash"] = "Main";
+CalemMsg["peer_tab_col"] = "Column";
+
+CalemMsg["dash_wo_orig_day"] = "Daily WO Count by Origination";
+CalemMsg["dash_wo_orig_md"] = "Monthly WO Count by Origination";
+CalemMsg["dash_wo_status_pie"] = "WO Count by Status";
+CalemMsg["dash_wo_age_pri"] = "WO Age by Priority";
+
+CalemMsg["wo_age_pri_1w_less"] = "less than 1 week";
+CalemMsg["wo_age_pri_1w"] = "1 week";
+CalemMsg["wo_age_pri_2w"] = "2 weeks";
+CalemMsg["wo_age_pri_3w"] = "3 weeks";
+CalemMsg["wo_age_pri_4w"] = "4 or more weeks";
+
+CalemMsg["wo_pri_null"] = "Null priority";
 
 CalemMsg["document"] = "Document";
 CalemMsg["document_list"] = "Document";
