@@ -38,7 +38,7 @@ CalemViewDef['CalemSchedulerJobRunViewList']={
 		itemMap : {
 			CalemItemMap: {
 			'lb_caption': {
-				CalemLabelInfo: {id: 'scheduler_job_run', className: 'CalemEditCaption'}
+				CalemLabelInfo: {id: 'scheduler_job_log', className: 'CalemEditCaption'}
 			},
 			toolbar: {
 				CalemToolBarInfo: {
