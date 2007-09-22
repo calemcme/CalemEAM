@@ -81,5 +81,10 @@ interface CalemDbHandlerInterface {
 	 */
 	public function getJoinInfo($joinFldName, $base, $lkup);
 	
+	/**
+	 * DB server id
+	 */
+	public function getDbTypeId();
+	
 }	
 ?>

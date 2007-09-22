@@ -42,6 +42,10 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
  * </ul>
  */
  class CalemDbo implements CalemDboInterface {
+ 	const onDataInserted = 'onDataInserted';
+ 	const onDataUpdated = 'onDataUpdated';
+ 	const onDataDeleted = 'onDataDeleted';
+ 	
  	//logger
  	protected $logger;
  	//Table definition
@@ -661,6 +665,53 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
 		return $this->conn->inTransaction();	
 	}
  
+	/**
+	 * Notify DBO listeners
+	 */ 
+	public function notifyDataInserted($id, $baseTable, $baseData, $customTable, $customData) {
+		$dataPkt=array('id'=>$id,
+		               'baseTable'=>$baseTable,
+		               'baseData'=>$baseData,
+		               'customTable'=>$customTable,
+		               'customData'=>$customData);
+		$this->notifyListeners(self::onDataInserted, $dataPkt);		               	
+	}
+	
+	public function notifyDataUpdated($baseTable, $baseCurrent, $baseUpdate, $customTable, $customCurrent, $customUpdate) {
+		$dataPkt=array('baseTable'=>$baseTable,
+		               'baseCurrent'=>$baseCurrent,
+		               'baseUpdate'=>$baseUpdate,
+		               'customTable'=>$customTable,
+		               'customCurrent'=>$customCurrent,
+		               'customUpdate'=>$customUpdate);
+		$this->notifyListeners(self::onDataUpdated, $dataPkt);		
+	}
+	
+	public function notifyDataDeleted($baseTable, $row) {
+		$dataPkt=array('baseTable'=>$baseTable,
+		               'baseData'=>$row);
+		$this->notifyListeners(self::onDataDeleted, $dataPkt);		
+	}
+	
+	public function notifyListeners($tag, $dataPkt) {
+		$class=get_class($this);
+		$func=$tag . '_' . $class;
+		include _CALEM_DIR_ . 'server/conf/dbo_listener_map.php';
+		$lsns=$_DBO_listener_map[$class];	
+		if (!$lsns || count($lsns)==0) return;
+		$tagLsns=$lsns[$tag];
+		$lns=$_DBO_listener_map['listeners'];
+		foreach ($tagLsns as $key=>$lname) {
+			$ln=$lns[$lname];
+			if (!$ln) {
+				$this->logger->warn("listener: " . $lname . " for " . $tag . " of " . $class . " NOT FOUND!");
+				continue;	
+			}
+			require_once _CALEM_DIR_ . $ln['path'] . '/' . $ln['class']. '.php';
+			$cls=new $ln['class'];
+			call_user_func(array($cls, $func), $dataPkt);
+		}
+	}
  }
  
 ?>

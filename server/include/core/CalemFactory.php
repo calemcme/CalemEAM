@@ -114,6 +114,19 @@ class CalemFactory {
 		return $dboInst;
 	}
 	
+	/**
+	 * Find the sql builder
+	 * @param path full path of the directory, sample: '/wamp/www/calemeam/server/modules/dashboard/'
+	 * @param sname - short name such as CalemDashSqlBuilder
+	 * @return is the sql builder for a database such as: CalemDashSb_mysql
+	 */
+	public function getSb($conf) {
+		$handler=self::getDbHandler();
+		$fname=$conf['sname'] . '_' . $handler->getDbTypeId();
+		require_once _CALEM_DIR_ . $conf['path'] . $fname . ".php";
+		return new $fname;
+	}
+	
 	public function getUidGen() {
 		$dbo= 'CalemUid'; 
 		$dboInst = CalemFactory::createInstance($dbo);
