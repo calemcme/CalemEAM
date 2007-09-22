@@ -353,6 +353,10 @@ final class MysqlHandler extends CalemDbHandler implements CalemDbHandlerInterfa
  			throw new CalemDataBoException($fldReq['tableId'], $ex, $errorInfo);
 		}
 	}
+	
+	public function getDbTypeId() {
+		return 'mysql';
+	}
 }	
 
 ?>
