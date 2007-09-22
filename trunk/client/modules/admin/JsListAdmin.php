@@ -83,6 +83,7 @@ $_CALEM_scripts=array(
 			'/modules/admin/form/view/CalemViewDesignRecordPanelDef.js',
 			'/modules/admin/form/view/CalemViewDesignListPanelDef.js',
 			'/modules/admin/form/view/CalemViewDesignMdTabPanelDef.js',
+            '/modules/admin/form/view/CalemViewDesignPeerTabPanelDef.js',
 			'/modules/admin/form/view/CalemViewDesignTablePanelDef.js',
 			'/modules/admin/form/view/CalemViewDesignDropdownPanelDef.js',
 			 //search select form
