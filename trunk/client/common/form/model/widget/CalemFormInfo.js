@@ -193,9 +193,9 @@ function(obj) {
 //Serialization
 CalemFormMdTabInfo.prototype.getJson =
 function() {
-	return ["{CalemFormMdTabInfo: {id: '", this._id, "', title: '", this._title,"', icon: '", 
+	return ["{", this.toString(),": {id: '", this._id, "', title: '", this._title,"', icon: '", 
 	              this._icon, "', replaceType: ", this._replaceType,", layout: ", this._layout.getJson(), 
-	              ", model: ", this._model.getJson(), ", itemMap: ", this._itemMap.getJson(), "}}"].join('');
+	              ", model: ", (this._model ? this._model.getJson() : "''"), ", itemMap: ", this._itemMap.getJson(), "}}"].join('');
 }
 
 CalemFormMdTabInfo.prototype.getId =
@@ -267,7 +267,7 @@ function(obj) {
 //Serialization
 CalemMdTabLayoutInfo.prototype.getJson =
 function() {
-	return ["{CalemMdTabLayoutInfo: {tabList: ", CalemJson.arrayToJson(this._tabList),
+	return ["{", this.toString(), ": {tabList: ", CalemJson.arrayToJson(this._tabList),
 	               ", tabMap: ", CalemJson.mapToJson(this._tabMap), "}}"].join('');
 }
 
@@ -289,6 +289,7 @@ function() {
 /**
  * CalemTabLayoutInfo
  * Tab layout descriptors when composing forms to make new forms.
+ * Provide common service like CalemTabColLayout
  */
 function CalemTabLayoutInfo(layout) {
 	if (arguments.length==0) return;
@@ -312,6 +313,16 @@ function() {
 
 CalemTabLayoutInfo.prototype.getLayout =
 function(id) {
+	return this._layout;
+}
+
+CalemTabLayoutInfo.prototype.getColCount =
+function() {
+	return 1;
+}
+
+CalemTabLayoutInfo.prototype.getColLayout =
+function(i) {
 	return this._layout;
 }
 
@@ -392,6 +403,11 @@ function() {
 CalemTabInfo.prototype.getLabel =
 function() {
 	return CalemMsg.getMsg(this._id);
+}
+
+CalemTabInfo.prototype.getColCount =
+function() {
+	return 1;
 }
 
 
@@ -556,3 +572,21 @@ CalemMdTabDesignTreeInfo.prototype.getJson =
 function() {
 	return ["{CalemMdTabDesignTreeInfo: true}"].join('');
 }
+
+/**
+ * CalemPeerTabDesignTreeInfo
+ */
+function CalemPeerTabDesignTreeInfo() {}
+
+CalemPeerTabDesignTreeInfo.prototype.toString = function() {return "CalemPeerTabDesignTreeInfo";}
+CalemPeerTabDesignTreeInfo.prototype.getClassName = function() {return "CalemPeerTabDesignTreeInfo";}
+
+CalemPeerTabDesignTreeInfo.prototype.setJson =
+function(obj) {
+}
+
+CalemPeerTabDesignTreeInfo.prototype.getJson = 
+function() {
+	return ["{CalemPeerTabDesignTreeInfo: true}"].join('');
+}
+

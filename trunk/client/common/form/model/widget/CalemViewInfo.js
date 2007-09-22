@@ -446,3 +446,68 @@ CalemEditScheduleTimeInfo.prototype.getField =
 function() {
 	return this._field;
 }
+
+/**
+ * CalemChartInfo
+ */
+function CalemChartInfo(id) {
+	if (arguments.length==0) return;
+	this._id=id;
+}
+
+CalemChartInfo.prototype.toString = function() {return "CalemChartInfo";}
+CalemChartInfo.prototype.getClassName = function() {return "CalemChartInfo";}
+
+CalemChartInfo.prototype.setJson =
+function(obj) {
+	this._id=obj.id;
+}
+
+CalemChartInfo.prototype.getJson = 
+function() {
+	return ["{CalemChartInfo: {id: '", this._id, "'}}"].join('');
+}
+
+//Service APIs
+CalemChartInfo.prototype.getId =
+function() {
+	return this._id;
+}
+
+//Line charts
+function CalemChartLineInfo(id) {
+	if (arguments.length==0) return;
+	CalemChartInfo.call(this, id);
+}
+
+CalemChartLineInfo.prototype = new CalemChartInfo;
+CalemChartLineInfo.prototype.constructor = CalemChartLineInfo
+
+CalemChartLineInfo.prototype.toString = function() {return "CalemChartLineInfo";}
+CalemChartLineInfo.prototype.getClassName = function() {return "CalemChartLineInfo";}
+
+//Pie charts
+function CalemChartPieInfo(id) {
+	if (arguments.length==0) return;
+	CalemChartInfo.call(this, id);
+}
+
+CalemChartPieInfo.prototype = new CalemChartInfo;
+CalemChartPieInfo.prototype.constructor = CalemChartPieInfo
+
+CalemChartPieInfo.prototype.toString = function() {return "CalemChartPieInfo";}
+CalemChartPieInfo.prototype.getClassName = function() {return "CalemChartPieInfo";}
+
+//Column charts
+function CalemChartColumnInfo(id) {
+	if (arguments.length==0) return;
+	CalemChartInfo.call(this, id);
+}
+
+CalemChartColumnInfo.prototype = new CalemChartInfo;
+CalemChartColumnInfo.prototype.constructor = CalemChartColumnInfo
+
+CalemChartColumnInfo.prototype.toString = function() {return "CalemChartColumnInfo";}
+CalemChartColumnInfo.prototype.getClassName = function() {return "CalemChartColumnInfo";}
+
+
