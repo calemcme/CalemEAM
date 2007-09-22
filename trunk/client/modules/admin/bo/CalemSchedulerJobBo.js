@@ -23,7 +23,7 @@
 function CalemSchedulerJobBo() {
 }
 
-CalemSchedulerJobBo._details = ['scheduler_job_run'];
+CalemSchedulerJobBo._details = ['scheduler_job_log'];
 
 CalemSchedulerJobBo.getInstance =
 function() {

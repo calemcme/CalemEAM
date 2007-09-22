@@ -17,9 +17,9 @@
  * Contributor(s): 
  */ 
 
-CalemViewDef['CalemSchedulerJobRunViewRead']={
+CalemViewDef['CalemSchedulerJobLogViewRead']={
 	CalemViewInfo: {
-		id: 'CalemSchedulerJobRunViewRead',
+		id: 'CalemSchedulerJobLogViewRead',
 		type: 'CalemView',
 		layout: {
 		 CalemLayoutInfo: {

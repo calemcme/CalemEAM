@@ -20,9 +20,9 @@
 /**
  * List views
  */
-CalemViewDef['CalemSchedulerJobRunViewList']={
+CalemViewDef['CalemSchedulerJobLogViewList']={
 	CalemViewInfo: {
-		id: 'CalemSchedulerJobRunViewList',
+		id: 'CalemSchedulerJobLogViewList',
 		type: 'CalemView',
 		layout: {
 			CalemLayoutInfo: {
