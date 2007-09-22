@@ -22,13 +22,13 @@
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $_CALEM_table=array(
-    'table_name'=>'scheduler_job_run',
+    'table_name'=>'scheduler_job_log',
     'module'=>'modCalemAdmin',
     'cache_type'=>'database',
     'order_by'=>array('field'=>'start_time', 'order'=>'DESC'),
     'primary_key'=>array('id'),
     'indexes'=>array(
-    	'idx_scheduler_job_run'=>array('start_time')
+    	'idx_scheduler_job_log'=>array('start_time')
     ),
     'fields'=>array(
     	'id'=>array(

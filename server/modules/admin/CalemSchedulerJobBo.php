@@ -39,7 +39,7 @@ class CalemSchedulerJobBo {
 	public function __construct() {	
  		$this->logger=&LoggerManager::getLogger("CalemSchedulerJobBo");
  		$this->dbo=CalemFactory::getDbo('scheduler_job');
- 		$this->dboRun=CalemFactory::getDbo('scheduler_job_run');
+ 		$this->dboRun=CalemFactory::getDbo('scheduler_job_log');
  		$this->taskDbo=CalemFactory::getDbo('scheduler_task');
  	}
  	
