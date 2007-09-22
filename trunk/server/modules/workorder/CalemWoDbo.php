@@ -52,7 +52,10 @@ class CalemWoDbo extends CalemDbo {
 	
 	//Bring details records over when adding a wo with PM number
 	public function onDataInserted($id, $baseTable, $baseData, $customTable, $customData) {
-		if (!isset($baseData['pm_id']) || !$baseData['pm_id']) return;
+		if (!isset($baseData['pm_id']) || !$baseData['pm_id']) {
+			$this->notifyDataInserted($id, $baseTable, $baseData, $customTable, $customData);
+			return;
+		}
 		$pmId=$baseData['pm_id'];
 		$assetId=$baseData['asset_id'];
 		$woId=$this->row['id'];
@@ -78,13 +81,15 @@ class CalemWoDbo extends CalemDbo {
 			} catch (CalemDboDataNotFoundException $ex) {}
 		}
 		//Now process pm meter
+		$bHasAsset=true;
 		$pmAssetDbo=CalemFactory::getDbo('pm_asset');
 		try {
 			$rows=$pmAssetDbo->fetchBySqlParam('select * from pm_asset where pm_id=? and asset_id=?', array($pmId, $assetId));
 			$pmAssetId=$rows[0]['id'];	
 		} catch (CalemDboDataNotFoundException $ex) {
-			return; //be done with it.	
+			$bHasAsset=false;
 		}
+		if ($bHasAsset) {
 		$pmMeterDbo=CalemFactory::getDbo('pm_meter');
 		try {
 			$rows=$pmMeterDbo->fetchBySqlParam('select * from pm_meter where pm_asset_id=?', $pmAssetId);
@@ -99,6 +104,7 @@ class CalemWoDbo extends CalemDbo {
 				$woMeterDbo->unsetId();	
 			}			                                   
 		} catch (CalemDboDataNotFoundException $ex) {}
+		}
 		//Now handle reserved parts
 		$woReserved=new CalemWoReservedBo();
 		$woReserved->updateReservedByWo($woId);
@@ -110,6 +116,8 @@ class CalemWoDbo extends CalemDbo {
 		$woDbo->setValue('planned_downtime_hours', $downtime);
 		$woDbo->setIdForUpdate($woId);
 		$woDbo->update();
+		//Notify listeners
+		$this->notifyDataInserted($id, $baseTable, $baseData, $customTable, $customData);
 	}
 	
 	//On data updated - if status set to closed:
@@ -129,5 +137,18 @@ class CalemWoDbo extends CalemDbo {
 				$reserveBo->removeReservedByWo($baseCurrent['id']);	
 			}
 		}		    
+		//Other listeners
+		$this->notifyDataUpdated($baseTable, $baseCurrent, $baseUpdate, $customTable, $customCurrent, $customUpdate);	    
 	}
+	
+	//Deletion handling
+	public function beforeDelete() {
+		$this->loadRecord();
+	}
+	
+	//Business logic when data deletion is done.	
+	public function onDataDeleted($table, $id) {
+		$this->notifyDataDeleted($table, $this->row);
+	}
+	
 }
