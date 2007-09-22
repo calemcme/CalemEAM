@@ -110,6 +110,8 @@
 .ImgCalemFormTab	{background-image:url("icons/tab.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
 .ImgCalemFormTabCustomize	{background-image:url("icons/tab_edit.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
 
+.ImgCalemFormCol	{background-image:url("icons/layout_content.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
 /** Admin */
 .ImgCalemUser	{background-image:url("icons/user.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
 .ImgCalemGroup	{background-image:url("icons/group.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
@@ -145,3 +147,5 @@
 
 .ImgCalemScheduler  {background-image:url("icons/date_go.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
 .ImgCalemSchedulerTask  {background-image:url("icons/application_lightning.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+
+.ImgCalemDashboard  {background-image:url("icons/chart_curve.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
