@@ -315,6 +315,9 @@ function(msg) { //default mapping.
  */
 CalemViewUtil.getUorH =
 function() {
+	if (!CalemViewUtil._uorH) {
+		return CalemConf['view_engine']['grid']['defaultRowH'];
+	}
 	return CalemViewUtil._uorH;	
 } 
 
@@ -408,3 +411,9 @@ function(fmId) {
 	fmId = fmInfo.getController() || fmId;
 	return fmId;
 }
+
+CalemViewUtil.getChartExportUrl =
+function() {
+	return [calemRequestUrl, '?aid=', CalemConf['chart_engine']['exportAid']].join('');	
+}
+	

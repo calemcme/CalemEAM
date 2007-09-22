@@ -43,7 +43,7 @@ CalemViewTabRender.prototype.getClassName = function() { return "CalemViewTabRen
  */
 CalemViewTabRender.prototype.render =
 function() {
-	var fmList=this._layout.getTabItem(this._tabId).getLayout();
+	var fmList=this.getFormList();
 
 	var yOff=0;
 	var xOff=0;
@@ -82,6 +82,11 @@ function() {
 		yOff += newH+yMargin; //IE 7 does not obey the height set so must use the height to do layout.
 	}
 	this._height=yOff;
+}
+
+CalemViewTabRender.prototype.getFormList =
+function() {
+	return this._layout.getTabItem(this._tabId).getLayout();
 }
 
 /**
