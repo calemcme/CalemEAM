@@ -75,5 +75,19 @@ class CalemGzip {
  		ob_start();
  		ob_implicit_flush(0);
  	}
+ 	
+ 	// gzip contents if applicable
+ 	public static function gzContents($contents, $zip=false, $logger=null) {
+ 		$canZip=self::canGzip();
+ 		header("Content-Type: text/xml; charset=UTF-8");
+ 		if ($zip && $canZip) {
+ 			header("Content-Encoding: ".$canZip);
+ 			$zipContents=gzencode($contents);
+ 			print($zipContents);
+ 			if ($logger && $logger->isDebugEnabled()) $logger->debug("Zip contents from " . strlen($contents) . " to " . strlen($zipContents));
+ 		} else {
+ 			print contents;
+ 		}
+ 	}
 }
 ?>
