@@ -179,10 +179,12 @@ CalemConf["desktop_mainView"] = {
 	form: {
 		viewImpl: 'CalemView',
 		viewMdTabImpl: {SINGLE: 'CalemViewMd', MULTIPLE: 'CalemViewMdTab'},
+        viewPeerTabImpl: {SINGLE: 'CalemViewPeer', MULTIPLE: 'CalemViewPeerTab'},
 		viewHolder: 'CalemViewPage',
 		viewDesignImpl: 'CalemViewDesign',
 		modelImpl: 'CalemDataModel',
-		formModelImpl: 'CalemFormModel'
+		formModelImpl: 'CalemFormModel',
+        formPeerModelImpl: 'CalemFormPeerModel'
 	}
 };
 
@@ -199,7 +201,13 @@ CalemConf['view_engine'] = {
 	grid: {
 		xMargin: 2,
 		yMargin: 5,
-		min: {width: 100, height: 100}
+		min: {width: 100, height: 100},
+		defaultRowH: 26
+	},
+	chart: {
+		xMargin: 2,
+		yMargin: 5,
+		min: {width: 200, height: 200}
 	},
 	defaultRowHeight: 24,
 	viewDiv: { widthOffset: 30, heightOffset: 0},
@@ -228,6 +236,9 @@ CalemConf['view_engine'] = {
 		CalemFieldInfo: 'CalemFieldReadRender',
 		CalemEditScheduleInfo: 'CalemReadScheduleRender',
 		CalemEditScheduleTimeInfo: 'CalemReadScheduleTimeRender',
+        CalemChartLineInfo: 'CalemChartLineRender',
+        CalemChartPieInfo: 'CalemChartPieRender',
+        CalemChartColumnInfo: 'CalemChartColumnRender',
 		FieldRenders: {
 	   	'text'  : 	'CalemReadTextRender',
 	   	'boolean' : 'CalemReadBooleanRender',
@@ -274,6 +285,15 @@ CalemConf['view_engine'] = {
 		CalemViewMd: 'CalemViewMdRender',
 		CalemViewMdTab: 'CalemViewMdTabRender',
 		CalemViewPageMd: 'CalemViewTabRender'
+	},
+    viewRenderPeerTab: {//Renders are determined by view class
+	    pageAbsMargin: {x: 0, y: 1},
+		tabViewMargin: {x: 0, y: 3},
+		formMargin: {y: 3},
+		rowMarginY: 15,
+		CalemViewPeer: 'CalemViewPeerRender',
+		CalemViewPeerTab: 'CalemViewMdTabRender',
+		CalemViewPageMd: 'CalemViewTabPeerRender'
 	},
 	/**
 	 * Design renders
@@ -440,6 +460,44 @@ CalemConf['view_engine'] = {
 			}
 		}	
 	},
+	
+    viewPeerTabDesign: {
+		startDelay: 50,
+		viewImpl: 'CalemViewPeer',
+		CalemViewPeer: 'CalemViewPeerTabDesignRender',
+		//Common design items
+		rowsNoDnd: {},
+		leftPanelWidth: 180,
+		margin: 2,
+		
+		treeMargin: {x: 2, y: 2},
+		seperatorBtn: {style: DwtLabel.IMAGE_LEFT | DwtLabel.ALIGN_LEFT, className: 'TBButton'},
+		leftPanelViewId: 'CalemViewDesignPeerTabPanel',
+		CalemPeerTabDesignTreeInfo: 'CalemPeerTabDesignTreeRender',
+
+		dropAllowed: {
+			//FormMdTab can accept tab, tabCustomize and form
+			CalemDesignTreeFormPeerTab: {
+				CalemLayoutTreeForm: true,
+				CalemLayoutTreeTab: true,
+				CalemLayoutTreeTabCustomize: true
+			},
+			//Row can accept new row, or row swap.
+			CalemLayoutTreeFormPeerTab: {
+				CalemDesignTreeTab: true,
+				CalemDesignTreeTabCustomize: true
+			},
+			//Only col node can take forms
+			CalemLayoutTreeCol: {
+				CalemLayoutTreeForm: true,
+				CalemDesignTreeForm: true
+			},
+			CalemLayoutTreeForm: {
+				CalemLayoutTreeForm: true
+			}
+		}	
+	},
+
 	
 	//Module list design
 	moduleViewListDesign: {
@@ -652,10 +710,11 @@ CalemConf['registry_manager'] = {impl:"CalemRegistry", names:['registry_module']
 //Modules
 CalemConf["registry_module"]={
 	   loader: 'loadModules',
-	   names: ['modCalemWo', 'modCalemSched', 'modCalemAsset', 'modCalemPm', 
+	   names: ['modCalemDash', 'modCalemWo', 'modCalemSched', 'modCalemAsset', 'modCalemPm', 
 	           'modCalemIn', 'modCalemReq', 'modCalemPo', 'modCalemRcm',
 	           'modCalemAdmin', 'modCalemProject', 'modCalemDoc', 'modCalemContact', 
-	           'modCalemContractor', 'modCalemBudget', 'modCalemInspection','modCalemTraining'] };
+	           'modCalemContractor', 'modCalemBudget', 'modCalemInspection','modCalemTraining'
+	           ] };
       
 //Db and cache definition
 CalemConf['registry_db']= {
@@ -859,4 +918,22 @@ CalemConf['desktop_keymap'] = {
 CalemConf['auto_completion']={
 	maxMatch: 15,
 	fetchDelay: 600
+};
+
+/**
+ * Chart sources
+ */
+CalemConf['chart_engine'] = {
+    forceload: 'forceload',
+	resetDelay: 40000,
+	flashVersion: '8',
+	backgroundColor: '#FFFFFF',
+	preloaderColor: "#999999",
+	aid: 'CalemDashboard',
+	tidSetting: 'settings',
+	tidData: 'data',
+	exportAid: 'CalemDashboardExport',
+	lineChartSwf: '/server/include/charts/amline/amline/amline.swf',
+   pieChartSwf: '/server/include/charts/ampie/ampie/ampie.swf',
+   columnChartSwf: '/server/include/charts/amcolumn/amcolumn/amcolumn.swf'
 };
