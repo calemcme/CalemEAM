@@ -1080,6 +1080,11 @@ function(id) {
 	this._mdTabId=id;
 }
 
+CalemForm.prototype.getMdTabId =
+function(id) {
+	return this._mdTabId;
+}
+
 //Allow customize
 CalemForm.prototype.allowCustomize =
 function() {
