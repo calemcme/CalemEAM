@@ -49,6 +49,11 @@ function() {
 	this._root.setExpanded(true);
 }
 
+CalemMdTabLayoutTree.prototype.getFormInfo =
+function() {
+	return this._formInfo;
+}
+
 CalemMdTabLayoutTree.prototype._createRoot =
 function() {
 	return new CalemLayoutTreeFormMdTab(this);
