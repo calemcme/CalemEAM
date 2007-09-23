@@ -856,7 +856,7 @@ CalemMsg["rollup_cost"] = "Rollup cost";
 CalemMsg["costcode_parent"] = "Parent code";
 
 CalemMsg["cost_type"] = "Cost type";
-CalemMsg["cost_employee"] = "Employee";
+CalemMsg["cost_employee_labor"] = "Employee";
 CalemMsg["cost_contractor_labor"] = "Contractor labor";
 CalemMsg["cost_labor"] = "Labor";
 CalemMsg["cost_internal_material"] = "Internal Material";
