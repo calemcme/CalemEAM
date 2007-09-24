@@ -165,12 +165,12 @@ final class MysqlHandler extends CalemDbHandler implements CalemDbHandlerInterfa
 	 * This is a special connection used for initial database setup only.
 	 * @return CalemPdo or an exception is thrown
 	 */
-	public function getDatabaseAdminConnection() {
+	public function getDatabaseAdminConnection($useCalem=false) {
 		if (!isset($this->databaseAdminConnection)) {
 			//Will not log into any db, just get a connection so we can create the DB
 			global $_CALEM_conf;
 			$host=$_CALEM_conf['calem_db_host'];
-			$dsn='mysql:'.'host='.$host;
+			$dsn=$useCalem ? $this->getCalemConnectionString() : $dsn='mysql:'.'host='.$host;
 		   $user=$_CALEM_conf['db_admin_user'];
 		   $password=$_CALEM_conf['db_admin_password'];
 		   if ($this->logger->isInfoEnabled()) {

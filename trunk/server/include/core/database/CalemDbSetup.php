@@ -68,41 +68,48 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDbo.php';
  		$tbMap=$resourceMgr->getTableMap();
  		$tableMap=$tbMap->getTableMap();
 	   foreach ($tableMap as $table) {
+	   	$ar=$this->getTableScript($dbHandler, $table);
+	   	$schema=array_merge($schema, $ar);
+		} //for Each table
+		return $schema;
+ 	}
+ 	
+ 	public function getTableScript($dbHandler, $table) {
+ 		$schema=array();
 	   	//Get table DD
-	   	$tbDd=$resourceMgr->getTableDd($table);
+   	$tbDd=CalemFactory::getTableDd($table);
 	   	//Dropdown not to store in db for this time.
-	   	if ($this->skipCreateInDb($tbDd)) continue;
-	   	$tableDd=$tbDd->getTableDef();
+   	if ($this->skipCreateInDb($tbDd)) return $schema;
+	   $tbDef=$tbDd->getTableDef();
 	   	//Let's create the table script first so that a table is created before its constraints
-	   	$schema[]=$dbHandler->getCreateTable($tableDd);
+   	$schema[]=$dbHandler->getCreateTable($tbDef);
 			//Next, let's add script for primary key and indexes
-			foreach ($tableDd as $key => $value) {
+		foreach ($tbDef as $key => $value) {
 				switch ($key) {
 					case 'fields':
 						break;
 					case 'primary_key':
-						$schema[]=$dbHandler->getCreatePrimaryKey($tableDd['table_name'],
-										$tableDd['table_name'].'_'.$key, $value);
+					$schema[]=$dbHandler->getCreatePrimaryKey($tbDef['table_name'],
+									$tbDef['table_name'].'_'.$key, $value);
 						break;
 					case 'unique_indexes':
-						$indexes=$tableDd['unique_indexes'];
+					$indexes=$tbDef['unique_indexes'];
 						foreach ($indexes as $index=>$field_list) {
-							$schema[]=$dbHandler->getCreateUniqueIndex($tableDd['table_name'],
+						$schema[]=$dbHandler->getCreateUniqueIndex($tbDef['table_name'],
 											$index, $field_list);
 						};
 						break;
 					case 'indexes':
-						$indexes=$tableDd['indexes'];
+					$indexes=$tbDef['indexes'];
 						foreach ($indexes as $index=>$field_list) {
-							$schema[]=$dbHandler->getCreateIndex($tableDd['table_name'],
+						$schema[]=$dbHandler->getCreateIndex($tbDef['table_name'],
 											$index, $field_list);
 						};
 						break;
 				}	
 			} //Each category of the DD
-		} //for Each table
 		return $schema;
- 	}
+		} //for Each table
  	
  	public function skipCreateInDb($tbDd) {
  		return $tbDd->isDropdown();
@@ -127,16 +134,20 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDbo.php';
  	/**
  	 * Executing SQL script one by one.
  	 */
- 	private function runSqlScriptArray(PDO $conn, array $sqlScripts) {
+ 	public function runSqlScriptArray(PDO $conn, array $sqlScripts) {
+ 		$results='';
  		//Also need to set a time limit so we can wait till all script is completed.
  		set_time_limit(0);
  		foreach ($sqlScripts as $sql) {
  			try {
  				$conn->query($sql);
+ 				$results .= 'Executed sql: ' . $sql . "\n";
  			} catch (Exception $e) {
  				$this->logger->error($e->getMessage() . ', executing sql='. $sql);
+ 				$results .= 'Executed sql: ' .$sql . " with exception: " . $e->getMessage() ."\n";
  			}
  		}
+ 		return $results;
  	}
  	
  	/**

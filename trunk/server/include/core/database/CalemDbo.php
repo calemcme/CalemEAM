@@ -74,7 +74,7 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
  	 * @param array the initial row value of the Dbo
  	 */
  	public function __construct() {	
- 		$this->logger=&LoggerManager::getLogger("CalemDbo");
+ 		$this->logger=&LoggerManager::getLogger(get_class($this));
  		$this->dbHandler=CalemFactory::getDbHandler();
  		$this->conn=$this->dbHandler->getCalemConnection();
  		$this->resourceMgr = CalemFactory::getResourceManager();
