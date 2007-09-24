@@ -32,6 +32,6 @@ require_once _CALEM_DIR_ . 'server/include/log4php/LoggerManager.php';
  	protected $logger;		
 	
  	public function __construct() {	
- 		$this->logger=&LoggerManager::getLogger("CalemBo");
+ 		$this->logger=&LoggerManager::getLogger(get_class($this));
  	}
 }
