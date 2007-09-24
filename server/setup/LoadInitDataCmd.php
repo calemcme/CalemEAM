@@ -50,6 +50,16 @@ $loadConf->init($_CALEM_conf['calem_data_load_init']);
 echo date("F j, Y, g:i:s a") . " - Loading init data...<br>\n";
 $sampleLoad=new CalemDataLoader();
 $sampleLoad->load($loadConf);
+//Now loading special ones
+$loaders=$loadConf->getLoaders();
+if ($loaders) {
+	foreach ($loaders as $cls) {
+		require_once 'loader/' . $cls . '.php';
+		$load=new $cls;
+		$load->load();	
+	}	
+}
+
 $sampleLoad->validate($loadConf);
 echo date("F j, Y, g:i:s a") . ' - DONE<br>';
 ?>
