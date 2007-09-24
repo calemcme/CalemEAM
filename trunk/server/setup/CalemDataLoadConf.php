@@ -47,10 +47,12 @@ class CalemDataLoadConf  {
 	//conf
 	private $conflictResolution;
 	private $dataset;
+	private $loaders;
 	
 	public function init(array $conf) {
 		$this->conflictResolution= (isset($conf['conflictResolution'])? $conf['conflictResolution'] : 'ignore');	
 		$this->dataset= (isset($conf['dataset'])? $conf['dataset']:array());
+		$this->loaders=$conf['loaders'];
 	}
 	
 	public function getOverwrite() {
@@ -66,6 +68,10 @@ class CalemDataLoadConf  {
 			}
 		}
 		return $rtn;
+	}
+	
+	public function getLoaders() {
+		return $this->loaders;
 	}
 }
 ?>
