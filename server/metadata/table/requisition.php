@@ -110,6 +110,14 @@ $_CALEM_table=array(
     		'type'=>'guid',
     		'lookup'=>'dept'
     	),
+    	'next_user_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'users'
+    	),
+    	'next_note'=>array(
+    		'type'=>'varchar',
+    		'length'=>76
+    	),
     	'modified_time'=>array(
     		'type'=>'datetime'
     	),

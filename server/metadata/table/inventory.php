@@ -73,6 +73,13 @@ $_CALEM_table=array(
     		'type'=>'guid',
     		'lookup'=>'in_valuation_type'
     	),
+    	'abc_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'in_abc'
+    	),
+    	'abc_time'=>array(
+    		'type'=>'datetime'
+    	),
     	'uom_id'=>array(
     		'type'=>'guid',
     		'label'=>'uom_fld',

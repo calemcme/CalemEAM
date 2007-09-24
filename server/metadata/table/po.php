@@ -76,6 +76,14 @@ $_CALEM_table=array(
     	'po_date'=>array(
     		'type'=>'date'
     	),
+    	'next_user_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'users'
+    	),
+    	'next_note'=>array(
+    		'type'=>'varchar',
+    		'length'=>76
+    	),
     	'vendor_id'=>array(
     		'type'=>'guid',
     		'lookup'=>'vendor',
