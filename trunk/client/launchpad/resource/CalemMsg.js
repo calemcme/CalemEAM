@@ -680,6 +680,11 @@ CalemMsg["us_active"] = "Active";
 CalemMsg["us_transferred"] = "Transferred";
 CalemMsg["us_departed"] = "Departed";
 
+CalemMsg["version_status"] = "Status";
+CalemMsg["vs_started"] = "Started";
+CalemMsg["vs_upgraded"] = "Upgraded";
+CalemMsg["vs_failed"] = "Failed";
+
 
 CalemMsg["tab_asset_main"] = "Main";
 CalemMsg["tab_asset_downtime"] = "Downtime";
@@ -976,6 +981,7 @@ CalemMsg["inventory"] = "Inventory";
 
 CalemMsg["in_no"] = "Item no.";
 CalemMsg["type_in"] = "Type";
+CalemMsg["abc_time"] = "Last ABC updated";
 CalemMsg["avg_unit_cost"] = "Avg. unit cost";
 CalemMsg["rent_rate"] = "Rent rate";
 CalemMsg["rent_uom_id"] = "Rent Uom";
@@ -1096,6 +1102,11 @@ CalemMsg["in_stock_type"] = "Stock type";
 CalemMsg["ist_stock"] = "Stock";
 CalemMsg["ist_non_stock"] = "None-stock";
 CalemMsg["ist_other"] = "Other";
+
+CalemMsg["in_abc"] = "ABC class";
+CalemMsg["in_abc_a"] = "A";
+CalemMsg["in_abc_b"] = "B";
+CalemMsg["in_abc_c"] = "C";
 
 CalemMsg["in_vt_checkout_loc"] = "Checkout";
 CalemMsg["checkout_to"] = "Checkout to";
