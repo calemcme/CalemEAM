@@ -265,6 +265,10 @@ class CalemTableDd {
 		return $this->allTableDef['fields'];
 	}
 	
+	public function getField($fld) {
+		return $this->allTableDef['fields'][$fld];
+	}
+	
 	public function getLookupMapping() {
 		return isset($this->allTableDef['lookup_mapping']) ? $this->allTableDef['lookup_mapping'] : null;	
 	}
