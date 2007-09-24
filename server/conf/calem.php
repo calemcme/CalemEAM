@@ -90,6 +90,7 @@ define('TAB_CUSTOMIZE', 'CUSTOMIZE_TAB');
 define('EMPTY_REC', '__NULL_REC__');
 	
 define('KEY_PREFIX', '___');
+define('VERSION_ID', 'VERSION_ID');
 
 //Must have x rights for directory.
 define('DIR_WRITE_RIGHTS', 0775);
@@ -252,7 +253,10 @@ $_CALEM_dist=array(
 	//data sets to load in the order specified. 
 	'calem_data_load_init'=>array(
 	   'conflictResolution'=>'overwrite', //overwrite, ignore
-		'dataset'=>array('server/setup/init')
+		'dataset'=>array('server/setup/init'),
+		'loaders'=>array(
+			'version'=>'CalemVersionLoader'
+		)
 	),
 	'calem_data_load_sample'=>array(
 	   'conflictResolution'=>'overwrite', //overwrite, ignore
@@ -348,7 +352,7 @@ $_CALEM_dist=array(
 @include_once _CALEM_DIR_ . 'server/conf/calem.custom.php';
 
 // used to bundle pear libraries and preserve existing include path (mantis ref 0000010)
-set_include_path(get_include_path() . PATH_SEPARATOR . _CALEM_DIR_ . 'server/include');
+set_include_path(_CALEM_DIR_ . 'server/include' . PATH_SEPARATOR . get_include_path());
 
 $GLOBALS['_CALEM_conf']= $_CALEM_dist;
 ?>
