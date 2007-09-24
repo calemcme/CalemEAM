@@ -29,16 +29,28 @@ require_once _CALEM_DIR_ . 'server/include/core/CalemErrorInfo.php';
  */
  class CalemDataBoException extends Exception {
  	private $errorInfo;
+ 	private $ex;
+ 	private $table;
+ 	private $nativeError;
+ 	private $param;
  	
  	// Redefine the exception so message isn't optional
    public function __construct($table, $ex, $nativeError=null, $param=null) {
        // make sure everything is assigned properly
        parent::__construct($ex->getMessage());
        $this->errorInfo=new CalemErrorInfo($ex, $table, $nativeError, $param);     
+       $this->table=$table;
+       $this->ex=$ex;
+       $this->nativeError=$nativeError;
+       $this->param=$param; 
    }
    
    public function getErrorInfo() {
    	return $this->errorInfo;
+   }
+   
+   public function getEx() {
+   	return $this->ex;
    }
  }
 ?>

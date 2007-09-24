@@ -18,29 +18,38 @@
  * Contributor(s): 
  */
 
-/**
- * This file defined the configuration for this installation by 
- * combining the custom with the distributed installation. 
- */
- 
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
-$_CALEM_dist['admin_conf']=array(
-   'scheduler'=>array(
-   	'task_script_time'=>300, //5 min
-   	'semaphoreExpireSecs'=>600   //10 min expiration 
-   ),
-   'first_version'=>array(
-   	'vid'=>'r1-0-2',
-   	'note'=>'CalemEAM version 1.0.2',
-   	'props'=>array()   
-   ),
-   'upgrade_status'=>array(
-   	'started'=>'vs_started',
-   	'done'=>'vs_upgraded',
-   	'failed'=>'vs_failed'
-   )
-);
-
+/**
+ * This is the class with version info.
+ */
+class CalemVersion {
+	protected $vid;
+	protected $note;
+	protected $props;
+	
+	public function __construct($vid=null, $note=null, $props=null) {
+		$this->vid = $vid;
+		$this->note= $note;
+		$this->props = $props;
+	}
+	
+	public static function decode($row) {
+		if ($row['props']) $props=unserialize($row['props']);
+		return new CalemVersion($row['vid'], $row['note'], $props);
+	}
+	
+	public function getVid() {return $this->vid;}
+	public function getNote() {return $this->note;}
+	public function getProps() {return $this->props;}
+	
+	public function getProp($key) {
+		return ($this->props ? $this->props[$key] : null);
+	}
+	
+	public function getEncodedProps() {
+		return ($this->props ? serialize($this->props) : null);
+	}
+}
 ?>
