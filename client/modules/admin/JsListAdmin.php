@@ -141,6 +141,11 @@ $_CALEM_scripts=array(
 			'/modules/admin/form/view/CalemSchedulerJobLogViewListDef.js',
 			'/modules/admin/form/view/CalemSchedulerJobLogViewReadDef.js',
 			
+			//scheduler job
+			'/modules/admin/form/view/CalemVersionUpgradeLogViewListDef.js',
+			'/modules/admin/form/view/CalemVersionUpgradeLogViewEditDef.js',
+			'/modules/admin/form/view/CalemVersionUpgradeLogViewReadDef.js',
+			
 			//module/form
 			'/modules/admin/form/view/CalemModuleViewListDef.js',
 			//table design
@@ -223,6 +228,11 @@ $_CALEM_scripts=array(
 			// -- scheduler job run
 			'/modules/admin/form/controller/CalemSchedulerJobLogFormList.js',
 			'/modules/admin/form/controller/CalemSchedulerJobLogFormRead.js',
+			
+			// -- Upgrade log
+			'/modules/admin/form/controller/CalemVersionUpgradeLogFormList.js',
+			'/modules/admin/form/controller/CalemVersionUpgradeLogFormEdit.js',
+			'/modules/admin/form/controller/CalemVersionUpgradeLogFormRead.js',
 			
 			// - module/form
 			'/modules/admin/form/controller/CalemModuleFormList.js',

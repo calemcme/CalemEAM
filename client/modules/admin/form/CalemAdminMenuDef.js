@@ -203,3 +203,23 @@ CalemMenuDef['CalemSchedulerJobFormList'] = {
 	tooltip: null,  				   
 	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}
 };
+
+// Upgrade
+CalemMenuDef['CalemAdminUpgrade'] = {
+	id: 'CalemAdminUpgrade',
+	title: 'admin_upgrade',
+	icon: 'CalemUpgrade',
+	disIcon: null,
+	enabled: true,
+	tooltip: null
+};
+
+CalemMenuDef['CalemVersionUpgradeLogFormList'] = {
+	id: 'CalemVersionUpgradeLogFormList',
+	title: 'version_upgrade_log',
+	icon: 'CalemUpgrade',
+	disIcon: null,
+	enabled: true,
+	tooltip: null,  				   
+	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}
+};

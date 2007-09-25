@@ -693,3 +693,43 @@ CalemItemDef['CalemSchedulerJobLogFormRead']={
 		replaceType: CalemItemDef.REPLACE_BY_ID
 	}
 }
+
+/**
+ * Upgrade log forms
+ */
+CalemItemDef['CalemVersionUpgradeLogFormList']={
+	CalemFormInfo: {
+		id: 'CalemVersionUpgradeLogFormList',
+		title: 'version_upgrade_log',
+		icon: 'CalemUpgrade',
+		controller: 'CalemVersionUpgradeLogFormList',
+		model: 'version_upgrade_log', 
+		view: {CalemViewRefInfo: {id: 'CalemVersionUpgradeLogViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemVersionUpgradeLogFormSearch'
+	}
+}
+
+CalemItemDef['CalemVersionUpgradeLogFormEdit']={
+	CalemFormInfo: {
+		id: 'CalemVersionUpgradeLogFormEdit',
+		title: 'version_upgrade_log',
+		icon: 'CalemUpgrade',
+		controller: 'CalemVersionUpgradeLogFormEdit',
+		model: 'version_upgrade_log', 
+   	view: {CalemViewRefInfo: {id: 'CalemVersionUpgradeLogViewEdit'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemVersionUpgradeLogFormRead']={
+	CalemFormInfo: {
+		id: 'CalemVersionUpgradeLogFormRead',
+		title: 'version_upgrade_log',
+		icon: 'CalemUpgrade',
+		controller: 'CalemVersionUpgradeLogFormRead',
+		model: 'version_upgrade_log', 
+		view: {CalemViewRefInfo: {id: 'CalemVersionUpgradeLogViewRead'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
