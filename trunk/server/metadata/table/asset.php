@@ -26,6 +26,10 @@ $_CALEM_table=array(
     'table_name'=>'asset',
     'module'=>'modCalemAsset',
     'cache_type'=>'memory',
+    'dbo'=>array(
+    	'path'=>'server/modules/asset/',
+    	'name'=>'CalemAssetDbo',
+    ),
     'primary_key'=>array(
     	'id'
     ),
