@@ -46,11 +46,9 @@ class CalemPoBo extends CalemBo {
  	}
  	
 	public function getNextPoNo() {
-		$poSeqDbo=CalemFactory::getDbo('po_seq');
-		$poSeqDbo->executeBySql('UPDATE po_seq SET id=LAST_INSERT_ID(id+1)');
-		$rows=$poSeqDbo->fetchBySql('SELECT LAST_INSERT_ID()');
-		$seq=$rows[0]['LAST_INSERT_ID()'];
-		return $this->conf['po_no']['prefix'] . $seq;
+		$dbHdlr=CalemFactory::getDbHandler();
+		$seq=$dbHdlr->getNextSeq('po_seq');
+		return sprintf($this->conf['po_no']['format'], $seq);
 	}
 	
 	/**

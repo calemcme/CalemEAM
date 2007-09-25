@@ -40,11 +40,9 @@ class CalemReqBo extends CalemBo {
  	}
  	
 	public function getNextReqNo() {
-		$reqSeqDbo=CalemFactory::getDbo('req_seq');
-		$reqSeqDbo->executeBySql('UPDATE req_seq SET id=LAST_INSERT_ID(id+1)');
-		$rows=$reqSeqDbo->fetchBySql('SELECT LAST_INSERT_ID()');
-		$seq=$rows[0]['LAST_INSERT_ID()'];
-		return $this->conf['req_no']['prefix'] . $seq;
+		$dbHdlr=CalemFactory::getDbHandler();
+		$seq=$dbHdlr->getNextSeq('req_seq');
+		return sprintf($this->conf['req_no']['format'], $seq);
 	}
 	
 	/**

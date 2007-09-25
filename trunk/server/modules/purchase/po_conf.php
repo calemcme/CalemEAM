@@ -30,7 +30,7 @@ if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 $_CALEM_dist['po_conf']=array(
    'po_init_status'=>'po_status_new',
    'po_init_state'=>'po_state_open', 
-	'po_no'=>array('prefix'=>'PO-'),
+	'po_no'=>array('format'=>'PO-%06d'),
 	'default_shipping_addr'=>'po_shipping_addr',
 	'default_billing_addr'=>'po_billing_addr',
 	'reqItemToPoItem'=>array(
