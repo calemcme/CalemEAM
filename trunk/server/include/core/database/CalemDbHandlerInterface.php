@@ -86,5 +86,10 @@ interface CalemDbHandlerInterface {
 	 */
 	public function getDbTypeId();
 	
+	/**
+	 * Get next sequence Id
+	 */
+	public function getNextSeq($seq);
+	
 }	
 ?>
