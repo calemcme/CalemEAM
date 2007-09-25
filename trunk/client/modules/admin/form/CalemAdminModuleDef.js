@@ -29,7 +29,7 @@ CalemModuleDef["modCalemAdmin"]= {
       toolBar: {
         CalemToolBarInfo: {
         	  type: 'CalemToolBar',
-        	  layout: ['modCalemAdmin', 'sep', 'CalemUserFormReadMine', 'CalemUserFormList', 'CalemAclGroupFormList', 'CalemModAdminDataDesign', 'CalemAdminCodes', 'CalemAdminScheduler'],
+        	  layout: ['modCalemAdmin', 'sep', 'CalemUserFormReadMine', 'CalemUserFormList', 'CalemAclGroupFormList', 'CalemModAdminDataDesign', 'CalemAdminCodes', 'CalemAdminScheduler', 'CalemAdminUpgrade'],
         	  list: [
 	         {CalemLabelInfo: {id: 'modCalemAdmin', className: 'CalemModuleLabel'}},
 	         
@@ -62,6 +62,13 @@ CalemModuleDef["modCalemAdmin"]= {
 		      	menuList: [{CalemMenuItemInfo: {id: 'CalemSchedulerTaskFormList'}},
 			      	       {CalemMenuItemInfo: {id: 'CalemSchedulerJobFormList'}}
 			      	      ]
+	      		}
+	      	},
+	      	
+	      	{CalemMenuInfo: {
+	      		menuButton: {CalemMenuButtonInfo: {id: 'CalemAdminUpgrade'}},
+		      	menuList: [{CalemMenuItemInfo: {id: 'CalemVersionUpgradeLogFormList'}}
+			      	       ]
 	      		}
 	      	}
 	      	

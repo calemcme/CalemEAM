@@ -531,6 +531,7 @@ CalemMsg["data_refresh"] = "Refresh data";
 
 CalemMsg["admin_codes"] = "Codes";
 CalemMsg["admin_scheduler"] = "Scheduler";
+CalemMsg["admin_upgrade"] = "Upgrade";
 
 CalemMsg["tab_scheduler_job_main"] = "Main";
 CalemMsg["tab_scheduler_job_log"] = "Job runs";
@@ -684,6 +685,20 @@ CalemMsg["version_status"] = "Status";
 CalemMsg["vs_started"] = "Started";
 CalemMsg["vs_upgraded"] = "Upgraded";
 CalemMsg["vs_failed"] = "Failed";
+
+CalemMsg["version"] = "Version";
+CalemMsg["vid"] = "Version Id";
+CalemMsg["note"] = "Note";
+CalemMsg["props"] = "Properties";
+
+CalemMsg["version_upgrade_log"] = "Upgrade history";
+CalemMsg["vid"] = "Version Id";
+CalemMsg["ver_note"] = "Note";
+CalemMsg["prev_vid"] = "Prev version Id";
+CalemMsg["prev_ver_note"] = "Prev version note";
+CalemMsg["prev_props"] = "Prev properties";
+CalemMsg["upgrade_note"] = "Upgrade note";
+CalemMsg["upgrade_log"] = "Logs";
 
 
 CalemMsg["tab_asset_main"] = "Main";
