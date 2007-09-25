@@ -28,10 +28,20 @@ require_once _CALEM_DIR_ . 'server/include/core/CalemFactory.php';
 require_once _CALEM_DIR_ . 'server/include/core/CalemBo.php';
 
 class CalemAssetBo extends CalemBo {
+	protected $conf;
 	
 	public function __construct() {	
  		parent::__construct();
+ 		global $_CALEM_conf;
+ 		$this->conf=$_CALEM_conf['asset_conf'];
  	}
+ 	
+ 	public function getNextAssetNo() {
+		$dbHdlr=CalemFactory::getDbHandler();
+		$seq=$dbHdlr->getNextSeq('asset_seq');
+		return sprintf($this->conf['asset_no']['format'], $seq);
+	}
+ 	
  	
  	public function updateLaborCost($id, $hours, $cost) {
  		$assetDbo=CalemFactory::getDbo('asset');

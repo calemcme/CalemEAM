@@ -29,7 +29,7 @@ if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $_CALEM_dist['wo_conf']=array(
    'wo_new_status'=>'wos_new',  
-	'wo_no'=>array('prefix'=>''),
+	'wo_no'=>array('format'=>'%d'),
 	'pmToWo'=>array(
 		'pm_labor'=>array(
 		   'target'=>'wo_planned_labor',

@@ -41,6 +41,12 @@ class CalemInBo extends CalemBo {
 		$this->conf=$_CALEM_conf['in_conf'];	
  	}
 	
+ 	public function getNextInNo() {
+		$dbHdlr=CalemFactory::getDbHandler();
+		$seq=$dbHdlr->getNextSeq('in_seq');
+		return sprintf($this->conf['in_no']['format'], $seq);
+	}
+	
 	public function getInCheckoutCost($startDate, $endDate) {
 		$inTranDbo=CalemFactory::getDbo('in_tran');
 		//Get part cost from checkout

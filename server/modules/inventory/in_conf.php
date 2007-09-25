@@ -31,6 +31,7 @@ if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
  * Inventory configuration
  */
 $_CALEM_dist['in_conf']=array( 
+	'in_no'=>array('format'=>'IN%06d'),
    //
    //In order request generation
    //
