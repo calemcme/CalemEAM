@@ -319,6 +319,9 @@ $_CALEM_dist=array(
 @include _CALEM_DIR_ . 'server/modules/admin/admin_conf.php';
 @include _CALEM_DIR_ . 'server/modules/inventory/admin_conf.custom.php';
 
+@include _CALEM_DIR_ . 'server/modules/asset/asset_conf.php';
+@include _CALEM_DIR_ . 'server/modules/asset/asset_conf.custom.php';
+
 @include _CALEM_DIR_ . 'server/modules/inventory/in_conf.php';
 @include _CALEM_DIR_ . 'server/modules/inventory/in_conf.custom.php';
 
