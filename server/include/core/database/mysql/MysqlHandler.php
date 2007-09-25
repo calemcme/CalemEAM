@@ -357,6 +357,16 @@ final class MysqlHandler extends CalemDbHandler implements CalemDbHandlerInterfa
 	public function getDbTypeId() {
 		return 'mysql';
 	}
+	
+	/**
+	 * Next sequence id
+	 */
+	public function getNextSeq($seq) {
+		$dbo=CalemFactory::getDbo($seq);
+		$dbo->executeBySql('UPDATE ' . $seq . ' SET id=LAST_INSERT_ID(id+1)');
+		$rows=$dbo->fetchBySql('SELECT LAST_INSERT_ID()');
+		return $rows[0]['LAST_INSERT_ID()'];
+	}
 }	
 
 ?>
