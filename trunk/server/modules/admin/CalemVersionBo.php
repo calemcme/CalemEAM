@@ -89,9 +89,9 @@ class CalemVersionBo extends CalemBo {
    public function startUpgrade(CalemVersion $vNew, CalemVersion $vOld) {
    	$this->dboLog->setChangeBulk(array(
    		'vid'=>$vNew->getVid(),
-   		'note'=>$vNew->getNote(),
+   		'ver_note'=>$vNew->getNote(),
    		'prev_vid'=>$vOld->getVid(),
-   		'prev_note'=>$vOld->getNote(),
+   		'prev_ver_note'=>$vOld->getNote(),
    		'prev_props'=>$vOld->getProps(),
    		'status_id'=>$this->conf['upgrade_status']['started'],
    		'start_time'=>CalemText::getServerDatetime()

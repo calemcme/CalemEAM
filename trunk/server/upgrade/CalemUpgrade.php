@@ -27,20 +27,22 @@ require_once 'CalemUpgradeMap.php';
 class CalemUpgrade {	
 	protected $vNew;
 	protected $vCurr;
+	protected $verBo;
 	
 	public function __construct($nId=null, $cId=null) {
+		$this->verBo=new CalemVersionBo();
+		$nVer=$this->verBo->getNewVersion();
+		$cVer=$this->verBo->getCurrentVersion();
 		if ($nId && $cId) {
-			$this->vNew=new CalemVersion($nId);
-			$this->vCurr=new CalemVersion($cId);	
+			$this->vNew = ($nId==$nVer->getVid()) ? $nVer : (new CalemVersion($nId));
+			$this->vCurr= ($cId==$cVer->getVid()) ? $cVer : (new CalemVersion($cId));	
+		} else {
+			$this->vNew=$this->verBo->getNewVersion();
+		   $this->vCurr=$this->verBo->getCurrentVersion();
 		}	
 	}
 	
 	public function execute() {
-		$bo=new CalemVersionBo();
-		if (!$this->vNew || !$this->vCurr) {
-			$this->vNew=$bo->getNewVersion();
-		   $this->vCurr=$bo->getCurrentVersion();
-		}
 		if ($this->vNew->getVid()==$this->vCurr->getVid()) {
 			echo "Current system is the same version as the version installed. Upgrade is aborted.\n";
 			return;

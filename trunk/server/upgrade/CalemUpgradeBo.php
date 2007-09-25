@@ -63,6 +63,7 @@ abstract class CalemUpgradeBo extends CalemBo {
 		try {
 			$this->id=$this->verBo->startUpgrade($this->newVer, $this->currVer);
 			if ($succ) {
+				$this->verBo->save($this->newVer);
 				$this->verBo->completeUpgrade($this->id, $results);
 			} else {
 				$this->verBo->failUpgrade($this->id, $results);

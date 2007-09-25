@@ -67,7 +67,8 @@ $_CALEM_table=array(
     		'length'=>76
     	),
     	'results'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+    		'label'=>'upgrade_log'
     	),
     	'modified_time'=>array(
     		'type'=>'datetime'
