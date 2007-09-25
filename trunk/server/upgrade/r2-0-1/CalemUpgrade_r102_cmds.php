@@ -84,6 +84,14 @@ $_CALEM_cmds = array(
 		)	
 	),
 	
+	//IN auto-numbering
+	'new_in_seq'=>array(
+		'cmd'=>'CalemCmdCreateTable',
+		'param'=>array(
+			'table'=>'in_seq'
+		)	
+	),
+	
 	//Updates to existing tables
 	'alter_po'=>array(
 		'cmd'=>'CalemCmdAddField',
