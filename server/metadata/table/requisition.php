@@ -112,11 +112,13 @@ $_CALEM_table=array(
     	),
     	'next_user_id'=>array(
     		'type'=>'guid',
-    		'lookup'=>'users'
+    		'lookup'=>'users',
+    		'label'=>'req_next_user'
     	),
     	'next_note'=>array(
     		'type'=>'varchar',
-    		'length'=>76
+    		'length'=>76,
+    		'label'=>'req_next_note'
     	),
     	'modified_time'=>array(
     		'type'=>'datetime'
