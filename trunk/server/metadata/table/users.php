@@ -80,7 +80,7 @@ $_CALEM_table=array(
     	),
     	'contractor_id'=>array(
     		'type'=>'guid',
-    		'lookup'=>'contractor'
+    		'lookup'=>'vendor'
     	),
     	'job_role_id'=>array(
     		'type'=>'guid',
