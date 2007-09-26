@@ -78,11 +78,13 @@ $_CALEM_table=array(
     	),
     	'next_user_id'=>array(
     		'type'=>'guid',
-    		'lookup'=>'users'
+    		'lookup'=>'users',
+    		'label'=>'po_next_user'
     	),
     	'next_note'=>array(
     		'type'=>'varchar',
-    		'length'=>76
+    		'length'=>76,
+    		'label'=>'po_next_note'
     	),
     	'vendor_id'=>array(
     		'type'=>'guid',
