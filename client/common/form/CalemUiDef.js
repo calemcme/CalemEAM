@@ -564,11 +564,6 @@ CalemFormDef['contact'] = {
 	lookup: 'CalemContactFormLookup'	
 } 
 
-//Contractor
-CalemFormDef['contractor'] = {
-	lookup: 'CalemContractorFormLookup'	
-} 
-
 //Failure
 CalemFormDef['rcm_failure'] = {
 	lookup: 'CalemRcmFailureFormLookup'
@@ -666,11 +661,6 @@ CalemFormDef['training'] = {
 //Workorder
 CalemFormDef['workorder'] = {
 	lookup: 'CalemWoFormLookup'	
-}
-
-//Contractor
-CalemFormDef['contractor'] = {
-	lookup: 'CalemContractorFormLookup'
 }
 
 //document
