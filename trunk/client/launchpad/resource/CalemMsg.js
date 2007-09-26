@@ -355,7 +355,7 @@ CalemMsg["modCalemSched"] = "Schedule";
 CalemMsg["modCalemRcm"] = "RCM";
 CalemMsg["modCalemInspection"] = "Inspection";
 CalemMsg["modCalemContact"] = "Contact";
-CalemMsg["modCalemContractor"] = "Contractor";
+CalemMsg["modCalemVendor"] = "Vendor";
 CalemMsg["modCalemProject"] = "Project";
 CalemMsg["modCalemTraining"] = "Training";
 CalemMsg["modCalemReq"] = "Requisition";
@@ -906,7 +906,6 @@ CalemMsg["cnt_partner"] = "Partner";
 CalemMsg["cnt_tenant"] = "Tenant";
 CalemMsg["cnt_other"] = "Other";
 
-CalemMsg["contractor"] = "Contractor";
 
 CalemMsg["dash_title"] = "Dashboard";
 CalemMsg["tab_dash"] = "Main";

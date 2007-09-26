@@ -714,7 +714,7 @@ CalemConf["registry_module"]={
 	   names: ['modCalemDash', 'modCalemWo', 'modCalemSched', 'modCalemAsset', 'modCalemPm', 
 	           'modCalemIn', 'modCalemReq', 'modCalemPo', 'modCalemRcm',
 	           'modCalemAdmin', 'modCalemProject', 'modCalemDoc', 'modCalemContact', 
-	           'modCalemContractor', 'modCalemBudget', 'modCalemInspection','modCalemTraining'
+	           'modCalemBudget', 'modCalemInspection','modCalemTraining'
 	           ] };
       
 //Db and cache definition
