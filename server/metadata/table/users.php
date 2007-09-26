@@ -56,7 +56,7 @@ $_CALEM_table=array(
     	),
     	'username'=>array(
     		'type'=>'varchar',
-    		'length'=>30,
+    		'length'=>50,
     		'required'=>true,
     	),
     	'status_id'=>array(
@@ -92,7 +92,7 @@ $_CALEM_table=array(
     	),
     	'full_name'=>array(
     		'type'=>'varchar',
-    		'length'=>30,
+    		'length'=>50,
     		'required'=>true    		
     	),
     	'job_title'=>array(
@@ -155,11 +155,11 @@ $_CALEM_table=array(
     	),
     	'email_work'=>array(
     		'type'=>'varchar',
-    		'length'=>30
+    		'length'=>50
     	),
     	'email_other'=>array(
     		'type'=>'varchar',
-    		'length'=>30
+    		'length'=>50
     	),
     	'im1_type_id'=>array(
     		'type'=>'guid',
@@ -183,7 +183,7 @@ $_CALEM_table=array(
     	),
     	'company'=>array(
     		'type'=>'varchar',
-    		'length'=>30
+    		'length'=>50
     	),
     	'street1'=>array(
     		'type'=>'varchar',
@@ -195,11 +195,11 @@ $_CALEM_table=array(
     	),
     	'city'=>array(
     		'type'=>'varchar',
-    		'length'=>30
+    		'length'=>50
     	),
     	'state'=>array(
     		'type'=>'varchar',
-    		'length'=>30
+    		'length'=>50
     	),
     	'zip'=>array(
     		'type'=>'varchar',
@@ -207,7 +207,7 @@ $_CALEM_table=array(
     	),
     	'country'=>array(
     		'type'=>'varchar',
-    		'length'=>30
+    		'length'=>50
     	),
     	'modified_time'=>array(
     		'type'=>'datetime'

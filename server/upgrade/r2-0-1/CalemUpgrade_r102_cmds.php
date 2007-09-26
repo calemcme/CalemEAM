@@ -113,6 +113,15 @@ $_CALEM_cmds = array(
 			'table'=>'inventory',
 			'fields'=>array('abc_id', 'abc_time')
 		)	
+	),
+	//Alter field types
+	'alter_users'=>array(
+		'cmd'=>'CalemCmdModifyFieldType',
+		'param'=>array(
+			'table'=>'users',
+			'fields'=>array('username', 'full_name', 'email_work', 'email_other',
+			                'company', 'city', 'state', 'country')
+		)
 	)
 );
 
