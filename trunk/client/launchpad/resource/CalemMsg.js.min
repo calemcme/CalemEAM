@@ -1366,6 +1366,8 @@ CalemMsg["po_item_total"] = "Item total";
 CalemMsg["tax_charge"] = "Tax";
 CalemMsg["total_charge"] = "Total";
 CalemMsg["po_comment"] = "Comment";
+CalemMsg["po_next_user"] = "Next assigned to";
+CalemMsg["po_next_note"] = "Assignment note";
 
 CalemMsg["po_item"] = "Items";
 CalemMsg["line_no"] = "Line";
@@ -1495,6 +1497,8 @@ CalemMsg["request_user_id"] = "User requested";
 CalemMsg["request_time"] = "Time requested";
 CalemMsg["req_total"] = "Req total";
 CalemMsg["due_date"] = "Due date";
+CalemMsg["req_next_user"] = "Next assigned to";
+CalemMsg["req_next_note"] = "Assignment note";
 
 CalemMsg["req_status_log"] = "Status log";
 
