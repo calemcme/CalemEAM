@@ -53,6 +53,7 @@ class CalemZipJustJs extends CalemZipBaseJs {
 			foreach ($files as $file) {
 				$fullPath=_CALEM_DIR_ . $path . $file;
 				if (!is_file($fullPath)) {
+                    if (strpos($file, 'CalemConf.custom.js')!==false) continue; //missing conf file is okay.
 					$this->logger->warn("Script file not found: " . $fullPath);
 					echo "Script file not found: " . $fullPath . "\n<br>\n";
 					continue;
