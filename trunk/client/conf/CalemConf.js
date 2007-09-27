@@ -938,3 +938,11 @@ CalemConf['chart_engine'] = {
    pieChartSwf: '/server/include/charts/ampie/ampie/ampie.swf',
    columnChartSwf: '/server/include/charts/amcolumn/amcolumn/amcolumn.swf'
 };
+
+/**
+ * File upload
+ */
+CalemConf['file_upload'] ={
+	inputName: 'fileupload',
+	size: 50
+};
