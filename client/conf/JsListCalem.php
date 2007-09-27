@@ -30,7 +30,7 @@ $_CALEM_scripts=array(
 			
 			//<!-- configuration -->
 			'/conf/CalemConf.js',
-			'/conf/CalemConfCustom.js',
+			'/conf/CalemConf.custom.js',
 			//<!-- currency -->
 			'/conf/data/CalemCurrency.js',
 			
