@@ -205,6 +205,11 @@ function(evt) {
 CalemFormNew.prototype._onSave =
 function(evt) {
 	var rows=this._prepareDataNew();
+	this._onSaveCall(rows);
+}
+
+CalemFormNew.prototype._onSaveCall =
+function(rows) {
 	CalemSoapUtil._onSoapCall('InsertData', rows, this._soapNewSaveCallback);
 }
 
