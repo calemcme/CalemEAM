@@ -152,10 +152,13 @@ $_CALEM_scripts=array(
 			'/common/form/widget/edit/CalemEditPassword.js',
 			'/common/form/widget/edit/CalemEditSchedule.js',
 			'/common/form/widget/edit/CalemEditScheduleTime.js',
+			'/common/form/widget/edit/CalemEditFileUpload.js',
 			//Read
 			'/common/form/widget/read/CalemReadText.js',
 			'/common/form/widget/read/CalemReadDefault.js',
 			'/common/form/widget/read/CalemReadBoolean.js',
+			'/common/form/widget/read/CalemReadFileUpload.js',
+			'/common/form/widget/read/CalemReadFileUploadEdit.js',
 			//Design
 			//Read
 			'/common/form/widget/design/CalemLabelDesign.js',
@@ -273,6 +276,8 @@ $_CALEM_scripts=array(
          '/common/form/view/edit/CalemEditPasswordRender.js',
          '/common/form/view/edit/CalemEditScheduleRender.js',
          '/common/form/view/edit/CalemEditScheduleTimeRender.js',
+         '/common/form/view/edit/CalemEditFileUploadRender.js',
+         '/common/form/view/edit/CalemNewFileUploadRender.js',
          //list
          '/common/form/view/list/CalemViewListRender.js',
          //read
@@ -284,6 +289,8 @@ $_CALEM_scripts=array(
          '/common/form/view/read/CalemReadBooleanRender.js',
          '/common/form/view/read/CalemReadScheduleRender.js',
          '/common/form/view/read/CalemReadScheduleTimeRender.js',
+         '/common/form/view/read/CalemReadFileUploadRender.js',
+         '/common/form/view/read/CalemReadFileAttachmentRender.js',
          
          //mdtab
          '/common/form/view/mdtab/CalemViewMd.js',
@@ -372,6 +379,7 @@ $_CALEM_scripts=array(
 			'/common/form/controller/CalemController.js',
 			'/common/form/controller/CalemUiController.js',
 			'/common/form/controller/CalemDataGrid.js',
+			'/common/form/controller/upload/CalemFileUpload.js',
 			'/common/form/controller/CalemForm.js',
 			'/common/form/controller/CalemFormList.js',
 			'/common/form/controller/CalemFormListDet.js',
