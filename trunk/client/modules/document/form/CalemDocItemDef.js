@@ -21,6 +21,52 @@
 /**
  * forms
  */
+
+/**
+ * Doc MdTab.
+ */
+CalemItemDef['CalemDocFormMdTab']={
+	CalemFormMdTabInfo: {
+		id: 'CalemDocFormMdTab',
+		title: 'document',
+		icon: 'CalemDocument',
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		//Three portions of info: layout, model and itemMap.
+		layout: {
+			CalemMdTabLayoutInfo: {
+				tabList: ['tab_doc'],
+				tabMap: {
+					'tab_doc': {CalemTabLayoutInfo: ['CalemDocFormRead','CalemDocAttachmentFormList']}
+				}
+			} },
+		model: {
+				CalemFormModelInfo: {
+					master: 'CalemDocFormRead',
+			      items: 
+			             [{CalemFormLinkInfo: {id: 'CalemDocAttachmentFormList', link: {CalemFieldMdInfo: {fld: 'doc_id', parentFld: 'id'}}} }
+			             ]
+				}
+		}, 
+		itemMap : { //Default layout conf.
+		  CalemItemMap :{
+			 'CalemDocFormRead' : {CalemFormLayoutInfo: {
+								 		id: 'CalemDocFormRead',
+								 		fixed: true, //Move not allowed.
+								 		layout: {CalemBlockLayoutInfo: {width: '100%', height: '-2'}} }
+										},
+			 
+			 'CalemDocAttachmentFormList' : {CalemFormLayoutInfo: {
+								 		id: 'CalemDocAttachmentFormList',
+								 		layout: {CalemBlockLayoutInfo: {width: '100%', height: '-1'}} }
+										},
+			 
+		  'tab_doc': {CalemTabInfo: {id: 'tab_doc'}}
+		  }
+		  
+		} //itemMap
+	} //MdTabInfo
+} 
+
 /**
  * Doc
  */
@@ -171,6 +217,135 @@ CalemItemDef['CalemDocTypeFormSearch']={
 		controller: 'CalemFormSearchEdit',
 		model: 'doc_type', 
 		view: {CalemViewRefInfo: {id: 'CalemDocTypeViewSearch'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+/**
+ * Doc Upload
+ */
+CalemItemDef['CalemDocUploadFormList']={
+	CalemFormInfo: {
+		id: 'CalemDocUploadFormList',
+		title: 'doc_upload',
+		icon: 'CalemUpload',
+		controller: 'CalemDocUploadFormList',
+		model: 'doc_upload', 
+		view: {CalemViewRefInfo: {id: 'CalemDocUploadViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemDocUploadFormSearch'
+	}
+}
+
+CalemItemDef['CalemDocUploadFormLookup']={
+	CalemFormInfo: {
+		id: 'CalemDocUploadFormLookup',
+		title: 'doc_upload',
+		icon: 'CalemUpload',
+		controller: 'CalemDocUploadFormLookup',
+		model: 'doc_upload', 
+		view: {CalemViewRefInfo: {id: 'CalemDocUploadViewLookup'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemDocUploadFormSearch'
+	}
+}
+
+CalemItemDef['CalemDocUploadFormNew']={
+	CalemFormInfo: {
+		id: 'CalemDocUploadFormNew',
+		title: 'doc_upload',
+		icon: 'CalemUpload',
+		controller: 'CalemDocUploadFormNew',
+		model: 'doc_upload', 
+		view: {CalemViewRefInfo: {id: 'CalemDocUploadViewNew'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemDocUploadFormEdit']={
+	CalemFormInfo: {
+		id: 'CalemDocUploadFormEdit',
+		title: 'doc_upload',
+		icon: 'CalemUpload',
+		controller: 'CalemDocUploadFormEdit',
+		model: 'doc_upload', 
+   	view: {CalemViewRefInfo: {id: 'CalemDocUploadViewEdit'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemDocUploadFormRead']={
+	CalemFormInfo: {
+		id: 'CalemDocUploadFormRead',
+		title: 'doc_upload',
+		icon: 'CalemUpload',
+		controller: 'CalemDocUploadFormRead',
+		model: 'doc_upload', 
+		view: {CalemViewRefInfo: {id: 'CalemDocUploadViewRead'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemDocUploadFormSearch']={
+	CalemFormInfo: {
+		id: 'CalemDocUploadFormSearch',
+		title: 'doc_upload',
+		icon: 'CalemUpload',
+		controller: 'CalemFormSearchEdit',
+		model: 'doc_upload', 
+		view: {CalemViewRefInfo: {id: 'CalemDocUploadViewSearch'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+/**
+ * Doc attachment
+ */
+CalemItemDef['CalemDocAttachmentFormList']={
+	CalemFormInfo: {
+		id: 'CalemDocAttachmentFormList',
+		title: 'doc_attachment',
+		icon: 'CalemDoc',
+		controller: 'CalemDocAttachmentFormList',
+		model: 'doc_attachment', 
+		view: {CalemViewRefInfo: {id: 'CalemDocAttachmentViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemDocAttachmentFormSearch'
+	}
+}
+
+CalemItemDef['CalemDocAttachmentFormNew']={
+	CalemFormInfo: {
+		id: 'CalemDocAttachmentFormNew',
+		title: 'doc_attachment',
+		icon: 'CalemDoc',
+		controller: 'CalemDocAttachmentFormNew',
+		model: 'doc_attachment', 
+		view: {CalemViewRefInfo: {id: 'CalemDocAttachmentViewNew'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemDocAttachmentFormEdit']={
+	CalemFormInfo: {
+		id: 'CalemDocAttachmentFormEdit',
+		title: 'doc_attachment',
+		icon: 'CalemDoc',
+		controller: 'CalemDocAttachmentFormEdit',
+		model: 'doc_attachment', 
+   	view: {CalemViewRefInfo: {id: 'CalemDocAttachmentViewEdit'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemDocAttachmentFormRead']={
+	CalemFormInfo: {
+		id: 'CalemDocAttachmentFormRead',
+		title: 'doc_attachment',
+		icon: 'CalemDoc',
+		controller: 'CalemDocAttachmentFormRead',
+		model: 'doc_attachment', 
+		view: {CalemViewRefInfo: {id: 'CalemDocAttachmentViewRead'}}, 
 		replaceType: CalemItemDef.REPLACE_BY_ID
 	}
 }

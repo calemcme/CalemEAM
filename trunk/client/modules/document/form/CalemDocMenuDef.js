@@ -41,3 +41,45 @@ CalemMenuDef['CalemDocTypeFormList'] = {
 	enabled: true,		   
 	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}
 };
+
+CalemMenuDef['CalemDocUploadFormList'] = {
+	id: 'CalemDocUploadFormList',
+	title: 'doc_upload',
+	icon: 'CalemUpload',
+	disIcon: null,
+	tooltip: null, 
+	enabled: true,		   
+	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}
+};
+
+// Upload view
+CalemMenuDef['CalemTbUploadView'] = {
+	id: 'CalemTbUploadView',
+	title: 'menu_upload_view',
+	icon: 'CalemUpload',
+	disIcon: null,
+	enabled: false,
+	tooltip: null, 
+	style: (DwtLabel.IMAGE_LEFT | DwtLabel.ALIGN_LEFT), 				   
+	radioGroupId: null,
+	idx: null,
+	className: 'TBButton',
+	posStyle: null,
+	onSelect: {CalemMenuSelect: {listener: 'UploadViewListener'}}
+};
+
+// Attachment view
+CalemMenuDef['CalemTbAttachmentView'] = {
+	id: 'CalemTbAttachmentView',
+	title: 'menu_attachment_view',
+	icon: 'CalemUpload',
+	disIcon: null,
+	enabled: false,
+	tooltip: null, 
+	style: (DwtLabel.IMAGE_LEFT | DwtLabel.ALIGN_LEFT), 				   
+	radioGroupId: null,
+	idx: null,
+	className: 'TBButton',
+	posStyle: null,
+	onSelect: {CalemMenuSelect: {listener: 'AttachmentViewListener'}}
+};
