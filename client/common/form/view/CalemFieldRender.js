@@ -113,3 +113,9 @@ CalemFieldRender.prototype._getDefaultValue =
 function(rec) {
 	return null;
 }
+
+CalemFieldRender.prototype._getRecId =
+function() {
+	var rec=this._modelItem.getCurrentRecord();
+	return rec.id;
+}
