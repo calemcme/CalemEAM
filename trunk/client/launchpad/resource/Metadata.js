@@ -345,6 +345,7 @@ CalemDropdown['contact_type'] = [["cnt_vendor",0],["cnt_manufacturer",0],["cnt_p
 CalemDropdown['cost_type'] = [["cost_employee_labor",1],["cost_contractor_labor",1],["cost_labor",1],["cost_internal_material",1],["cost_contractor_material",1],["cost_material",1],["cost_training",1],["cost_operations",1],["cost_other",1]]
 CalemDropdown['depreciation_time'] = [["as_dep_annual",365,0],["as_dep_quarter",120,0]]
 CalemDropdown['depreciation_type'] = [["as_dep_straightline",1],["as_dep_other",0]]
+CalemDropdown['doc_access_type'] = [["doc_access_public",1],["doc_access_app",1]]
 CalemDropdown['downtime_cause'] = [["as_dc_operationerr",0],["as_dc_maintenanceerr",0],["as_dc_other",0]]
 CalemDropdown['downtime_type'] = [["as_dt_emergency",0],["as_dt_pm",0],["as_dt_project",0],["as_dt_other",0]]
 CalemDropdown['im_type'] = [["im_yahoo",0],["im_skype",0],["im_msn",0],["im_aol",0]]
