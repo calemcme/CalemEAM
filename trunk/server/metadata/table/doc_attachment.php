@@ -18,46 +18,33 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $_CALEM_table=array(
-    'table_name'=>'document', //No translation needed.
+    'table_name'=>'doc_attachment', //No translation needed.
     'module'=>'modCalemDoc',
-    'cache_type'=>'memory',
-    'order_by'=>array('field'=>'document', 'order'=>'ASC'),
+    'cache_type'=>'database',
     'primary_key'=>array(
     	'id'
     ),
-    'unique_indexes'=>array(
-    	'uidx_document'=>array(
-    		'document'
-    	),
-    ),
-    'lookup_mapping'=>array(
-    	'field'=>'id',
-		'primary'=>'document',
-		'extra'=>array(
-	    	'document',
-	    	'note'
-	    )
+    'indexes'=>array(
+    	'idx_doc_attachment_doc'=>array('doc_id'),
+    	'idx_doc_attachment_attach'=>array('upload_id')
     ),
     'fields'=>array(
     	'id'=>array(
     		'type'=>'guid'  		
     	),
-    	'document'=>array(
-    		'type'=>'varchar',
-    		'length'=>30,
-    		'required'=>true    		
-    	),
-    	'content'=>array(
-    		'type'=>'text'    		
-    	),
-    	'type_id'=>array(
+    	'doc_id'=>array(
     		'type'=>'guid',
-    		'lookup'=>'doc_type'
+    		'lookup'=>'document',
+    		'required'=>true
+    	),
+    	'upload_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'doc_upload',
+    		'required'=>true  		
     	),
     	'note'=>array(
     		'type'=>'varchar',
