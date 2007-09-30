@@ -62,6 +62,20 @@ $_CALEM_cmds = array(
 		)		
 	),
 	
+	//doc upload
+	'new_doc_attachment'=>array(
+		'cmd'=>'CalemCmdCreateTable',
+		'param'=>array(
+			'table'=>'doc_attachment'
+		)		
+	),
+	'new_doc_upload'=>array(
+		'cmd'=>'CalemCmdCreateTable',
+		'param'=>array(
+			'table'=>'doc_upload'
+		)		
+	),
+	
 	//Upgrade - new tables
 	'new_version'=>array(
 		'cmd'=>'CalemCmdCreateTable',
@@ -121,6 +135,26 @@ $_CALEM_cmds = array(
 			'table'=>'users',
 			'fields'=>array('username', 'full_name', 'email_work', 'email_other',
 			                'company', 'city', 'state', 'country')
+		)
+	),
+	//Change field names for document
+	'alter_document'=>array(
+		'cmd'=>'CalemCmdModifyFieldName',
+		'param'=>array(
+			'table'=>'document',
+			'fields'=>array(
+				'url_change'=>array('id'=>'content', 'oldId'=>'url')			
+			)
+		
+		)
+	
+	),
+	//Added asset photo
+	'alter_asset_photo'=>array(
+		'cmd'=>'CalemCmdAddField',
+		'param'=>array(
+			'table'=>'asset',
+			'fields'=>array('upload_id')
 		)
 	)
 );
