@@ -510,4 +510,92 @@ CalemChartColumnInfo.prototype.constructor = CalemChartColumnInfo
 CalemChartColumnInfo.prototype.toString = function() {return "CalemChartColumnInfo";}
 CalemChartColumnInfo.prototype.getClassName = function() {return "CalemChartColumnInfo";}
 
+/**
+ * CalemFileUploadInfo
+ */
+function CalemFileUploadInfo(fld) {
+	if (arguments.length==0) return;
+	this._field=fld;
+}
 
+CalemFileUploadInfo.prototype.toString = function() {return "CalemFileUploadInfo";}
+CalemFileUploadInfo.prototype.getClassName = function() {return "CalemFileUploadInfo";}
+
+CalemFileUploadInfo.prototype.setJson =
+function(obj) {
+	this._field=obj.field;
+}
+
+CalemFileUploadInfo.prototype.getJson = 
+function() {
+	return ["{", this.toString(), ": {field: '", this._field, "'}}"].join('');
+}
+
+CalemFileUploadInfo.prototype.getField =
+function() {
+	return this._field;
+}
+
+/**
+ * CalemEditFileUploadInfo
+ */
+function CalemEditFileUploadInfo(fld) {
+	if (arguments.length==0) return;
+	CalemFileUploadInfo.call(this, fld);
+}
+
+
+CalemEditFileUploadInfo.prototype = new CalemFileUploadInfo;
+CalemEditFileUploadInfo.prototype.constructor = CalemEditFileUploadInfo;
+
+
+CalemEditFileUploadInfo.prototype.toString = function() {return "CalemEditFileUploadInfo";}
+CalemEditFileUploadInfo.prototype.getClassName = function() {return "CalemEditFileUploadInfo";}
+
+/**
+ * CalemNewFileUploadInfo
+ */
+function CalemNewFileUploadInfo(fld) {
+	if (arguments.length==0) return;
+	CalemFileUploadInfo.call(this, fld);
+}
+
+
+CalemNewFileUploadInfo.prototype = new CalemFileUploadInfo;
+CalemNewFileUploadInfo.prototype.constructor = CalemNewFileUploadInfo;
+
+
+CalemNewFileUploadInfo.prototype.toString = function() {return "CalemNewFileUploadInfo";}
+CalemNewFileUploadInfo.prototype.getClassName = function() {return "CalemNewFileUploadInfo";}
+
+/**
+ * CalemReadFileUploadInfo
+ */
+function CalemReadFileUploadInfo(fld) {
+	if (arguments.length==0) return;
+	CalemFileUploadInfo.call(this, fld);
+}
+
+
+CalemReadFileUploadInfo.prototype = new CalemFileUploadInfo;
+CalemReadFileUploadInfo.prototype.constructor = CalemReadFileUploadInfo;
+
+
+CalemReadFileUploadInfo.prototype.toString = function() {return "CalemReadFileUploadInfo";}
+CalemReadFileUploadInfo.prototype.getClassName = function() {return "CalemReadFileUploadInfo";}
+
+/**
+ * CalemReadFileAttachmentInfo
+ */
+function CalemReadFileAttachmentInfo(fld) {
+	if (arguments.length==0) return;
+	CalemFileUploadInfo.call(this, fld);
+}
+
+
+CalemReadFileAttachmentInfo.prototype = new CalemFileUploadInfo;
+CalemReadFileAttachmentInfo.prototype.constructor = CalemReadFileAttachmentInfo;
+
+
+CalemReadFileAttachmentInfo.prototype.toString = function() {return "CalemReadFileAttachmentInfo";}
+CalemReadFileAttachmentInfo.prototype.getClassName = function() {return "CalemReadFileAttachmentInfo";}
