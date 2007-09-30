@@ -668,6 +668,11 @@ CalemFormDef['document'] = {
 	lookup: 'CalemDocFormLookup'
 }
 
+//upload
+CalemFormDef['doc_upload'] = {
+	lookup: 'CalemDocUploadFormLookup'
+}
+
 //document
 CalemFormDef['doc_type'] = {
 	lookup: 'CalemDocTypeFormLookup'
