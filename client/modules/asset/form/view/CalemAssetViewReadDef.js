@@ -142,7 +142,8 @@ CalemViewDef['CalemAssetViewRead']={
 			},
 			'lb_last_changes': {
 				CalemLabelInfo: {id: 'last_changes', className: 'CalemEditSection'}
-			}
+			},
+			'upload_id' : {CalemReadFileAttachmentInfo: {field: 'upload_id'}}
 	}
  } //ItemMap	
 }
