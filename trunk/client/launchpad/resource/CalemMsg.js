@@ -742,6 +742,7 @@ CalemMsg["depreciation_time_id"] = "Depreciation interval";
 CalemMsg["parent_asset"] = "Parent asset";
 CalemMsg["location_asset"] = "Location asset";
 CalemMsg["owner_user_id"] = "Owner user";
+CalemMsg["asset_photo"] = "Asset photo";
 
 CalemMsg["asset_downtime"] = "Asset downtime";
 CalemMsg["start_time"] = "Start time";
@@ -924,13 +925,28 @@ CalemMsg["wo_age_pri_4w"] = "4 or more weeks";
 
 CalemMsg["wo_pri_null"] = "Null priority";
 
-CalemMsg["document"] = "Document";
-CalemMsg["document_list"] = "Document";
+CalemMsg["menu_upload_view"] = "View file";
+CalemMsg["menu_attachment_view"] = "View file";
 
-CalemMsg["url"] = "Path";
+CalemMsg["upload_busy"] = "Uploading file to server...";
+CalemMsg["tab_doc"] = "Main";
+
+CalemMsg["document"] = "Document";
+CalemMsg["document_list"] = "Document list";
+
+CalemMsg["content"] = "Content";
 
 CalemMsg["doc_type"] = "Doc type";
 CalemMsg["type_doc"] = "Type";
+
+CalemMsg["doc_attachment"] = "Attachment";
+
+CalemMsg["doc_upload"] = "Uploaded files";
+CalemMsg["file_upload"] = "File";
+
+CalemMsg["doc_access_type"] = "Access type";
+CalemMsg["doc_access_public"] = "Public";
+CalemMsg["doc_access_app"] = "Application";
 
 CalemMsg["tab_ins_main"] = "Main";
 CalemMsg["tab_ins_citation"] = "Citation";
