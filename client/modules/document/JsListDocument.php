@@ -30,6 +30,7 @@ $_CALEM_scripts=array(
 			 // BO
 			'/modules/document/bo/CalemDocBo.js',
 			'/modules/document/bo/CalemDocTypeBo.js',
+			'/modules/document/bo/CalemDocUploadBo.js',
 			
 			 //Menu
          '/modules/document/form/CalemDocMenuDef.js',
@@ -42,6 +43,20 @@ $_CALEM_scripts=array(
          '/modules/document/form/view/CalemDocViewEditDef.js',
          '/modules/document/form/view/CalemDocViewSearchDef.js',
          
+         //attachment
+         '/modules/document/form/view/CalemDocAttachmentViewListDef.js',
+         '/modules/document/form/view/CalemDocAttachmentViewNewDef.js',
+         '/modules/document/form/view/CalemDocAttachmentViewReadDef.js',
+         '/modules/document/form/view/CalemDocAttachmentViewEditDef.js',         
+         
+         //upload
+         '/modules/document/form/view/CalemDocUploadViewListDef.js',
+         '/modules/document/form/view/CalemDocUploadViewLookupDef.js',
+         '/modules/document/form/view/CalemDocUploadViewNewDef.js',
+         '/modules/document/form/view/CalemDocUploadViewReadDef.js',
+         '/modules/document/form/view/CalemDocUploadViewEditDef.js',
+         '/modules/document/form/view/CalemDocUploadViewSearchDef.js',
+         
          //doc_type
          '/modules/document/form/view/CalemDocTypeViewListDef.js',
          '/modules/document/form/view/CalemDocTypeViewLookupDef.js',
@@ -51,11 +66,25 @@ $_CALEM_scripts=array(
          '/modules/document/form/view/CalemDocTypeViewSearchDef.js',
          
          //document forms
+         '/modules/document/form/controller/CalemDocFormMdTab.js',
          '/modules/document/form/controller/CalemDocFormList.js',
          '/modules/document/form/controller/CalemDocFormRead.js',
          '/modules/document/form/controller/CalemDocFormNew.js',
          '/modules/document/form/controller/CalemDocFormEdit.js',
          '/modules/document/form/controller/CalemDocFormLookup.js',
+         
+         //attachment
+         '/modules/document/form/controller/CalemDocAttachmentFormList.js',
+         '/modules/document/form/controller/CalemDocAttachmentFormRead.js',
+         '/modules/document/form/controller/CalemDocAttachmentFormNew.js',
+         '/modules/document/form/controller/CalemDocAttachmentFormEdit.js',
+         
+         //upload
+         '/modules/document/form/controller/CalemDocUploadFormList.js',
+         '/modules/document/form/controller/CalemDocUploadFormRead.js',
+         '/modules/document/form/controller/CalemDocUploadFormNew.js',
+         '/modules/document/form/controller/CalemDocUploadFormEdit.js',
+         '/modules/document/form/controller/CalemDocUploadFormLookup.js',
          
          //doc_type forms
          '/modules/document/form/controller/CalemDocTypeFormList.js',

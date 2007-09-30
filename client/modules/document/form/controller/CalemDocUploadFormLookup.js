@@ -15,47 +15,46 @@
  * All Rights Reserved.
  
  * Contributor(s): 
- */
- 
+ */ 
 
 /**
- * CalemDocFormLookup
+ * CalemDocUploadFormLookup
  */
-function CalemDocFormLookup(parent, formId, data) {
+function CalemDocUploadFormLookup(parent, formId, data) {
 	if (arguments.length==0) return;
 	CalemFormLookup.call(this, parent, formId, data);
+	this._viewListener = new AjxListener(this, this.onViewUpload);
 }
 
-CalemDocFormLookup.prototype = new CalemFormLookup;
-CalemDocFormLookup.prototype.constructor = CalemDocFormLookup;
+CalemDocUploadFormLookup.prototype = new CalemFormLookup;
+CalemDocUploadFormLookup.prototype.constructor = CalemDocUploadFormLookup;
 
-CalemDocFormLookup.prototype.toString = function() { return "CalemDocFormLookup";}
+CalemDocUploadFormLookup.prototype.toString = function() { return "CalemDocUploadFormLookup";}
 
 /**
  * Business APIs
  */
-CalemDocFormLookup.prototype._getFormNewId =
+CalemDocUploadFormLookup.prototype._getFormNewId =
 function() {
-   return 'CalemDocFormNew';
+   return 'CalemDocUploadFormNew';
 } 
 
 /**
  * Open a master detailed view with recordlist and current record position.
  */
-CalemDocFormLookup.prototype._getFormReadId =
+CalemDocUploadFormLookup.prototype._getFormReadId =
 function(evt) {
-	return 'CalemDocFormRead';
+	return 'CalemDocUploadFormRead';
 } 
 
-/**
- * Open a master detailed view with recordlist and current record position.
- */
-CalemDocFormLookup.prototype._onOpen =
-function(evt) {
-	//Get the selection event
-    var item=CalemEvent.getItem(evt);
-	//Prepare data for master detail view.
-	var data = {modelItem: this._modelItem, item: item};
-	//pass-through current data model and selection
-	this._openForm('CalemDocFormMdTab', data);
+//Event handlers
+CalemDocUploadFormLookup.prototype.getUploadViewListener =
+function() {
+	return this._viewListener;
 } 
+
+CalemDocUploadFormLookup.prototype.onViewUpload =
+function(evt) {
+	var rec=CalemEvent.getItem(evt);
+	CalemFileUpload._viewFile(rec.id);
+}

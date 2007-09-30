@@ -32,6 +32,19 @@ CalemDocFormList.prototype.constructor = CalemDocFormList;
 CalemDocFormList.prototype.toString = function() { return "CalemDocFormList";}
 
 /**
+ * Open a master detailed view with recordlist and current record position.
+ */
+CalemDocFormList.prototype._onOpen =
+function(evt) {
+	//Get the selection event
+    var item=CalemEvent.getItem(evt);
+	//Prepare data for master detail view.
+	var data = {modelItem: this._modelItem, item: item};
+	//pass-through current data model and selection
+	this._openForm('CalemDocFormMdTab', data);
+} 
+
+/**
  * Business APIs
  */
 CalemDocFormList.prototype._getFormNewId =

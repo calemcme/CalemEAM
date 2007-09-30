@@ -26,13 +26,15 @@ CalemModuleDef["modCalemDoc"]= {
       toolBar: {
         CalemToolBarInfo: {
         	  type: 'CalemToolBar',
-        	  layout: ['modCalemDoc', 'sep', 'CalemDocFormList', 'CalemDocTypeFormList'],
+        	  layout: ['modCalemDoc', 'sep', 'CalemDocFormList', 'CalemDocUploadFormList', 'CalemDocTypeFormList'],
         	  list: [
 	         {CalemLabelInfo: {id: 'modCalemDoc', className: 'CalemModuleLabel'}},
 	         
 	         {CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
 	         
 	         {CalemMenuItemInfo: {id: 'CalemDocFormList'}},
+	         
+	         {CalemMenuItemInfo: {id: 'CalemDocUploadFormList'}},
 	         
 	         {CalemMenuItemInfo: {id: 'CalemDocTypeFormList'}}
 	      ] }
