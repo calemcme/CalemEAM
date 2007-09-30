@@ -23,6 +23,8 @@
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 require_once _CALEM_DIR_ . 'server/include/util/CalemExit.php';
+require_once _CALEM_DIR_ . 'server/include/util/CalemMime.php';
+
 /**
  * This is helper function to output zipped content.
  */
@@ -86,8 +88,30 @@ class CalemGzip {
  			print($zipContents);
  			if ($logger && $logger->isDebugEnabled()) $logger->debug("Zip contents from " . strlen($contents) . " to " . strlen($zipContents));
  		} else {
- 			print contents;
+ 			print $contents;
  		}
  	}
+ 	
+ 	public static function downloadFile($fn, $gzip=false) {
+ 		if ($gzip) $canZip=self::canGzip();
+ 		$contents=file_get_contents($fn);
+ 		$mime=CalemMime::getMime($fn);
+ 		header("Content-Type: " . $mime);
+ 		$disp=CalemMime::getDisposition($mime);
+    	header("Content-disposition: " . ($disp ? $disp . "; " : '') . "filename=\"".basename($fn)."\"");
+ 		if ($gzip && $canZip) {
+ 			header("Content-Encoding: ".$canZip);
+ 			$zipContents=gzencode($contents);
+ 			header("Content-length: ".strlen($zipContents));
+ 			print($zipContents);
+ 			global $logger;
+ 			if ($logger && $logger->isDebugEnabled()) $logger->debug("Zip contents from " . strlen($contents) . " to " . strlen($zipContents));
+ 		} else {
+ 			header("Content-length: ".strlen($contents));
+ 			print $contents;
+ 		}
+ 	}
+ 	
+ 	 
 }
 ?>
