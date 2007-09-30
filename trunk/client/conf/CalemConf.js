@@ -240,6 +240,8 @@ CalemConf['view_engine'] = {
         CalemChartLineInfo: 'CalemChartLineRender',
         CalemChartPieInfo: 'CalemChartPieRender',
         CalemChartColumnInfo: 'CalemChartColumnRender',
+      CalemReadFileUploadInfo: 'CalemReadFileUploadRender',
+      CalemReadFileAttachmentInfo: 'CalemReadFileAttachmentRender',
 		FieldRenders: {
 	   	'text'  : 	'CalemReadTextRender',
 	   	'boolean' : 'CalemReadBooleanRender',
@@ -253,6 +255,8 @@ CalemConf['view_engine'] = {
 		CalemEditScheduleInfo: 'CalemEditScheduleRender',
 		CalemEditScheduleTimeInfo: 'CalemEditScheduleTimeRender',
 		CalemEditInCheckoutToInfo: 'CalemEditInCheckoutToRender',
+		CalemEditFileUploadInfo: 'CalemEditFileUploadRender',
+		CalemNewFileUploadInfo: 'CalemNewFileUploadRender',
 		FieldRenders: {
 			//String type
 			'varchar': 	'CalemEditStringRender',
@@ -323,7 +327,12 @@ CalemConf['view_engine'] = {
 		CalemDesignLabelInfo: 'CalemLabelRender',   //regular label render
 		CalemDesignSelectInfo: 'CalemDesignSaveSelectRender',
 		//Search save
-		CalemSearchSaveInfo: 'CalemSearchSaveDesignRender'
+		CalemSearchSaveInfo: 'CalemSearchSaveDesignRender',
+		//Upload stuff
+		CalemReadFileUploadInfo: 'CalemFieldDesignRender',
+      CalemReadFileAttachmentInfo: 'CalemFieldDesignRender',
+      CalemEditFileUploadInfo: 'CalemFieldDesignRender',
+		CalemNewFileUploadInfo: 'CalemFieldDesignRender'
 	},
 	viewRecordDesign: {
 		rowsNoDnd: {'err': true, 'toolbar': true, '_save_search': true},
@@ -944,5 +953,10 @@ CalemConf['chart_engine'] = {
  */
 CalemConf['file_upload'] ={
 	inputName: 'fileupload',
-	size: 50
+	size: 50,
+	uploadAid: 'CalemFileUpload',
+	viewAid: 'CalemFileView',
+	viewMethod: 'JavaScript:CalemFileUpload._viewFile',
+	uploadEdit: 'CalemDocUploadEdit',
+	uploadNew: 'CalemDocUploadNew'
 };
