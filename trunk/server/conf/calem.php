@@ -160,12 +160,15 @@ $_CALEM_dist=array(
 	'CalemReport'=>'server/modules/report/CalemReport.php',
 	'CalemDashboard'=>'server/modules/dashboard/CalemDashboard.php',
 	'CalemDashboardExport'=>'server/include/charts/share/export.php',
+	'CalemDashboardExport'=>'server/include/charts/share/export.php',
+	'CalemFileUpload'=>'server/upload/CalemFileUpload.php',
+	'CalemFileView'=>'server/upload/CalemFileView.php',
 	
 	//Module list
 	'modules'=>array(
 		'admin', 'asset', 'budget', 'pm', 'inventory', 'workorder', 'requisition', 'purchase', 
-      'document','schedule', 'rcm','contact', 'inspection', 'training',
-		'project', 'dashboard'
+      'document','schedule', 'rcm','contact', //'vendor', 
+      'inspection', 'training', 'project', 'dashboard'
 	),
 	//Default SOAP return format - must be XML for unit tests to pass.
 	'default_soap_output_format'=>'XML',
@@ -345,6 +348,9 @@ $_CALEM_dist=array(
 
 @include _CALEM_DIR_ . 'server/modules/dashboard/dash_conf.php';
 @include _CALEM_DIR_ . 'server/modules/dashboard/dash_conf.custom.php';
+
+@include _CALEM_DIR_ . 'server/upload/upload_conf.php';
+@include _CALEM_DIR_ . 'server/upload/upload_conf.custom.php';
 
 //Finally get the custom and install conf.
 //The custom/installation files are included here.
