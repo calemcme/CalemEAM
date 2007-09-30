@@ -18,65 +18,29 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $_CALEM_table=array(
-    'table_name'=>'document', //No translation needed.
+    'table_name'=>'doc_access_type',
     'module'=>'modCalemDoc',
-    'cache_type'=>'memory',
-    'order_by'=>array('field'=>'document', 'order'=>'ASC'),
+    'cache_type'=>'dropdown',
     'primary_key'=>array(
     	'id'
     ),
-    'unique_indexes'=>array(
-    	'uidx_document'=>array(
-    		'document'
-    	),
-    ),
     'lookup_mapping'=>array(
     	'field'=>'id',
-		'primary'=>'document',
-		'extra'=>array(
-	    	'document',
-	    	'note'
-	    )
+		'primary'=>'id',
     ),
     'fields'=>array(
     	'id'=>array(
-    		'type'=>'guid'  		
-    	),
-    	'document'=>array(
-    		'type'=>'varchar',
-    		'length'=>30,
-    		'required'=>true    		
-    	),
-    	'content'=>array(
-    		'type'=>'text'    		
-    	),
-    	'type_id'=>array(
     		'type'=>'guid',
-    		'lookup'=>'doc_type'
+    		'label'=>'doc_access_type',
+    		'required'=>true  		
     	),
-    	'note'=>array(
-    		'type'=>'varchar',
-    		'length'=>76
-    	),
-    	'modified_time'=>array(
-    		'type'=>'datetime'
-    	),
-    	'modified_id'=>array(
-    		'type'=>'guid',
-    		'lookup'=>'users'
-    	),
-    	'created_time'=>array(
-    		'type'=>'datetime'
-    	),
-    	'created_id'=>array(
-    		'type'=>'guid',
-    		'lookup'=>'users'
-    	)    	   
-    ) //End of fields list    
-) 
+    	'fixed'=>array(
+    		'type'=>'boolean'
+    	) 
+    )
+)
 ?>

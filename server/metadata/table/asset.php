@@ -118,6 +118,11 @@ $_CALEM_table=array(
     		'type'=>'guid',
     		'lookup'=>'vendor'
     	),
+    	'upload_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'doc_upload',
+    		'label'=>'asset_photo'
+    	),
     	'warranty_start_date'=>array(
     		'type'=>'date',
     	),
