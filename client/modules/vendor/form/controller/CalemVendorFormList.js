@@ -45,6 +45,19 @@ function(evt) {
 } 
 
 /**
+ * Open a master detailed view with recordlist and current record position.
+ */
+CalemVendorFormList.prototype._onOpen =
+function(evt) {
+	//Get the selection event
+    var item=CalemEvent.getItem(evt);
+	//Prepare data for master detail view.
+	var data = {modelItem: this._modelItem, item: item};
+	//pass-through current data model and selection
+	this._openForm('CalemVendorFormMdTab', data);
+} 
+
+/**
  * Deletion must be handled specially
  */
 CalemVendorFormList.prototype.onDelete =
