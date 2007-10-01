@@ -610,10 +610,6 @@ CalemFormDef['po'] = {
 	lookup: 'CalemPoFormLookup'	
 }
 
-CalemFormDef['vendor'] = {
-	lookup: 'CalemVendorFormLookup'	
-}
-
 CalemFormDef['tax_code'] = {
 	lookup: 'CalemTaxCodeFormLookup'	
 }
@@ -656,6 +652,15 @@ CalemFormDef['training_certificate'] = {
 
 CalemFormDef['training'] = {
 	lookup: 'CalemTrainingFormLookup'
+}
+
+//Vendor
+CalemFormDef['vendor'] = {
+	lookup: 'CalemVendorFormLookup'	
+}
+
+CalemFormDef['contract'] = {
+	lookup: 'CalemContractFormLookup'	
 }
 
 //Workorder
