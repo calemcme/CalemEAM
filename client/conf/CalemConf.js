@@ -721,7 +721,7 @@ CalemConf['registry_manager'] = {impl:"CalemRegistry", names:['registry_module']
 CalemConf["registry_module"]={
 	   loader: 'loadModules',
 	   names: ['modCalemDash', 'modCalemWo', 'modCalemSched', 'modCalemAsset', 'modCalemPm', 
-	           'modCalemIn', 'modCalemReq', 'modCalemPo', 'modCalemRcm',
+	           'modCalemIn', 'modCalemReq', 'modCalemPo', 'modCalemVendor', 'modCalemRcm',
 	           'modCalemAdmin', 'modCalemProject', 'modCalemDoc', 'modCalemContact', 
 	           'modCalemBudget', 'modCalemInspection','modCalemTraining'
 	           ] };
