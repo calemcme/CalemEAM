@@ -156,7 +156,60 @@ $_CALEM_cmds = array(
 			'table'=>'asset',
 			'fields'=>array('upload_id')
 		)
+	),
+	
+	//Vendor module
+	'alter_vendor'=>array(
+		'cmd'=>'CalemCmdAddField',
+		'param'=>array(
+			'table'=>'vendor',
+			'fields'=>array('status_id', 'owner_user_id', 'comment')
+		)	
+	),
+	
+	'new_vendor_contact'=>array(
+		'cmd'=>'CalemCmdCreateTable',
+		'param'=>array(
+			'table'=>'vendor_contact'
+		)	
+	),
+	
+	'new_contract'=>array(
+		'cmd'=>'CalemCmdCreateTable',
+		'param'=>array(
+			'table'=>'contract'
+		)	
+	),
+	
+	'new_contract_contact'=>array(
+		'cmd'=>'CalemCmdCreateTable',
+		'param'=>array(
+			'table'=>'contract_contact'
+		)	
+	),
+	
+	'contract_doc'=>array(
+		'cmd'=>'CalemCmdCreateTable',
+		'param'=>array(
+			'table'=>'contract_doc'
+		)	
+	),
+	
+	//Asset service log
+	'new_asset_service_log'=>array(
+		'cmd'=>'CalemCmdCreateTable',
+		'param'=>array(
+			'table'=>'asset_service_log'
+		)	
+	),
+	
+	//Asset contract
+	'new_asset_contract'=>array(
+		'cmd'=>'CalemCmdCreateTable',
+		'param'=>array(
+			'table'=>'asset_contract'
 	)
+	),
 );
 
 ?>

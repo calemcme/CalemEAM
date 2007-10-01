@@ -167,7 +167,7 @@ $_CALEM_dist=array(
 	//Module list
 	'modules'=>array(
 		'admin', 'asset', 'budget', 'pm', 'inventory', 'workorder', 'requisition', 'purchase', 
-      'document','schedule', 'rcm','contact', //'vendor', 
+      'document','schedule', 'rcm','contact', 'contract', 'vendor', 
       'inspection', 'training', 'project', 'dashboard'
 	),
 	//Default SOAP return format - must be XML for unit tests to pass.
