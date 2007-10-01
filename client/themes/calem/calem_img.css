@@ -34,6 +34,7 @@
 .ImgCalemTraining	{background-image:url("icons/cd.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
 .ImgCalemContact	{background-image:url("icons/vcard.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
 .ImgCalemVendor	{background-image:url("icons/group_gear.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
+.ImgCalemContract	{background-image:url("icons/page_green.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
 .ImgCalemProject	{background-image:url("icons/page.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
 .ImgCalemReq	{background-image:url("icons/script_gear.png");background-position:0px 0px;background-repeat:no-repeat;width:16px;height:16px;overflow:hidden;}
 /* generic bar */
