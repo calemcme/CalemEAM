@@ -16,13 +16,14 @@
  * All Rights Reserved.
  
  * Contributor(s): 
- */ 
+ */
 
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $data=array(
-	'doc_access_public'=>array('fixed'=>1),
-	'doc_access_app'=>array('fixed'=>1)
+   'ct_sla'=>array('fixed'=>1),
+   'ct_oem'=>array('fixed'=>0),
+   'ct_other'=>array('fixed'=>0)   
 );
 ?>
