@@ -15,28 +15,22 @@
  * All Rights Reserved.
  
  * Contributor(s): 
- */
- 
+ */ 
 
 /**
- * CalemVendorBo - business logic
+ * Admin module menu
  */
-function CalemVendorBo() {
-}
 
-CalemVendorBo._details = ['contract', 'in_vendor', 'po', 'asset', 'users', 'req_item', 'contract_doc', 'contract_contact'];
+//Modules Form
 
-CalemVendorBo.getInstance =
-function() {
-	if (!CalemVendorBo.singleton) {
-		CalemVendorBo.singleton = new CalemVendorBo();
-	}
-	return CalemVendorBo.singleton;
-}
+// forms
+CalemMenuDef['CalemVendorFormList'] = {
+	id: 'CalemVendorFormList',
+	title: 'vendor',
+	icon: 'CalemVendor',
+	disIcon: null,
+	tooltip: null, 
+	enabled: true,		   
+	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}
+};
 
-//Asset deletion check
-CalemVendorBo.prototype.canDelete =
-function(rec, callback) {
-	var boUtil=CalemBoUtil.getInstance();
-	boUtil.canDeleteByLookup(CalemVendorBo._details, 'vendor_id', rec.id, callback);
-}

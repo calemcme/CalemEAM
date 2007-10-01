@@ -15,28 +15,18 @@
  * All Rights Reserved.
  
  * Contributor(s): 
- */
- 
+ */ 
 
 /**
- * CalemVendorBo - business logic
+ * CalemVendorContactFormNew
  */
-function CalemVendorBo() {
+function CalemVendorContactFormNew(parent, formId, data) {
+	if (arguments.length==0) return;
+	CalemFormNew.call(this, parent, formId, data);
 }
 
-CalemVendorBo._details = ['contract', 'in_vendor', 'po', 'asset', 'users', 'req_item', 'contract_doc', 'contract_contact'];
+CalemVendorContactFormNew.prototype = new CalemFormNew;
+CalemVendorContactFormNew.prototype.constructor = CalemVendorContactFormNew;
 
-CalemVendorBo.getInstance =
-function() {
-	if (!CalemVendorBo.singleton) {
-		CalemVendorBo.singleton = new CalemVendorBo();
-	}
-	return CalemVendorBo.singleton;
-}
-
-//Asset deletion check
-CalemVendorBo.prototype.canDelete =
-function(rec, callback) {
-	var boUtil=CalemBoUtil.getInstance();
-	boUtil.canDeleteByLookup(CalemVendorBo._details, 'vendor_id', rec.id, callback);
-}
+CalemVendorContactFormNew.prototype.toString = function() { return "CalemVendorContactFormNew";}
+ 

@@ -15,28 +15,27 @@
  * All Rights Reserved.
  
  * Contributor(s): 
- */
- 
+ */ 
 
 /**
- * CalemVendorBo - business logic
+ * Admin module
  */
-function CalemVendorBo() {
-}
-
-CalemVendorBo._details = ['contract', 'in_vendor', 'po', 'asset', 'users', 'req_item', 'contract_doc', 'contract_contact'];
-
-CalemVendorBo.getInstance =
-function() {
-	if (!CalemVendorBo.singleton) {
-		CalemVendorBo.singleton = new CalemVendorBo();
+CalemModuleDef["modCalemVendor"]= {
+	CalemModuleInfo: {
+      id:"modCalemVendor",
+      icon:"CalemVendor",
+      defaultMenu: 'CalemVendorFormList',
+      toolBar: {
+        CalemToolBarInfo: {
+        	  type: 'CalemToolBar',
+        	  layout: ['modCalemVendor', 'sep', 'CalemVendorFormList'],
+        	  list: [
+	         {CalemLabelInfo: {id: 'modCalemVendor', className: 'CalemModuleLabel'}},
+	         
+	         {CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
+	         
+	         {CalemMenuItemInfo: {id: 'CalemVendorFormList'}}
+	      ] }
 	}
-	return CalemVendorBo.singleton;
-}
-
-//Asset deletion check
-CalemVendorBo.prototype.canDelete =
-function(rec, callback) {
-	var boUtil=CalemBoUtil.getInstance();
-	boUtil.canDeleteByLookup(CalemVendorBo._details, 'vendor_id', rec.id, callback);
-}
+	}
+};
