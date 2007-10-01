@@ -56,17 +56,6 @@ CalemMenuDef['CalemTaxCodeFormList'] = {
 	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}
 };
 
-//vendor
-CalemMenuDef['CalemVendorFormList'] = {
-	id: 'CalemVendorFormList',
-	title: 'vendor',
-	icon: 'CalemPo',
-	disIcon: null,
-	tooltip: null, 
-	enabled: true,		   
-	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}
-};
-
 //poAddress
 CalemMenuDef['CalemPoAddressFormList'] = {
 	id: 'CalemPoAddressFormList',

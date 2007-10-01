@@ -29,7 +29,6 @@ $_CALEM_scripts=array(
 			
 			'/modules/purchase/bo/CalemPoBo.js',
 			'/modules/purchase/bo/CalemTaxCodeBo.js',
-			'/modules/purchase/bo/CalemVendorBo.js',
 			'/modules/purchase/bo/CalemPoAddressBo.js',
 			
 			 //Menu
@@ -74,14 +73,6 @@ $_CALEM_scripts=array(
          '/modules/purchase/form/view/CalemTaxRateViewNewDef.js',
          '/modules/purchase/form/view/CalemTaxRateViewEditDef.js',
          '/modules/purchase/form/view/CalemTaxRateViewReadDef.js',
-         
-         //Vendor 
-         '/modules/purchase/form/view/CalemVendorViewListDef.js',
-         '/modules/purchase/form/view/CalemVendorViewLookupDef.js',
-         '/modules/purchase/form/view/CalemVendorViewNewDef.js',
-         '/modules/purchase/form/view/CalemVendorViewReadDef.js',
-         '/modules/purchase/form/view/CalemVendorViewEditDef.js',
-         '/modules/purchase/form/view/CalemVendorViewSearchDef.js',
          
          //Address 
          '/modules/purchase/form/view/CalemPoAddressViewListDef.js',
@@ -138,13 +129,6 @@ $_CALEM_scripts=array(
          '/modules/purchase/form/controller/CalemTaxRateFormNew.js',
          '/modules/purchase/form/controller/CalemTaxRateFormEdit.js',
          '/modules/purchase/form/controller/CalemTaxRateFormRead.js',
-         
-         //Vendor
-         '/modules/purchase/form/controller/CalemVendorFormList.js',
-         '/modules/purchase/form/controller/CalemVendorFormRead.js',
-         '/modules/purchase/form/controller/CalemVendorFormNew.js',
-         '/modules/purchase/form/controller/CalemVendorFormEdit.js',
-         '/modules/purchase/form/controller/CalemVendorFormLookup.js',
          
          //PoAddress
          '/modules/purchase/form/controller/CalemPoAddressFormList.js',
