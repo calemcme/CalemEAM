@@ -18,62 +18,39 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $_CALEM_table=array(
-    'table_name'=>'vendor',
+    'table_name'=>'vendor_contact',
     'module'=>'modCalemVendor',
-    'cache_type'=>'memory',
-    'order_by'=>array('field'=>'vendor', 'order'=>'ASC'),
+    'cache_type'=>'database',
+    'order_by'=>array('field'=>'contact_id', 'order'=>'ASC'),
     'primary_key'=>array(
     	'id'
     ),
-    'unique_indexes'=>array(
-    	'uidx_vendor'=>array('vendor'),
-    ),
-    'lookup_mapping'=>array(
-    	'field'=>'id',
-		'primary'=>'vendor'
+    'indexes'=>array(
+    	'idx_vendor_contact_v'=>array('vendor_id'),
+    	'idx_vendor_contact_c'=>array('contact_id')
     ),
     'fields'=>array(
     	'id'=>array(
     		'type'=>'guid'  		
     	),
-    	'vendor'=>array(
-    		'type'=>'varchar',
-    		'length'=>30,
+    	'vendor_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'vendor',
     		'required'=>true
     	),
-    	'tax_code_id'=>array(
+    	'contact_id'=>array(
     		'type'=>'guid',
-    		'lookup'=>'tax_code'
-    	),
-    	'status_id'=>array(
-    		'type'=>'guid',
-    		'lookup'=>'vendor_status'
-    	),
-    	'owner_user_id'=>array(
-    		'type'=>'guid',
-    		'lookup'=>'users'
+    		'lookup'=>'contact',
+    		'required'=>true
     	),
     	'note'=>array(
     		'type'=>'varchar',
     		'length'=>76
     	), 
-    	'contact_id'=>array(
-    		'type'=>'guid',
-    		'lookup'=>'contact'
-    	),
-    	'address'=>array(
-    		'type'=>'varchar',
-    		'length'=>512,
-    		'label'=>'vendor_address'
-    	),
-    	'comment'=>array(
-    		'type'=>'text'
-    	),
     	'modified_time'=>array(
     		'type'=>'datetime'
     	),
