@@ -137,7 +137,7 @@ CalemConf["desktop_modView"] = {
 	yOff: 2,
 	xPad: 2,
 	yPad: 2,
-	modViewWidth:150, modBarHeight:450, 
+	modViewWidth:150, modBarHeight:500, 
    minModSumHeight: 40, minModWidth: 100, redrawDelay:400, sashLimit: 3
 };
 
@@ -721,7 +721,7 @@ CalemConf['registry_manager'] = {impl:"CalemRegistry", names:['registry_module']
 CalemConf["registry_module"]={
 	   loader: 'loadModules',
 	   names: ['modCalemDash', 'modCalemWo', 'modCalemSched', 'modCalemAsset', 'modCalemPm', 
-	           'modCalemIn', 'modCalemReq', 'modCalemPo', 'modCalemVendor', 'modCalemRcm',
+	           'modCalemIn', 'modCalemReq', 'modCalemPo', 'modCalemContract', 'modCalemVendor', 'modCalemRcm',
 	           'modCalemAdmin', 'modCalemProject', 'modCalemDoc', 'modCalemContact', 
 	           'modCalemBudget', 'modCalemInspection','modCalemTraining'
 	           ] };

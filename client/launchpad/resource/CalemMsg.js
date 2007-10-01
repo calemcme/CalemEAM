@@ -355,6 +355,7 @@ CalemMsg["modCalemSched"] = "Schedule";
 CalemMsg["modCalemRcm"] = "RCM";
 CalemMsg["modCalemInspection"] = "Inspection";
 CalemMsg["modCalemContact"] = "Contact";
+CalemMsg["modCalemContract"] = "Contract";
 CalemMsg["modCalemVendor"] = "Vendor";
 CalemMsg["modCalemProject"] = "Project";
 CalemMsg["modCalemTraining"] = "Training";
@@ -793,6 +794,16 @@ CalemMsg["asset_type"] = "Asset type";
 CalemMsg["type_asset"] = "Type";
 CalemMsg["asset_type_list"] = "Asset type";
 
+CalemMsg["asset_service_log"] = "Service log";
+CalemMsg["to_location_id"] = "New location";
+CalemMsg["from_location_id"] = "Prev. location";
+CalemMsg["to_parent_id"] = "New Parent";
+CalemMsg["from_parent_id"] = "Prev. Parent";
+CalemMsg["to_owner_id"] = "New owner";
+CalemMsg["from_owner_id"] = "Prev. owner";
+
+CalemMsg["asset_contract"] = "Contract";
+
 CalemMsg["asset_category"] = "Asset category";
 CalemMsg["as_cat_equipment"] = "Equipment";
 CalemMsg["as_cat_building"] = "Building";
@@ -906,6 +917,44 @@ CalemMsg["cnt_manufacturer"] = "Manufacturer";
 CalemMsg["cnt_partner"] = "Partner";
 CalemMsg["cnt_tenant"] = "Tenant";
 CalemMsg["cnt_other"] = "Other";
+
+CalemMsg["tab_vendor_main"] = "Main";
+CalemMsg["tab_vendor_contact"] = "Contact";
+CalemMsg["tab_vendor_misc"] = "Misc";
+
+CalemMsg["tab_contract_main"] = "Main";
+CalemMsg["tab_contract_misc"] = "Misc";
+CalemMsg["tab_contract_contact"] = "Contact";
+CalemMsg["tab_contract_doc"] = "Document";
+
+CalemMsg["vendor_list"] = "Vendor list";
+CalemMsg["contract_list"] = "Contract list";
+
+CalemMsg["vendor"] = "Vendor";
+CalemMsg["vendor_address"] = "Address";
+CalemMsg["contact_id"] = "Contact";
+
+CalemMsg["vendor_contact"] = "Contact";
+
+CalemMsg["contract"] = "Contract";
+
+CalemMsg["contract_contact"] = "Contact";
+
+CalemMsg["contract_doc"] = "Document";
+
+CalemMsg["vendor_status"] = "Status";
+CalemMsg["vds_active"] = "Active";
+CalemMsg["vds_inactive"] = "Inactive";
+
+CalemMsg["contract_status"] = "Status";
+CalemMsg["cs_valid"] = "Valid";
+CalemMsg["cs_expired"] = "Expired";
+CalemMsg["cs_cancelled"] = "Cancelled";
+
+CalemMsg["contract_type"] = "Contract type";
+CalemMsg["ct_sla"] = "SLA";
+CalemMsg["ct_oem"] = "OEM";
+CalemMsg["ct_other"] = "Other";
 
 
 CalemMsg["dash_title"] = "Dashboard";
@@ -1356,10 +1405,6 @@ CalemMsg["tax_code"] = "Tax code";
 CalemMsg["tax_rate_total"] = "Tax rate";
 
 CalemMsg["tax_rate"] = "Tax rate";
-
-CalemMsg["vendor"] = "Vendor";
-CalemMsg["vendor_address"] = "Address";
-CalemMsg["contact_id"] = "Contact";
 
 CalemMsg["po_address"] = "Address";
 CalemMsg["type_po_address"] = "Type";
