@@ -15,36 +15,26 @@
  * All Rights Reserved.
  
  * Contributor(s): 
- */
- 
+ */ 
 
 /**
  * Admin module
  */
-CalemModuleDef["modCalemPo"]= {
+CalemModuleDef["modCalemContract"]= {
 	CalemModuleInfo: {
-      id:"modCalemPo",
-      icon:"CalemPo",
-      defaultMenu: 'CalemPoMineFormList',
+      id:"modCalemContract",
+      icon:"CalemContract",
+      defaultMenu: 'CalemContractFormList',
       toolBar: {
         CalemToolBarInfo: {
         	  type: 'CalemToolBar',
-        	  layout: ['modCalemPo', 'sep', 'CalemPoMineFormList', 'CalemPoOpenForms'],
+        	  layout: ['modCalemVendor', 'sep', 'CalemContractFormList'],
         	  list: [
-	         {CalemLabelInfo: {id: 'modCalemPo', className: 'CalemModuleLabel'}},
+	         {CalemLabelInfo: {id: 'modCalemVendor', className: 'CalemModuleLabel'}},
 	         
 	         {CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
 	         
-	         {CalemMenuItemInfo: {id: 'CalemPoMineFormList'}},
-	         
-	         {CalemMenuInfo: {
-	      		menuButton: {CalemMenuButtonInfo: {id: 'CalemPoOpenForms'}},
-		      	menuList: [ {CalemMenuItemInfo: {id: 'CalemPoFormList'}},
-		      	            {CalemMenuItemInfo: {id: 'CalemTaxCodeFormList'}},
-		      					{CalemMenuItemInfo: {id: 'CalemPoAddressFormList'}}
-		      	      ]
-	      		}
-	      	}
+	         {CalemMenuItemInfo: {id: 'CalemContractFormList'}}
 	      ] }
 	}
 	}
