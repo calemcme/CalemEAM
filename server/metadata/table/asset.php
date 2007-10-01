@@ -39,6 +39,9 @@ $_CALEM_table=array(
     		'asset_no'
     	)
     ),
+    'indexes'=>array(
+    	'idx_asset_vendor'=>array('vendor_id')
+    ),
     'lookup_mapping'=>array(
     	'field'=>'id',
 		'primary'=>'asset_no'

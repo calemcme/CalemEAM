@@ -18,62 +18,52 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $_CALEM_table=array(
-    'table_name'=>'vendor',
-    'module'=>'modCalemVendor',
-    'cache_type'=>'memory',
-    'order_by'=>array('field'=>'vendor', 'order'=>'ASC'),
+    'table_name'=>'asset_contract',
+    'module'=>'modCalemAsset',
+    'cache_type'=>'database',
     'primary_key'=>array(
     	'id'
     ),
-    'unique_indexes'=>array(
-    	'uidx_vendor'=>array('vendor'),
-    ),
-    'lookup_mapping'=>array(
-    	'field'=>'id',
-		'primary'=>'vendor'
+    'order_by'=>array('field'=>'contract_id', 'order'=>'DESC'),
+    'indexes'=>array(
+    	'idx_asset_contract_cr'=>array('contract_id'),
+    	'idx_asset_asset'=>array('asset_id')
     ),
     'fields'=>array(
     	'id'=>array(
     		'type'=>'guid'  		
     	),
-    	'vendor'=>array(
-    		'type'=>'varchar',
-    		'length'=>30,
+    	'asset_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'asset',
     		'required'=>true
     	),
-    	'tax_code_id'=>array(
+    	'contract_id'=>array(
     		'type'=>'guid',
-    		'lookup'=>'tax_code'
-    	),
-    	'status_id'=>array(
-    		'type'=>'guid',
-    		'lookup'=>'vendor_status'
-    	),
-    	'owner_user_id'=>array(
-    		'type'=>'guid',
-    		'lookup'=>'users'
+    		'lookup'=>'contract',
+    		'required'=>true
     	),
     	'note'=>array(
     		'type'=>'varchar',
     		'length'=>76
-    	), 
-    	'contact_id'=>array(
-    		'type'=>'guid',
-    		'lookup'=>'contact'
     	),
-    	'address'=>array(
-    		'type'=>'varchar',
-    		'length'=>512,
-    		'label'=>'vendor_address'
+    	'status_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'contract_status'
+    	),
+    	'start_date'=>array(
+    		'type'=>'date'
+    	),
+    	'end_date'=>array(
+    		'type'=>'date'
     	),
     	'comment'=>array(
-    		'type'=>'text'
-    	),
+    	    'type'=>'text'
+    	 ),
     	'modified_time'=>array(
     		'type'=>'datetime'
     	),
@@ -87,7 +77,7 @@ $_CALEM_table=array(
     	'created_id'=>array(
     		'type'=>'guid',
     		'lookup'=>'users'
-    	)    	    
-    ) //End of fields list    	
+    	)    	
+    ) //End of fields list    
 )
 ?>

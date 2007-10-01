@@ -18,76 +18,75 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $_CALEM_table=array(
-    'table_name'=>'vendor',
-    'module'=>'modCalemVendor',
-    'cache_type'=>'memory',
-    'order_by'=>array('field'=>'vendor', 'order'=>'ASC'),
+    'table_name'=>'asset_service_log',
+    'module'=>'modCalemAsset',
+    'cache_type'=>'database',
     'primary_key'=>array(
     	'id'
     ),
-    'unique_indexes'=>array(
-    	'uidx_vendor'=>array('vendor'),
-    ),
-    'lookup_mapping'=>array(
-    	'field'=>'id',
-		'primary'=>'vendor'
+    'order_by'=>array('field'=>'created_time', 'order'=>'DESC'),
+    'indexes'=>array(
+    	'idx_asset_status_log'=>array('asset_id'),
+    	'idx_asset_status_time'=>array('created_time')
     ),
     'fields'=>array(
     	'id'=>array(
     		'type'=>'guid'  		
     	),
-    	'vendor'=>array(
-    		'type'=>'varchar',
-    		'length'=>30,
-    		'required'=>true
-    	),
-    	'tax_code_id'=>array(
+    	'asset_id'=>array(
     		'type'=>'guid',
-    		'lookup'=>'tax_code'
+    		'lookup'=>'asset',
+    		'md'=>true
     	),
-    	'status_id'=>array(
+    	'from_status_id'=>array(
     		'type'=>'guid',
-    		'lookup'=>'vendor_status'
-    	),
-    	'owner_user_id'=>array(
-    		'type'=>'guid',
-    		'lookup'=>'users'
-    	),
-    	'note'=>array(
-    		'type'=>'varchar',
-    		'length'=>76
+    		'lookup'=>'asset_status'
     	), 
-    	'contact_id'=>array(
+    	'to_status_id'=>array(
     		'type'=>'guid',
-    		'lookup'=>'contact'
-    	),
-    	'address'=>array(
-    		'type'=>'varchar',
-    		'length'=>512,
-    		'label'=>'vendor_address'
-    	),
-    	'comment'=>array(
-    		'type'=>'text'
-    	),
-    	'modified_time'=>array(
-    		'type'=>'datetime'
-    	),
-    	'modified_id'=>array(
+    		'lookup'=>'asset_status'
+    	),  
+    	'from_location_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'asset'
+    	), 
+    	'to_location_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'asset'
+    	), 
+    	'from_parent_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'asset'
+    	), 
+    	'to_parent_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'asset'
+    	), 
+    	'from_owner_id'=>array(
     		'type'=>'guid',
     		'lookup'=>'users'
+    	), 
+    	'to_owner_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'users'
+    	), 
+    	'changed_by_id'=>array(
+    		'type'=>'guid',
+    		'lookup'=>'users',
+    		'required'=>true
     	),
     	'created_time'=>array(
     		'type'=>'datetime'
     	),
-    	'created_id'=>array(
-    		'type'=>'guid',
-    		'lookup'=>'users'
-    	)    	    
+    	'comment'=>array(
+    		'type'=>'text',
+    		'required'=>true
+    	)
+    	    
     ) //End of fields list    	
 )
 ?>
