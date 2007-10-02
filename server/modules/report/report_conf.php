@@ -28,6 +28,7 @@
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $_CALEM_dist['report_conf']=array(
+	'logo'=>'customlogo.png',
    'timezone'=>array(
    	'std'=>'(GMT-06.00) Central Time (US & Canada)',
    	'(GMT-06.00) Central Time (US & Canada)'=>array(
