@@ -101,11 +101,12 @@ CalemConf['desktop_logo'] = {
 /** Desktop toolbar */
 CalemConf["desktop_exitToolBar"]= {
 	posInfo: {parentId: 'theme_headline_right'},
-	extraInfo: {helpUrl: "http://www.calemeam.com"},
+	extraInfo: {helpUrl: "http://www.calemeam.com/apps/wiki"},
 	tbDef: {
 		CalemToolBarInfo: {
-			      layout: ['CalemLogout', 'CalemHelp'],
+			      layout: ['CalemUserFormReadMine', 'CalemLogout', 'CalemHelp'],
 					list: [
+					   {CalemButtonInfo: {id: 'CalemUserFormReadMine'}},
 						{CalemButtonInfo: {id: 'CalemLogout'}},	
 						{CalemButtonInfo: {id: 'CalemHelp'}}]
 	}
