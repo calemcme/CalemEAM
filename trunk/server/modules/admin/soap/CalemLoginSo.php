@@ -84,7 +84,7 @@ class CalemLoginSo extends CalemSoapRequest {
 			 	$theme=$_CALEM_conf['client_theme'];
 			}
    		//configure session settings
-   		$ses->set('setting', array('lang'=>$lang, 'theme'=>$theme));
+   		$ses->set('setting', array('lang'=>$lang, 'theme'=>$theme, 'login_time'=>mktime()));
 			$ses->set('user', $userDbo->getRow()); //Store off the user.
 			$ses->save();
 		} 
