@@ -72,7 +72,8 @@ $_CALEM_table=array(
     		'label'=>'vendor_address'
     	),
     	'comment'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+    		'label'=>'vendor_comment'
     	),
     	'modified_time'=>array(
     		'type'=>'datetime'

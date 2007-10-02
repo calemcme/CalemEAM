@@ -61,7 +61,8 @@ $_CALEM_table=array(
     		'lookup'=>'rcm_cause_type'
     	),
     	'description'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+            'label'=>'action_description'
     	),
     	'modified_time'=>array(
     		'type'=>'datetime'

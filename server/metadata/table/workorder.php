@@ -62,7 +62,8 @@ $_CALEM_table=array(
     	),
     	'description'=>array(
     		'type'=>'text',
-    		'required'=>true
+    		'required'=>true,
+    		'label'=>'wo_description'
     	),
     	'asset_id'=>array(
     		'type'=>'guid',

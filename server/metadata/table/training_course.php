@@ -49,7 +49,8 @@ $_CALEM_table=array(
     		'required'=>true
     	),
     	'description'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+            'label'=>'course_description'
     	),
     	'type_id'=>array(
     		'type'=>'guid',

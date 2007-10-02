@@ -175,6 +175,10 @@ $_CALEM_table=array(
     	'depreciation_rate'=>array(
     		'type'=>'double'
     	),
+    	'description'=>array(
+    		'type'=>'text',
+    		'label'=>'asset_description'
+    	),
     	'modified_time'=>array(
     		'type'=>'datetime'
     	),

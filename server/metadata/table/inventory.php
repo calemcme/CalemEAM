@@ -143,6 +143,10 @@ $_CALEM_table=array(
     		'type'=>'guid',
     		'lookup'=>'costcode'
     	),
+    	'description'=>array(
+    		'type'=>'text',
+    		'label'=>'in_description'
+    	),
     	'modified_time'=>array(
     		'type'=>'datetime'
     	),

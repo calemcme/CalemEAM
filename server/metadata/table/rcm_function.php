@@ -54,7 +54,8 @@ $_CALEM_table=array(
     		'required'=>true
     	),
     	'description'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+            'label'=>'function_description'
     	),
     	'modified_time'=>array(
     		'type'=>'datetime'

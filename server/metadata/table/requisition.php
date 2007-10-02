@@ -56,7 +56,8 @@ $_CALEM_table=array(
     		'required'=>true
     	),
     	'description'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+    		'label'=>'req_description'
     	),
     	'priority_id'=>array(
     		'type'=>'guid',

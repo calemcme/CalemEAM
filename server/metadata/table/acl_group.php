@@ -43,8 +43,7 @@ $_CALEM_table=array(
     	'field'=>'id',
 		'primary'=>'acl_group',
 		'extra'=>array(
-	    	'acl_group',
-	    	'description',
+	    	'acl_group'
 	    )
     ),
     'fields'=>array(

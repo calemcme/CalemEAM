@@ -50,7 +50,8 @@ $_CALEM_table=array(
     	),
     	'description'=>array(
     		'type'=>'text',
-    		'required'=>true
+    		'required'=>true,
+    		'label'=>'pm_description'
     	),
     	'status_id'=>array(
     		'type'=>'guid',

@@ -49,7 +49,8 @@ $_CALEM_table=array(
     		'required'=>true
     	),
     	'description'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+            'label'=>'certificate_description'
     	),
     	'days_valid'=>array(
     		'type'=>'int'
