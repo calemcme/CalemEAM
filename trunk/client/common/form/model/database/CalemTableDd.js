@@ -442,13 +442,14 @@ function(fld) {
 CalemTableDd.prototype._getFieldLabel =
 function(fld) {
 	var msg;
-	var msgId=this._allTableDef.fields[fld]['label'];
-	if (msgId) {
-		msg= CalemMsg.getMsg(msgId, true);
-	} else {
-		msg=CalemMsg.getMsg(fld, true); //Try out the field name itself.
+	var msgId=this.getLabelId(fld);
+	return CalemMsg.getMsg(msgId, true);
 	}
-	return msg;
+
+CalemTableDd.prototype.getLabelId =
+function(fld) {
+	var id=this._allTableDef.fields[fld]['label'];
+	return (id ? id : fld);
 }
 
 //System fields are internal fields that should not be displayed.

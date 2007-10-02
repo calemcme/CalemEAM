@@ -60,7 +60,7 @@ function() {
 
 CalemFieldLabelDesignRender.prototype.getLabelId =
 function() {
-	return this._field;
+	return this._modelItem.getTableDd().getLabelId(this._field);
 }
 
 CalemFieldLabelDesignRender.prototype.onLabelChanged =

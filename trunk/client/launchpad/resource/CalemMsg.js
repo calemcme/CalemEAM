@@ -744,6 +744,7 @@ CalemMsg["parent_asset"] = "Parent asset";
 CalemMsg["location_asset"] = "Location asset";
 CalemMsg["owner_user_id"] = "Owner user";
 CalemMsg["asset_photo"] = "Asset photo";
+CalemMsg["asset_description"] = "Description";
 
 CalemMsg["asset_downtime"] = "Asset downtime";
 CalemMsg["start_time"] = "Start time";
@@ -831,6 +832,8 @@ CalemMsg["as_dep_other"] = "Other";
 CalemMsg["depreciation_time"] = "Depreciation time";
 CalemMsg["as_dep_annual"] = "Annually";
 CalemMsg["as_dep_quarter"] = "Quarterly";
+
+CalemMsg["duration_days"] = "Days";
 
 CalemMsg["downtime_type"] = "Downtime Type";
 CalemMsg["as_dt_emergency"] = "Emergency";
@@ -933,10 +936,12 @@ CalemMsg["contract_list"] = "Contract list";
 CalemMsg["vendor"] = "Vendor";
 CalemMsg["vendor_address"] = "Address";
 CalemMsg["contact_id"] = "Contact";
+CalemMsg["vendor_comment"] = "Comment";
 
 CalemMsg["vendor_contact"] = "Contact";
 
 CalemMsg["contract"] = "Contract";
+CalemMsg["contract_comment"] = "Comment";
 
 CalemMsg["contract_contact"] = "Contact";
 
@@ -1073,6 +1078,7 @@ CalemMsg["max_level"] = "Max";
 CalemMsg["reorder_point"] = "Reorder point";
 CalemMsg["reorder_qty"] = "Reorder qty";
 CalemMsg["in_order_notification"] = "Order notification";
+CalemMsg["in_description"] = "Description";
 
 CalemMsg["in_stock"] = "Stock";
 CalemMsg["location_id"] = "Location";
@@ -1257,6 +1263,7 @@ CalemMsg["duration_hours"] = "Duration (hours)";
 CalemMsg["release_schedule"] = "Release schedule";
 CalemMsg["labor_hours"] = "Labor hours";
 CalemMsg["downtime_hours"] = "Downtime hours";
+CalemMsg["pm_description"] = "Description";
 
 CalemMsg["pm_labor"] = "Labor";
 CalemMsg["crew_size"] = "Crew size";
@@ -1349,6 +1356,7 @@ CalemMsg["percent_done"] = "% complete";
 CalemMsg["sched_end_time"] = "Schedule end";
 CalemMsg["actual_end_time"] = "Actual end";
 CalemMsg["actual_hours"] = "Actual hours";
+CalemMsg["project_comment"] = "Comment";
 
 CalemMsg["project_type"] = "Project type";
 CalemMsg["type_project"] = "Type";
@@ -1487,18 +1495,22 @@ CalemMsg["tab_rcm_consequence"] = "Consequence";
 CalemMsg["rcm_failure"] = "Failure";
 CalemMsg["failure"] = "Failure";
 CalemMsg["is_evident"] = "Evident";
+CalemMsg["failure_description"] = "Description";
 
 CalemMsg["rcm_action"] = "Action";
 CalemMsg["action"] = "Action";
 CalemMsg["cause"] = "Cause";
+CalemMsg["action_description"] = "Description";
 
 CalemMsg["rcm_action_part"] = "Part";
 
 CalemMsg["rcm_consequence"] = "Consequence";
 CalemMsg["consequence"] = "Consequence";
+CalemMsg["consequence_description"] = "Description";
 
 CalemMsg["rcm_function"] = "Function";
 CalemMsg["fn_name"] = "Function";
+CalemMsg["function_description"] = "Description";
 
 CalemMsg["rcm_template"] = "RCM template";
 CalemMsg["template"] = "RCM template";
@@ -1559,6 +1571,7 @@ CalemMsg["req_total"] = "Req total";
 CalemMsg["due_date"] = "Due date";
 CalemMsg["req_next_user"] = "Next assigned to";
 CalemMsg["req_next_note"] = "Assignment note";
+CalemMsg["req_description"] = "Description";
 
 CalemMsg["req_status_log"] = "Status log";
 
@@ -1639,6 +1652,7 @@ CalemMsg["training_codes"] = "Codes";
 CalemMsg["training"] = "Training";
 CalemMsg["instructor_user_id"] = "Instructor user";
 CalemMsg["instructor_contact_id"] = "Instructor contact";
+CalemMsg["training_description"] = "Description";
 
 CalemMsg["training_user"] = "Training user";
 
@@ -1647,12 +1661,14 @@ CalemMsg["training_status"] = "Status";
 CalemMsg["training_certificate"] = "Certificate";
 CalemMsg["certificate"] = "Certificate";
 CalemMsg["days_valid"] = "Days valid";
+CalemMsg["certificate_description"] = "Description";
 
 CalemMsg["training_course_type"] = "Course type";
 CalemMsg["course_type"] = "Type";
 
 CalemMsg["training_course"] = "Course";
 CalemMsg["course"] = "Course";
+CalemMsg["course_description"] = "Description";
 
 CalemMsg["training_status"] = "Status";
 CalemMsg["trns_complete"] = "Complete";
@@ -1795,7 +1811,7 @@ CalemMsg["ot_factor"] = "O.T. factor";
 
 CalemMsg["workorder"] = "Work order";
 CalemMsg["wo_no"] = "Wo no.";
-CalemMsg["description"] = "Description";
+CalemMsg["wo_description"] = "Description";
 CalemMsg["asset_note"] = "Asset note";
 CalemMsg["orig_contact_id"] = "Contact requested";
 CalemMsg["orig_user_id"] = "User requested";
@@ -1852,10 +1868,12 @@ CalemMsg["seq"] = "Seq #";
 CalemMsg["completed"] = "Completed";
 CalemMsg["completed_by_id"] = "Completed by";
 CalemMsg["completed_time"] = "Time completed";
+CalemMsg["step_description"] = "Description";
 
 CalemMsg["wo_safety"] = "Safety notes";
 CalemMsg["followed"] = "Followed";
 CalemMsg["followed_by_id"] = "Followed by";
+CalemMsg["safety_description"] = "Description";
 
 CalemMsg["wo_doc"] = "Documents";
 
@@ -1948,5 +1966,8 @@ CalemMsg["vt_label"] = "Label";
 CalemMsg["label_id"] = "Label Id";
 
 CalemMsg["key_customize"] = "Customize";
+
+CalemMsg["recycle_bin"] = "Recycle bin";
+CalemMsg["rb_desc"] = "Description";
 
 //Messages of CalemMsg from CalemMsgCustom.properties
