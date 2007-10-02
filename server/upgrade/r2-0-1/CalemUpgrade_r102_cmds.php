@@ -209,7 +209,7 @@ $_CALEM_cmds = array(
 		'param'=>array(
 			'table'=>'asset_contract'
 	)
-	),
+	)
 );
 
 ?>
