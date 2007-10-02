@@ -48,7 +48,8 @@ $_CALEM_table=array(
     	),
     	'description'=>array(
     		'type'=>'text',
-    		'required'=>true
+    		'required'=>true,
+         'label'=>'safety_description'
     	),
     	'followed'=>array(
     		'type'=>'boolean'

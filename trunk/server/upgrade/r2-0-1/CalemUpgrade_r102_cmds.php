@@ -202,14 +202,29 @@ $_CALEM_cmds = array(
 			'table'=>'asset_service_log'
 		)	
 	),
-	
 	//Asset contract
 	'new_asset_contract'=>array(
 		'cmd'=>'CalemCmdCreateTable',
 		'param'=>array(
 			'table'=>'asset_contract'
 	)
+	),
+	//Asset description
+	'alter_asset_add_desc'=>array(
+		'cmd'=>'CalemCmdAddField',
+		'param'=>array(
+			'table'=>'asset',
+			'fields'=>array('description')
 	)
+	),
+	//Inventory desc
+	'alter_in_add_desc'=>array(
+		'cmd'=>'CalemCmdAddField',
+		'param'=>array(
+			'table'=>'inventory',
+			'fields'=>array('description')
+		)	
+	),
 );
 
 ?>

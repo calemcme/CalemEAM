@@ -45,10 +45,7 @@ $_CALEM_table=array(
     ),
     'lookup_mapping'=>array(
     	'field'=>'id',
-		'primary'=>'project_no',
-		'extra'=>array(
-	    	'description'
-	    )
+		'primary'=>'project_no'    
     ),
     'fields'=>array(
     	'id'=>array(
@@ -116,7 +113,8 @@ $_CALEM_table=array(
     		'lookup'=>'costcode'
     	),
     	'comment'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+    		'label'=>'project_comment'
     	),
     	'modified_time'=>array(
     		'type'=>'datetime'

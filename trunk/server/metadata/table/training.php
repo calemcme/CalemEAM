@@ -81,7 +81,8 @@ $_CALEM_table=array(
     		'lookup'=>'training_certificate'
     	),
     	'description'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+            'label'=>'training_description'
     	),
     	'modified_time'=>array(
     		'type'=>'datetime'

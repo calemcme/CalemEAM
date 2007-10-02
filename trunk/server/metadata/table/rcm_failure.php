@@ -67,7 +67,8 @@ $_CALEM_table=array(
     		'lookup'=>'rcm_template'
     	),
     	'description'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+    		'label'=>'failure_description'
     	),
     	'modified_time'=>array(
     		'type'=>'datetime'

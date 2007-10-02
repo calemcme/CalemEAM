@@ -56,7 +56,8 @@ $_CALEM_table=array(
     		'lookup'=>'rcm_pm_policy'
     	),
     	'description'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+            'label'=>'consequence_description'
     	),
     	'modified_time'=>array(
     		'type'=>'datetime'

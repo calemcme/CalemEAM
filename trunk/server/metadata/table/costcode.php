@@ -39,8 +39,7 @@ $_CALEM_table=array(
     	'field'=>'id',
 		'primary'=>'costcode',
 		'extra'=>array(
-	    	'costcode',
-	    	'description',
+	    	'costcode'
 	    )
     ),
     'fields'=>array(

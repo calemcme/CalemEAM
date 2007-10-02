@@ -45,7 +45,8 @@ $_CALEM_table=array(
     	),
     	'description'=>array(
     		'type'=>'varchar',
-    		'length'=>256
+    		'length'=>256,
+            'label'=>'rb_desc'
     	),
     	'table_name'=>array(
     		'type'=>'varchar',

@@ -80,7 +80,8 @@ $_CALEM_table=array(
     		'type'=>'date'
     	),
     	'comment'=>array(
-    		'type'=>'text'
+    		'type'=>'text',
+    		'label'=>'contract_comment'
     	),
     	'modified_time'=>array(
     		'type'=>'datetime'
