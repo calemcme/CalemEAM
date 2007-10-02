@@ -91,7 +91,7 @@ CalemDropdownFormNew.prototype.getCustomInfo =
 function() {	
 	var viewInfo=this.getViewInfo();
 	var tbDd=this._modelItem.getTableDd();
-	return CalemViewCustomInfo.createCustomLayout(viewInfo, tbDd, tbDd.getFieldList());
+	return CalemViewCustomInfo.createCustomLayout(viewInfo, tbDd, tbDd.getFieldList(), ['fixed']);
 }
 
  

@@ -48,7 +48,8 @@ function() {
 
 CalemLayoutTreeGridField.prototype.getLabelId =
 function() {
-	return this._id;
+    var dd=this._tree._controller.getModelItem().getTableDd();
+	return dd.getLabelId(this._id);
 }
 
 CalemLayoutTreeGridField.prototype.onLabelChanged =

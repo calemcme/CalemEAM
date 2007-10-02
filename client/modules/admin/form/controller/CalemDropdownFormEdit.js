@@ -71,9 +71,11 @@ function() {
 	CalemFormEdit.prototype._render.call(this);
 	var dn=this._tableDd.getOobDropdownMap();
 	if (dn[this._id] && dn[this._id]['fixed']) {
+		this._view.setFieldReadOnly('id');
+	}
+	//Do not allow fixed to change
 		this._view.setFieldReadOnly('fixed');
 	}
-}
 
 CalemDropdownFormEdit.prototype._verifyInputBo =
 function() {

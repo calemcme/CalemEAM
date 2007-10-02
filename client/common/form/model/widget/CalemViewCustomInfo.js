@@ -87,13 +87,26 @@ function(fld) {
 } 
 
 CalemViewCustomInfo.createCustomLayout =
-function(viewInfo, tableDd, fldList) {	
+function(viewInfo, tableDd, fldList, excludeList) {	
 	var ci=CalemCustomViewManager.getInstance()._getEmptyCustomInfo();
 	var tbLayout=viewInfo.getItem('toolbar').getLayout();
 	var rows=viewInfo.getLayout().getRows();
 	var colCount=viewInfo.getLayout().getColLayout().getColCount();
 	var i=0;
 	while (i < fldList.length) {
+		if (excludeList) {
+			var found=false;
+			for (var ei=0; ei<excludeList.length; ei++) {
+				if (excludeList[ei]==fldList[i]) {
+					found=true;
+					break;
+				}
+			}
+			if (found) {
+				i++;
+				continue;
+			}
+		}
 		var j=0;
 		var ar=[];
 		while (j < colCount) { 
