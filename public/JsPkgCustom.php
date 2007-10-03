@@ -47,8 +47,9 @@ require_once _CALEM_DIR_ . 'server/include/core/session/CalemSession.php';
 		   $cont=true;
 			if ($logger->isInfoEnabled()) $logger->info("Found the correct session: " . $sesReload->toString());
 			$userRow=$sesReload->get('user');
-			$lang=isset($_REQUEST[CALEM_PARAM_LANG])?$_REQUEST[CALEM_PARAM_LANG]:$_CALEM_conf['client_language'];
-			$loadmode=isset($_REQUEST[CALEM_PARAM_LOAD_MODE])?$_REQUEST[CALEM_PARAM_LOAD_MODE]:$_CALEM_conf['client_js_load_mode'];
+			$setting=$sesReload->get('setting');
+			$lang=$setting['lang'];
+			$loadmode=$setting['loadmode'];
 		}
 	}
 	if (!$cont) {
