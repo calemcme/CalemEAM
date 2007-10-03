@@ -442,6 +442,7 @@ CalemMsg["at_time"] = "At";
 CalemMsg["schedule_weekly"] = "Weekly";
 CalemMsg["schedule_weeks"] = "Every weeks";
 CalemMsg["schedule_months"] = "Every months";
+CalemMsg["schedule_days"] = "Every days";
 CalemMsg["schedule_on"] = "on";
 
 CalemMsg["dow_short_mon"] = "Mon";
@@ -477,6 +478,7 @@ CalemMsg["schedule_hours"] = "hours";
 CalemMsg["schedule_weekly_text"] = "Every week on {0}";
 CalemMsg["schedule_weeks_text"] = "Every {0} weeks on {1}";
 CalemMsg["schedule_months_text"] = "Every {0} months on {1} {2}";
+CalemMsg["schedule_days_text"] = "Every {0} days";
 
 CalemMsg["schedule_dates_from"] = "from {0}";
 CalemMsg["schedule_dates_till"] = "until {0}";

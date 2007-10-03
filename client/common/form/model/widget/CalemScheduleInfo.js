@@ -17,16 +17,16 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemScheduleInfo
  */
-function CalemScheduleInfo(selection, weekly, weeks, months, dates) {
+function CalemScheduleInfo(selection, weekly, weeks, months, dates, days) {
 	if (arguments.length==0) return;
 	this._selection=selection;
 	this._weekly=weekly;
 	this._weeks=weeks;
 	this._months=months;
+	this._days=days;
 	this._dates=dates;
 }
 
@@ -53,6 +53,7 @@ function(obj) {
 	this._weekly=CalemJson.setJson(obj.weekly);
 	this._weeks=CalemJson.setJson(obj.weeks);
 	this._months=CalemJson.setJson(obj.months);
+	this._days=CalemJson.setJson(obj.days);
 	this._dates=CalemJson.setJson(obj.dates);
 }
 
@@ -63,6 +64,7 @@ function() {
 	        (this._weekly ? [", \"weekly\": ", this._weekly.getJsonPhp()].join('') : ''), 
 	        (this._weeks  ?  [", \"weeks\": ", this._weeks.getJsonPhp()].join('') : ''),
 	        (this._months ?  [", \"months\": ", this._months.getJsonPhp()].join('') : ''),
+	        (this._days ?  [", \"days\": ", this._days.getJsonPhp()].join('') : ''),
 	        (this._dates  ?   [", \"dates\": ", this._dates.getJsonPhp()].join('') : ''), "}}"].join('');
 }
 
@@ -86,6 +88,11 @@ function() {
 	return this._months;
 }
 
+CalemScheduleInfo.prototype.getDays =
+function() {
+	return this._days;
+}
+
 CalemScheduleInfo.prototype.getDates =
 function() {
 	return this._dates;
@@ -104,13 +111,15 @@ function() {
 		obj=this._weekly;
 	} else if (this._selection=='weeks') {
 		obj=this._weeks;
-	} else {
+	} else if (this._selection=='months'){
 		obj=this._months;
+	} else if (this._selection=='days'){
+		obj=this._days;
 	}
 	if (obj) {
 		text=obj.getText();
 		var dtText= this._dates ? this._dates.getText() : null;
-		if (dtText) text=[text, ', ', dtText].join('');
+		if (dtText) text=[text, ' ', dtText].join('');
 	}
 	return text;
 }
@@ -270,6 +279,43 @@ function() {
 	if (this._freq) {
 		text=AjxMessageFormat.format(CalemMsg.getMsg('schedule_months_text'), 
 		      [this._freq, CalemMsg.getMsg(this._weekNo), CalemMsg.getMsg(this._dow)]);
+	}
+	return text;
+}
+
+/**
+ * CalemScheduleDays
+ */
+function CalemScheduleDays(freq) {
+	if (arguments.length==0) return;
+	this._freq=freq;
+}
+
+CalemScheduleDays.prototype.toString = function() {return "CalemScheduleDays";}
+CalemScheduleDays.prototype.getClassName = function() {return "CalemScheduleDays";}
+
+//Deserialize the object
+CalemScheduleDays.prototype.setJson =
+function(obj) {
+	this._freq=obj.freq;
+}
+
+//Serialization - for PHP use as well.
+CalemScheduleDays.prototype.getJsonPhp =
+function() {
+	return ["{\"CalemScheduleDays\": {\"freq\": ", (this._freq ? this._freq : 0), "}}"].join('');
+}
+
+CalemScheduleDays.prototype.getFreq =
+function() {
+	return this._freq;
+}
+
+CalemScheduleDays.prototype.getText =
+function() {
+	var text=null;
+	if (this._freq) {
+		text=AjxMessageFormat.format(CalemMsg.getMsg('schedule_days_text'), [this._freq]);
 	}
 	return text;
 }
