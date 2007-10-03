@@ -28,11 +28,11 @@ class CalemMsg {
 	private $i18nMsg;
 	private $customMsg;
 	
-	public static function getInstance($lang=null) {
+	public static function getInstance($langId=null) {
        if (!isset(self::$inst)) {
            $c = __CLASS__;
            self::$inst = new $c;
-           self::$inst->init($lang);
+           self::$inst->init($langId);
        }
        return self::$inst;
    }
@@ -42,10 +42,11 @@ class CalemMsg {
 		return $inst->getMessage($id);
 	}
 	
-	public function init($lang) {
-		$lf= $lang ? '_' . $lang : '';
+	public function init($langId) {
+		global $lang;
+		$lf= ($langId ? '_'.$langId : ($lang ? '_' . $lang : ''));
 		$fn=_CALEM_DIR_ . 'client/launchpad/resource/CalemMsg' . $lf . '.phpo';
-		$dfn=_CALEM_DIR_ . 'client/launchpad/resource/CalemMsg' . $lf . '.phpo';
+		$dfn=_CALEM_DIR_ . 'client/launchpad/resource/CalemMsg' . '.phpo';
 		$fn = file_exists($fn) ? $fn : $dfn;
 		$cn=file_get_contents($fn);
 		$this->msg=unserialize($cn);
