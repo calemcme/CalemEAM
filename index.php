@@ -41,13 +41,14 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 	$sid=isset($_REQUEST['sessionId'])?$_REQUEST['sessionId']:null;
 	if ($logger->isDebugEnabled()) {
 		require_once _CALEM_DIR_ . 'server/include/util/CalemHttpHelper.php';
-		$logger->debug("sid=$sid; aid=" . $_REQUEST['aid']. ", Post data=" . CalemHttpHelper::getPostData());
+		$logger->debug("sid=$sid; aid=" . $_REQUEST['aid']. ", Post data: " . CalemHttpHelper::getPostData());
 	}
 	$action=isset($_REQUEST['calemAction']) ? $_REQUEST['calemAction'] : null;
 	//This is the only action supported so far so make it simple at this point.
 	if ($action) {
 		$succ=false;
 		if ($action=='LoginAction') {
+			setCookie('CALEM_LANG', $_REQUEST[CALEM_PARAM_LANG], time()+$_CALEM_conf['setting_cookie_expire']);
 			$login_username=$_REQUEST['username'];	
 			$login_password=$_REQUEST['password'];
 			require_once _CALEM_DIR_ . 'server/modules/admin/soap/CalemLoginSo.php';
@@ -93,8 +94,7 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 			$si=$sesReload->get('setting');		
 			$lang=$si['lang'];	
    		$theme = $si['theme'];
-   		//load mode
-   		$loadmode=isset($_REQUEST[CALEM_PARAM_LOAD_MODE])?$_REQUEST[CALEM_PARAM_LOAD_MODE]: $_CALEM_conf['client_js_load_mode'];
+   		$loadmode=$si['loadmode'];
 		}
 	}
 	//If session is valid load the application
@@ -103,10 +103,12 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 		//Place a cookie to remember the session Id.
 		if (!$hasCookie) {
 			$userRow=$sesReload->get('user');  
+			$locale = $lang ? $lang : NULL_LOCALE; 
 			$cookieValue="{sid: '" . $sid . "', gid: '" . $userRow['acl_group_id'] . "', uid: '" . $userRow['id'] . 
 	                     "', uname: '" . $userRow['username'] . "', full_name: '" . $userRow['full_name'] . "', admin_type_id: '" . 
-	                     $userRow['admin_type_id'] . "', locale: '" . $lang . 
+	                     $userRow['admin_type_id'] . "', locale: '" . $locale . 
 	                     "', team_id: '" . $userRow['team_id'] . "'}";
+			if ($logger->isDebugEnabled()) $logger->debug("Cookie set to: " . $cookieValue);	                     
 			setCookie('CALEM_SID', base64_encode($cookieValue));
 		}
 	} else {
