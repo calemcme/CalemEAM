@@ -718,6 +718,7 @@ CalemMsg["tab_asset_meter"] = "Meter";
 CalemMsg["tab_asset_part"] = "Part";
 CalemMsg["tab_asset_depreciation"] = "Depreciation";
 CalemMsg["tab_asset_comment"] = "Comment";
+CalemMsg["tab_asset_contract"] = "Contract";
 CalemMsg["tab_asset_misc"] = "Misc";
 
 CalemMsg["sec_asset_warranty"] = "Warranty";
