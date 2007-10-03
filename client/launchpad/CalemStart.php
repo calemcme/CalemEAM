@@ -62,7 +62,21 @@
    require _CALEM_DIR_ . 'client/launchpad/CalemJsResource.php';
    //Load custom info
    print "<script type=\"text/javascript\" src=\"" . $calemRootUrl 
-   		   . "/public/JsPkgCustom.php?sessionId=" . $sid . "&loadmode=" . $loadmode . "\"></script>";
+   		   . "/public/JsPkgCustom.php?sessionId=" . $sid . "\"></script>";
+     //prepare locale list
+     $localeList='[';
+     $bf=true;
+     foreach ($_CALEM_conf['client_lang_select'] as $desc=>$val) {
+     	  if ($bf) {
+     	  		$bf=false;
+     	  } else {
+     	  		$localeList .= ',';
+     	  }
+     	  $id=$val['id'] ? $val['id'] : NULL_LOCALE;
+     	  $localeList .= '{id: "' . $id . '", desc: "' . $desc . '"}';     	  	
+     }
+     $localeList .=']';
+     if ($logger->isDebugEnabled()) $logger->debug("localeList=" . $localeList);
 ?>	
 	<script language="JavaScript">
 		function launch() {
@@ -76,5 +90,6 @@
 		calemRequestUrl='<?php print $calemRequestUrl ?>';
 		calemSoapUrl='<?php print $calemSoapUrl ?>';
 		calemUseAlternateColor = <?php print $calemAlternateColor ?>;
+		calemLocaleList= eval(<?php print $localeList ?>);
 	   AjxCore.addOnloadListener(launch);
 	</script>

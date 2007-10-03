@@ -350,6 +350,14 @@ function() {
    //Continue initiating registry based on acl-groups.
    reg.init(regMgr.names)
    desktop.setRegistry(reg);
+   //Init locale list
+   var localeData=[];
+   for (var i=0; i< calemLocaleList.length; i++) {
+   	var obj=calemLocaleList[i];
+   	CalemMsg[obj.id]=obj.desc;
+   	localeData.push([obj.id, false]);
+   }
+   new CalemLocalCachedItem(cache, 'locale', localeData);
    //Now launchDesktop
    desktop.launchDesktop();
    return desktop;

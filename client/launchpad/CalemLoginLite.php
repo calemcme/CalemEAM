@@ -29,7 +29,7 @@
  require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
  
  //Check for user customization
- $lang=isset($_REQUEST['lang'])?$_REQUEST['lang']:$_CALEM_conf['client_language'];
+ $lang=$_COOKIE['CALEM_LANG'] ? $_COOKIE['CALEM_LANG'] : $_CALEM_conf['client_language'];
  if ($lang) {
  	if (!is_file(_CALEM_DIR_ . 'client/launchpad/resource/CalemMsg_' . $lang . ".js")) {
  		$lang=$_CALEM_conf['client_language'];
@@ -40,7 +40,8 @@
  if (!is_dir(_CALEM_DIR_ . 'client/themes/' . $theme)) {
  	 $theme=$_CALEM_conf['client_theme'];
  }
-   
+ //Debug
+ $debug=isset($_REQUEST['debug']) ? $_REQUEST['debug'] : ''; 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -232,6 +233,22 @@ function() {
 			             <td style='padding-top: 3px;'><input id='passwordEl' name='password' 
 			                         value='<?php print $login_password ?>'
 			                         size=30 class=editPassword type="password"></td></tr>
+						<tr><td align=right class=loginFieldLable><?php print CalemMsg::getMsg('language') ?>:</td>
+			             <td style='padding-top: 3px;'>
+			                  <select NAME="lang" class=editLang>
+			                     <?php
+			                        $langSelect=$_CALEM_conf['client_lang_select'];
+			                        foreach ($langSelect as $desc=>$val) {
+			                        	$id=$val['id'];
+			                        	$selected = ($id==$lang) ? ' selected ' : '';
+			                        	print '<option ' . $selected . ' value="' . $id . '">' . $desc . '</option>';	
+			                        }
+									   ?>
+									</select>
+			             </td></tr>
+			             <input type='hidden' name='loadmode' value='<?php print $loadmode?>' />
+			             <input type='hidden' name='theme' value='<?php print $theme ?>' />
+			             <input type='hidden' name='debug' value='<?php print $debug ?>' />			                         
 			         <tr><td>&nbsp;</td>
 			             <td align=left style='padding-top: 5px;'>
 			                <input name='calemAction' value='LoginAction' type='hidden'>

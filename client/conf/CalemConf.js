@@ -639,8 +639,7 @@ CalemConf['view_engine'] = {
 	//Label design
 	labelDesign: {
 		group: 'CUSTOM_SYSTEM',
-		locale: { clientMap: {def: {id: 'en'}},
-		          serverMap: {'en': {id: ''}}
+		locale: { serverMap: {'en': {id: ''}}
 		}
 	},
 	
@@ -876,9 +875,9 @@ CalemConf['form_data_change'] = {
 }
 
 /**
- * Default currency
+ * System currency
  */
-CalemConf['default_currency'] = {
+CalemConf['sys_currency'] = {
 	id: 'USD'
 }
 
