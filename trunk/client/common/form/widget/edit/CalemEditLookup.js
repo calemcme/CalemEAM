@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemEditLookup
  * This is the general edit lookup field.
@@ -223,7 +222,7 @@ function(info) {
  */
 CalemEditLookup.prototype.isValid =
 function() {
-	if (!this._validity._valid) throw CalemMsg.getMsg('lookup_invalid');
+	if (!this._validity._valid) throw (this._errorMsg+", id="+this._validity._id+", value="+this._validity._value);
 	return true;
 }
 

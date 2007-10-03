@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemEditSchedule
  * This is the time edit control
@@ -45,6 +44,7 @@ function() {
 	this._createWeeklyData();
 	this._createWeeksData();
 	this._createMonthsData();
+	this._createDaysData();
 	this._createDatesData();
 	
 	var html=new Array();
@@ -67,7 +67,6 @@ function() {
 	html[i++]=["<td class=CalemEditScheduleWeeksOnTd id=", this._weeksOn._id, "></td>"].join('');
 	html[i++]="</tr></table></td></tr>"
 	//months
-	//weeks
 	html[i++]=["<tr><td><input type='radio' class=CalemEditScheduleRadio name='schedule', id=", this._radioGroups['months']._id,
 			     ">", CalemMsg.getMsg("schedule_months"), "</td>"].join('');
 	html[i++]="<td><table class=CalemEditScheduleMonthsTable><tr>";
@@ -75,6 +74,12 @@ function() {
 	html[i++]=["<td class=CalemEditScheduleMonthsOnTextTd>", CalemMsg.getMsg("schedule_on"), "</td>"].join('');
 	html[i++]=["<td class=CalemEditScheduleMonthsOnTd id=", this._monthsOn._id, "></td>"].join('');
 	html[i++]=["<td class=CalemEditScheduleMonthsOnDowTd id=", this._monthsOnDow._id, "></td>"].join('');
+	html[i++]="</tr></table></td></tr>"
+	//days
+	html[i++]=["<tr><td><input type='radio' class=CalemEditScheduleRadio name='schedule', id=", this._radioGroups['days']._id,
+			     ">", CalemMsg.getMsg("schedule_days"), "</td>"].join('');
+	html[i++]="<td><table class=CalemEditScheduleDaysTable><tr>";
+	html[i++]=["<td class=CalemEditScheduleDaysTd id=", this._days._id, "></td>"].join('');
 	html[i++]="</tr></table></td></tr>"
 	//dates
 	html[i++]="<tr><td colSpan=2><table class=CalemEditScheduleDatesTable><tr>";
@@ -95,6 +100,7 @@ function() {
 	this._bindWeekly();
 	this._bindWeeks();
 	this._bindMonths();
+	this._bindDays();
 	this._bindDates();
 }
 
@@ -211,6 +217,32 @@ function() {
 }
 
 /**
+ * Days
+ */
+CalemEditSchedule.prototype._createDaysData =
+function() {
+	this._radioGroups['days']=new Object();
+	this._radioGroups['days']._id=Dwt.getNextId();
+	
+	this._days=new Object();
+	this._days._id=Dwt.getNextId();
+}
+ 
+CalemEditSchedule.prototype._bindDays =
+function() {
+	this._days._el= document.getElementById(this._days._id);
+	//Render integer field.
+	this._days._fld = new CalemInputField({parent: this, type: DwtInputField.INTEGER, 
+	              size: 4, errorIconStyle: CalemConf['view_engine']['field']['inputErrorIcon']});
+	this._days._fld.reparentHtmlElement(this._days._el);
+	
+	this._radioGroups['days']._enableCallback=new AjxCallback(this, this._enableDays);
+	this._radioGroups['days']._disableCallback=new AjxCallback(this, this._disableDays);
+	this._radioGroups['days']._setterCallback=new AjxCallback(this, this._setDays);
+	this._radioGroups['days']._getterCallback=new AjxCallback(this, this._getDays);
+}
+
+/**
  * Dates
  */
 CalemEditSchedule.prototype._createDatesData =
@@ -266,6 +298,7 @@ function(callback) {
 	//Now set up callback in all fields.
 	this._weeks._fld.setValidationCallback(this._vdCallbackProxy);
 	this._months._fld.setValidationCallback(this._vdCallbackProxy);
+	this._days._fld.setValidationCallback(this._vdCallbackProxy);
 	this._startDate._fld.setValidationCallback(this._vdCallbackProxy);
 	this._endDate._fld.setValidationCallback(this._vdCallbackProxy);
 } 
@@ -299,6 +332,7 @@ function() {
 	this._endDate._fld.isValid();
 	this._weeks._fld.isValid();
 	this._months._fld.isValid();
+	this._days._fld.isValid();
 	return true;
 }
 
@@ -398,6 +432,16 @@ function() {
 	this._monthsOnDow._fld.disable();
 }
 
+CalemEditSchedule.prototype._enableDays =
+function() {
+	this._days._fld.enable();
+}
+
+CalemEditSchedule.prototype._disableDays =
+function() {
+	this._days._fld.disable();
+}
+
 /**
  * Setters
  */
@@ -438,6 +482,16 @@ function(schedInfo) {
 	}	
 } 
 
+CalemEditSchedule.prototype._setDays =
+function(schedInfo) {
+	this._radioGroups['days']._el.checked=true;
+	this.onRadioClicked(true);
+	var days=schedInfo.getDays();
+	if (days) {//Continue setting.
+		this._days._fld.setValue(days.getFreq(), true);
+	}	
+} 
+
 /**
  * Getters
  */
@@ -474,6 +528,14 @@ function(schedInfo) {
 	if (!dow) dow=this._weekDays[0].id;
 	var mths=new CalemScheduleMonths(freq, weekNo, dow);
 	schedInfo._months=mths;	
+} 
+
+CalemEditSchedule.prototype._getDays =
+function(schedInfo) {
+	schedInfo._selection='days';
+	var freq=this._days._fld.getFieldValue();
+	var ds=new CalemScheduleDays(freq);
+	schedInfo._days=ds;	
 } 
 
 CalemEditSchedule.prototype._getDates =
