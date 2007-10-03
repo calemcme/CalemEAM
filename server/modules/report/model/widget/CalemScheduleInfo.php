@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
  
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -35,15 +34,17 @@ class CalemScheduleInfo {
 	protected $weekly;
 	protected $weeks;
 	protected $months;
+	protected $days;
 	protected $dates;
 	
 	protected $elements;
 	 
-	public function __construct($selection=null, $weekly=null, $weeks=null, $months=null, $dates=null) {
+	public function __construct($selection=null, $weekly=null, $weeks=null, $months=null, $dates=null, $days=null) {
 		$this->selection=$selection;
 		$this->weekly=$weekly;
 		$this->weeks=$weeks;
 		$this->months=$months;
+		$this->days=$days;
 		$this->dates=$dates;
 		$this->init();
 	}
@@ -65,6 +66,7 @@ class CalemScheduleInfo {
 		$this->weekly=CalemJson::setJson($obj['weekly']);
 		$this->weeks=CalemJson::setJson($obj['weeks']);
 		$this->months=CalemJson::setJson($obj['months']);
+		$this->days=CalemJson::setJson($obj['days']);
 		$this->dates=CalemJson::setJson($obj['dates']);
 		$this->init();
 	}
@@ -74,6 +76,7 @@ class CalemScheduleInfo {
 			'weekly'=>$this->weekly,
 			'weeks'=>$this->weeks,
 			'months'=>$this->months,
+			'days'=>$this->days,
 			'dates'=>$this->dates		
 		);	
 	}
@@ -92,6 +95,10 @@ class CalemScheduleInfo {
 	
 	public function getMonths() {
 		return $this->months;
+	}
+	
+	public function getDays() {
+		return $this->days;
 	}
 	
 	public function getDates() {
@@ -336,6 +343,40 @@ class CalemScheduleMonths implements CalemScheduleInterface {
 				$ndt=CalemText::getDateByDow($ndt, CalemScheduleWeekly::$DOW_MAP[$this->dow], true);
 			}
 		}
+		return $ndt;
+	}
+}
+	
+/**
+ * CalemScheduleDays
+ */
+class CalemScheduleDays implements CalemScheduleInterface {
+	protected $freq;
+	
+	public function __construct($freq=null) {
+		$this->freq=$freq ? $freq : 0;
+	}
+	
+	//Deserialize the object
+	public function setJson($obj) {
+		$this->freq=$obj['freq'] ? $obj['freq'] : 0;
+	}
+	
+	public function getFreq() {
+		return $this->freq;
+	}
+	
+	//Interface APIs
+	public function isValid() {
+		return true;	
+	}
+	
+	public function getNextDueDate($dt) {
+		$ndt=strtotime('+' . $this->freq . ' day', $dt);
+		return $this->adjustReleaseDate($ndt);
+	}
+	
+	public function adjustReleaseDate($ndt) {
 		return $ndt;
 	}
 }

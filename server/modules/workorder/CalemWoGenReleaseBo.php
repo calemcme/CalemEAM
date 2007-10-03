@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -31,12 +30,14 @@ require_once _CALEM_DIR_ . 'server/modules/pm/CalemPmScheduleBo.php';
 
 class CalemWoGenReleaseBo extends CalemBo {
 	protected $releaseConf;
+	protected $wogenConf;
 	protected $pmToWoConf;
 	protected $woDbo;
 	
 	public function __construct() {
 		parent::__construct();
 		global $_CALEM_conf;
+		$this->wogenConf=$_CALEM_conf['wo_conf']['wo_generation'];
 		$this->releaseConf=$_CALEM_conf['wo_conf']['wo_generation']['release_conf'];	
 		$this->pmToWoConf=$_CALEM_conf['pm_conf']['lookupWoNewFromPm'];
 		$this->woDbo=CalemFactory::getDbo('workorder');
@@ -56,6 +57,10 @@ class CalemWoGenReleaseBo extends CalemBo {
 		$woRow['time_needed']=$woRow['planned_finish_time'];
 		
 		$woRow=$this->copyPmToWo($woRow, $pmRow, $pmAssetRow);
+		//Check for minimum fields to fill if not set
+		foreach ($this->wogenConf['wo_min_default'] as $fld=>$value) {
+			if (!$woRow[$fld]) $woRow[$fld]=$value;	
+		}
 		$woRow=$this->woDbo->beforeInsert('workorder', $woRow, null, null);
 		//Start a transaction here
 		$this->woDbo->unsetId(); //So a new Id is generated
