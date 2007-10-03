@@ -376,15 +376,14 @@ function(id) {
 
 CalemViewUtil.getLocaleClient =
 function() {
-	var locale=CalemContext.getInstance().getUserInfo().locale;
-	var clientMap=CalemConf['view_engine']	['labelDesign']['locale']['clientMap'];
-	locale= locale ? locale : clientMap.def.id;
+	return CalemContext.getInstance().getUserInfo().locale;
 }
 
 CalemViewUtil.getLocaleServer =
 function(locale) {
 	var serverMap=CalemConf['view_engine']	['labelDesign']['locale']['serverMap'];
 	locale = serverMap[locale] ? serverMap[locale].id : locale;
+	return locale;
 }
 
 /**

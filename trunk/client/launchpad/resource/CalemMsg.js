@@ -335,6 +335,7 @@ CalemMsg["login_err"] = "Please enter both User name and Password to log in.";
 CalemMsg["calemeam_title"] = "CalemEAM - Open Source CMMS/EAM";
 CalemMsg["login_reqd"] = "The only action allowed is login. Action cancelled.";
 CalemMsg["splash_wait_text"] = "Loading...";
+CalemMsg["language"] = "Language";
 
 CalemMsg["exit_calemeam"] = "CalemEAM will log you out when you confirm. Select Cancel to continue use CalemEAM.";
 
@@ -620,7 +621,6 @@ CalemMsg["job_operations"] = "Operations";
 CalemMsg["job_other"] = "Other";
 
 CalemMsg["locale"] = "Locale";
-CalemMsg["locale_en"] = "English";
 
 CalemMsg["team"] = "Team";
 CalemMsg["lead_id"] = "Lead";

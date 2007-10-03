@@ -417,7 +417,7 @@ function(fld) {
 	var msg=this._getFieldLabel(fld);
 	if (msg) {
 		if (this.isSysCurrencyField(fld)) {
-			msg=[msg, " (", CalemConf['default_currency'].id, ")"].join('');
+			msg=[msg, " (", CalemConf['sys_currency'].id, ")"].join('');
 		}
 		return msg;
 	}
