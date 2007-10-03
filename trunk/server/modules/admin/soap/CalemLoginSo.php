@@ -83,8 +83,10 @@ class CalemLoginSo extends CalemSoapRequest {
    		if (!is_dir(_CALEM_DIR_ . 'client/themes/' . $theme)) {
 			 	$theme=$_CALEM_conf['client_theme'];
 			}
+			//3. loadmode
+			$loadmode=isset($_REQUEST[CALEM_PARAM_LOAD_MODE])?$_REQUEST[CALEM_PARAM_LOAD_MODE]: $_CALEM_conf['client_js_load_mode'];
    		//configure session settings
-   		$ses->set('setting', array('lang'=>$lang, 'theme'=>$theme, 'login_time'=>mktime()));
+   		$ses->set('setting', array('lang'=>$lang, 'theme'=>$theme, 'loadmode'=>$loadmode, 'login_time'=>mktime()));
 			$ses->set('user', $userDbo->getRow()); //Store off the user.
 			$ses->save();
 		} 

@@ -95,6 +95,8 @@ define('VERSION_ID', 'VERSION_ID');
 //Must have x rights for directory.
 define('DIR_WRITE_RIGHTS', 0775);
 	
+define('NULL_LOCALE', 'en');
+	
 /**
  * Configuration from the distribution. 
  * All initial configuration is defined in <code>_CALEM_dist</code> 
@@ -195,6 +197,18 @@ $_CALEM_dist=array(
 		'CalemMsg.js'=>array('AjxMsg'=>array('AjxMsg'),
                            'I18nMsg'=>array('I18nMsg'),
                            'CalemMsg'=>array('CalemMsg', 'CalemMsgCustom')),
+                           
+		'CalemMsg_en_AU.js'=>array('AjxMsg'=>array('AjxMsg'),
+                           'I18nMsg'=>array('I18nMsg', 'I18nMsg_en_AU'),
+                           'CalemMsg'=>array('CalemMsg', 'CalemMsgCustom')),
+                           
+		'CalemMsg_en_CA.js'=>array('AjxMsg'=>array('AjxMsg'),
+                           'I18nMsg'=>array('I18nMsg', 'I18nMsg_en_CA'),
+                           'CalemMsg'=>array('CalemMsg', 'CalemMsgCustom')),
+                           
+		'CalemMsg_en_GB.js'=>array('AjxMsg'=>array('AjxMsg'),
+                           'I18nMsg'=>array('I18nMsg', 'I18nMsg_en_GB'),
+                           'CalemMsg'=>array('CalemMsg', 'CalemMsgCustom')),                                                                                 
       //ch_cn
       'CalemMsg_cn.js'=> array('AjxMsg'=>array('AjxMsg_cn'),
             					'I18nMsg'=>array('I18nMsg_zh', 'I18nMsg_zh_CN'),
@@ -204,6 +218,14 @@ $_CALEM_dist=array(
             					'I18nMsg'=>array('I18nMsg_ja', 'I18nMsg_ja_JP'),
             					'CalemMsg'=>array('CalemMsg_ja', 'CalemMsgCustom_ja'))
     ),
+    //Client selection list
+    'client_lang_select'=>array(
+    	'English (US)'=>array('id'=>''),
+    	'English (Australia)'=>array('id'=>'en_AU'),
+    	'English (Canada)'=>array('id'=>'en_CA'),
+    	'English (UK)'=>array('id'=>'en_GB')
+    ),
+    'setting_cookie_expire'=>1209600, //Two weeks
    //custom items to include
    'calem_cutsom_set'=>array('.view.js', '.form.js', '.search.js', '.mod.js', '.modlist.js'),
    'calem_cutsom_design_load'=>array('.view.js.min', '.form.js.min', '.mod.js.min', '.modlist.js.min'),
