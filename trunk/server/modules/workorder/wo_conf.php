@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 /**
  * This file defined the configuration for this installation by 
  * combining the custom with the distributed installation. 
@@ -115,7 +114,12 @@ $_CALEM_dist['wo_conf']=array(
 		),
 		
 		'days_ahead'=>array('days'=>35), //supporting days only for now
-		'user_id'=>array('id'=>1000000),  //Option to use an Id or a username.
+		//Default minimums
+		'wo_min_default'=>array(
+			'orig_user_id'=>1000000,  //Option to use an Id or a username.
+			'origin_id'=>'woo_pm',
+			'priority_id'=>'wop_p4'
+		),
 		'release_past_due'=>false,
 		'scheduleBo'=>array(
 			'name'=>'CalemWoGenScheduleBo',
