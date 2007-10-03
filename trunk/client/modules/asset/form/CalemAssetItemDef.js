@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * forms
  */
@@ -119,6 +118,7 @@ CalemItemDef['CalemAssetFormMdTab']={
 			              {CalemFormLinkInfo: {id: 'CalemAssetCommentFormList', link: {CalemFieldMdInfo: {fld: 'asset_id', parentFld: 'id'}}} },
 			              {CalemFormLinkInfo: {id: 'CalemAssetMeterFormList', link: {CalemFieldMdInfo: {fld: 'asset_id', parentFld: 'id'}}} },
 			              {CalemFormLinkInfo: {id: 'CalemAssetPartFormList', link: {CalemFieldMdInfo: {fld: 'asset_id', parentFld: 'id'}}} },
+			              {CalemFormLinkInfo: {id: 'CalemAssetContractFormList', link: {CalemFieldMdInfo: {fld: 'asset_id', parentFld: 'id'}}} },
 			              {CalemFormLinkInfo: {id: 'CalemAssetDepreciationFormList', link: {CalemFieldMdInfo: {fld: 'asset_id', parentFld: 'id'}}} }
 			             ]
 				}
@@ -136,21 +136,21 @@ CalemItemDef['CalemAssetFormMdTab']={
 			 'CalemAssetDowntimeFormList' : {
 			 	 CalemFormLayoutInfo: {
 			 	 	id: 'CalemAssetDowntimeFormList',
-			 	 	layout: {CalemBlockLayoutInfo: {width: '100%', rows: 8}}
+			 	 	layout: {CalemBlockLayoutInfo: {width: '100%', rows: 10}}
 			 	 }
 			 },
 			 
 			 'CalemAssetCommentFormList' : {
 			 	 CalemFormLayoutInfo: {
 			 	 	id: 'CalemAssetCommentFormList',
-			 	 	layout: {CalemBlockLayoutInfo: {width: '100%', rows: 8}}
+			 	 	layout: {CalemBlockLayoutInfo: {width: '100%', rows: 10}}
 			 	 }
 			 },
 			 
 			 'CalemAssetPartFormList' : {
 			 	 CalemFormLayoutInfo: {
 			 	 	id: 'CalemAssetPartFormList',
-			 	 	layout: {CalemBlockLayoutInfo: {width: '100%', rows: 8}}
+			 	 	layout: {CalemBlockLayoutInfo: {width: '100%', rows: 10}}
 			 	 }
 			 },
 			 
@@ -164,6 +164,13 @@ CalemItemDef['CalemAssetFormMdTab']={
 		  'CalemAssetMeterFormList' : {
 			 	 CalemFormLayoutInfo: {
 			 	 	id: 'CalemAssetMeterFormList',
+			 	 	layout: {CalemBlockLayoutInfo: {width: '100%', rows: 8}}
+			 	 }
+			 },
+			 
+		  'CalemAssetContractFormList' : {
+			 	 CalemFormLayoutInfo: {
+			 	 	id: 'CalemAssetContractFormList',
 			 	 	layout: {CalemBlockLayoutInfo: {width: '100%', rows: 8}}
 			 	 }
 			 },
@@ -190,6 +197,10 @@ CalemItemDef['CalemAssetFormMdTab']={
 		  
 		  'tab_comment': {
 		  		CalemTabInfo: {id: 'tab_asset_comment'}
+		  },
+		  
+		  'tab_contract': {
+		  		CalemTabInfo: {id: 'tab_asset_contract'}
 		  },
 		  
 		  'tab_misc': {
@@ -758,3 +769,54 @@ CalemItemDef['CalemAssetMeterSelectFormList']={
 		searchFormId: 'CalemAssetFormSearch'
 	}
 } 
+
+/**
+ * Contract
+ */
+CalemItemDef['CalemAssetContractFormList']={
+	CalemFormInfo: {
+		id: 'CalemAssetContractFormList',
+		title: 'asset_contract',
+		icon: 'CalemAsset',
+		controller: 'CalemAssetContractFormList',
+		model: 'asset_contract', 
+		view: {CalemViewRefInfo: {id: 'CalemAssetContractViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemAssetContractFormNew']={
+	CalemFormInfo: {
+		id: 'CalemAssetContractFormNew',
+		title: 'asset_contract',
+		icon: 'CalemAsset',
+		controller: 'CalemAssetContractFormNew',
+		model: 'asset_contract', 
+		view: {CalemViewRefInfo: {id: 'CalemAssetContractViewNew'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemAssetContractFormEdit']={
+	CalemFormInfo: {
+		id: 'CalemAssetContractFormEdit',
+		title: 'asset_contract',
+		icon: 'CalemAsset',
+		controller: 'CalemAssetContractFormEdit',
+		model: 'asset_contract', 
+   	view: {CalemViewRefInfo: {id: 'CalemAssetContractViewEdit'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemAssetContractFormRead']={
+	CalemFormInfo: {
+		id: 'CalemAssetContractFormRead',
+		title: 'asset_contract',
+		icon: 'CalemAsset',
+		controller: 'CalemAssetContractFormRead',
+		model: 'asset_contract', 
+		view: {CalemViewRefInfo: {id: 'CalemAssetContractViewRead'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}

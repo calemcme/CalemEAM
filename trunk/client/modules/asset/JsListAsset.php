@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
  
-
 $_CALEM_scripts=array(
 	'Calem.js'=>array(
    	'path'=>'client',
@@ -67,6 +66,11 @@ $_CALEM_scripts=array(
          '/modules/asset/form/view/CalemAssetPartViewNewDef.js',
          '/modules/asset/form/view/CalemAssetPartViewEditDef.js',
          '/modules/asset/form/view/CalemAssetPartViewReadDef.js',
+         //Contract
+         '/modules/asset/form/view/CalemAssetContractViewListDef.js',
+         '/modules/asset/form/view/CalemAssetContractViewNewDef.js',
+         '/modules/asset/form/view/CalemAssetContractViewEditDef.js',
+         '/modules/asset/form/view/CalemAssetContractViewReadDef.js',
          //Depreciation
          '/modules/asset/form/view/CalemAssetDepreciationViewListDef.js',
          '/modules/asset/form/view/CalemAssetDepreciationViewNewDef.js',
@@ -132,6 +136,13 @@ $_CALEM_scripts=array(
          '/modules/asset/form/controller/CalemAssetPartFormNew.js',
          '/modules/asset/form/controller/CalemAssetPartFormEdit.js',
          '/modules/asset/form/controller/CalemAssetPartFormRead.js',
+         
+         //Contract
+         '/modules/asset/form/controller/CalemAssetContractFormList.js',
+         '/modules/asset/form/controller/CalemAssetContractFormNew.js',
+         '/modules/asset/form/controller/CalemAssetContractFormEdit.js',
+         '/modules/asset/form/controller/CalemAssetContractFormRead.js',
+         
          //Depreciation
          '/modules/asset/form/controller/CalemAssetDepreciationFormList.js',
          '/modules/asset/form/controller/CalemAssetDepreciationFormNew.js',
