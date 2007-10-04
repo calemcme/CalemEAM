@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * Admin module menu
  */
@@ -105,4 +104,16 @@ CalemMenuDef['CalemTbAddMeterReading'] = {
 	className: 'TBButton',
 	posStyle: null,
 	onSelect: {CalemMenuSelect: {listener: 'OpenAddMeterReading'}}	
+};
+
+//Service log
+CalemMenuDef['CalemTbAssetServiceLog'] = {
+	id: 'CalemTbAssetServiceLog',
+	title: 'asset_view_service_log',
+	icon: 'CalemOpen',
+	disIcon: null,
+	enabled: true,
+	tooltip: null, 
+	className: 'TBButton',
+	onSelect: {CalemMenuSelect: {listener: 'AssetServiceLog'}}	
 };

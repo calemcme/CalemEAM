@@ -31,3 +31,39 @@ CalemAssetFormEdit.prototype.constructor = CalemAssetFormEdit;
 
 CalemAssetFormEdit.prototype.toString = function() { return "CalemAssetFormEdit";}
 
+/**
+ * Service tracking
+ */
+CalemAssetFormEdit.prototype._onSave =
+function(evt) {
+	var rows=this._prepareDataEdit();
+	var baseRow=rows['row_0'].base;
+	if (CalemAssetBo.getInstance().getServiceChange(baseRow.update)) {
+		var rec=this._dataModel.getCurrentRecord();
+		var row=new Object();
+		row['asset_id']=rec.id;
+		row['to_status_id']=baseRow.update['status_id'] || baseRow.current['status_id'];
+		row['from_status_id']=baseRow.current['status_id'];
+		row['to_location_id']=baseRow.update['location_id'] || baseRow.current['location_id'];
+		row['from_location_id']=baseRow.current['location_id'];
+		row['to_parent_id']=baseRow.update['parent_id'] || baseRow.current['parent_id'];
+		row['from_parent_id']=baseRow.current['parent_id'];
+		row['to_owner_id']=baseRow.update['owner_id'] || baseRow.current['owner_id'];
+		row['from_owner_id']=baseRow.current['owner_id'];
+		this.collectStatusChangeNote({row: row, parentRows: rows});
+	} else {
+		this._onSaveCall(rows); //done.
+	}
+} 
+
+CalemAssetFormEdit.prototype.collectStatusChangeNote =
+function(param) {
+	this._openEmbedForm('CalemAssetServiceLogNoteFormNew', param);
+}
+
+CalemAssetFormEdit.prototype.onAssetServiceLogNoteCollected =
+function(table, statusRowInsert, reqRowUpdate) {
+	var rows={UpdateData: reqRowUpdate, InsertData: statusRowInsert};
+	CalemSoapUtil._onSoapCall('ModifyDataTran', rows, this._soapEditTranSaveCallback);
+}
+ 

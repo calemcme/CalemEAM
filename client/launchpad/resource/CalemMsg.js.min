@@ -720,6 +720,7 @@ CalemMsg["sec_asset_cost"] = "Cost";
 
 CalemMsg["view_meter_reading_history"] = "Reading history";
 CalemMsg["add_meter_reading"] = "Add reading";
+CalemMsg["asset_view_service_log"] = "Service log";
 
 CalemMsg["asset_list"] = "Asset list";
 CalemMsg["asset_codes"] = "Codes";

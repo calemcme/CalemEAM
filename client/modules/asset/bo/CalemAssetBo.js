@@ -17,14 +17,13 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemAssetBo - business logic
  */
 function CalemAssetBo() {
 }
 
-CalemAssetBo._asset_detail = ['asset_downtime', 'asset_comment', 'asset_meter', 'asset_part', 'asset_depreciation'];
+CalemAssetBo._asset_detail = ['asset_downtime', 'asset_comment', 'asset_meter', 'asset_part', 'asset_depreciation', 'asset_contract', 'asset_service_log'];
 
 CalemAssetBo.getInstance =
 function() {
@@ -62,3 +61,15 @@ function(recAsset, callback) {
 	var soapCb=new AjxCallback(boUtil, boUtil.onDeleteByLookupResponse, callback);
 	reg.getCache().bulkLoadCountBypassCache(dbQry, soapCb);
 }
+
+/**
+ * Asset service track
+ */
+CalemAssetBo.prototype.getServiceChange =
+function(update) {
+	var svc=CalemConf['asset_conf']['serviceFlds'];
+	for (var i=0; i< svc.length; i++) {
+		if (update[svc[i]]) return true;		
+	}
+	return false;
+} 

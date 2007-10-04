@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * This is the configuration shipped out of the box.
  */
@@ -960,3 +959,10 @@ CalemConf['file_upload'] ={
 	uploadEdit: 'CalemDocUploadEdit',
 	uploadNew: 'CalemDocUploadNew'
 };
+
+/**
+ * Asset service tracking
+ */
+CalemConf['asset_conf'] = {
+	serviceFlds: ['status_id', 'parent_id', 'location_id', 'owner_id']
+}

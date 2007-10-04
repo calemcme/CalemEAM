@@ -17,13 +17,13 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemAssetFormRead
  */
 function CalemAssetFormRead(parent, formId, data) {
 	if (arguments.length==0) return;
 	CalemFormRead.call(this, parent, formId, data);
+	this._serviceLog=new AjxListener(this, this.onAssetServiceLog);
 }
 
 CalemAssetFormRead.prototype = new CalemFormRead;
@@ -53,4 +53,23 @@ function(evt) {
 	var rec=CalemEvent.getItem(evt);
 	CalemAssetBo.getInstance().canDelete(rec, new AjxCallback(this, this.onDeleteBoCallback, {evt: evt}));
 }
+
+/**
+ * Service log
+ */
+CalemAssetFormRead.prototype.getAssetServiceLog =
+function() {
+	return this._serviceLog;
+} 
+
+CalemAssetFormRead.prototype.onAssetServiceLog =
+function() {
+	var rec=this._dataModel.getCurrentRecord();
+	if (!rec.id) return; //not a valid record.
+	
+	var link=new CalemFieldMdInfo('asset_id', 'id');
+	var ebInfo=new CalemEmbedInfo(this._parent, 'CalemAssetServiceLogFormList', {parentRec: rec, link: link});
+	this._embedForm(ebInfo);
+}
+
 
