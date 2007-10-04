@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemAssetFormMdTab
  */
@@ -34,4 +33,8 @@ CalemAssetFormMdTab.prototype.toString = function() { return "CalemAssetFormMdTa
 /**
  * Business APIs
  */
-
+CalemAssetFormMdTab.prototype.onAssetServiceLogNoteCollected =
+function(table, statusRowInsert, reqRowUpdate) {	
+	if (!this._formModel.getFormByModel(table)) return;
+	this._formModel.getFormByModel(table).onAssetServiceLogNoteCollected(table, statusRowInsert, reqRowUpdate);
+} 

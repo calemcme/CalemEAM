@@ -101,6 +101,14 @@ $_CALEM_scripts=array(
          '/modules/asset/form/view/CalemMeterTypeViewEditDef.js',
          '/modules/asset/form/view/CalemMeterTypeViewSearchDef.js',
 
+         //Service log
+		   '/modules/asset/form/view/CalemAssetServiceLogViewListDef.js',
+		   '/modules/asset/form/view/CalemAssetServiceLogViewReadDef.js',
+		   '/modules/asset/form/view/CalemAssetServiceLogNoteViewNewDef.js',
+
+			//form action
+         '/modules/asset/form/action/CalemAssetFormAction.js',
+         
          //asset forms
          '/modules/asset/form/controller/CalemAssetFormList.js',
          '/modules/asset/form/controller/CalemAssetFormMdTab.js',
@@ -169,6 +177,11 @@ $_CALEM_scripts=array(
          '/modules/asset/form/controller/CalemMeterTypeFormNew.js',
          '/modules/asset/form/controller/CalemMeterTypeFormEdit.js',
          '/modules/asset/form/controller/CalemMeterTypeFormLookup.js',
+			
+         //Service log
+		   '/modules/asset/form/controller/CalemAssetServiceLogFormList.js',
+		   '/modules/asset/form/controller/CalemAssetServiceLogFormRead.js',
+		   '/modules/asset/form/controller/CalemAssetServiceLogNoteFormNew.js',
 			
          //Asset module
 			'/modules/asset/form/CalemAssetItemDef.js',
