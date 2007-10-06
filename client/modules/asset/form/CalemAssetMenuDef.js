@@ -117,3 +117,15 @@ CalemMenuDef['CalemTbAssetServiceLog'] = {
 	className: 'TBButton',
 	onSelect: {CalemMenuSelect: {listener: 'AssetServiceLog'}}	
 };
+
+//Activity log
+CalemMenuDef['CalemTbAssetActivityLog'] = {
+	id: 'CalemTbAssetActivityLog',
+	title: 'asset_view_activity_log',
+	icon: 'CalemOpen',
+	disIcon: null,
+	enabled: true,
+	tooltip: null, 
+	className: 'TBButton',
+	onSelect: {CalemMenuSelect: {listener: 'AssetActivityLog'}}	
+};
