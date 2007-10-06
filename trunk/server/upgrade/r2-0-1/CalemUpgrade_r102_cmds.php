@@ -225,6 +225,14 @@ $_CALEM_cmds = array(
 			'fields'=>array('description')
 		)	
 	),
+	//WO note
+	'alter_workorder_add_note'=>array(
+		'cmd'=>'CalemCmdAddField',
+		'param'=>array(
+			'table'=>'workorder',
+			'fields'=>array('note')
+		)	
+	),
 );
 
 ?>
