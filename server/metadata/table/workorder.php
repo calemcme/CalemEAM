@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -59,6 +58,10 @@ $_CALEM_table=array(
     		'type'=>'varchar',
     		'length'=>30,
     		'required'=>true
+    	),
+    	'note'=>array(
+    		'type'=>'varchar',
+    		'length'=>76
     	),
     	'description'=>array(
     		'type'=>'text',
