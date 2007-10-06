@@ -40,6 +40,7 @@ class CalemDashWoOrigMdBo extends CalemDashWoOrigDayBo {
 	 * Update local data file - data collection for the report.
 	 */
 	public function generateChartData() {
+		$conf=$this->conf['dash_wo_orig_md'];
 		//First of all, let's get data out.
 		$rtn=null;
 		try {
