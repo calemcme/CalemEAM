@@ -105,6 +105,9 @@ $_CALEM_scripts=array(
 		   '/modules/asset/form/view/CalemAssetServiceLogViewListDef.js',
 		   '/modules/asset/form/view/CalemAssetServiceLogViewReadDef.js',
 		   '/modules/asset/form/view/CalemAssetServiceLogNoteViewNewDef.js',
+		   //Activity log
+		   '/modules/asset/form/view/CalemAssetActivityLogViewListDef.js',
+		   '/modules/asset/form/view/CalemAssetActivityLogViewReadDef.js',
 
 			//form action
          '/modules/asset/form/action/CalemAssetFormAction.js',
@@ -182,6 +185,10 @@ $_CALEM_scripts=array(
 		   '/modules/asset/form/controller/CalemAssetServiceLogFormList.js',
 		   '/modules/asset/form/controller/CalemAssetServiceLogFormRead.js',
 		   '/modules/asset/form/controller/CalemAssetServiceLogNoteFormNew.js',
+			
+		   //Activity log
+		   '/modules/asset/form/controller/CalemAssetActivityLogFormList.js',
+		   '/modules/asset/form/controller/CalemAssetActivityLogFormRead.js',
 			
          //Asset module
 			'/modules/asset/form/CalemAssetItemDef.js',

@@ -52,6 +52,7 @@ CalemViewDef['CalemAssetViewRead']={
 					{ CalemButtonInfo: { id: 'CalemTbNew' } },
 					{CalemButtonInfo: {id: 'CalemTbDataRefresh'}},
 					{CalemButtonInfo: {id: 'CalemTbAssetServiceLog'}},
+					{CalemButtonInfo: {id: 'CalemTbAssetActivityLog'}},
 					
 					{ CalemButtonInfo: {
 						  id: 'CalemTbEdit',

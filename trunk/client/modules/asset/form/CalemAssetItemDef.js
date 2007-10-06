@@ -852,10 +852,37 @@ CalemItemDef['CalemAssetServiceLogNoteFormNew']={
 	CalemFormInfo: {
 		id: 'CalemAssetServiceLogNoteFormNew',
 		title: 'asset_service_log',
-		icon: 'CalemWo',
+		icon: 'CalemAsset',
 		controller: 'CalemAssetServiceLogNoteFormNew',
 		model: 'asset_service_log', 
 		view: {CalemViewRefInfo: {id: 'CalemAssetServiceLogNoteViewNew'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+/**
+ * Asset activities
+ */
+CalemItemDef['CalemAssetActivityLogFormList']={
+	CalemFormInfo: {
+		id: 'CalemAssetActivityLogFormList',
+		title: 'asset_view_activity_log',
+		icon: 'CalemAsset',
+		controller: 'CalemAssetActivityLogFormList',
+		model: 'workorder', 
+		view: {CalemViewRefInfo: {id: 'CalemAssetActivityLogViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemAssetActivityLogFormRead']={
+	CalemFormInfo: {
+		id: 'CalemAssetActivityLogFormRead',
+		title: 'asset_view_activity_log',
+		icon: 'CalemAsset',
+		controller: 'CalemAssetActivityLogFormRead',
+		model: 'workorder', 
+		view: {CalemViewRefInfo: {id: 'CalemAssetActivityLogViewRead'}}, 
 		replaceType: CalemItemDef.REPLACE_BY_ID
 	}
 }
