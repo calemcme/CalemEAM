@@ -730,11 +730,16 @@ CalemMsg["view_meter_reading_history"] = "Reading history";
 CalemMsg["add_meter_reading"] = "Add reading";
 CalemMsg["asset_view_service_log"] = "Service log";
 CalemMsg["asset_view_activity_log"] = "Activity log";
+CalemMsg["asset_view_asset_child"] = "Child asset";
+CalemMsg["asset_view_asset_location_child"] = "Asset at location";
 
 CalemMsg["asset_list"] = "Asset list";
 CalemMsg["asset_codes"] = "Codes";
 
 CalemMsg["asset_meter_select"] = "Select meter";
+
+CalemMsg["asset_child"] = "Child asset";
+CalemMsg["asset_loc_child"] = "Asset at location";
 
 CalemMsg["asset"] = "Asset";
 CalemMsg["asset_no"] = "Asset no.";
