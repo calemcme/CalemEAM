@@ -129,3 +129,27 @@ CalemMenuDef['CalemTbAssetActivityLog'] = {
 	className: 'TBButton',
 	onSelect: {CalemMenuSelect: {listener: 'AssetActivityLog'}}	
 };
+
+//Child
+CalemMenuDef['CalemTbAssetChild'] = {
+	id: 'CalemTbAssetChild',
+	title: 'asset_view_asset_child',
+	icon: 'CalemOpen',
+	disIcon: null,
+	enabled: true,
+	tooltip: null, 
+	className: 'TBButton',
+	onSelect: {CalemMenuSelect: {listener: 'AssetChild'}}	
+};
+
+//Child
+CalemMenuDef['CalemTbAssetLocChild'] = {
+	id: 'CalemTbAssetLocChild',
+	title: 'asset_view_asset_location_child',
+	icon: 'CalemOpen',
+	disIcon: null,
+	enabled: true,
+	tooltip: null, 
+	className: 'TBButton',
+	onSelect: {CalemMenuSelect: {listener: 'AssetLocChild'}}	
+};

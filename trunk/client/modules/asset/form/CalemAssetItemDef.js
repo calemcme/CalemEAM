@@ -886,3 +886,57 @@ CalemItemDef['CalemAssetActivityLogFormRead']={
 		replaceType: CalemItemDef.REPLACE_BY_ID
 	}
 }
+
+/**
+ * Child
+ */
+CalemItemDef['CalemAssetChildFormList']={
+	CalemFormInfo: {
+		id: 'CalemAssetChildFormList',
+		title: 'asset_child',
+		icon: 'CalemAsset',
+		controller: 'CalemAssetChildFormList',
+		model: 'asset', 
+		view: {CalemViewRefInfo: {id: 'CalemAssetChildViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemAssetChildFormRead']={
+	CalemFormInfo: {
+		id: 'CalemAssetChildFormRead',
+		title: 'asset_child',
+		icon: 'CalemAsset',
+		controller: 'CalemAssetChildFormRead',
+		model: 'asset', 
+		view: {CalemViewRefInfo: {id: 'CalemAssetChildViewRead'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+/**
+ * LocChild
+ */
+CalemItemDef['CalemAssetLocChildFormList']={
+	CalemFormInfo: {
+		id: 'CalemAssetLocChildFormList',
+		title: 'asset_loc_child',
+		icon: 'CalemAsset',
+		controller: 'CalemAssetLocChildFormList',
+		model: 'asset', 
+		view: {CalemViewRefInfo: {id: 'CalemAssetLocChildViewList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}
+
+CalemItemDef['CalemAssetLocChildFormRead']={
+	CalemFormInfo: {
+		id: 'CalemAssetLocChildFormRead',
+		title: 'asset_loc_child',
+		icon: 'CalemAsset',
+		controller: 'CalemAssetLocChildFormRead',
+		model: 'asset', 
+		view: {CalemViewRefInfo: {id: 'CalemAssetLocChildViewRead'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID
+	}
+}

@@ -25,6 +25,8 @@ function CalemAssetFormRead(parent, formId, data) {
 	CalemFormRead.call(this, parent, formId, data);
 	this._serviceLog=new AjxListener(this, this.onAssetServiceLog);
 	this._activityLog=new AjxListener(this, this.onAssetActivityLog);
+	this._assetChild=new AjxListener(this, this.onAssetChild);
+	this._assetLocChild=new AjxListener(this, this.onAssetLocChild);
 }
 
 CalemAssetFormRead.prototype = new CalemFormRead;
@@ -91,4 +93,39 @@ function() {
 	this._embedForm(ebInfo);
 }
 
+/**
+ * Asset Child
+ */
+CalemAssetFormRead.prototype.getAssetChild =
+function() {
+	return this._assetChild;
+} 
+
+CalemAssetFormRead.prototype.onAssetChild =
+function() {
+	var rec=this._dataModel.getCurrentRecord();
+	if (!rec.id) return; //not a valid record.
+
+	var link=new CalemFieldMdInfo('parent_id', 'id');
+	var ebInfo=new CalemEmbedInfo(this._parent, 'CalemAssetChildFormList', {parentRec: rec, link: link});
+	this._embedForm(ebInfo);
+}
+
+/**
+ * Asset at Location
+ */
+CalemAssetFormRead.prototype.getAssetLocChild =
+function() {
+	return this._assetLocChild;
+} 
+
+CalemAssetFormRead.prototype.onAssetLocChild =
+function() {
+	var rec=this._dataModel.getCurrentRecord();
+	if (!rec.id) return; //not a valid record.
+
+	var link=new CalemFieldMdInfo('location_id', 'id');
+	var ebInfo=new CalemEmbedInfo(this._parent, 'CalemAssetLocChildFormList', {parentRec: rec, link: link});
+	this._embedForm(ebInfo);
+}
 
