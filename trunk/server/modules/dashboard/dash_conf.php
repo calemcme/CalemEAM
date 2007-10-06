@@ -43,6 +43,15 @@ $_CALEM_dist['dash_conf']=array(
 		),
 		'graph_attrs_default'=>' axis="left" ',
 	),
+	'dash_wo_orig_md'=>array(
+		'graph_attrs'=>array(
+			'woo_request'=>' axis="left" color="0xAB3C49" ',
+			'woo_pm'=>' axis="left" color="0x3CAB3C" ',
+			'woo_rework'=>' axis="left" color="0x4E4141" ',
+			'woo_other'=>' axis="left" color="0x4C49BA" '		
+		),
+		'graph_attrs_default'=>' axis="left" ',
+	),
 	'dash_wo_status_pie'=>array(
 		'ttl'=>600
 	),
