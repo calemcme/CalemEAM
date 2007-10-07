@@ -1,6 +1,6 @@
 This is the readme for r2.0.1.
 
-CalemEAM r2.0.1 includes many enhancements and bug fixes:
+CalemEAM r2.0.1 includes many new features, enhancements and bug fixes:
 - Dashboard module
 - Language packs
 - PM schedule by days
