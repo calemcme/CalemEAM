@@ -1,6 +1,6 @@
 This is the readme for r2.0.1.
 
-CalemEAM r2.0.1 includes many enhancements and bug fixes including:
+CalemEAM r2.0.1 includes many enhancements and bug fixes:
 - Dashboard module
 - Language packs
 - PM schedule by days
@@ -9,6 +9,7 @@ CalemEAM r2.0.1 includes many enhancements and bug fixes including:
 - Contract and Vendor modules
 - Document attachment and upload
 - List view scroll by mouse wheel 
+- Script scheduler
 
 Full list of changes for r2.0.1:
 - 0000007: [Asset] Add drilldown to asset module (clayli) - resolved.
