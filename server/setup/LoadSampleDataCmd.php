@@ -40,6 +40,7 @@ if (!defined('_CALEM_DIR_')) {
 require_once _CALEM_DIR_ . 'server/conf/calem.php';
 require_once _CALEM_DIR_ . 'server/setup/CalemDataLoadConf.php';
 require_once _CALEM_DIR_ . 'server/setup/CalemDataLoader.php';
+require_once _CALEM_DIR_ . 'server/modules/dashboard/proc/CalemDashWoCountResetTask.php';
 
 
 
@@ -47,6 +48,9 @@ require_once _CALEM_DIR_ . 'server/setup/CalemDataLoader.php';
 global $_CALEM_conf;
 $loadConf=new CalemDataLoadConf();
 $loadConf->init($_CALEM_conf['calem_data_load_sample']);
+//Reset wo count
+$cntReset=new CalemDashWoCountResetTask();
+$cntReset->execute();
 echo date("F j, Y, g:i:s a") . " - Loading sample data...<br>\n";
 $sampleLoad=new CalemDataLoader();
 $sampleLoad->load($loadConf);
