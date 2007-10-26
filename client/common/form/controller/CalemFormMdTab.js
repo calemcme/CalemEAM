@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemFormMdTab
  * This is multi-tab form controller.
@@ -55,7 +54,8 @@ CalemFormMdTab.prototype.createView =
 function() {
 	//Figure out the tab count here.
 	var customInfo=this.getCustomInfo();
-	var layout= (customInfo && customInfo.getLayout()) ? customInfo.getLayout() : this._formInfo.getLayout();
+	//Use original layout so give admin a chance to see Customize
+	var layout= this._formInfo.getLayout();
 	var ext= layout.getTabList().length > 1 ? CalemConst._TAB_MULTI : CalemConst._TAB_SINGLE;
 	var impl= CalemConf['desktop_mainView']['form']['viewMdTabImpl'][ext];
 	this._view=eval(['new ', impl, '(this._viewHolder, this)'].join(''));

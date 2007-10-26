@@ -4073,7 +4073,7 @@ function CalemFormMdTab(parent,formId,data){if(arguments.length==0)return;CalemF
 CalemFormMdTab.prototype=new CalemForm;CalemFormMdTab.prototype.constructor=CalemFormMdTab;CalemFormMdTab.prototype.toString=function(){return"CalemFormMdTab";}
 CalemFormMdTab.prototype._createDataModel=function(data){var impl=CalemConf['desktop_mainView']['form']['formModelImpl'];var model=this._formInfo.getModel();this._formModel=eval(['new ',impl,'(this._parent, model, this, data)'].join(''));}
 CalemFormMdTab.prototype._getDataModel=function(){return this._formModel;}
-CalemFormMdTab.prototype.createView=function(){var customInfo=this.getCustomInfo();var layout=(customInfo&&customInfo.getLayout())?customInfo.getLayout():this._formInfo.getLayout();var ext=layout.getTabList().length>1?CalemConst._TAB_MULTI:CalemConst._TAB_SINGLE;var impl=CalemConf['desktop_mainView']['form']['viewMdTabImpl'][ext];this._view=eval(['new ',impl,'(this._viewHolder, this)'].join(''));this._fitViewToParent();}
+CalemFormMdTab.prototype.createView=function(){var customInfo=this.getCustomInfo();var layout=this._formInfo.getLayout();var ext=layout.getTabList().length>1?CalemConst._TAB_MULTI:CalemConst._TAB_SINGLE;var impl=CalemConf['desktop_mainView']['form']['viewMdTabImpl'][ext];this._view=eval(['new ',impl,'(this._viewHolder, this)'].join(''));this._fitViewToParent();}
 CalemFormMdTab.prototype._loadData=function(){this._formModel.load(this._dataLoadCallback);}
 CalemFormMdTab.prototype._onDataLoaded=function(){this._formModel.onInitDataLoaded();CalemForm.prototype._onDataLoaded.call(this);}
 CalemFormMdTab.prototype.getFormModel=function(){return this._formModel;}
@@ -4093,7 +4093,7 @@ function CalemFormPeerTab(parent,formId,data){if(arguments.length==0)return;Cale
 CalemFormPeerTab.prototype=new CalemForm;CalemFormPeerTab.prototype.constructor=CalemFormPeerTab;CalemFormPeerTab.prototype.toString=function(){return"CalemFormPeerTab";}
 CalemFormPeerTab.prototype._createDataModel=function(data){var impl=CalemConf['desktop_mainView']['form']['formPeerModelImpl'];var model=this._formInfo.getModel();this._formModel=eval(['new ',impl,'(this._parent, model, this, data)'].join(''));}
 CalemFormPeerTab.prototype._getDataModel=function(){return this._formModel;}
-CalemFormPeerTab.prototype.createView=function(){var customInfo=this.getCustomInfo();var layout=(customInfo&&customInfo.getLayout())?customInfo.getLayout():this._formInfo.getLayout();var ext=layout.getTabList().length>1?CalemConst._TAB_MULTI:CalemConst._TAB_SINGLE;var impl=CalemConf['desktop_mainView']['form']['viewPeerTabImpl'][ext];this._view=eval(['new ',impl,'(this._viewHolder, this)'].join(''));this._fitViewToParent();}
+CalemFormPeerTab.prototype.createView=function(){var customInfo=this.getCustomInfo();var layout=this._formInfo.getLayout();var ext=layout.getTabList().length>1?CalemConst._TAB_MULTI:CalemConst._TAB_SINGLE;var impl=CalemConf['desktop_mainView']['form']['viewPeerTabImpl'][ext];this._view=eval(['new ',impl,'(this._viewHolder, this)'].join(''));this._fitViewToParent();}
 CalemFormPeerTab.prototype._loadData=function(){this._formModel.load(this._dataLoadCallback);}
 CalemFormPeerTab.prototype._onDataLoaded=function(){this._formModel.onInitDataLoaded();CalemForm.prototype._onDataLoaded.call(this);}
 CalemFormPeerTab.prototype.getFormModel=function(){return this._formModel;}
