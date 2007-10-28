@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * forms
  */
@@ -1064,7 +1063,7 @@ CalemItemDef['CalemInOrderFormList']={
 		icon: 'CalemIn',
 		controller: 'CalemInOrderFormList',
 		model: 'in_order_list', 
-		view: {CalemViewRefInfo: {id: 'CalemInOrderViewList'}}, 
+		view: {CalemViewRefInfo: {id: 'CalemInOrderReportList'}}, 
 		replaceType: CalemItemDef.REPLACE_BY_ID,
 		searchFormId: 'CalemInFormSearch'
 	}
