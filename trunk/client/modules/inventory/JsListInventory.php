@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
  
-
 $_CALEM_scripts=array(
 	'Calem.js'=>array(
    	'path'=>'client',
@@ -61,7 +60,6 @@ $_CALEM_scripts=array(
          '/modules/inventory/form/view/CalemInViewEditDef.js',
          '/modules/inventory/form/view/CalemInViewSearchDef.js',
          //Order list form
-         '/modules/inventory/form/view/CalemInOrderViewListDef.js',
          '/modules/inventory/form/view/CalemInOrderViewReadDef.js',
          //Generate req form
          '/modules/inventory/form/view/CalemInGenOrderViewNewDef.js',

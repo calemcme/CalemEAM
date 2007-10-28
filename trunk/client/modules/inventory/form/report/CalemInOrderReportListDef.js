@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * List views
  */
@@ -43,21 +42,58 @@ CalemViewDef['CalemInOrderReportList']={
 			},
 			toolbar: {
 				CalemToolBarInfo: {
-					layout: ['CalemTbPrint', 'sep', 'CalemTbCustomize'],
+					layout: ['CalemTbOpen', 'sep', 'CalemTbPrint', 'sep2', 'CalemTbSearch', 'CalemTbSearchClear', 'sep3', 'CalemTbCustomize'],
 					list: [
 					
+					{CalemButtonInfo: {id: 'CalemTbDataRefresh'}},
+					
+					{ CalemButtonInfo: {
+						 id: 'CalemTbOpen', 
+						 customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SINGLE_SELECTION, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.MULTI_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.NO_SELECTION, func: '_disableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.DBL_CLICK_SELECTION, func: '_clickIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }
+					},
+					
 					{CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
-					
-					{ CalemButtonInfo: {id: 'CalemTbCancel'}},
-					
 				   { CalemButtonInfo: {
 						id: 'CalemTbPrint', 
-						customInfo: {CalemMenuCustomInfo: {
+						customInfo: {
+						  	   CalemMenuCustomInfo: {
 						  	   	enabled: true
 						  	   }
 						  }
 					  }  
 					},
+					
+					
+					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
+				
+					{ CalemButtonInfo: { id: 'CalemTbSearch' }},
+					
+					{ CalemButtonInfo: {
+						id: 'CalemTbSearchClear', 
+						customInfo: {
+						  	   CalemMenuCustomInfo: {
+						  	   	enabled: false,
+						  	   	events: [
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_APPLIED, func: '_enableIt'}},
+						  	   		{CalemEventInfo: {id: CalemEvent.SEARCH_REMOVED, func: '_disableIt'}}
+						  	   	]
+						  	   }
+						  }
+					  }  
+					},
+					
+					{CalemSeparator: {id: 'sep3', className: 'CalemToolBarSeparator'}},
 					
 					{CalemButtonInfo: { id: 'CalemTbCustomize'}}
 				]
