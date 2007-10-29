@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 /**
  * This file defined the configuration for this installation by 
  * combining the custom with the distributed installation. 
@@ -160,6 +159,7 @@ $_CALEM_dist=array(
 	'ses_launch_app'=>'client/launchpad/CalemStart.php',
 	//Other handlers
 	'CalemReport'=>'server/modules/report/CalemReport.php',
+	'CalemExportExcel'=>'server/modules/report/CalemExportExcel.php',
 	'CalemDashboard'=>'server/modules/dashboard/CalemDashboard.php',
 	'CalemDashboardExport'=>'server/include/charts/share/export.php',
 	'CalemDashboardExport'=>'server/include/charts/share/export.php',
