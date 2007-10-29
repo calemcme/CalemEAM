@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * Admin module
  */
@@ -29,7 +28,7 @@ CalemModuleDef["modCalemAsset"]= {
       toolBar: {
         CalemToolBarInfo: {
         	  type: 'CalemToolBar',
-        	  layout: ['modCalemAsset', 'sep', 'CalemAssetFormList', 'CalemAssetCodes'],
+        	  layout: ['modCalemAsset', 'sep', 'CalemAssetFormList', 'CalemAssetCodes', 'CalemModReport'],
         	  list: [
 	         {CalemLabelInfo: {id: 'modCalemAsset', className: 'CalemModuleLabel'}},
 	         
@@ -42,6 +41,13 @@ CalemModuleDef["modCalemAsset"]= {
 		      	menuList: [ {CalemMenuItemInfo: {id: 'CalemAssetTypeFormList'}},
 		      	            {CalemMenuItemInfo: {id: 'CalemMeterTypeFormList'}},
 		      	            {CalemMenuItemInfo: {id: 'CalemManufacturerFormList'}}
+		      	      ]
+	      		}
+	      	},
+	      	
+	      	{CalemMenuInfo: {
+	      		menuButton: {CalemMenuButtonInfo: {id: 'CalemModReport'}},
+		      	menuList: [ {CalemMenuItemInfo: {id: 'CalemAssetListFormList'}}
 		      	      ]
 	      		}
 	      	}

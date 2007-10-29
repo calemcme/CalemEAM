@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
 
-
 /**
  * CalemTableQuery includes the where, orderBy and range to use 
  * when fetching data from a table. CalemTableQuery is mainly used
@@ -81,6 +80,11 @@ function(table, leftField, expr, tableDd) {
 CalemTableQuery.prototype.getWhere =
 function(table, leftFld) {
 	return this._where.get(table, leftFld);
+}
+
+CalemTableQuery.prototype.getWhereAll =
+function() {
+	return this._where;
 }
 
 CalemTableQuery.prototype.hasWhereExpr =
@@ -433,6 +437,20 @@ function() {
 	return hasExpr;
 }
 
+/**
+ * For now we're supporting only one table query only.
+ * Table join is not considered at this time.
+ */
+CalemQueryWhere.prototype.getCoreExpr =
+function() {
+	var rtn=null;
+	for (var i in this._where) {
+		rtn=this._where[i].getExpr();
+		break;
+	}
+	return rtn;
+}
+
 CalemQueryWhere.prototype.query =
 function(rec) {
 	var match=true;
@@ -631,16 +649,15 @@ function() {
 CalemTableJoin.prototype.getSql =
 function() {
 	return [' ', this._type, ' JOIN ', this._rightTbl, 
-	        (this._aliasKey ? [" as ",this._rightTbl, this._aliasKey].join(''): ''), 
+	        " as ",this.getAlias(), 
 	        ' ON ', this._leftTbl, '.',
-	        this._leftFld, '=', this._rightTbl, 
-	        (this._aliasKey ? this._aliasKey : ''),
+	        this._leftFld, '=', this.getAlias(),
 	        '.', this._rightFld, ' '].join('');
 }
 
 CalemTableJoin.prototype.getAlias =
 function() {
-	return (this._aliasKey) ? [this._rightTbl, this._aliasKey].join('') : this._rightTbl;
+	return [this._rightTbl, '_', this._leftFld].join('');
 }
 
 CalemTableJoin.prototype.isLeftJoin =

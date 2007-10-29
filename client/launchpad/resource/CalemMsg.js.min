@@ -412,6 +412,7 @@ CalemMsg["menu_search_clear"] = "Clear search";
 CalemMsg["menu_refresh"] = "Refresh";
 CalemMsg["menu_apply"] = "Apply";
 CalemMsg["menu_apply_save"] = "Apply & save";
+CalemMsg["menu_export_excel"] = "Export";
 
 CalemMsg["menu_logout"] = "Sign out";
 CalemMsg["menu_help"] = "Help";
@@ -727,6 +728,7 @@ CalemMsg["asset_view_asset_location_child"] = "Asset at location";
 
 CalemMsg["asset_list"] = "Asset list";
 CalemMsg["asset_codes"] = "Codes";
+CalemMsg["asset_report_list"] = "Asset list report";
 
 CalemMsg["asset_meter_select"] = "Select meter";
 

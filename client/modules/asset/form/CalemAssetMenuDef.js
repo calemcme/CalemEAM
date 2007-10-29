@@ -153,3 +153,15 @@ CalemMenuDef['CalemTbAssetLocChild'] = {
 	className: 'TBButton',
 	onSelect: {CalemMenuSelect: {listener: 'AssetLocChild'}}	
 };
+
+//Asset report list
+CalemMenuDef['CalemAssetListFormList'] = {
+	id: 'CalemAssetListFormList',
+	title: 'asset_report_list',
+	icon: 'CalemAsset',
+	disIcon: null,
+	enabled: true,
+	tooltip: null, 
+	className: 'TBButton',
+	onSelect: {CalemMenuSelect: {listener: 'OpenFormListener'}}	
+};

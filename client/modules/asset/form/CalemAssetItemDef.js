@@ -940,3 +940,19 @@ CalemItemDef['CalemAssetLocChildFormRead']={
 		replaceType: CalemItemDef.REPLACE_BY_ID
 	}
 }
+
+/**
+ * Asset List report
+ */
+CalemItemDef['CalemAssetListFormList']={
+	CalemFormInfo: {
+		id: 'CalemAssetListFormList',
+		title: 'asset_report_list',
+		icon: 'CalemAsset',
+		controller: 'CalemAssetListFormList',
+		model: 'asset', 
+		view: {CalemViewRefInfo: {id: 'CalemAssetReportList'}}, 
+		replaceType: CalemItemDef.REPLACE_BY_ID,
+		searchFormId: 'CalemAssetFormSearch'
+	}
+}
