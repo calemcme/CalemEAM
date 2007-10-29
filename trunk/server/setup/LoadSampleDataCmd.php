@@ -48,12 +48,13 @@ require_once _CALEM_DIR_ . 'server/modules/dashboard/proc/CalemDashWoCountResetT
 global $_CALEM_conf;
 $loadConf=new CalemDataLoadConf();
 $loadConf->init($_CALEM_conf['calem_data_load_sample']);
-//Reset wo count
-$cntReset=new CalemDashWoCountResetTask();
-$cntReset->execute();
 echo date("F j, Y, g:i:s a") . " - Loading sample data...<br>\n";
 $sampleLoad=new CalemDataLoader();
 $sampleLoad->load($loadConf);
 $sampleLoad->validate($loadConf);
+//Reset wo count
+$cntReset=new CalemDashWoCountResetTask();
+$result=$cntReset->execute();
+echo $result . "<br>\n";
 echo date("F j, Y, g:i:s a") . " - DONE<br>\n";
 ?>
