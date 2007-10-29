@@ -17,7 +17,6 @@
  
  * Contributor(s): 
  */
- 
 /**
  * Ported and simplified from DwtListView for report rendering.
  */
@@ -151,39 +150,92 @@ class ReportListView {
 	* the string value of the item.
 	*/
 	public function createItemHtml($item, $now, $isDnDIcon) {
-		/*
-		var div = document.createElement("DIV");
-		div.id = Dwt.getNextId();
-		var rowClassName = AjxBuffer.concat($this->className, "Row");
-		div._styleClass = AjxBuffer.concat("Row ",rowClassName);
-		div._selectedStyleClass = AjxBuffer.concat("Row-", DwtCssStyle.SELECTED, " ", rowClassName);
-		div._selectedDisabledStyleClass = AjxBuffer.concat("Row-", DwtCssStyle.SELECTED, "-" , DwtCssStyle.DISABLED, " ", rowClassName);
-		div.className = div._styleClass;
-		if (typeof(item) == "object") {
-			div.innerHTML = AjxStringUtil.htmlEncode(item.toString());
-		} else {
-			div.innerHTML = AjxStringUtil.htmlEncode(String(item));
 		}
-		$this.associateItemWithElement(item, div, ReportListView.TYPE_LIST_ITEM);
-		return div;
-		*/
-	}
 	
 	public function setNoResultsHtml() {
-		/*
-		var htmlArr = new Array(5);
-		var	div = document.createElement("div");
-		var idx = 0;
+	}
 	
-		htmlArr[idx++] = "<table width='100%' cellspacing='0' cellpadding='1'>";
-		htmlArr[idx++] = "<tr><td class='NoResults'><br>";
-		htmlArr[idx++] = AjxMsg.noResults;
-		htmlArr[idx++] = "</td></tr></table>";
+	/**
+	 * Render Excel File Download
+	 */
+	public function renderExcel($list, $controller) {
+		require_once _CALEM_DIR_ . "server/include/Spreadsheet/Excel/Writer.php";
+
+		//Create workbook
+		$excel =& new Spreadsheet_Excel_Writer();
+		//Create worksheet
+		$st1 =& $excel->addWorksheet('sheet1');
+      //Send HTTP headers to tell the browser what's coming
+	   $excel->send($controller->getModelItem()->getTableName() . '.xls');
 	
-		div.innerHTML = htmlArr.join("");
+		//Get report title
+		$titleText = $controller->getTitle();
+		//Create a format object
+		$titleFormat =& $excel->addFormat();
+		// Set the font family - Helvetica works for OpenOffice calc too...
+		$titleFormat->setFontFamily('Helvetica');
+		// Set the text to bold
+		$titleFormat->setBold();
+		//Set the text size
+		$titleFormat->setSize('13');
+		//Set the text color
+		$titleFormat->setColor('navy');
+		//Set the bottom border width to "thick"
+		$titleFormat->setBottom(2);
+		//Set the color of the bottom border
+		$titleFormat->setBottomColor('navy');
+		//Set the alignment to the special merge value
+		$titleFormat->setAlign('merge');
+		//Add the title to the top left cell of the worksheet,
+		//passing it the title string and the format object
+		$st1->write(0,0,$titleText,$titleFormat);
+		//Add three empty cells to merge with
+		$st1->write(0,1,'',$titleFormat);
+		$st1->write(0,2,'',$titleFormat);
+		$st1->write(0,3,'',$titleFormat);
+		//The row height
+		//$st1->setRow(0,30);
+		//Set the column width for the first 4 columns
+		//$st1->setColumn(0,3,15);
 	
-		$this->addRow(div);
+		//Set column headers
+		$colHeadingFormat =& $excel->addFormat();
+		$colHeadingFormat->setBold();
+		$colHeadingFormat->setFontFamily('Helvetica');
+		$colHeadingFormat->setBold();
+		$colHeadingFormat->setSize('10');
+		$colHeadingFormat->setAlign('center');
+		//An array with the data for the column headings
+		$colNames = array();
+		foreach ($this->headerList as $headerCol) {
+			if (!$headerCol['visible'])
+				continue;
+			$colNames[]=$headerCol['label'];
+		}
+		//Add all the column headings with a single call
+		//leaving a blank row to look nicer
+		$st1->writeRow(2,0,$colNames,$colHeadingFormat);
+	
+		/**
+		 * Exporting data
 		*/
+		//Use this to keep track of the row number
+		$row = 4;	
+		//Loop through the data, adding it to the sheet
+		if ($list) {
+			foreach ($list as $item) {
+				$ar=array();
+				foreach ($this->headerList as $col) {
+					if (!$col['visible']) continue;
+					$ar[]=array($col['label']=> $item->getValue($col['field']));
+				}
+				$st1->writeRow($row,0,$ar);
+ 				$row++;
+			}
+		}
+		
+		// Finish the spreadsheet, dumping it to the browser
+		$excel->close();
 	}	
 }
 ?>

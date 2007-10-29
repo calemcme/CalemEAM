@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
- 
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -32,4 +31,5 @@ require _CALEM_DIR_ . 'server/modules/workorder/wo_report_map.php';
 require _CALEM_DIR_ . 'server/modules/requisition/req_report_map.php';
 require _CALEM_DIR_ . 'server/modules/purchase/po_report_map.php';
 require _CALEM_DIR_ . 'server/modules/inventory/in_report_map.php';
+require _CALEM_DIR_ . 'server/modules/asset/asset_report_map.php';
 ?>

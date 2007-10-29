@@ -18,13 +18,13 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 require_once _CALEM_DIR_ . 'server/modules/report/render/CalemReportRender.php';
 
 class CalemReportListRender extends CalemReportRender {
+	const GRID_ID='grid';
 	
 	public function getDivCcs() {
 		return 'CalemReportListDiv';	
@@ -32,6 +32,24 @@ class CalemReportListRender extends CalemReportRender {
 	
 	public function getTableCcs() {
 		return 'CalemReportListTable';	
+	}
+	
+	/**
+	 * Rendering Excel is supported for list type report only at this time.
+	 */
+	public function renderExcel($customInfo) {
+		$this->customInfo=$customInfo;
+		$this->tableDd=$this->controller->getModelItem()->getTableDd();		
+		//Get grid out and render it.
+		$itemInfo=CalemReportUtil::getItemInfo(self::GRID_ID, $this->info, $this->tableDd);	
+		$impl=$this->controller->getReportRender($itemInfo); //Created an instance
+		if (!$impl) {
+			$this->logger->error("Error in locating render for: " . var_export($itemInfo, true));
+		}
+		$render=CalemReportUtil::getRenderInstance($impl);
+		//Init the render
+		$render->init(self::GRID_ID, $itemInfo, $this->controller);
+		$render->renderExcel();
 	}
 }
 ?>

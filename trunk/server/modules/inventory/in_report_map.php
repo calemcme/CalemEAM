@@ -25,8 +25,8 @@ if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 $_CALEM_report['CalemInOrderReportList']= array(
 	  'module'=>'inventory',
      'controller'=>array(
-			'path'=>'server/modules/inventory/report/',
-			'class'=>'CalemInOrderReportList'
+			'path'=>'server/modules/report/controller/',
+			'class'=>'CalemReportList'
 		)
 );
 ?>

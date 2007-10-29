@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
  
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -47,6 +46,12 @@ class CalemDataGrid {
 		$listView=new CalemListView(null, null, $this->tableDd, $this->customInfo, $this);	
 		$recList=$this->modelItem->getRecordList()->getRecList();
 		return $listView->set($recList);
+	}	
+	
+	public function renderExcel() {
+		$listView=new CalemListView(null, null, $this->tableDd, $this->customInfo, $this);	
+		$recList=$this->modelItem->getRecordList()->getRecList();
+		return $listView->renderExcel($recList, $this->controller);
 	}	
 }
 ?>
