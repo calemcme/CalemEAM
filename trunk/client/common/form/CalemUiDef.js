@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * Common UI class definition.
  */
@@ -466,6 +465,22 @@ CalemMenuDef['CalemTbApplySave'] = {
 	className: 'TBButton',
 	posStyle: null,
 	onSelect: {CalemMenuSelect: {listener: 'ApplySaveListener'}}
+};
+
+//Export to excel
+CalemMenuDef['CalemTbExportExcel'] = {
+	id: 'CalemTbExportExcel',
+	title: 'menu_export_excel',
+	icon: 'CalemExportExcel',
+	disIcon: null,
+	enabled: false,
+	tooltip: null, 
+	style: (DwtLabel.IMAGE_LEFT | DwtLabel.ALIGN_LEFT), 				   
+	radioGroupId: null,
+	idx: null,
+	className: 'TBButton',
+	posStyle: null,
+	onSelect: {CalemMenuSelect: {listener: 'ExportExcelListener'}}
 };
 
 

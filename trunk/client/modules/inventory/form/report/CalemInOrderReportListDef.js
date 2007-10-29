@@ -74,6 +74,11 @@ CalemViewDef['CalemInOrderReportList']={
 					  }  
 					},
 					
+					{ CalemButtonInfo: {id: 'CalemTbExportExcel', 
+						customInfo: {CalemMenuCustomInfo: {enabled: true}}  
+					  }
+					},
+					
 					
 					{CalemSeparator: {id: 'sep2', className: 'CalemToolBarSeparator'}},
 				

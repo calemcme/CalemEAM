@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemForm
  * This is the form widget.
@@ -667,7 +666,7 @@ function() {
 //Print handling.
 CalemForm.prototype.onPrint =
 function(ev) {
-	this._onPrint(ev);
+	this._onPrint(ev, 'CalemReport');
 } 
 
 CalemForm.prototype.onPrintCustomize =
@@ -675,8 +674,13 @@ function(ev) {
 	this._onPrintCustomize(ev);
 } 
 
+/**
+ * Print/Export with ev for record and aid for handler.
+ * - CalemReport for report
+ * - CalemExportExcel for exporting to excel
+ */
 CalemForm.prototype._onPrint =
-function(ev) {
+function(ev, aid) {
 	var item=this._getSelectedItem(ev);
 	//A few things to prepare - timezone offset, date format, time format, number, integer format
 	var conf=CalemConf['text_formatter'];
@@ -687,11 +691,21 @@ function(ev) {
 	            "', intfmt: '", conf.integer.local,
 	            "', numberfmt: '", conf.number.local,
 	            "', currencyfmt: '", conf.sys_currency.read, "'}"].join('');
-	var loc64=Base64.encode(loc);
+	var loc64=CalemTextUtil.encodeUrlParam(loc);
+	var xid=this._getReportExtraId();
+	if (xid) xid=CalemTextUtil.encodeUrlParam(xid);
 	//Open report window
-	var url=calemRequestUrl + "?aid=CalemReport&cid="+(item? item.id: '')+"&rid="+this.getReportId()+"&lid="+loc64+"&xid="+this._getReportExtraId();
+	var url=calemRequestUrl + "?aid="+aid+"&cid="+(item? item.id: '')+"&rid="+this.getReportId()+"&lid="+loc64+"&xid="+xid;
 	window.open(url, 'CalemReport', CalemConf['report_window_conf']);
 } 
+
+/**
+ * Export to Excel
+ */
+CalemForm.prototype.onExportExcel =
+function(ev) {
+	this._onPrint(ev, 'CalemExportExcel');
+}
 
 CalemForm.prototype._getSelectedItem =
 function(ev) {

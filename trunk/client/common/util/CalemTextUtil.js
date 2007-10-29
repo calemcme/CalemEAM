@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * String trim function
  * @see http://www.thescripts.com/forum/thread165013.html by Alex Vassiliev
@@ -717,4 +716,13 @@ AjxNumberFormat.NumberSegment.prototype._normalize = function(s) {
 CalemTextUtil.getNullReplacement =
 function() {
 	return '';
+}
+
+/**
+ * Use special encoding to pass param to server
+ */
+CalemTextUtil.encodeUrlParam =
+function(p) {
+	var np=p.replace(/%/, '(%)');
+	return AjxStringUtil.urlEncode(np);
 }

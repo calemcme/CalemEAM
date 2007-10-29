@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemFormList
  * This is the listView form.
@@ -36,7 +35,10 @@ function CalemFormList(parent, formId, data) {
 	this._soapDeleteCallback=new AjxCallback(this, this.onSoapDeleteCallback);
 	//Print handler.
 	this._printListener=new AjxListener(this, this.onPrint);
+	//print customize to be deprecated.
 	this._printCustomizeListener=new AjxListener(this, this.onPrintCustomize);
+	//Export Excel handler.
+	this._exportExcelListener=new AjxListener(this, this.onExportExcel);
 	//Search and search clear
 	this._searchListener=new AjxListener(this, this.onSearch);
 	this._searchClearListener=new AjxListener(this, this.onSearchClear);
@@ -160,6 +162,14 @@ function() {
 	return this._printCustomizeListener;
 } 
 
+/**
+ * Export Excel
+ */
+CalemFormList.prototype.getExportExcelListener =
+function() {
+	return this._exportExcelListener;
+} 
+
 //Render factory
 CalemFormList.prototype.getRender =
 function(info) {
@@ -249,3 +259,17 @@ function() {
 	var gridListInfo= layout ? layout.getGridLayout() : this.getViewInfo().getItem('grid').getListInfo();
 	return {acl: customInfo.getAcl().getViewAcl()._acl, listInfo: gridListInfo};
 }
+
+/**
+ * Support list query for report
+ */
+CalemFormList.prototype._getReportExtraId =
+function() {
+	var where=this._modelItem.getTableQuery().getWhereAll();
+	var rtn='';
+	if (where) {
+		var exp=where.getCoreExpr();
+		if (exp) rtn=exp.getSql();
+	}
+	return rtn;
+} 

@@ -116,6 +116,11 @@ $_CALEM_scripts=array(
 		   '/modules/asset/form/view/CalemAssetLocChildViewListDef.js',
 		   '/modules/asset/form/view/CalemAssetLocChildViewReadDef.js',
 
+		   //Report
+		   '/modules/asset/form/report/CalemAssetReportListDef.js',
+		   //Report item
+		   '/modules/asset/form/report/CalemAssetReportList.js',
+
 			//form action
          '/modules/asset/form/action/CalemAssetFormAction.js',
          
@@ -203,6 +208,9 @@ $_CALEM_scripts=array(
 		   //LocChild
 		   '/modules/asset/form/controller/CalemAssetLocChildFormList.js',
 		   '/modules/asset/form/controller/CalemAssetLocChildFormRead.js',
+			
+		   //Asset report
+			'/modules/asset/form/controller/CalemAssetListFormList.js',
 			
          //Asset module
 			'/modules/asset/form/CalemAssetItemDef.js',
