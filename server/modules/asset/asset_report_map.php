@@ -18,27 +18,14 @@
  * Contributor(s): 
  */
  
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
-require_once _CALEM_DIR_ . 'server/modules/report/controller/CalemReportList.php';
-require_once _CALEM_DIR_ . 'server/include/core/database/query/CalemDbExpr.php';
-require_once _CALEM_DIR_ . 'server/include/core/database/query/CalemTableQuery.php';
-
-/**
- * CalemFormList
- * This is the listView form.
- * 
- */
-class CalemInOrderReportList extends CalemReportList {
-	
-	public function initQueryByForm($tblQuery) {
-		$fld=new CalemDbField('inventory', 'qty_to_order');
-	   $val=new CalemDbNumber(0);
-	   $expr=new CalemDbExpr($fld, CalemDbExpr::EXPR_GT, $val);
-	   $tblQuery->setWhere('inventory', $expr);
-		return $tblQuery;
-	}
-}
+$_CALEM_report['CalemAssetReportList']= array(
+	  'module'=>'asset',
+     'controller'=>array(
+			'path'=>'server/modules/report/controller/',
+			'class'=>'CalemReportList'
+		)
+);
 ?>

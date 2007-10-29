@@ -17,7 +17,6 @@
  
  * Contributor(s): 
  */
- 
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -32,6 +31,13 @@ class CalemDataGridRender extends CalemUiRender {
 											$this->controller->getGridCustomInfo(), $this->controller);
 		$rtn=$grid->renderData();
 		return $rtn;
+	}	
+	
+	public function renderExcel() {
+		$modelItem=$this->controller->getModelItem();
+		$grid =new CalemDataGrid($this->id, $modelItem->getTableDd(), 
+											$this->controller->getGridCustomInfo(), $this->controller);
+		$grid->renderExcel();
 	}	
 }
 ?>

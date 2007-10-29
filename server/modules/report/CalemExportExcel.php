@@ -46,30 +46,16 @@ $rid=$_REQUEST['rid'];
 
 //Locale info.
 $lid=$_REQUEST['lid'];
-if ($lid) {
+if ($lid) {	
 	$lids=decodeUrlEx($lid);
 	require_once _CALEM_DIR_ . 'server/include/JSON/JSON.php'; //Pear's JSON
 	$json = new Services_JSON(SERVICES_JSON_LOOSE_TYPE);
-	$loc_conf=$json->decode($lids);
+	$loc_conf=$json->decode($lids);	
 	
 }
 if ($logger->isInfoEnabled()) $logger->info('rid=' . $rid . ', query=' . var_export($query, true) . ', locInfo=' . var_export($loc_conf, true));
 
-$calemImgCss=$calemRootUrl . '/client/themes/' . $theme . "/" . $theme . "_img.css";
-$dwtImgCss=$calemRootUrl . '/client/themes/image/hiRes/dwtimgs.css';
-$calemReportCss=$calemRootUrl . '/client/themes/' . $theme . "/" . $theme . "_print.css";
-if (is_file(_CALEM_DIR_ . 'client/themes/' . $_CALEM_conf['report_conf']['logo'])) {
-	$calemReportIcon=$calemRootUrl . '/client/themes/' . $_CALEM_conf['report_conf']['logo'];
-} else {
-$calemReportIcon=$calemRootUrl . '/client/themes/calemeam.png';
-}
-$calemReportPrintIcon=$calemRootUrl . '/client/themes/' . $theme . "/icons/printer.png";
-//Identify controller
+//Get controller
 $controller= CalemReportMap::getController($rid, $query);
-$doc=$controller->render();
-$reportTitle=$controller->getReportTitle();
-
-include _CALEM_DIR_ . 'server/modules/report/doc/CalemReportHeader.php';
-print $doc;
-include _CALEM_DIR_ . 'server/modules/report/doc/CalemReportFooter.php';
+$controller->renderExcel();
 ?>

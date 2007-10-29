@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
  
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -176,6 +175,9 @@ class CalemReportController {
 	 * Built-in filter support at list form
 	 */
 	public function initQueryByForm($tblQuery) {
+		if ($this->query['xid']) {
+			$tblQuery->setWhereSql($this->query['xid']);	
+		}
 		return $tblQuery;
 	}
 	
@@ -223,6 +225,14 @@ class CalemReportController {
 	public function render() {
 		$this->loadData();
 		return $this->renderReport();	
+	}	 
+	
+	/**
+	 * Render Excel format
+	 */
+	public function renderExcel() {
+		$this->loadData();
+		return $this->render->renderExcel($this->getCustomInfo());	
 	}	 
 	
 }

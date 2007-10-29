@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -193,6 +192,13 @@ class CalemReportRender {
 	public function getViewInfo() {
 		return $this->info;
 	}	 
+	
+	/**
+	 * Rendering Excel
+	 */
+	public function renderExcel($customInfo) {
+		echo "(No data)";
+	}
 	
 }
 ?>
