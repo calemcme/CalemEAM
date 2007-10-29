@@ -17,7 +17,6 @@
  
  * Contributor(s): 
  */
-
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 require_once _CALEM_DIR_ . 'server/include/core/database/query/CalemDbExpr.php';
@@ -72,6 +71,11 @@ class CalemTableQuery {
 	
 	public function setWhere($table, $expr, $tblJoin=null) {
 		$this->where->set($table, $expr, $tblJoin);
+	}
+	
+	/** Adding where sql directly */
+	public function setWhereSql($sql) {
+		$this->where->setSql($sql);	
 	}
 	
 	public function addWhere($table, $leftField, $expr, $tableDd=null) {
@@ -211,6 +215,7 @@ class CalemSelectField {
 	 */
 class CalemQueryWhere {
 	private $where;
+	private $sql;
 	
 	public function __construct() {
 		$this->where=array();
@@ -220,6 +225,10 @@ class CalemQueryWhere {
 		//use table join for the where key if applicable
 		$key= ($tblJoin) ? $table . "__" . $tblJoin->getLeftField() : $table;
 		$this->where[$key]=new CalemWhereItem($table, $expr, $tblJoin);
+	}
+	
+	public function setSql($sql) {
+		$this->sql=$sql;
 	}
 	
 	public function get($table, $leftField=null) {
@@ -258,6 +267,10 @@ class CalemQueryWhere {
 			$stw= " WHERE " . implode(' ', $where);
 		} else if (count($where) > 1) {
 			$stw= " WHERE " .  implode(' AND ', $where);
+		}
+		if ($this->sql) {//if there's a fixed SQL already
+			if ($stw) $stw .= ' AND ' . $this->sql;
+			else $stw = ' WHERE ' . $this->sql;
 		}
 		return ($rtn . $stw);
 	}
@@ -356,15 +369,14 @@ class CalemTableJoin {
 	
 	public function getSql() {
 		return (' ' . $this->type . ' JOIN ' . $this->rightTbl .
-		        ($this->aliasKey ? (" as " . $this->rightTbl . $this->aliasKey): '') . 
+		        ' AS ' . $this->getAlias() . 
 		        ' ON ' . $this->leftTbl . '.' .
-		        $this->leftFld . '=' . $this->rightTbl . 
-		        ($this->aliasKey ? $this->aliasKey : '') .
+		        $this->leftFld . '=' . $this->getAlias() .
 		        '.' . $this->rightFld . ' ');
 	}
 	
 	public function getAlias () {
-		return ($this->aliasKey) ? $this->rightTbl . $this->aliasKey : $this->rightTbl;
+		return $this->rightTbl . '_' . $this->leftFld;
 	}
 	
 	public function isLeftJoin() {
