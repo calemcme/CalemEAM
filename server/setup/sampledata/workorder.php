@@ -30,7 +30,9 @@ $data=array(
 		'orig_time'=>'2007-09-28 12:30:00',
 		'status_id'=>'wos_open',
 		'origin_id'=>'woo_request',
-		'priority_id'=>'wop_p4'
+		'priority_id'=>'wop_p4',
+		'orig_user_id'=>'1002',
+		'description'=>'Standard cleanup procedure.'
 	),
 	array(
 		'id'=>'10001',
@@ -40,7 +42,9 @@ $data=array(
 		'orig_time'=>'2007-10-01 12:30:00',
 		'status_id'=>'wos_open',
 		'origin_id'=>'woo_request',
-		'priority_id'=>'wop_p4'
+		'priority_id'=>'wop_p4',
+		'orig_user_id'=>'1003',
+		'description'=>'Vent cleanup before the replacement.'
 	),
 	array(
 		'id'=>'10002',
@@ -50,7 +54,9 @@ $data=array(
 		'orig_time'=>'2007-10-02 12:30:00',
 		'status_id'=>'wos_new',
 		'origin_id'=>'woo_request',
-		'priority_id'=>'wop_p3'
+		'priority_id'=>'wop_p3',
+		'orig_user_id'=>'1003',
+		'description'=>'Vent cleanup before the replacement.'
 	),
 	
 	array(
@@ -61,7 +67,9 @@ $data=array(
 		'orig_time'=>'2007-09-02 12:30:00',
 		'status_id'=>'wos_complete',
 		'origin_id'=>'woo_request',
-		'priority_id'=>'wop_p2'
+		'priority_id'=>'wop_p2',
+		'orig_user_id'=>'1002',
+		'description'=>'Frequent system reboot. Suspect firmware problem.'
 	),
 	array(
 		'id'=>'10004',
@@ -71,7 +79,9 @@ $data=array(
 		'orig_time'=>'2007-09-20 12:30:00',
 		'status_id'=>'wos_accepted',
 		'origin_id'=>'woo_request',
-		'priority_id'=>'wop_p2'
+		'priority_id'=>'wop_p2',
+		'orig_user_id'=>'1003',
+		'description'=>'Vent cleanup before the replacement.'
 	),
 );
 ?>
