@@ -208,7 +208,10 @@ $_CALEM_dist=array(
                            
 		'CalemMsg_en_GB.js'=>array('AjxMsg'=>array('AjxMsg'),
                            'I18nMsg'=>array('I18nMsg', 'I18nMsg_en_GB'),
-                           'CalemMsg'=>array('CalemMsg', 'CalemMsgCustom')),                                                                                 
+                           'CalemMsg'=>array('CalemMsg', 'CalemMsgCustom')), 
+      'CalemMsg_de_DE.js'=>array('AjxMsg'=>array('AjxMsg'),
+                           'I18nMsg'=>array('I18nMsg', 'I18nMsg_de', 'I18nMsg_de_DE'),
+                           'CalemMsg'=>array('CalemMsg_de', 'CalemMsgCustom_de')),									
       //ch_cn
       'CalemMsg_cn.js'=> array('AjxMsg'=>array('AjxMsg_cn'),
             					'I18nMsg'=>array('I18nMsg_zh', 'I18nMsg_zh_CN'),
@@ -223,7 +226,8 @@ $_CALEM_dist=array(
     	'English (US)'=>array('id'=>''),
     	'English (Australia)'=>array('id'=>'en_AU'),
     	'English (Canada)'=>array('id'=>'en_CA'),
-    	'English (UK)'=>array('id'=>'en_GB')
+    	'English (UK)'=>array('id'=>'en_GB'),
+		'German'=>array('id'=>'de_DE')
     ),
     'setting_cookie_expire'=>1209600, //Two weeks
    //custom items to include
