@@ -47,6 +47,8 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 	//This is the only action supported so far so make it simple at this point.
 	if ($action) {
 		$succ=false;
+		$lang=$_REQUEST[CALEM_PARAM_LANG];
+		if (!$lang) $lang=$_CALEM_conf['client_language'];
 		if ($action=='LoginAction') {
 			setCookie('CALEM_LANG', $_REQUEST[CALEM_PARAM_LANG], time()+$_CALEM_conf['setting_cookie_expire']);
 			$login_username=$_REQUEST['username'];	
