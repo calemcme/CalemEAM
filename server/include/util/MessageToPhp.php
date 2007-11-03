@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 // Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -41,12 +40,20 @@ class MessageToPhp {
  	}
  	/**
  	 * Parse a property and make it JSON element
+ 	 * - Also converting JS Unicode \uhhhh to &#xhhhh;
  	 */
  	public static function parseProperty($prop, $ar) {
  		$key = strtok($prop, "=");
  		$key=trim($key);
  		if ($key) {
 	 		$value=trim(strtok("="));
+	 		/**
+	 		 * Converting special chars from JS to PHP
+	 		 * Do a check to be efficient.
+	 		 */
+	 		if (strpos($value, '\u') !== false) {
+	 			$value=preg_replace('/\\\\u([0-9A-Fa-f]{4})/', '&#x$1;', $value);
+	 		}
 	 		$ar[$key]=$value;
  		}
  		return $ar;
