@@ -121,7 +121,7 @@ AjxMsg["xformRepeatAdd"] = "+";
 AjxMsg["xformRepeatRemove"] = "-";
 AjxMsg["xformDateTimeFormat"] = "{0,date} at {0,time}";
 
-//Message definition for I18nMsg
+//Messages of AjxMsg from AjxMsg_de.properties//Message definition for I18nMsg
 function I18nMsg() {}
 
 //Messages of I18nMsg from I18nMsg.propertiesI18nMsg["currencyCode"] = "USD";
