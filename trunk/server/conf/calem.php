@@ -209,7 +209,7 @@ $_CALEM_dist=array(
 		'CalemMsg_en_GB.js'=>array('AjxMsg'=>array('AjxMsg'),
                            'I18nMsg'=>array('I18nMsg', 'I18nMsg_en_GB'),
                            'CalemMsg'=>array('CalemMsg', 'CalemMsgCustom')), 
-      'CalemMsg_de_DE.js'=>array('AjxMsg'=>array('AjxMsg'),
+      'CalemMsg_de_DE.js'=>array('AjxMsg'=>array('AjxMsg', 'AjxMsg_de'),
                            'I18nMsg'=>array('I18nMsg', 'I18nMsg_de', 'I18nMsg_de_DE'),
                            'CalemMsg'=>array('CalemMsg_de', 'CalemMsgCustom_de')),									
       //ch_cn
