@@ -385,6 +385,8 @@ $_CALEM_dist=array(
 
 //recommended format
 @include_once _CALEM_DIR_ . 'server/conf/calem.custom.php';
+//Installation configuration file
+@include_once _CALEM_DIR_ . 'server/conf/calem.install.php';
 
 // used to bundle pear libraries and preserve existing include path (mantis ref 0000010)
 set_include_path(_CALEM_DIR_ . 'server/include' . PATH_SEPARATOR . get_include_path());
