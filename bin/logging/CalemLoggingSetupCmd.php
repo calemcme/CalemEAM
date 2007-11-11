@@ -31,26 +31,11 @@ if (!defined('_CALEM_DIR_')) {
 		define('_CALEM_DIR_', $_ENV['CALEM_DIR']);	
 	}
 }
-
-define('LOG_PLACE_HOLDER', '_CALEM_LOG_PATH_');
-define('LOG4PHP_SRC', 'etc/log4php.sample.properties');
-define('LOG4PHP_CONF', 'etc/log4php.properties');
-
-if (!is_file(_CALEM_DIR_ . LOG4PHP_CONF)) {
-	copy(_CALEM_DIR_ . LOG4PHP_SRC, _CALEM_DIR_ . LOG4PHP_CONF);
+require_once 'CalemLoggingSetup.php';
+try {
+	$rtn=CalemLoggingSetup::execute();
+	echo $rtn . "\n";	
+} catch (Exception $e) {
+	echo $e->getMessage() . "\n";
 }
- 
-if (is_file(_CALEM_DIR_ . LOG4PHP_CONF)) {
-	$cnt=file_get_contents(_CALEM_DIR_ . LOG4PHP_CONF);
-	if (false!==($pos=strpos($cnt, LOG_PLACE_HOLDER))) {
-		$nc=str_replace(LOG_PLACE_HOLDER, _CALEM_DIR_ . 'logs/calem.log', $cnt);
-		file_put_contents(_CALEM_DIR_ . LOG4PHP_CONF, $nc);
-		echo "Logging is configured\n";	
-	} else {
-		echo "Logging is already configured.\n";	
-	}
-} else {
-	echo 'Error in finding log4php.properties. Logging is not configured.' . "\n";	
-}
-		
 ?>
