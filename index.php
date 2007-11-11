@@ -34,6 +34,12 @@ require_once _CALEM_DIR_ . 'server/include/core/session/CalemSession.php';
 require_once _CALEM_DIR_ . 'server/include/util/CalemExit.php';
 require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 	
+	if (is_dir(_CALEM_DIR_ . '/installation')) {
+		$loginErrorText=CalemMsg::getMsg("installation_not_deleted");
+		require _CALEM_DIR_ . $_CALEM_conf['noses_allowed_actions']['LoginAction'];
+		//Close down logger
+		CalemExit::exitCalem();	
+	}
 	//Disable browser side cache
 	header('Cache-Control', 'no-cache');
 	//Start handling the request.
