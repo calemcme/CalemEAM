@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -42,13 +41,19 @@ class CalemDbHandler {
 		return $this->getCreateDatabaseMore($db_name, $dbConf);
 	}
 	
+	public function getAppHost() {
+		global $_CALEM_conf;
+		return ($_CALEM_conf['calem_application_host'] ? $_CALEM_conf['calem_application_host'] : '%');
+		
+	}
+	
 	//DDL create user for the database
 	public function getCreateUser() {
 		global $_CALEM_conf;
 		$user=$_CALEM_conf['calem_db_user'];
 		$password=$_CALEM_conf['calem_db_password'];
 		$db_name=$_CALEM_conf['calem_db_name'];
-		$app_host=$_CALEM_conf['calem_application_host'];
+		$app_host= $this->getAppHost();
 		return $this->getCreateUserMore($user, $password, $db_name, $app_host);
 	}
 	
@@ -59,7 +64,7 @@ class CalemDbHandler {
 		$user=$_CALEM_conf['calem_db_user'];
 		$password=$_CALEM_conf['calem_db_password'];
 		$db_name=$_CALEM_conf['calem_db_name'];
-		$app_host=$_CALEM_conf['calem_application_host'];
+		$app_host=$this->getAppHost();
 		return $this->getCreateGrantPrivilegesMore($privileges, $user, $password, $db_name, $app_host);
 	}
 

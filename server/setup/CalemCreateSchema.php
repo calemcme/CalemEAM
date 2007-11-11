@@ -19,7 +19,6 @@
  */
 
  
-
 /** 
  * Must define _CALEM_DIR_ and _LOG4PHP_CONFIGURATION
  * 
@@ -52,9 +51,7 @@ class CalemCreateSchema  {
 		$conn=$dbHandler->getDatabaseAdminConnection();
 		try {
 			//Will not drop a db by code
-			if (!$dbHandler->dbExist($_CALEM_conf['calem_db_name'], $conn)) {
 				$dbSetup->setupDatabaseAndUser($dbHandler, $conn);
-			}
 			
 			//Release the connection for admin
 			$dbHandler->releaseDatabaseAdminConnection();

@@ -56,7 +56,7 @@ abstract class CalemUpgradeBo extends CalemBo {
 			}
 			$results = 'Done upgrade. Commands executed: ' . count($cmds) . "\n" .  $results;
 		} catch (Exception $e) {
-			$results = $e->getMessage();
+			$results = 'Exception in upgrade: '. $e->getMessage();
 			$succ=false;
 		}
 		//Now let's log the version upgrade results if any.
@@ -69,7 +69,12 @@ abstract class CalemUpgradeBo extends CalemBo {
 				$this->verBo->failUpgrade($this->id, $results);
 			}
 		} catch (Exception $e) {
+			$results .= '; exception in save log: ' . $e->getMessage();
+			$succ=false;
 			$this->logger->error("Error in creating upgrade log, error=" . $e->getMessage());
+		}
+		if (!$succ) {
+			throw $results;	
 		}
 		return $results;
 	}

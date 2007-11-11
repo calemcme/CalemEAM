@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
- 
 /**
  * To run Calem test one must set up the following:
  * - _CALEM_DIR_
@@ -37,24 +36,12 @@ if (!defined('_CALEM_DIR_')) {
 	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'etc/log4php.properties');
 } 
 
-require_once _CALEM_DIR_ . 'server/conf/calem.php';
-require_once _CALEM_DIR_ . 'server/setup/CalemDataLoadConf.php';
-require_once _CALEM_DIR_ . 'server/setup/CalemDataLoader.php';
-require_once _CALEM_DIR_ . 'server/modules/dashboard/proc/CalemDashWoCountResetTask.php';
-
-
+require_once _CALEM_DIR_ . 'server/setup/CalemLoadSampleData.php';
 
 //Starting off loading sample data.
-global $_CALEM_conf;
-$loadConf=new CalemDataLoadConf();
-$loadConf->init($_CALEM_conf['calem_data_load_sample']);
 echo date("F j, Y, g:i:s a") . " - Loading sample data...<br>\n";
-$sampleLoad=new CalemDataLoader();
-$sampleLoad->load($loadConf);
-$sampleLoad->validate($loadConf);
-//Reset wo count
-$cntReset=new CalemDashWoCountResetTask();
-$result=$cntReset->execute();
+$loader=new CalemLoadSampleData();
+$result=$loader->load();
 echo $result . "<br>\n";
 echo date("F j, Y, g:i:s a") . " - DONE<br>\n";
 ?>

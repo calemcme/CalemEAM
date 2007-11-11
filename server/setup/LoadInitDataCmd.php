@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
- 
 /**
  * To run Calem test one must set up the following:
  * - _CALEM_DIR_
@@ -37,29 +36,13 @@ if (!defined('_CALEM_DIR_')) {
 	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'etc/log4php.properties');
 } 
 
-require_once _CALEM_DIR_ . 'server/conf/calem.php';
-require_once _CALEM_DIR_ . 'server/setup/CalemDataLoadConf.php';
-require_once _CALEM_DIR_ . 'server/setup/CalemDataLoader.php';
+require_once _CALEM_DIR_ . 'server/setup/CalemLoadInitData.php';
 
 
 
 //Starting off loading sample data.
-global $_CALEM_conf;
-$loadConf=new CalemDataLoadConf();
-$loadConf->init($_CALEM_conf['calem_data_load_init']);
 echo date("F j, Y, g:i:s a") . " - Loading init data...<br>\n";
-$sampleLoad=new CalemDataLoader();
-$sampleLoad->load($loadConf);
-//Now loading special ones
-$loaders=$loadConf->getLoaders();
-if ($loaders) {
-	foreach ($loaders as $cls) {
-		require_once 'loader/' . $cls . '.php';
-		$load=new $cls;
-		$load->load();	
-	}	
-}
-
-$sampleLoad->validate($loadConf);
-echo date("F j, Y, g:i:s a") . ' - DONE<br>';
+$loader=new CalemLoadInitData();
+$loader->load();
+echo date("F j, Y, g:i:s a") . " - DONE<br>\n";
 ?>
