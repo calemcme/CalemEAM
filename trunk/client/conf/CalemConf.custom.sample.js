@@ -17,8 +17,9 @@
  * Contributor(s): 
  */
  
-
 /**
  * This is the customized configuration.
  */
-CalemConf["temp"] = "temp";
+CalemConf['sys_currency'] = {
+	id: 'EUR'
+}
