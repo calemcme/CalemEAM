@@ -44,6 +44,9 @@ class CalemConvertReport {
 			die("Error in converting report for: " . $srcPath . $srcFile);	
 		}
 		$phps=serialize($phpo);
+		if ($GLOBALS['logger'] && $GLOBALS['logger']->isDebugEnabled()) {
+			$GLOBALS['logger']->debug("To put file: " . $dst . ", content size=" . strlen($phps));	
+		}
 		file_put_contents($dst, $phps);
 	}
 	
