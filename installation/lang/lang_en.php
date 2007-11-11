@@ -33,13 +33,16 @@ $_CALEM_lang=array(
 'step_dbexpress_help'=>'Express setup creates the database, user and tables for CalemEAM. It requires a user with administration privileges for these operations. You will provide the user and database to be created. If the user or database exists it will be used without being recreated. The installation will also perform upgrade if applicable.',
 'step_dbinfo_help'=>'To continue the installation you must have a database and a user created for use with CalemEAM. Your database DBA or system admin can help create a database and a user for you.',
 'step_dbsetup_help'=>'Database configuration will create tables, upgrade a previous version if applicable, load system data, load sample data and verify that all tables are in the database. Data in existing tables will not be affected.',
-'step_saveconf_help'=>'Settings used in the installation will be saved in <b>server/conf/calem.custom.php</b> so you can use CalemEAM. The settings include database information and server URLs. This step also creates some directories and data cache.', 
-'step_done_help'=>'Congratulations! Your installation is complete. You must delete the <b>installation</b> directory before using your CalemEAM.',
+'step_saveconf_help'=>'Settings used in the installation will be saved in <b>server/conf/calem.install.php</b> so you can use CalemEAM. The settings include database information and server URLs. This step also creates some directories and data cache.', 
+'step_done_help'=>'Congratulations! Your installation is complete. You must delete the <b>installation</b> directory before using your CalemEAM.<p>An admin user is installed by default with user name and password being <b>admin</b> and <b>admin_password</b> respectively. You should change the password after you log in. </p>',
 
 'check_php_version_help' => 'PHP 5.0 or later has a new object model and better object-oriented features which are a good fit for the object-oriented architecture of CalemEAM.',
+'check_db_help'=>'We cannot verify your database at this time. MySQL 5.0 or later is required (for information_schema and performance improvement in innoDB). If you have WAMP 1.5 or later, or XAMPP 1.5 or later, you are fine. To find the version of your MySQL server open a browser to the home page of phpMyAdmin of your MySQL installation which displays MySQL version.',
 'check_pdo_help' => 'PDO is an efficient, lightweight, consistent interface for accessing databases in PHP. CalemEAM builds its database layer on top of PDO',
 'check_pdo_mysql_help' => 'This is the PDO Driver for MySQL.',
 'check_conf_writable_help' => 'The configuration file will be modified at the end of the installation.',
+'check_amcharts_help'=>'CalemEAM uses <a href="http://www.amcharts.com/" target="_blank">amCharts</a> in the dashboard module. amCharts is free for download and use. Download and unzip the following to directories under <b>server/include/charts/</b> <ul><li><a href="http://www.amcharts.com/pie/download/" target="_blank">amPie</a> to <b>ampie</b> directory;</li> <li><a href="http://www.amcharts.com/line/download/" target="_blank">amLine</a> to <b>amline</b> directory;</li> <li><a href="http://www.amcharts.com/column/download/" target="_blank">amColumn</a> to <b>amcolumn</b> directory.</li></ul> Flash player version 8 or later is required. For flash version detection and download, click <a href="http://kb.adobe.com/selfservice/viewContent.do?externalId=tn_15507" target="_blank">here</a>.',
+'check_file_access_help'=>'The installation program cannot verify file access settings in your system. The settings are required for Linux/Unix. If you are installing on platforms other than Winodws consult <a href="http://www.calemeam.com/apps/wiki/index.php?title=CalemInstallation" target="_blank">Access Rights for CalemEAM</a>.',
 
 'inst_title' => 'Installation of',
 'step_list_title'=>'Steps',
@@ -74,13 +77,17 @@ $_CALEM_lang=array(
 
 'syscheck_item' => 'Item',
 'check_db'=>'Database',
-'db_unknown'=>'(Unknown)',
-'check_db_help'=>'We cannot verify your database at this time. MySQL 5.0 or later is required (for information_schema and performance improvement in innoDB). If you have WAMP 1.5 or later, or XAMPP 1.5 or later, you are fine. To find the version of your MySQL server open a browser to the home page of phpMyAdmin of your MySQL installation which displays MySQL version.',
+'text_unknown'=>'(Unknown)',
+'not_found'=>'(Not Found)',
 
 'check_php_version' => 'PHP Version',
 'check_pdo' => 'PDO', 
 'check_pdo_mysql' => 'PDO for MySQL',
 'check_conf_writable' => 'Configuration',
+'check_amcharts'=>'amCharts',
+'check_file_access'=>'File access',
+'fil_access_required'=>'Browser access and security',
+
 'syscheck_current' => 'Current',
 'syscheck_required' => 'Required',
 'syscheck_passed' => 'Passed?',

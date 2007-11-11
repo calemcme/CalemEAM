@@ -328,6 +328,7 @@ a:hover#switchcolorwhite {
   font-size:12px;
   padding: 1px 1px 1px 5px;
   white-space: nowrap;
+  color: #4f504d;
 }
 
 .input_table .input_field_td {

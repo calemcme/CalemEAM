@@ -57,7 +57,7 @@ class CalemInstSaveConfModel extends CalemInstModel {
 		$cnt .= "\$_CALEM_dist['calem_request_uri']='" . $this->getCalemRootUri() . "/index.php';\n";
 		$cnt .= "\$_CALEM_dist['calem_soap_uri']='" . $this->getCalemRootUri() . "/CalemSoapService.php';\n";
 		$cnt .= "?>\n";
-		$rtn= file_put_contents(_CALEM_DIR_ . 'server/conf/calem.custom.php', $cnt);
+		$rtn= file_put_contents(_CALEM_DIR_ . 'server/conf/calem.install.php', $cnt);
 		if (!$rtn) {
 			$this->setErrorMsg("Error in saving settings to file: " . _CALEM_DIR_ . 'server/conf/calem.custom.php');
 		} 

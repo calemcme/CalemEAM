@@ -34,7 +34,9 @@ class CalemInstSyscheckModel extends CalemInstModel {
 		$c2=$this->checkDb();
 		$c3=$this->checkPdo();
 		$c4=$this->checkConfFile();
-		$this->passed= ($c1&&$c2&&$c3&&$c4);
+		$c5=$this->checkAmCharts();
+		$c6=$this->checkFileAccess();
+		$this->passed= ($c1&&$c2&&$c3&&$c4&&$c5);
 		return $this->getCheckInfo();
 	}
 	
@@ -55,11 +57,11 @@ class CalemInstSyscheckModel extends CalemInstModel {
 	}
 	
 	public function checkDb() {
-		$cv=$this->getLabel('db_unknown');
+		$cv=$this->getLabel('text_unknown');
 		$this->syscheck['check_db']=array(
 			'syscheck_current'=>$cv,
 			'syscheck_required'=>'MySQL 5.0',
-			'syscheck_passed'=> ('unknown')
+			'syscheck_passed'=> 'unknown'
 		);	
 		return true;
 	}
@@ -87,18 +89,47 @@ class CalemInstSyscheckModel extends CalemInstModel {
 	public function checkConfFile() {
 		$rtn=false;
 		$d=_CALEM_DIR_ . 'server/conf';
-		$fn= $d . '/calem.custom.php';
+		$fn= $d . '/calem.install.php';
 		if (is_file($fn)) {
 			$rtn=is_writable($fn);	
 		} else {
 			$rtn=is_writable($d);	
 		}
 		$this->syscheck['check_conf_writable']=array(
-			'syscheck_current'=>'server/conf/calem.custom.php',
+			'syscheck_current'=>'server/conf/calem.install.php',
 			'syscheck_required'=>'Writable',
 			'syscheck_passed'=>($rtn?'yes':'no')
 		);
 		return $rtn;
+	}
+	
+	public function checkAmCharts() {
+		$cv=$this->getLabel('not_found');
+		$rtn=true;
+		$d=_CALEM_DIR_ . 'server/include/charts/';
+		$ar=array('amcolumn/amcolumn', 'amline/amline', 'ampie/ampie');
+		foreach ($ar as $p) {
+			if (!is_dir($d . $p)) {
+				$rtn=false;
+				break;	
+			}	
+		}
+		$this->syscheck['check_amcharts']=array(
+			'syscheck_current'=>($rtn ? 'amCharts' : '(Not Found)'),
+			'syscheck_required'=>'amCharts',
+			'syscheck_passed'=>($rtn?'yes':'no')
+		);
+		return $rtn;
+	}
+	
+	public function checkFileAccess() {
+		$cv=$this->getLabel('text_unknown');
+		$this->syscheck['check_file_access']=array(
+			'syscheck_current'=>$this->getLabel('text_unknown'),
+			'syscheck_required'=>$this->getLabel('fil_access_required'),
+			'syscheck_passed'=>'unknown'
+		);	
+		return true;
 	}
 }	 	
 ?>
