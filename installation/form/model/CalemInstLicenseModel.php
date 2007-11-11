@@ -28,7 +28,7 @@ require_once 'CalemInstModel.php';
 class CalemInstLicenseModel extends CalemInstModel {
 	
 	public function getLicenseUrl() {
-		return 'CalemEAM_Software_license.html';	
+		return 'license.html';	
 	}
 }	 	
 ?>
