@@ -345,6 +345,8 @@ CalemMsg["login_reqd"] = "The only action allowed is login. Action cancelled.";
 CalemMsg["splash_wait_text"] = "Loading...";
 CalemMsg["language"] = "Language";
 
+CalemMsg["installation_not_deleted"] = "The <b>installation</b> directory is not deleted. It is a safety issue. You must have the <b>installation</b> directory deleted before using CalemEAM.";
+
 CalemMsg["exit_calemeam"] = "CalemEAM will log you out when you confirm. Select Cancel to continue use CalemEAM.";
 
 CalemMsg["soap_InvalidLogin"] = "Login failed. Please check your user name/password and try again.";
