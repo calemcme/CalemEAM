@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -210,6 +209,20 @@ final class MysqlHandler extends CalemDbHandler implements CalemDbHandlerInterfa
 		}
 		return $exist;
 	}
+	
+	/**
+	 * Check if the given user exists
+	 * @param database name
+	 * @param PDO connection
+	 * @return boolean true|false
+	 */
+	public function userExist($username, PDO $conn) {
+		$qry="select count(*) as cnt from mysql.user where user='" . $username . "'";
+		foreach ($conn->query($qry, PDO::FETCH_ASSOC) as $row) {
+			return ($row['cnt'] > 0);
+		}
+	}
+	
 	/**
 	 * Get all the tables in the database
 	 * @return array of table names
@@ -235,7 +248,7 @@ final class MysqlHandler extends CalemDbHandler implements CalemDbHandlerInterfa
 	//DDL create user for the database
 	public function getCreateUserMore($user, $password, $db_name, $app_host) {
 		return 'CREATE USER \''. $user . '\'@' . '\'' . $app_host . '\' ' 
-				 . 'IDENTIFIED BY \''. $password . '\'';
+				 . ($password ? ('IDENTIFIED BY \''. $password . '\'') : '');
 	}
 	//DDL grant access privileges
 	public function getCreateGrantPrivilegesMore($privileges, $user, $password, $db_name, $host) {
@@ -288,14 +301,18 @@ final class MysqlHandler extends CalemDbHandler implements CalemDbHandlerInterfa
 	/**
 	 * Custom field functions
 	 */
-	public function tableExists($dbo, $table) {
+	public function tableExists($dbo, $table, $throw=false) {
+		$rtn=true;
 		try {
- 			$count=$dbo->getCountBySql("SELECT count(table_name) FROM INFORMATION_SCHEMA.TABLES WHERE table_name = '" . $table . "'");
+ 			$count=$dbo->getCountBySql("SELECT count(*) from ". $table);
 		} catch (Exception $ex) {
+			if ($throw) {
 			$errorInfo=$dbo->getErrorInfo();	
  			throw new CalemDataBoException($table, $ex, $errorInfo);
 		}	
-		return ($count > 0);
+			$rtn=false;
+		}
+		return $rtn;
 	}
 	
 	//First field addition

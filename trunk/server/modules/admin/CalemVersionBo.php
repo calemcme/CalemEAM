@@ -40,19 +40,30 @@ class CalemVersionBo extends CalemBo {
 	//Constructor method
 	public function __construct() {
 		parent::__construct();
-   	$this->dbo=CalemFactory::getDbo('version');
-   	$this->dboLog=CalemFactory::getDbo('version_upgrade_log');
    	global $_CALEM_conf;
    	$this->conf=$_CALEM_conf['admin_conf'];
    	$fv=$_CALEM_conf['admin_conf']['first_version'];
    	$this->firstVersion=new CalemVersion($fv['vid'], $fv['note'], $fv['props']);   		
    }
    
-   public function getCurrentVersion() {
-   	$dh=CalemFactory::getDbHandler();
-   	$rtn=$this->firstVersion;
-   	if (!$dh->tableExists($this->dbo, 'version')) return $rtn;
+   /**
+    * To use this object in installation so cannot assume db is available to start with.
+    */
+   private function initDbo() {
+   	if (!$this->dbo) {
+			$this->dbo=CalemFactory::getDbo('version');
+		}	
+		if (!$this->dboLog) {
+			$this->dboLog=CalemFactory::getDbo('version_upgrade_log');	
+		}
+   }
+   
+   public function getCurrentVersion($useFirst=true) {
+   	$rtn= $useFirst ? $rtn=$this->firstVersion : null;
    	try {
+   		$this->initDbo();
+   	$dh=CalemFactory::getDbHandler();
+   	if (!$dh->tableExists($this->dbo, 'version')) return $rtn;
    		$row=$this->dbo->fetchById(VERSION_ID);
    		$rtn=CalemVersion::decode($row);	
    	} catch (CalemDboDataNotFoundException $dn) {
@@ -68,6 +79,7 @@ class CalemVersionBo extends CalemBo {
    
    public function save(CalemVersion $version) {
    	try {
+   		$this->initDbo();
    		$row=$this->dbo->fetchById(VERSION_ID);
    		$this->dbo->setChangeBulk(array(
    			'vid'=>$version->getVid(),
@@ -87,6 +99,7 @@ class CalemVersionBo extends CalemBo {
    
    //Upgrade handling
    public function startUpgrade(CalemVersion $vNew, CalemVersion $vOld) {
+   	$this->initDbo();
    	$this->dboLog->setChangeBulk(array(
    		'vid'=>$vNew->getVid(),
    		'ver_note'=>$vNew->getNote(),
@@ -108,6 +121,7 @@ class CalemVersionBo extends CalemBo {
    }
    
    public function setLogStatus($id, $statusId, $results) {
+   	$this->initDbo();
    	$this->dboLog->setChangeBulk(array(
    		'status_id'=>$statusId,
    		'end_time'=>CalemText::getServerDatetime(),
@@ -115,6 +129,15 @@ class CalemVersionBo extends CalemBo {
    	));
    	$this->dboLog->setIdForUpdate($id);
    	$this->dboLog->update();
+   }
+   
+   public function getUpgradeHdlr($newVersion, $currVersion) {
+   	$rtn=null;
+		if ($currVersion) {
+			require_once _CALEM_DIR_ . 'server/upgrade/CalemUpgradeMap.php';
+			$rtn=CalemUpgradeMap::getHandler($newVersion, $currVersion);	
+		}
+		return $rtn;
    }
 }
 ?>

@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 	
@@ -48,11 +47,16 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDbo.php';
  	/**
  	 * Generating scripts for database and user setup
  	 */
- 	public function getDatabaseAndUserScript(CalemDbHandlerInterface $dbHandler) {
+ 	public function getDatabaseAndUserScript(CalemDbHandlerInterface $dbHandler, PDO $conn) {
+ 		global $_CALEM_conf;
  		$database=array();
+ 		if (!$dbHandler->dbExist($_CALEM_conf['calem_db_name'], $conn)) {
  		$database[]=$dbHandler->getCreateDatabase();
+		}
+ 		if (!$dbHandler->userExist($_CALEM_conf['calem_db_user'], $conn)) {
  		$database[]=$dbHandler->getCreateUser();
  		$database[]=$dbHandler->getCreateGrantPrivileges();
+ 		}
  		return $database;
  	}
  	
@@ -118,9 +122,11 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDbo.php';
  	/**
  	 * Setup database and user first
  	 */
- 	public function setupDatabaseAndUser(CalemDbHandlerInterface $dbHandler, PDO $connection) {
- 		$sql=$this->getDatabaseAndUserScript($dbHandler);
- 		$this->runSqlScriptArray($connection, $sql);
+ 	public function setupDatabaseAndUser(CalemDbHandlerInterface $dbHandler, PDO $conn) {
+ 		$sql=$this->getDatabaseAndUserScript($dbHandler, $conn);
+ 		if (count($sql) > 0) {
+ 			$this->runSqlScriptArray($conn, $sql);
+ 		}
  	}
  	
  	/**
