@@ -39,87 +39,16 @@ if (!defined('_CALEM_DIR_')) {
 	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'etc/log4php.properties');
 }
 
-require_once _CALEM_DIR_ . 'build/CalemZipMetadataJs.php';
-require_once _CALEM_DIR_ . 'build/CalemZipMessageJs.php';
-require_once _CALEM_DIR_ . 'build/CalemZipJustAjaxJs.php';
-require_once _CALEM_DIR_ . 'build/CalemZipJustCalemJs.php';
-require_once _CALEM_DIR_ . 'build/CalemZipGroupUserJs.php';
-require_once _CALEM_DIR_ . 'build/CalemBuildCache.php';
+require_once _CALEM_DIR_ . 'build/CalemZipJs.php';
 
-require_once _CALEM_DIR_ . 'build/CalemZipCustomMetadataJs.php';
-require_once _CALEM_DIR_ . 'build/CalemZipCustomDropdownJs.php';
-require_once _CALEM_DIR_ . 'build/CalemZipCustomMessageAllJs.php';
-
-require_once _CALEM_DIR_ . 'build/CalemConvertReportBatch.php';
-
+echo date("F j, Y, g:i:s a") . " - Start ZipJs - <br>\n";
 $tmBuild=microtime(true);
 $build= (isset($_ENV['CALEM_BUILD']) && $_ENV['CALEM_BUILD']==1);
-
-function createDir($d, $r=DIR_WRITE_RIGHTS) {
-	if (!is_dir($d)) mkdir($d, $r);	
+$zipJs=new CalemZipJs();
+$tmRpt=$zipJs->execute($build);
+$timeZip=microtime(true) - $tmBuild;
+if ($tmRpt) {
+	echo "ReportConversion: " . ($tmRpt['reportTime']['end'] - $tmRpt['reportTime']['start']) . "<br>\n";
 }
-
-// -- client directories
-createDir(_CALEM_DIR_ . 'logs');
-
-createDir(_CALEM_DIR_ . 'client/launchpad/resource');
-
-// -- server directories
-createDir(_CALEM_DIR_ . 'server/cache');
-createDir(_CALEM_DIR_ . 'server/cache/data');
-createDir(_CALEM_DIR_ . 'server/cache/default');
-createDir(_CALEM_DIR_ . 'server/cache/session');
-
-// -- custom directories
-createDir(_CALEM_DIR_ . 'custom/global');
-createDir(_CALEM_DIR_ . 'custom/global/dropdown');
-createDir(_CALEM_DIR_ . 'custom/global/message');
-createDir(_CALEM_DIR_ . 'custom/global/metadata');
-
-createDir(_CALEM_DIR_ . 'custom/group/CUSTOM_SYSTEM');
-
-createDir(_CALEM_DIR_ . 'custom/user');
-
-// -- start deployment.
-echo date("F j, Y, g:i:s a") . " - Start deployment - <br>\n";
-if ($build) {
-   echo " - Start merging and compressing JS scripts - <br>\n";
-	$ajax=new CalemZipJustAjaxJs();
-	$ajax->process();
-	$calemeam=new CalemZipJustCalemJs();
-	$calemeam->process();
-	
-	$metadata=new CalemZipMetadataJs();
-	$metadata->process();
-	$message=new CalemZipMessageJs();
-	$message->process();
-		
-	$groupUser=new CalemZipGroupUserJs();
-	$groupUser->package();
-	
-	//Global custom info
-	$md=new CalemZipCustomMetadataJs();
-	$md->package();
-	
-	$md=new CalemZipCustomDropdownJs();
-	$md->package();
-	
-	$md=new CalemZipCustomMessageAllJs();
-	$md->package();
-	
-	//Converting report
-	$tmRpt=microtime(true);
-	$rpt=new CalemConvertReportBatch();
-	$countRpt=$rpt->process();
-	$tmRtpTaken=microtime(true)  - $tmRpt;
-	$avg= ($tmRtpTaken) / ($countRpt > 0 ? $countRpt : 1);
-	echo "Report converted: count=" . $countRpt . ", time=" . $tmRtpTaken . ', avg time=' . $avg . "<br>\n";
-}
-
-//Data cache building
-$cacheBuilder=new CalemBuildCache();
-$cacheBuilder->buildCache();
-
-$tmTaken=microtime(true) - $tmBuild;
-echo date("F j, Y, g:i:s a") . " - Completed deploy. Time: " . $tmTaken . "<br>\n";
+echo date("F j, Y, g:i:s a") . " - Completed ZipJs. Time: " . $timeZip. "<br>\n";
 ?>
