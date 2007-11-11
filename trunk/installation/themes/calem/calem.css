@@ -1,0 +1,393 @@
+/*
+ * The contents of this file are subject to the CalemEAM Public License Version
+ * 1.0 ("License"); You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.calemeam.com/license
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is: CalemEAM Open Source
+ *
+ * The Initial Developer of the Original Code is CalemEAM Inc.
+ * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
+ * All Rights Reserved.
+ 
+ * Contributor(s): 
+ */
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+	
+.body_class {
+   /* position: relative; */
+	background: #585470;
+} 
+
+.background_darkblue {
+   background: #585470;
+}
+
+.background_green {
+	background: green;
+}
+
+.background_blue {
+	background: #c7c6ea;
+}
+
+.background_white {
+	background: white;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+#style_change_div {
+   margin: 10px 40px 10px 10px;
+	float: right; 
+}
+
+div#style_change_div a {
+	display:block;
+	float:right;
+	height:20px;
+	text-decoration:none;
+	width:15px;
+}
+
+a#switchcolordarkblue {
+	background: url(images/background_darkblue.png) 0 0 no-repeat;
+}
+
+a:hover#switchcolordarkblue {
+	background: url(images/background_darkblue_hover.png) 0 0 no-repeat;
+}
+
+a#switchcolorgreen {
+	background: url(images/background_green.png) 0 0 no-repeat;
+}
+
+a:hover#switchcolorgreen {
+	background: url(images/background_green_hover.png) 0 0 no-repeat;
+}
+
+a#switchcolorblue {
+	background: url(images/background_blue.png) 0 0 no-repeat;
+}
+
+a:hover#switchcolorblue {
+	background: url(images/background_blue_hover.png) 0 0 no-repeat;
+}
+
+a#switchcolorwhite {
+	background: url(images/background_white.png) 0 0 no-repeat;
+}
+
+a:hover#switchcolorwhite {
+	background: url(images/background_white_hover.png) 0 0 no-repeat;
+}
+
+#inst_wrapper {
+   margin:auto;
+   margin-top: 15px;
+   padding-top: 10px;
+	width: 940px;
+}
+
+#install_view {
+   clear: both;
+   margin-top: 10px;
+   padding-top: 10px;
+	background: #f0eef8;
+}
+
+#top_panel_left {
+	background: url(../logo.png) no-repeat;
+	height: 60px;
+}
+
+#top_panel_right {
+	background: url(../calemeam-ad_60.png) 98% 0 no-repeat;
+	height: 60px;
+}
+
+#title_panel {
+   background: #3C7FB9;
+	font-size: 22px;
+	color: white;
+	font-weight: bold;
+	line-height: 44px;
+	text-align: center;
+}
+
+#bottom_panel {
+   clear: both;
+	text-align: center;
+	background: #3C7FB9;
+	font-size: 11px;
+	color: white;
+	line-height: 28px;
+}
+
+#content_area {
+}
+
+#install_step_list {
+   background:#E7EFE7;
+   float:left;
+   width:160px;
+	margin: 10px 5px 5px 10px;
+	border: 1px solid #7FB6DD; 
+}
+
+#step_list_title {
+  color:blue;
+  font-size:20px;
+  font-weight:bold;
+  margin:0pt;
+  padding: 5px 0px 5px 10px;
+}
+
+#step_list_table {
+   font-size:12px;
+   font-weight:bold;
+}
+
+#step_list_table td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.caption_step_off {
+	color: gray;
+}
+
+.caption_step_on {
+	color: green;
+}
+
+.icon_step_off {
+  background-image: url(images/bullet_black.png); 
+  background-position:0px 5px;
+  background-repeat:no-repeat;
+  overflow:hidden;
+  width: 16px;
+  height: 16px;
+}
+
+.icon_step_on {
+  background-image: url(images/bullet_go.png); 
+  background-position:0px 5px;
+  background-repeat:no-repeat;
+  overflow:hidden;
+  width: 16px;
+  height: 16px;
+}
+
+#install_step_area {
+	margin-left:185px;
+}
+
+#install_step_content {
+	float: left;
+	width: 100%;
+}
+
+#inst_step_box {
+   background:#E7EFE7;
+	margin: 10px 10px 5px 0px;
+	border: 1px solid #7FB6DD;
+}
+
+#inst_step_title {
+  color:blue;
+  font-size:20px;
+  font-weight:bold;
+  padding: 5px 0px 5px 5px;
+}
+
+#inst_toolbar {
+	margin: 5px 5px 5px 0px;
+	height: 26px;
+}
+
+.toolbar_button_refresh {
+	background: url(images/view-refresh.png) no-repeat 6% 55%;
+	float:left;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-right: 5px;
+	border: 1px solid #7FB6DD;
+}
+
+.toolbar_button_next {
+	background: url(images/go-next.png) no-repeat 90% 55%;
+	float:left;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-right: 5px;
+	border: 1px solid #7FB6DD;
+}
+
+.toolbar_button_accept {
+	background: url(images/accept.png) no-repeat 90% 55%;
+	float:left;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-right: 5px;
+	border: 1px solid #7FB6DD;
+}
+
+.toolbar_button_prev {
+	background: url(images/go-previous.png) no-repeat 10% 55%;
+	float:left;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-right: 5px;
+	border: 1px solid #7FB6DD;
+}
+
+.toolbar_button_next a, .toolbar_button_accept a {
+   padding-right: 22px;
+}
+
+.toolbar_button_prev a, .toolbar_button_refresh a {
+   padding-left: 22px;
+}
+
+.toolbar_button_next a, .toolbar_button_prev a, .toolbar_button_accept a, .toolbar_button_refresh a {
+	color: black;
+	cursor:pointer;
+	display:block;
+	float:left;
+	font-size:12px;
+	font-weight:bold;
+	height:24px;
+	line-height:24px;
+}
+
+.input_area {
+   clear: left;
+	background:#E7EFE7;
+	margin: 10px 10px 10px 0px;
+	border: 1px solid #7FB6DD;
+}
+
+#license_if {
+	width: 100%;
+	height: 600px;
+}
+
+.input_table .header_td {
+  font-size: 12px;
+  font-weight:bold;
+  padding: 5px 5px 5px 5px;
+}
+
+.input_table .value_td {
+  padding: 5px 5px 5px 5px;
+}
+
+.input_table .value_td_yes {
+  padding: 5px 5px 5px 5px;
+  background: url(images/tick.png) no-repeat 50% 50%;
+}
+
+.input_table .value_td_no {
+  padding: 5px 5px 5px 5px;
+  background: url(images/cross.png) no-repeat 50% 50%;
+}
+
+.input_table .value_td_unknown {
+  padding: 5px 5px 5px 5px;
+  background: url(images/asterisk_yellow.png) no-repeat 50% 50%;
+}
+
+#input_error_icon {
+  background: url(images/Critical_32.gif) no-repeat 10% 55%; 
+  background-position:0px 0px;
+  background-repeat:no-repeat;
+  overflow:hidden;
+  width: 32px;
+  height: 32px;
+}
+
+.input_error_msg {
+  color: red;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.input_table .input_label_td {
+  font-size:12px;
+  padding: 1px 1px 1px 5px;
+  white-space: nowrap;
+}
+
+.input_table .input_field_td {
+  font-size:12px;
+  padding: 1px 1px 1px 1px;
+  white-space: nowrap;
+}
+
+.input_table .input_field_url {
+  font-size:12px;
+  padding: 2px 10px 2px 10px;
+}
+
+.input_table .input_field_help {
+  font-size:12px;
+  padding: 5px 5px 5px 5px;
+  color: #4f504d;
+}
+
+.inst_toolbar_wait_table {
+	margin: 0px 0px 0px 5px;
+}
+
+.inst_toolbar_wait_icon {
+  background: url(images/wait_32.gif) no-repeat; 
+  background-position:0px 0px;
+  background-repeat:no-repeat;
+  overflow:hidden;
+  width: 32px;
+  height: 32px;
+}
+
+.inst_toolbar_wait_text {
+	color: red;
+	font-size:12px;
+}
+
+.inst_help_area {
+   clear: left;
+	background:#E7EFE7;
+	margin: 10px 10px 10px 0px;
+	border: 1px solid #7FB6DD;
+}
+.inst_help_icon {
+  background: url(images/help.png) no-repeat; 
+  background-position:0px 0px;
+  background-repeat:no-repeat;
+  overflow:hidden;
+  width: 16px;
+  height: 16px;
+  margin: 2px 2px 2px 2px;
+}
+
+.inst_help_text {
+  font-size:12px;
+  color: #4f504d;
+  padding: 3px 3px 3px 3px;
+}
+
+
+
+
+
