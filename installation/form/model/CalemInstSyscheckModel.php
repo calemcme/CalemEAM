@@ -34,8 +34,8 @@ class CalemInstSyscheckModel extends CalemInstModel {
 		$c2=$this->checkDb();
 		$c3=$this->checkPdo();
 		$c4=$this->checkConfFile();
-		$c5=$this->checkAmCharts();
-		$c6=$this->checkFileAccess();
+		$c5=$this->checkFileAccess();
+		$c6=$this->checkAmCharts();
 		$this->passed= ($c1&&$c2&&$c3&&$c4&&$c5);
 		return $this->getCheckInfo();
 	}
