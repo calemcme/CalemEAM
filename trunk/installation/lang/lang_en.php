@@ -37,7 +37,7 @@ $_CALEM_lang=array(
 'step_done_help'=>'Congratulations! Your installation is complete. You must delete the <b>installation</b> directory before using your CalemEAM.<p>An admin user is installed by default with user name and password being <b>admin</b> and <b>admin_password</b> respectively. You should change the password after you log in. </p>',
 
 'check_php_version_help' => 'PHP 5.0 or later has a new object model and better object-oriented features which are a good fit for the object-oriented architecture of CalemEAM.',
-'check_db_help'=>'We cannot verify your database at this time. MySQL 5.0 or later is required (for information_schema and performance improvement in innoDB). If you have WAMP 1.5 or later, or XAMPP 1.5 or later, you are fine. To find the version of your MySQL server open a browser to the home page of phpMyAdmin of your MySQL installation which displays MySQL version.',
+'check_db_help'=>'We cannot verify your database at this time. MySQL 5.0 or later is required (for information_schema and performance improvement in innoDB). CalemEAM uses innoDB for transactions (see <a href="http://www.mydigitallife.info/2006/10/21/enable-mysql-innodb-storage-engine-support-in-xampp-installation/" target="_blank">here</a> to enable innoDB in XAMPP installation). To find the version of your MySQL server open a browser to the home page of phpMyAdmin of your MySQL installation.',
 'check_pdo_help' => 'PDO is an efficient, lightweight, consistent interface for accessing databases in PHP. CalemEAM builds its database layer on top of PDO',
 'check_pdo_mysql_help' => 'This is the PDO Driver for MySQL.',
 'check_conf_writable_help' => 'The configuration file will be modified at the end of the installation.',
