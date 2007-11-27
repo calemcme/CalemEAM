@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * This is the class that provides all the meta data info about a table.
  */
@@ -639,13 +638,21 @@ function(includeMd) {
 	this._buildQueryJoins(this.getBaseFields(), tableName, tableQuery, includeMd);
 	//Check custom table - custom fields don't support join fields.
 	if (this.getCustomFields()) {//a) add a join; b) add select fields
-		sf=new CalemSelectField(this.getCustomTableName());
+		sf=new CalemSelectField(this.getCustomTableAlias());
 		tableQuery.addSelect(sf);
 		var join= new CalemTableJoin(CalemTableJoin.LEFT, tableName, 'id', 
 								this.getCustomTableName(), CalemConst._REC_CUSTOM_ID);
 		tableQuery.setWhere(this.getCustomTableName(), null, join);									
 	}	
 	return tableQuery;
+}
+
+/**
+ * Custom table must use an alias that's used in join with the id field.
+ */
+CalemTableDd.prototype.getCustomTableAlias =
+function() {
+	return this.getCustomTableName()+ "_id";
 }
 
 CalemTableDd.prototype.isLookupMd =
