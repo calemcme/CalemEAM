@@ -42,3 +42,4 @@ class CalemHttpHelper {
 		return $post;
 	}
 }
+?>

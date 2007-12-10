@@ -46,3 +46,4 @@ class CalemDebug {
 		return $post;
 	}
 }
+?>
