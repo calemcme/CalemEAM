@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -72,3 +71,4 @@ class CalemMsg {
 		return $msg;
 	}
 }
+?>

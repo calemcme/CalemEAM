@@ -38,3 +38,4 @@ class CalemMime {
 		return $_CALEM_conf['upload_conf']['doc_disposition']; //To make per mime type	
 	}
 }
+?>
