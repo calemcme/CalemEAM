@@ -22,7 +22,7 @@
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
-require_once _CALEM_DIR_ . 'server/include/core/CalemSoapRequest.php';
+require_once _CALEM_DIR_ . 'server/include/core/CalemWsFacade.php';
 require_once _CALEM_DIR_ . 'server/include/core/CalemFactory.php';
 require_once _CALEM_DIR_ . 'server/include/util/CalemJson.php';
 require_once _CALEM_DIR_ . 'server/modules/database/CalemDataBoException.php';
@@ -32,7 +32,7 @@ require_once _CALEM_DIR_ . 'build/CalemZipCustomMessageJs.php';
 /**
  * This class handles custom field and labels.
  */
-class CalemCustomFieldSo extends CalemSoapRequest {
+class CalemCustomFieldSo extends CalemWsFacade {
 	
  	//Add field
  	public function AddField() {

@@ -18,16 +18,15 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
-require_once _CALEM_DIR_ . 'server/include/core/CalemSoapRequest.php';
+require_once _CALEM_DIR_ . 'server/include/core/CalemWsFacade.php';
 require_once _CALEM_DIR_ . 'server/include/core/CalemFactory.php';
 require_once _CALEM_DIR_ . 'server/include/util/CalemJson.php';
 require_once _CALEM_DIR_ . 'server/modules/workorder/CalemWoBo.php';
 
-class CalemWoSo extends CalemSoapRequest {
+class CalemWoSo extends CalemWsFacade {
 	private $woBo;
 	
 	public function __construct() {

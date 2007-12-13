@@ -22,7 +22,7 @@
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
-require_once _CALEM_DIR_ . 'server/include/core/CalemSoapRequest.php';
+require_once _CALEM_DIR_ . 'server/include/core/CalemWsFacade.php';
 require_once _CALEM_DIR_ . 'server/include/core/CalemFactory.php';
 require_once _CALEM_DIR_ . 'server/include/util/CalemJson.php';
 require_once _CALEM_DIR_ . 'build/CalemZipDirectoryJs.php';
@@ -30,7 +30,7 @@ require_once _CALEM_DIR_ . 'build/CalemZipDirectoryJs.php';
 /**
  * This class handle view customization and removal.
  */
-class CalemCustomHandler extends CalemSoapRequest {
+class CalemCustomHandler extends CalemWsFacade {
 	
  	/**
  	 * Save view customization. 

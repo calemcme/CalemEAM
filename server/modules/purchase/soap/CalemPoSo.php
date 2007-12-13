@@ -22,13 +22,13 @@
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
-require_once _CALEM_DIR_ . 'server/include/core/CalemSoapRequest.php';
+require_once _CALEM_DIR_ . 'server/include/core/CalemWsFacade.php';
 require_once _CALEM_DIR_ . 'server/include/core/CalemFactory.php';
 require_once _CALEM_DIR_ . 'server/include/util/CalemJson.php';
 require_once _CALEM_DIR_ . 'server/modules/database/CalemDataBoException.php';
 require_once _CALEM_DIR_ . 'server/modules/purchase/CalemPoBo.php';
 
-class CalemPoSo extends CalemSoapRequest {
+class CalemPoSo extends CalemWsFacade {
 	private $poBo;
 	
 	public function __construct() {
