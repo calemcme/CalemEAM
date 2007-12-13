@@ -62,7 +62,9 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 			require_once _CALEM_DIR_ . 'server/modules/admin/soap/CalemLoginSo.php';
 			$ex='';
 			try {
-				list($succ, $ses)=CalemLoginSo::doLogin($login_username, $login_password);
+				$loginSo=new CalemLoginSo();
+				$loginSo->initByWeb();
+				list($succ, $ses)=$loginSo->doLogin($login_username, $login_password);
 			} catch (Exception $e) {
 				$ex=$e->getTraceAsString();
 				$logger->error("Exception in processing login. Error msg=" . $ex);

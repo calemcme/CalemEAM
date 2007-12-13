@@ -174,35 +174,57 @@ function CalemAclInfo(acl){if(arguments.length==0)return;this._acl=acl;}
 CalemAclInfo.ACCESS=0;CalemAclInfo.NO_ACCESS=1;CalemAclInfo.prototype.getJson=function(){return CalemJson.mapToJson(this._acl);}
 CalemAclInfo.prototype.aggregate=function(acl){for(var i in acl._acl)this._acl[i]=acl._acl[i];}
 CalemAclInfo.prototype.checkAcl=function(i){return(this._acl[i]!=CalemAclInfo.NO_ACCESS);}
-function CalemCustomInfoManager(){}
-CalemCustomInfoManager.prototype.getMyCustomInfo=function(id,target){var userInfo=CalemContext.getInstance().getUserInfo();var uid=userInfo.uid;var isGroup=(target&&target.isGroup());var gid=isGroup?target.getId():userInfo.gid;return this._getCustomInfo(id,uid,gid,isGroup,false,true);}
-CalemCustomInfoManager.prototype.getParentCustomInfo=function(id,target){var userInfo=CalemContext.getInstance().getUserInfo();var isGroup=(target&&target.isGroup());var gid=isGroup?target.getId():userInfo.gid;return this._getCustomInfo(id,null,gid,true,isGroup,false);}
-CalemCustomInfoManager.prototype.getFullCustomInfo=function(id,target){var userInfo=CalemContext.getInstance().getUserInfo();var isGroup=(target&&target.isGroup());var gid=isGroup?target.getId():userInfo.gid;return this._getCustomInfo(id,userInfo.uid,gid,isGroup,false,false);}
-CalemCustomInfoManager.prototype._getCustomInfo=function(id,uid,gid,excludeUser,excludeMyGroup,stopWhenFound){var customInfo=this._getEmptyCustomInfo();var foundIt=false;if(!excludeUser){foundIt=this.aggregate(id,uid,customInfo);if(stopWhenFound&&foundIt)return customInfo;}
-if(!excludeMyGroup){foundIt=this.aggregate(id,gid,customInfo);if(stopWhenFound&&foundIt)return customInfo;}
-var cachedGroups=CalemContext.getInstance().getRegistry().getCache().get('acl_group');var parents=cachedGroups.findParents(gid);if(parents){for(var i=0;i<parents.length;i++){foundIt=this.aggregate(id,parents[i],customInfo);if(stopWhenFound&&foundIt)return customInfo;}}
+function CalemCustomViewManager(){}
+CalemCustomViewManager.prototype.getMyCustomInfo=function(id,target){var userInfo=CalemContext.getInstance().getUserInfo();var uid=userInfo.uid;var isGroup=(target&&target.isGroup());var gid=isGroup?target.getId():userInfo.gid;if(!CalemDropdownUtil.isGroupCalem(gid)&&!CalemDropdownUtil.isGroupCustom(gid)){gid=CalemConst.CUSTOM_SYSTEM;}
+var customInfo=this._getEmptyCustomInfo();var foundIt=this.aggregate(id,gid,customInfo);if(!foundIt&&CalemDropdownUtil.isGroupCustom(gid)){this.aggregate(id,CalemConst.CALEM_OOB,customInfo);}
 return customInfo;}
-CalemCustomInfoManager.prototype.aggregate=function(id,aid,customInfo){var info=this._getCustomInfoById(id,aid);if(info){var cInfo=CalemJson.setJson(info);rtn=customInfo.getAcl().aggregate(cInfo.getAcl());if(!customInfo.getLayout()&&cInfo.getLayout())customInfo.setLayout(cInfo.getLayout());}
+CalemCustomViewManager.prototype.getParentCustomInfo=function(id,target){var userInfo=CalemContext.getInstance().getUserInfo();var isGroup=(target&&target.isGroup());var gid=isGroup?target.getId():userInfo.gid;if(!CalemDropdownUtil.isGroupCalem(gid)&&!CalemDropdownUtil.isGroupCustom(gid)){gid=CalemConst.CUSTOM_SYSTEM;}else if(CalemDropdownUtil.isGroupCustom(gid)){gid=CalemConst.CALEM_OOB;}
+var customInfo=this._getEmptyCustomInfo();this.aggregate(id,gid,customInfo);if(CalemDropdownUtil.isGroupCustom(gid)){this.aggregate(id,CalemConst.CALEM_OOB,customInfo);}
+return customInfo;}
+CalemCustomViewManager.prototype.getFullCustomInfo=function(id,target){var userInfo=CalemContext.getInstance().getUserInfo();var isGroup=(target&&target.isGroup());var gid=isGroup?target.getId():userInfo.gid;if(!CalemDropdownUtil.isGroupCalem(gid)&&!CalemDropdownUtil.isGroupCustom(gid)){gid=CalemConst.CUSTOM_SYSTEM;}
+var customInfo=this._getEmptyCustomInfo();this.aggregate(id,gid,customInfo);if(CalemDropdownUtil.isGroupCustom(gid)){this.aggregate(id,CalemConst.CALEM_OOB,customInfo);}
+return customInfo;}
+CalemCustomViewManager.prototype.aggregate=function(id,aid,customInfo){var info=this._getCustomInfoById(id,aid);if(info){var cInfo=CalemJson.setJson(info);rtn=customInfo.getAcl().aggregate(cInfo.getAcl());if(!customInfo.getLayout()&&cInfo.getLayout())customInfo.setLayout(cInfo.getLayout());}
 return info;}
 function CalemCustomViewManager(){}
 CalemCustomViewManager.getInstance=function(){if(!CalemCustomViewManager._INSTANCE){CalemCustomViewManager._INSTANCE=new CalemCustomViewManager();}
 return CalemCustomViewManager._INSTANCE;}
-CalemCustomViewManager.prototype=new CalemCustomInfoManager;CalemCustomViewManager.prototype.constructor=CalemCustomViewManager;CalemCustomViewManager.prototype.addCustomInfo=function(customInfo,target){eval("var custom="+customInfo.getJson());CalemViewCustomDef[customInfo.getId()+"_"+target.getId()]=custom;}
+CalemCustomViewManager.prototype=new CalemCustomViewManager;CalemCustomViewManager.prototype.constructor=CalemCustomViewManager;CalemCustomViewManager.prototype.addCustomInfo=function(customInfo,target){eval("var custom="+customInfo.getJson());CalemViewCustomDef[customInfo.getId()+"_"+target.getId()]=custom;}
 CalemCustomViewManager.prototype._getEmptyCustomInfo=function(id){var viewAcl=new CalemViewAclInfo(new CalemAclInfo({}),new CalemAclInfo({}));return new CalemViewCustomInfo(id,viewAcl,null);}
 CalemCustomViewManager.prototype._getCustomInfoById=function(id,oid){return oid?CalemViewCustomDef[id+"_"+oid]:null;}
 function CalemCustomFormManager(){}
 CalemCustomFormManager.getInstance=function(){if(!CalemCustomFormManager._INSTANCE){CalemCustomFormManager._INSTANCE=new CalemCustomFormManager();}
 return CalemCustomFormManager._INSTANCE;}
-CalemCustomFormManager.prototype=new CalemCustomInfoManager;CalemCustomFormManager.prototype.constructor=CalemCustomFormManager;CalemCustomFormManager.prototype.addCustomInfo=function(customInfo,target){eval("var custom="+customInfo.getJson());CalemFormCustomDef[customInfo.getId()+"_"+target.getId()]=custom;}
+CalemCustomFormManager.prototype=new CalemCustomViewManager;CalemCustomFormManager.prototype.constructor=CalemCustomFormManager;CalemCustomFormManager.prototype.addCustomInfo=function(customInfo,target){eval("var custom="+customInfo.getJson());CalemFormCustomDef[customInfo.getId()+"_"+target.getId()]=custom;}
+CalemCustomFormManager.prototype._getEmptyCustomInfo=function(id){var formAcl=new CalemFormAclInfo(new CalemAclInfo({}),new CalemAclInfo({}));return new CalemFormCustomInfo(id,formAcl,null);}
+CalemCustomFormManager.prototype._getCustomInfoById=function(id,oid){return oid?CalemFormCustomDef[id+"_"+oid]:null;}
+function CalemCustomModManager(){}
+CalemCustomModManager.prototype.getMyCustomInfo=function(id,target){var userInfo=CalemContext.getInstance().getUserInfo();var uid=userInfo.uid;var isGroup=(target&&target.isGroup());var gid=isGroup?target.getId():userInfo.gid;return this._getCustomInfo(id,gid,false,true);}
+CalemCustomModManager.prototype.getParentCustomInfo=function(id,target){var userInfo=CalemContext.getInstance().getUserInfo();var isGroup=(target&&target.isGroup());var gid=isGroup?target.getId():userInfo.gid;return this._getCustomInfo(id,gid,true,false);}
+CalemCustomModManager.prototype.getFullCustomInfo=function(id,target){var userInfo=CalemContext.getInstance().getUserInfo();var isGroup=(target&&target.isGroup());var gid=isGroup?target.getId():userInfo.gid;return this._getCustomInfo(id,gid,false,false);}
+CalemCustomModManager.prototype._getCustomInfo=function(id,gid,excludeMyGroup,stopWhenFound){var customInfo=this._getEmptyCustomInfo();var foundIt=false;if(!excludeMyGroup){foundIt=this.aggregate(id,gid,customInfo);if(stopWhenFound&&foundIt)return customInfo;}
+var cachedGroups=CalemContext.getInstance().getRegistry().getCache().get('acl_group');var parents=cachedGroups.findParents(gid);if(parents){for(var i=0;i<parents.length;i++){foundIt=this.aggregate(id,parents[i],customInfo);if(stopWhenFound&&foundIt)return customInfo;}}
+return customInfo;}
+CalemCustomModManager.prototype.aggregate=function(id,aid,customInfo){var info=this._getCustomInfoById(id,aid);if(info){var cInfo=CalemJson.setJson(info);rtn=customInfo.getAcl().aggregate(cInfo.getAcl());if(!customInfo.getLayout()&&cInfo.getLayout())customInfo.setLayout(cInfo.getLayout());}
+return info;}
+function CalemCustomViewManager(){}
+CalemCustomViewManager.getInstance=function(){if(!CalemCustomViewManager._INSTANCE){CalemCustomViewManager._INSTANCE=new CalemCustomViewManager();}
+return CalemCustomViewManager._INSTANCE;}
+CalemCustomViewManager.prototype=new CalemCustomModManager;CalemCustomViewManager.prototype.constructor=CalemCustomViewManager;CalemCustomViewManager.prototype.addCustomInfo=function(customInfo,target){eval("var custom="+customInfo.getJson());CalemViewCustomDef[customInfo.getId()+"_"+target.getId()]=custom;}
+CalemCustomViewManager.prototype._getEmptyCustomInfo=function(id){var viewAcl=new CalemViewAclInfo(new CalemAclInfo({}),new CalemAclInfo({}));return new CalemViewCustomInfo(id,viewAcl,null);}
+CalemCustomViewManager.prototype._getCustomInfoById=function(id,oid){return oid?CalemViewCustomDef[id+"_"+oid]:null;}
+function CalemCustomFormManager(){}
+CalemCustomFormManager.getInstance=function(){if(!CalemCustomFormManager._INSTANCE){CalemCustomFormManager._INSTANCE=new CalemCustomFormManager();}
+return CalemCustomFormManager._INSTANCE;}
+CalemCustomFormManager.prototype=new CalemCustomModManager;CalemCustomFormManager.prototype.constructor=CalemCustomFormManager;CalemCustomFormManager.prototype.addCustomInfo=function(customInfo,target){eval("var custom="+customInfo.getJson());CalemFormCustomDef[customInfo.getId()+"_"+target.getId()]=custom;}
 CalemCustomFormManager.prototype._getEmptyCustomInfo=function(id){var formAcl=new CalemFormAclInfo(new CalemAclInfo({}),new CalemAclInfo({}));return new CalemFormCustomInfo(id,formAcl,null);}
 CalemCustomFormManager.prototype._getCustomInfoById=function(id,oid){return oid?CalemFormCustomDef[id+"_"+oid]:null;}
 function CalemCustomModuleManager(){}
 CalemCustomModuleManager.getInstance=function(){if(!CalemCustomModuleManager._INSTANCE){CalemCustomModuleManager._INSTANCE=new CalemCustomModuleManager();}
 return CalemCustomModuleManager._INSTANCE;}
-CalemCustomModuleManager.prototype=new CalemCustomInfoManager;CalemCustomModuleManager.prototype.constructor=CalemCustomModuleManager;CalemCustomModuleManager.prototype.addCustomInfo=function(customInfo,target){eval("var custom="+customInfo.getJson());CalemModuleCustomDef[customInfo.getId()+"_"+target.getId()]=custom;}
+CalemCustomModuleManager.prototype=new CalemCustomModManager;CalemCustomModuleManager.prototype.constructor=CalemCustomModuleManager;CalemCustomModuleManager.prototype.addCustomInfo=function(customInfo,target){eval("var custom="+customInfo.getJson());CalemModuleCustomDef[customInfo.getId()+"_"+target.getId()]=custom;}
 CalemCustomModuleManager.prototype._getEmptyCustomInfo=function(id){var acl=new CalemAclInfo({});return new CalemModuleCustomInfo(id,acl,null);}
 CalemCustomModuleManager.prototype._getCustomInfoById=function(id,oid){return oid?CalemModuleCustomDef[id+"_"+oid]:null;}
-CalemCustomModuleManager.prototype._getCustomInfo=function(id,uid,gid,excludeUser,excludeMyGroup,stopWhenFound){return CalemCustomInfoManager.prototype._getCustomInfo.call(this,id,uid,gid,true,excludeMyGroup,stopWhenFound);}
 CalemCustomModuleManager.prototype.getSysModInfo=function(id){return CalemJson.setJson(CalemModuleDef[id]);}
 function CalemCustomModListManager(){}
 CalemCustomModListManager.getInstance=function(){if(!CalemCustomModListManager._INSTANCE){CalemCustomModListManager._INSTANCE=new CalemCustomModListManager();}

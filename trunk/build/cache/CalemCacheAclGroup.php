@@ -56,10 +56,13 @@ class CalemCacheAclGroup {
 	}	
 	
 	private function addParent($id, $parentId) {
+		if ($parentId!=CALEM_OOB && $parentId!=CUSTOM_SYSTEM) {
+			$parentId=CUSTOM_SYSTEM;
+		}
 		if (isset($this->parentMap[$id])) {
 			$list=$this->parentMap[$id];	
 		} else {
-			$list=array('CALEM_OOB');	
+			$list=array(CALEM_OOB);	
 		}
 		if ($parentId!==null) {
 			array_splice($list, 0, 0, $parentId);
