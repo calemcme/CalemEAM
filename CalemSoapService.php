@@ -29,7 +29,7 @@ if (!defined('_CALEM_DIR_')) {
 require_once _CALEM_DIR_ . 'server/conf/calem.php'; //Configuration
 require_once _CALEM_DIR_ . 'server/conf/soap_map.php'; //Soap mapping
 require_once _CALEM_DIR_ . 'server/include/log4php/LoggerManager.php'; //Logger
-require_once _CALEM_DIR_ . 'server/include/core/CalemSoapRequest.php';
+require_once _CALEM_DIR_ . 'server/include/core/CalemWsSoap.php';
 require_once _CALEM_DIR_ . 'server/include/util/CalemHttpHelper.php';
 
 //Must have PEAR SOAP on the path
@@ -40,39 +40,39 @@ require_once 'SOAP/Parser.php';
 	//Start handling the request.
 	$logger=&LoggerManager::getLogger('CalemSoapService');
 	$postData=CalemHttpHelper::getPostData();
-	$calemSoapRequest=new CalemSoapRequest();
+	$calemWsSoap=new CalemWsSoap();
 	if ($logger->isDebugEnabled()) {
 		$logger->debug("acceptedEncoding=" . $_SERVER['HTTP_ACCEPT_ENCODING'] . ", Received a post request=" . $postData);
 	}
 	if (!$postData) {
 		if ($logger->isDebugEnabled()) $logger->debug("Invalid post data.");
-		$calemSoapRequest->sendFault(CALEM_SF_NO_POSTDATA);
+		$calemWsSoap->sendFault(CALEM_SF_NO_POSTDATA);
 	}
 	//Processing postData
 	$parser=&new SOAP_Parser($postData);
  	$request_headers = $parser->getHeaders();
  	if ($request_headers) {
  		if (!is_a($request_headers, 'SOAP_Value')) {
- 			$calemSoapRequest->sendFault(CALEM_SF_INVALID_HEADER);
+ 			$calemWsSoap->sendFault(CALEM_SF_INVALID_HEADER);
  		}
  		$request_headers=$request_headers->value;
  	}
  	$params=$parser->getResponse();
  	if ($params) {
  		if (!is_a($params, 'SOAP_Value')) {
- 			$calemSoapRequest->sendFault(CALEM_SF_INVLIAD_PARAMS);
+ 			$calemWsSoap->sendFault(CALEM_SF_INVLIAD_PARAMS);
  		}
  		$params=$params->value;
  	}
  	$method=$parser->root_struct_name[0];
  	if (!$method || !isset($_CALEM_soap[$method])) {
- 		$calemSoapRequest->sendFault(CALEM_SF_INVALID_METHOD);
+ 		$calemWsSoap->sendFault(CALEM_SF_INVALID_METHOD);
  	}
  	if ($logger->isDebugEnabled()) $logger->debug("reqHeader=".var_export($request_headers, true) . ", params=".var_export($params, true));
  	//Now let's dispatch to the proper class for Soap service.
  	$service=$_CALEM_soap[$method];
  	require_once _CALEM_DIR_ . 'server/modules/' . $service[CALEM_SOAP_MODULE] . '/soap/' . $service[CALEM_SOAP_CLASS] . '.php';
  	$cls = new $service[CALEM_SOAP_CLASS];
- 	$cls->service($request_headers, $method, $params);
+ 	$cls->service($request_headers, $method, $params, $calemWsSoap);
  	//Code below will not be executed.
 ?>

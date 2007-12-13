@@ -44,7 +44,8 @@ $_CALEM_scripts=array(
 			'/common/util/swfobject.js',
 			//Other utils
 			'/common/form/model/CalemDropdownUtil.js',
-			'/common/form/model/widget/CalemCustomInfoManager.js',
+			'/common/form/model/widget/CalemCustomViewManager.js',
+			'/common/form/model/widget/CalemCustomModManager.js',
 			'/common/form/view/CalemViewUtil.js',
 			'/common/form/widget/CalemWidgetUtil.js',
 			
