@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemDropdownFormNew
  */
@@ -64,7 +63,8 @@ function() {
 CalemDropdownFormNew.prototype._onSave =
 function(evt) {
 	var row=this._getInputDataRow();
-	row['locale'] = CalemContext.getInstance().getUserInfo().locale;
+	var locale=CalemContext.getInstance().getUserInfo().locale;
+	row['locale']=CalemViewUtil.getLocaleServer(locale);
 	row['tableId']=this._tableId;
 	var entry={entry_0 : row};
 	CalemSoapUtil._onSoapCall('AddDropdown', entry, new AjxCallback(this, this._onSoapAddResponse, row));

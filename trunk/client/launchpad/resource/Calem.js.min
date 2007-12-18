@@ -284,7 +284,7 @@ CalemViewUtil.addList=function(listSrc,listDest){if(listSrc){var j=listDest.leng
 CalemViewUtil.getVtFieldTypeById=function(id){return id.substr('vt_field_'.length);}
 CalemViewUtil.getIdByVtFieldType=function(id){return['vt_field_',id].join('');}
 CalemViewUtil.getLocaleClient=function(){return CalemContext.getInstance().getUserInfo().locale;}
-CalemViewUtil.getLocaleServer=function(locale){var serverMap=CalemConf['view_engine']['labelDesign']['locale']['serverMap'];locale=serverMap[locale]?serverMap[locale].id:locale;return locale;}
+CalemViewUtil.getLocaleServer=function(locale){DBG.println("locale="+locale);var serverMap=CalemConf['view_engine']['labelDesign']['locale']['serverMap'];DBG.println("serverMap["+locale+"]"+"="+serverMap[locale]);locale=serverMap[locale]?serverMap[locale].id:locale;DBG.println("new locale="+locale);return locale;}
 CalemViewUtil.partitionData=function(tableDd,row){var rowBase={};var rowCustom={};if(!tableDd.getCustomFields()){rowBase=row;}else{for(var i in row){if(tableDd.isBaseField(i))rowBase[i]=row[i];else rowCustom[i]=row[i];}}
 return{base:rowBase,custom:rowCustom};}
 CalemViewUtil.getFormControllerById=function(fmId){var fmInfo=CalemJson.setJson(CalemItemDef[fmId]);fmId=fmInfo.getController()||fmId;return fmId;}
@@ -4942,7 +4942,7 @@ CalemDropdownFormNew.prototype._createDataModel=function(data){this._tableId=dat
 CalemDropdownFormNew.prototype._verifyInputBo=function(){var row=this._getInputDataRow();return CalemDropdownBo.getInstance()._verifyInputBo(row,this);}
 CalemDropdownFormNew.prototype.getTableDd=function(){return this._tableDd;}
 CalemDropdownFormNew.prototype.getCacheEmbedOnClose=function(){return false;}
-CalemDropdownFormNew.prototype._onSave=function(evt){var row=this._getInputDataRow();row['locale']=CalemContext.getInstance().getUserInfo().locale;row['tableId']=this._tableId;var entry={entry_0:row};CalemSoapUtil._onSoapCall('AddDropdown',entry,new AjxCallback(this,this._onSoapAddResponse,row));}
+CalemDropdownFormNew.prototype._onSave=function(evt){var row=this._getInputDataRow();var locale=CalemContext.getInstance().getUserInfo().locale;row['locale']=CalemViewUtil.getLocaleServer(locale);row['tableId']=this._tableId;var entry={entry_0:row};CalemSoapUtil._onSoapCall('AddDropdown',entry,new AjxCallback(this,this._onSoapAddResponse,row));}
 CalemDropdownFormNew.prototype._onSoapAddResponse=function(row,resp){var rowResp=resp[0];if(rowResp.status==CalemForm.SOAP_SUCC){this._tableDd.addDropdown(row);CalemMsg._addCustomMsg(row['id'],row['label']);this._closeAndResumeParentForm(new CalemReRenderAction());}else{this._onSoapResponseException(rowResp);}}
 CalemDropdownFormNew.prototype.getCustomInfo=function(){var viewInfo=this.getViewInfo();var tbDd=this._modelItem.getTableDd();return CalemViewCustomInfo.createCustomLayout(viewInfo,tbDd,tbDd.getFieldList(),['fixed']);}
 function CalemDropdownFormEdit(parent,formId,data){if(arguments.length==0)return;CalemFormEdit.call(this,parent,formId,data);}
@@ -4954,7 +4954,7 @@ CalemDropdownFormEdit.prototype._render=function(){CalemFormEdit.prototype._rend
 this._view.setFieldReadOnly('fixed');}
 CalemDropdownFormEdit.prototype._verifyInputBo=function(){var row=this._getInputDataRow();return CalemDropdownBo.getInstance()._verifyEditBo(row,this._id,this);}
 CalemDropdownFormEdit.prototype.getCacheEmbedOnClose=function(){return false;}
-CalemDropdownFormEdit.prototype._onSave=function(evt){var row=this._getInputDataRow();row['oldId']=this._id;row['tableId']=this._tableId;row['locale']=CalemContext.getInstance().getUserInfo().locale;var entry={entry_0:row};CalemSoapUtil._onSoapCall('ModifyDropdown',entry,new AjxCallback(this,this._onSoapModifyResponse,row));}
+CalemDropdownFormEdit.prototype._onSave=function(evt){var row=this._getInputDataRow();row['oldId']=this._id;row['tableId']=this._tableId;var locale=CalemContext.getInstance().getUserInfo().locale;row['locale']=CalemViewUtil.getLocaleServer(locale);var entry={entry_0:row};CalemSoapUtil._onSoapCall('ModifyDropdown',entry,new AjxCallback(this,this._onSoapModifyResponse,row));}
 CalemDropdownFormEdit.prototype._onSoapModifyResponse=function(row,resp){var rowResp=resp[0];if(rowResp.status==CalemForm.SOAP_SUCC){this._tableDd.modifyDropdown(row,this._id);CalemMsg._addCustomMsg(row['id'],row['label']);this._closeAndResumeParentForm(new CalemReRenderAction());}else{this._onSoapResponseException(rowResp);}}
 CalemDropdownFormEdit.prototype.getCustomInfo=function(){var viewInfo=this.getViewInfo();var tbDd=this._modelItem.getTableDd();return CalemViewCustomInfo.createCustomLayout(viewInfo,tbDd,tbDd.getFieldList());}
 function CalemLabelFormEdit(parent,formId,data){if(arguments.length==0)return;CalemFormEdit.call(this,parent,formId,data);}
