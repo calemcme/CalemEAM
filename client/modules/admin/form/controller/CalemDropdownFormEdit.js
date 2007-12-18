@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemDropdownFormEdit
  */
@@ -95,7 +94,8 @@ function(evt) {
 	var row=this._getInputDataRow();
 	row['oldId'] =this._id;
 	row['tableId']=this._tableId;
-	row['locale']=CalemContext.getInstance().getUserInfo().locale;
+	var locale=CalemContext.getInstance().getUserInfo().locale;
+	row['locale']=CalemViewUtil.getLocaleServer(locale);
 	var entry={entry_0 : row};	                  
 	CalemSoapUtil._onSoapCall('ModifyDropdown', entry, new AjxCallback(this, this._onSoapModifyResponse, row));
 }
