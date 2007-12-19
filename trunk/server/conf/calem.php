@@ -266,7 +266,8 @@ $_CALEM_dist=array(
 		'readControl'=>false,
         'writeControl'=>false,
 		'fileNameProtection'=>false,
-		'hashedDirectoryLevel'=>1	
+		'hashedDirectoryLevel'=>0,
+		'errorHandlingAPIBreak'=>true //to return error, not boolean.	
 	),
 	//Session configuration
 	'calem_session_config'=>array(
@@ -277,7 +278,8 @@ $_CALEM_dist=array(
         'writeControl'=>false,
 		'automaticSerialization'=>true,
 		'automaticCleaningFactor'=>200,
-		'hashedDirectoryLevel'=>1	
+		'hashedDirectoryLevel'=>0,
+		'errorHandlingAPIBreak'=>true	
 	),
 	//data sets to load in the order specified. 
 	'calem_data_load_init'=>array(

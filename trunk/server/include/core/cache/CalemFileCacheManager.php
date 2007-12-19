@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -71,12 +70,26 @@ class CalemFileCacheManager implements CalemCacheManagerInterface {
 	 * Save session
 	 */
 	public function save($data, $sid) {
-		$this->cache->save($data, $sid);
+		$rtn=$this->cache->save($data, $sid);
+		$this->reportError($rtn);
 	}
 	/**
 	 * Remove session
 	 */
 	public function remove($sid) {
-		$this->cache->remove($sid);
+		$rtn=$this->cache->remove($sid);
+		$this->reportError($rtn);
+	}
+	
+	/**
+	 * Pear error handling
+	 */
+	protected function reportError($rtn) {
+		if (is_bool($rtn)) return;
+		require_once 'PEAR.php';
+		if (PEAR::isError($rtn)) {
+			$GLOBALS['logger']->error("CalemFileCacheManager error: " . $rtn->getMessage() 
+			                          . ', userInfo' . $rtn->getUserInfo());	
+		}
 	}
 }
