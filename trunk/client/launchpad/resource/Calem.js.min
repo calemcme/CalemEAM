@@ -284,7 +284,7 @@ CalemViewUtil.addList=function(listSrc,listDest){if(listSrc){var j=listDest.leng
 CalemViewUtil.getVtFieldTypeById=function(id){return id.substr('vt_field_'.length);}
 CalemViewUtil.getIdByVtFieldType=function(id){return['vt_field_',id].join('');}
 CalemViewUtil.getLocaleClient=function(){return CalemContext.getInstance().getUserInfo().locale;}
-CalemViewUtil.getLocaleServer=function(locale){DBG.println("locale="+locale);var serverMap=CalemConf['view_engine']['labelDesign']['locale']['serverMap'];DBG.println("serverMap["+locale+"]"+"="+serverMap[locale]);locale=serverMap[locale]?serverMap[locale].id:locale;DBG.println("new locale="+locale);return locale;}
+CalemViewUtil.getLocaleServer=function(locale){var serverMap=CalemConf['view_engine']['labelDesign']['locale']['serverMap'];locale=serverMap[locale]?serverMap[locale].id:locale;return locale;}
 CalemViewUtil.partitionData=function(tableDd,row){var rowBase={};var rowCustom={};if(!tableDd.getCustomFields()){rowBase=row;}else{for(var i in row){if(tableDd.isBaseField(i))rowBase[i]=row[i];else rowCustom[i]=row[i];}}
 return{base:rowBase,custom:rowCustom};}
 CalemViewUtil.getFormControllerById=function(fmId){var fmInfo=CalemJson.setJson(CalemItemDef[fmId]);fmId=fmInfo.getController()||fmId;return fmId;}
