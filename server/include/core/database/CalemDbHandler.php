@@ -43,7 +43,7 @@ class CalemDbHandler {
 	
 	public function getAppHost() {
 		global $_CALEM_conf;
-		return ($_CALEM_conf['calem_application_host'] ? $_CALEM_conf['calem_application_host'] : '%');
+		return ($_CALEM_conf['calem_application_host'] ? $_CALEM_conf['calem_application_host'] : 'localhost');
 		
 	}
 	
