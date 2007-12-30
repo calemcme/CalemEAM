@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemModuleDesignTree
  */
@@ -71,17 +70,22 @@ function(parentCustomInfo, myCustomInfo) {
 	//Going through original list.
 	for (var i=0; i < origRtn.layout.length; i++) {
 		var id=origRtn.layout[i];
-		if (myMap[id] || !parentCustomInfo.checkAcl(id)) continue;
-		var item=myMap[id];
+		var item=origRtn.map[id];
+		if (myMap[id] || !parentCustomInfo.checkAcl(id)) {
+			if (item instanceof CalemMenuInfo) {//Check each item in the list individually.
+				this._addModuleMenuList(item, myMap, parentCustomInfo);
+			}
+			continue;
+		}
 		this._addModuleItem(item, myMap, parentCustomInfo);
 	}
 } 
 
-CalemModuleDesignTree.prototype._addModuleItem =
+/**
+ * Each menu in the menu list is individually acl-checked.
+ */
+CalemModuleDesignTree.prototype._addModuleMenuList =
 function(item, myMap, parentCustomInfo) {
-	if (item instanceof CalemMenuInfo) {
-		var btnInfo=item.getMenuButton();
-		this._nodeRoot.addModNode(btnInfo.getId(), btnInfo, btnInfo.getTitle());
 		var list=item.getMenuList();
 		if (list) {//make sure we have nodes below.
 			for (var i=0; i< list.length; i++) {
@@ -90,6 +94,14 @@ function(item, myMap, parentCustomInfo) {
 				this._itemRoot.addModItem(info.getId(), info, info.getTitle());
 			}
 		}
+}
+
+CalemModuleDesignTree.prototype._addModuleItem =
+function(item, myMap, parentCustomInfo) {
+	if (item instanceof CalemMenuInfo) {
+		var btnInfo=item.getMenuButton();
+		this._nodeRoot.addModNode(btnInfo.getId(), btnInfo, btnInfo.getTitle());
+		this._addModuleMenuList(item, myMap, parentCustomInfo);
 	} else if (item instanceof CalemMenuItemInfo) {
 		this._itemRoot.addModItem(item.getId(), item, item.getTitle());
 	}
