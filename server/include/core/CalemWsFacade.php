@@ -116,6 +116,7 @@ require_once _CALEM_DIR_ . 'server/include/core/session/CalemSession.php';
  		$sesReload->renew();
  		//Keep track of the userId for data operation
  		$GLOBALS['calem_ses_data']=$sesReload->get('user');			
+ 		$GLOBALS['calem_ses_setting']=$sesReload->get('setting');			
  		return true;
  	}
  }
