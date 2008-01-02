@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemFieldNameFormEdit
  */
@@ -75,6 +74,9 @@ CalemFieldNameFormEdit.prototype._onSave =
 function(evt) {
 	var row=this._getInputDataRow(); 
 	row['field_type']=CalemViewUtil.getVtFieldTypeById(row['field_type']);
+	//Change locale/length
+	var lc=CalemContext.getInstance().getUserInfo().locale;
+	lc=CalemViewUtil.getLocaleServer(lc);
 	var col={col_0 : {id: row['id'], 
 				         oldId: this._rec.id,
 							tableId: this._fieldTableDd.getCustomTableName(),
@@ -82,7 +84,7 @@ function(evt) {
 	                  length: row['field_length'],
 	                  required: row['required'],
 	                  label: row['field_label'],
-	                  locale: CalemContext.getInstance().getUserInfo().locale }};	                  
+	                  locale: lc }};	                  
 	CalemSoapUtil._onSoapCall('ModifyFieldName', col, new AjxCallback(this, this._onSoapModifyFieldResponse, row));
 }
 
