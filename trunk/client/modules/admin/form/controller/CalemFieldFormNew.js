@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemFieldFormNew
  */
@@ -64,13 +63,16 @@ CalemFieldFormNew.prototype._onSave =
 function(evt) {
 	var row=this._getInputDataRow(); 
 	row['field_type']=CalemViewUtil.getVtFieldTypeById(row['field_type']);
+	//Change locale/length
+	var lc=CalemContext.getInstance().getUserInfo().locale;
+	lc=CalemViewUtil.getLocaleServer(lc);
 	var col={col_0 : {id: row['id'], 
 							tableId: this._fieldTableDd.getCustomTableName(),
 	                  type: row['field_type'],
 	                  length: row['field_length'],
 	                  required: row['required'],
 	                  label: row['field_label'],
-	                  locale: CalemContext.getInstance().getUserInfo().locale }};
+	                  locale: lc }};
 	CalemSoapUtil._onSoapCall('AddField', col, new AjxCallback(this, this._onSoapSaveFieldResponse, row));
 }
 
