@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -187,7 +186,7 @@ class CalemCustomFieldSo extends CalemWsFacade {
 		}
 		$fld=array('type'=>$fldAr['type']);
 		if ($fldAr['type']==FIELD_VARCHAR) {
-			$fld['length']=$fldAr['length'];	
+			$fld['length']=intval($fldAr['length']);	
 		}	
 		if ($fldAr['required']) {
 			$fld['required']=true;	
@@ -253,7 +252,7 @@ class CalemCustomFieldSo extends CalemWsFacade {
 
 		$fld=array('type'=>$fldAr['type']);
 		if ($fldAr['type']==FIELD_VARCHAR) {
-			$fld['length']=$fldAr['length'];	
+			$fld['length']=intval($fldAr['length']);	
 		}	
 		if ($fldAr['required']) {
 			$fld['required']=true;	
