@@ -41,8 +41,8 @@ require_once 'SOAP/Parser.php';
 	$logger=&LoggerManager::getLogger('CalemSoapService');
 	$postData=CalemHttpHelper::getPostData();
 	$calemWsSoap=new CalemWsSoap();
-	if ($logger->isDebugEnabled()) {
-		$logger->debug("acceptedEncoding=" . $_SERVER['HTTP_ACCEPT_ENCODING'] . ", Received a post request=" . $postData);
+	if ($logger->isInfoEnabled()) {
+		$logger->info("acceptedEncoding=" . $_SERVER['HTTP_ACCEPT_ENCODING'] . ", Received a post request=" . $postData);
 	}
 	if (!$postData) {
 		if ($logger->isDebugEnabled()) $logger->debug("Invalid post data.");
@@ -68,7 +68,7 @@ require_once 'SOAP/Parser.php';
  	if (!$method || !isset($_CALEM_soap[$method])) {
  		$calemWsSoap->sendFault(CALEM_SF_INVALID_METHOD);
  	}
- 	if ($logger->isDebugEnabled()) $logger->debug("reqHeader=".var_export($request_headers, true) . ", params=".var_export($params, true));
+ 	if ($logger->isDebugEnabled()) $logger->debug("reqHeader=".count($request_headers) . ", params=".count($params));
  	//Now let's dispatch to the proper class for Soap service.
  	$service=$_CALEM_soap[$method];
  	require_once _CALEM_DIR_ . 'server/modules/' . $service[CALEM_SOAP_MODULE] . '/soap/' . $service[CALEM_SOAP_CLASS] . '.php';
