@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemScrollBar
  * The scroll bar includes up and down buttons, scroll slider and 
@@ -119,10 +118,24 @@ function(dataSize) {
 }
 
 /**
+ * External events to trigger UI changes
+ */
+CalemScrollBar.prototype.onDataRefresh =
+function() {
+	this._start=0;
+}
+
+/**
  * This is to resume grid after coming out of a hosted state.
  */
 CalemScrollBar.prototype.resumeView =
 function() {
+	//check for start over data size issue.
+	if (this._viewSize>=this._dataSize) {
+		this._start=0;
+	} else if (this._start >=this._dataSize) {
+		this._start=this._dataSize-this._viewSize; //reset to start from last one.
+	}
 	this._initUom();
 	this.onDataScroll();
 }

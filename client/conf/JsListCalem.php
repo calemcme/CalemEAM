@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * This defines all the JS files used. The order reflects the object dependency and
  * must be maintained.
@@ -68,6 +67,7 @@ $_CALEM_scripts=array(
 			'/common/form/model/event/CalemSelectionEvent.js',
 			'/common/form/model/event/CalemCacheChangeEvent.js',
 			'/common/form/model/event/CalemDataChangeEvent.js',
+			'/common/form/model/event/CalemDataRefreshEvent.js',
 			'/common/form/model/event/CalemDataValidEvent.js',
 			'/common/form/model/event/CalemRecordPosEvent.js',
 			'/common/form/model/event/CalemRecMoveEvent.js',

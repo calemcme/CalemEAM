@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
- 
 /**
  * Constructor
  */
@@ -98,6 +97,10 @@ function() {
  */
 CalemDataModel.prototype.load =
 function(callback, forceReload) {
+	//Check for forceReload
+	if (forceReload) {
+		this._modelItem.onDataRefresh();
+	}
 	var dbQuery=new CalemDbQuery();
 	dbQuery.add(this._modelItem.getTableQuery());
 	//Define a callback

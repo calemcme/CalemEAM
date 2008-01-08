@@ -386,7 +386,7 @@ function CalemSoapUtil(){}
 CalemSoapUtil._onSoapCall=function(soapApi,soapObj,callback,errorCallback,extraInfo){CalemSoapClient.soapCall(soapApi,soapObj,new AjxCallback(null,CalemSoapUtil._onSoapCallback,{api:soapApi,callback:callback,errorCallback:errorCallback,ei:extraInfo}));}
 CalemSoapUtil._onSoapCallback=function(param,resp){if(resp.getException()){if(param.errorCallback){param.errorCallback.run(resp);}else{var msg;if(msg=resp.getErrorMsg())CalemInfoDialog.showIt(CalemMsg.getMsg('error_server'),msg);}}else{eval(['var rsp=','resp.getResponse().',param.api,'Response'].join(''));param.callback.run(rsp,param.ei);}}
 function CalemEvent(type,detail){if(arguments.length==0)return;this._type=type;this._detail=detail;this._items=new AjxVector();}
-CalemEvent.CACHE_CHANGE='CACHE_CHANGE';CalemEvent.DATA_CHANGE='DATA_CHANGE';CalemEvent.SELECTION='SEL';CalemEvent.SINGLE_SELECTION='SEL_1';CalemEvent.MULTI_SELECTION='SEL_N';CalemEvent.DBL_CLICK_SELECTION="SEL_DC";CalemEvent.NO_SELECTION='SEL_0'
+CalemEvent.CACHE_CHANGE='CACHE_CHANGE';CalemEvent.DATA_CHANGE='DATA_CHANGE';CalemEvent.DATA_REFRESH='DATA_REFRESH';CalemEvent.SELECTION='SEL';CalemEvent.SINGLE_SELECTION='SEL_1';CalemEvent.MULTI_SELECTION='SEL_N';CalemEvent.DBL_CLICK_SELECTION="SEL_DC";CalemEvent.NO_SELECTION='SEL_0'
 CalemEvent.DATA_VALID="DATA_VALID";CalemEvent.DATA_INVALID="DATA_INVALID";CalemEvent.RECORD_POS_FIRST="REC_FIRST";CalemEvent.RECORD_POS_LAST="REC_LAST";CalemEvent.RECORD_POS_MID="REC_MID";CalemEvent.RECORD_POS_FIRST_LAST="REC_FIRST_LAST";CalemEvent.RECORD_POS_VALID="REC_VALID";CalemEvent.RECORD_POS_INVALID="REC_INVALID";CalemEvent.RECORD_MOVED="RECORD_MOVED";CalemEvent.RECORD_CHANGED="RECORD_CHANGED";CalemEvent.EDIT_CHANGED="EDIT_CHANGED";CalemEvent.EDIT_NO_CHANGE="EDIT_NO_CHANGE";CalemEvent.SEARCH_VALID='SEARCH_VALID';CalemEvent.SEARCH_NOT_VALID='SEARCH_NOT_VALID';CalemEvent.SEARCH_VALID_ALL='SEARCH_VALID_ALL';CalemEvent.SEARCH_NAME_NOT_VALID='SEARCH_NAME_NOT_VALID';CalemEvent.SEARCH_APPLIED='SEARCH_APPLIED';CalemEvent.SEARCH_REMOVED='SEARCH_REMOVED';CalemEvent.PARENT_REC_MODIFIED='PARENT_REC_MODIFIED';CalemEvent.prototype.toString=function(){return"CalemEvent";}
 CalemEvent.prototype.getType=function(){return this._type;}
 CalemEvent.prototype.setType=function(type){this._type=type;}
@@ -413,8 +413,10 @@ CalemCacheChangeEvent.prototype.size=function(){return(this.getUpdated().size()+
 CalemCacheChangeEvent.prototype.setTotal=function(total){this._total=total;}
 CalemCacheChangeEvent.prototype.getTotal=function(){return this._total;}
 function CalemDataChangeEvent(total){if(arguments.length==0)return;CalemEvent.call(this,CalemEvent.DATA_CHANGE);this._total=total;}
-CalemDataChangeEvent.prototype=new CalemEvent;CalemDataChangeEvent.prototype.constructor=CalemDataChangeEvent;CalemDataChangeEvent.prototype.toString=function(){return"CalemSelectionEvent";}
+CalemDataChangeEvent.prototype=new CalemEvent;CalemDataChangeEvent.prototype.constructor=CalemDataChangeEvent;CalemDataChangeEvent.prototype.toString=function(){return"CalemDataChangeEvent";}
 CalemDataChangeEvent.prototype.getTotal=function(){return this._total;}
+function CalemDataRefreshEvent(val){if(arguments.length==0)return;CalemEvent.call(this,CalemEvent.DATA_REFRESH);}
+CalemDataRefreshEvent.prototype=new CalemEvent;CalemDataRefreshEvent.prototype.constructor=CalemDataRefreshEvent;CalemDataRefreshEvent.prototype.toString=function(){return"CalemDataRefreshEvent";}
 function CalemDataValidEvent(dummy){if(arguments.length==0)return;CalemEvent.call(this,CalemEvent.DATA_VALID);}
 CalemDataValidEvent.prototype=new CalemEvent;CalemDataValidEvent.prototype.constructor=CalemDataValidEvent;CalemDataValidEvent.prototype.toString=function(){return"CalemDataValidEvent";}
 function CalemDataInvalidEvent(dummy){if(arguments.length==0)return;CalemEvent.call(this,CalemEvent.DATA_INVALID);}
@@ -1481,7 +1483,7 @@ CalemRecordListDbCache.prototype.add=function(rec){if(this._recMap[rec.id]){this
 this._total++;}
 CalemRecordListDbCache.prototype._replace=function(rec){this._recMap[rec.id]=rec;for(var i=0;i<this._recList.length;i++){if(this._recList[i].id==rec.id){this._recList[i]=rec;}}}
 CalemRecordListDbCache.prototype.getTotal=function(rec){return this._total;}
-CalemRecordListDbCache.prototype.deleteRecord=function(id){for(var i=0;i<this._recList.length;i++){if(this._recList[i].id==id){this._recList.splice(i,1);delete this._recMap[id];this._cached.splice(i,1);}}
+CalemRecordListDbCache.prototype.deleteRecord=function(id){for(var i=0;i<this._recList.length;i++){if(!this._recList[i])continue;if(this._recList[i].id==id){this._recList.splice(i,1);delete this._recMap[id];this._cached.splice(i,1);}}
 this._total--;}
 CalemRecordListDbCache.prototype.sliceByVector=function(start,count,callback){var fetch=false;for(var i=start;i<(start+count);i++){if(!this._cached[i]==CalemConst._CACHED){fetch=true;break;}}
 if(!fetch){callback.run(this._sliceByVector(start,count));}else{var range=new CalemQueryRange(start);var fetchCallback=new AjxCallback(this,this.onBulkFetchCallback,{callback:callback,count:count,start:start});this._executeBulkFetch(range,fetchCallback);}}
@@ -1507,6 +1509,8 @@ CalemDataModelItem.prototype.publishEvents=function(eventList,obj){for(var i=0;i
 CalemDataModelItem.prototype.unpublishEvents=function(eventList,obj){for(var i=0;i<eventList.length;i++){obj.removeListener(eventList[i],this._uiBrokerListener);}}
 CalemDataModelItem.prototype.addDataChangeListener=function(listener){this.addListener(CalemEvent.DATA_CHANGE,listener);}
 CalemDataModelItem.prototype.removeDataChangeListener=function(listener){this.removeListener(CalemEvent.DATA_CHANGE,listener);}
+CalemDataModelItem.prototype.addDataRefreshListener=function(listener){this.addListener(CalemEvent.DATA_REFRESH,listener);}
+CalemDataModelItem.prototype.removeDataRefreshListener=function(listener){this.removeListener(CalemEvent.DATA_REFRESH,listener);}
 CalemDataModelItem.prototype.addRecMoveListener=function(listener){this.addListener(CalemEvent.RECORD_MOVED,listener);}
 CalemDataModelItem.prototype.removeRecMoveListener=function(listener){this.removeListener(CalemEvent.RECORD_MOVED,listener);}
 CalemDataModelItem.prototype.addRecChangeListener=function(listener){this.addListener(CalemEvent.RECORD_CHANGED,listener);}
@@ -1529,6 +1533,8 @@ CalemDataModelItem.prototype.getRecPos=function(){return this._recPos;}
 CalemDataModelItem.prototype.initCurrentRecord=function(rec){if(!this._recList){this._recList=this._createEmptyRecList();this._recList.add(rec);}
 this.setCurrentRecord(rec);}
 CalemDataModelItem.prototype._reportPosition=function(){if(this._recList.getTotal()==0){var ev=new CalemRecordPosEvent(CalemEvent.RECORD_POS_INVALID);this.notifyListeners(CalemEvent.RECORD_POS_INVALID,ev);}else{var ev=new CalemRecordPosEvent(CalemEvent.RECORD_POS_VALID);ev.add(this._currentRec);this.notifyListeners(CalemEvent.RECORD_POS_VALID,ev);ev=new CalemRecordPosEvent(CalemEvent.RECORD_POS_FIRST_LAST);ev.add(this._currentRec);if(this._recList.getTotal()==1){this.notifyListeners(CalemEvent.RECORD_POS_FIRST_LAST,ev);}else if(this._recPos==0){ev.setType(CalemEvent.RECORD_POS_FIRST);this.notifyListeners(CalemEvent.RECORD_POS_FIRST,ev);}else if(this._recList.atLast(this._recPos)){ev.setType(CalemEvent.RECORD_POS_LAST);this.notifyListeners(CalemEvent.RECORD_POS_LAST,ev);}else{ev.setType(CalemEvent.RECORD_POS_MID);this.notifyListeners(CalemEvent.RECORD_POS_MID,ev);}}}
+CalemDataModelItem.prototype.onDataRefresh=function(){this._onDataRefresh();var evt=new CalemDataRefreshEvent(true);this.notifyListeners(CalemEvent.DATA_REFRESH,evt);}
+CalemDataModelItem.prototype._onDataRefresh=function(){}
 CalemDataModelItem.prototype._shutdown=function(){this.decRefCount();if(this._refCount>0)return false;if(CalemDebug.isDebug())CalemDebug.debug("Shutting down modelItem: "+this._id);return true;}
 function CalemDataModelItemCached(id,model){if(arguments.length==0)return;CalemDataModelItem.call(this,id,model);this._cacheListener=new AjxListener(this,this._onCacheChanged);}
 CalemDataModelItemCached.prototype=new CalemDataModelItem;CalemDataModelItemCached.prototype.constructor=CalemDataModelItemCached;CalemDataModelItemCached.prototype.toString=function(){return"CalemDataModelItemCached";}
@@ -1574,6 +1580,8 @@ this._reportPosition();}
 CalemDataModelItemDb.prototype.movePrev=function(){this._recList.movePrev(this._recPos,this._movePrevCallback);}
 CalemDataModelItemDb.prototype.onMovePrevCallback=function(){if(this._recPos-1>=0){this._recPos--;this._currentRec=this._recList.getRecord(this._recPos);this._reportRecMoved();}
 this._reportPosition();}
+CalemDataModelItemDb.prototype._onDataRefresh=function(){if(this._tableQuery){var range=new CalemQueryRange(0);this._tableQuery.setRange(range);}
+if(this._recList)this._recList._clearCache();}
 CalemDataModelItemDb.prototype._shutdown=function(){if(!CalemDataModelItem.prototype._shutdown.call(this))return false;this._model.getCache().removeChangeListener(this._id,this._cacheListener);}
 CalemDataModelItemDb.prototype._createEmptyRecList=function(){var recList=new CalemResultRecordList(this._id);return this._createRecList(recList);}
 CalemDataModelItemDb.prototype._createRecList=function(recList){return eval(['new ',CalemConf['db_query']['db_recList_impl'],'(recList)'].join(''));}
@@ -1587,7 +1595,8 @@ CalemDataModel.prototype.getController=function(){return this._controller;}
 CalemDataModel.prototype._createModelItem=function(id){var mi;if(this._reg.getTableDd(id).isCached()){mi=new CalemDataModelItemCached(id,this);}else{mi=new CalemDataModelItemDb(id,this);}
 return mi;}
 CalemDataModel.prototype.getRegistry=function(){return this._reg;}
-CalemDataModel.prototype.load=function(callback,forceReload){var dbQuery=new CalemDbQuery();dbQuery.add(this._modelItem.getTableQuery());var loadCallback=new AjxCallback(this,this.onDataLoadResponse,{callback:callback});this._cache.bulkLoad(dbQuery,loadCallback,forceReload);}
+CalemDataModel.prototype.load=function(callback,forceReload){if(forceReload){this._modelItem.onDataRefresh();}
+var dbQuery=new CalemDbQuery();dbQuery.add(this._modelItem.getTableQuery());var loadCallback=new AjxCallback(this,this.onDataLoadResponse,{callback:callback});this._cache.bulkLoad(dbQuery,loadCallback,forceReload);}
 CalemDataModel.prototype.onDataLoadResponse=function(param,resultList){this._modelItem.onLoadResult(resultList[this._modelItem.getTableName()]);if(param.callback)param.callback.run();this._modelItem.addCacheListener();}
 CalemDataModel.prototype.onLoadResult=function(result){this._modelItem.onLoadResult(result);}
 CalemDataModel.prototype.getModelItem=function(){return this._modelItem;}
@@ -2055,7 +2064,9 @@ CalemScrollBar.prototype._createScrollBar=function(){this._upBtnId=Dwt.getNextId
 CalemScrollBar.prototype.init=function(start,dataSize,viewSize,controller){this._start=start;this._dataSize=dataSize;this._viewSize=viewSize;this._controller=controller;this.__onLayoutChange();this._initUom();}
 CalemScrollBar.prototype.onViewSizeChange=function(viewSize){this._viewSize=viewSize;}
 CalemScrollBar.prototype.onDataChange=function(dataSize){this._dataSize=dataSize;}
-CalemScrollBar.prototype.resumeView=function(){this._initUom();this.onDataScroll();}
+CalemScrollBar.prototype.onDataRefresh=function(){this._start=0;}
+CalemScrollBar.prototype.resumeView=function(){if(this._viewSize>=this._dataSize){this._start=0;}else if(this._start>=this._dataSize){this._start=this._dataSize-this._viewSize;}
+this._initUom();this.onDataScroll();}
 CalemScrollBar.prototype.setParentEl=function(el,grid){this._pEl=el;el.appendChild(this.getHtmlElement());this._grid=grid;}
 CalemScrollBar.prototype.getState=function(){return{start:this._start,viewSize:this._viewSize,dataSize:this._dataSize};}
 CalemScrollBar.prototype.resetState=function(state){this._start=state.start;this._dataSize=state.dataSize;this._viewSize=state.viewSize;this._initUom();}
@@ -3014,12 +3025,12 @@ CalemToolBarRender.prototype.render=function(parentEl,yOff){this._tb=new CalemTo
 CalemToolBarRender.prototype._shutdown=function(){this._tb._shutdown();}
 function CalemDataGridRender(parent,id,gridInfo,controller){if(arguments.length==0)return;CalemUiRender.call(this,parent,id,gridInfo,controller);this._modelItem=controller.getDataModel().getModelItem();this._renders=new Object();}
 CalemDataGridRender.prototype=new CalemUiRender;CalemDataGridRender.prototype.constructor=CalemDataGridRender;CalemDataGridRender.prototype.toString=function(){return"CalemDataGridRender";}
-CalemDataGridRender.prototype.render=function(parentEl,yOff){this._yOff=yOff;this._grid=new CalemDataGrid(this._parent,this._id,this._modelItem.getTableDd(),this._controller.getGridCustomInfo(),this._controller);parentEl.appendChild(this._grid.getHtmlElement());this._fitBounds(yOff);this._showData();this._modelItem.addDataChangeListener(this._grid.getDataChangeListener());}
+CalemDataGridRender.prototype.render=function(parentEl,yOff){this._yOff=yOff;this._grid=new CalemDataGrid(this._parent,this._id,this._modelItem.getTableDd(),this._controller.getGridCustomInfo(),this._controller);parentEl.appendChild(this._grid.getHtmlElement());this._fitBounds(yOff);this._showData();this._modelItem.addDataChangeListener(this._grid.getDataChangeListener());this._modelItem.addDataRefreshListener(this._grid.getDataRefreshListener());}
 CalemDataGridRender.prototype._fitBounds=function(yOff,resize){var vConf=CalemConf['view_engine']['grid'];var pBz=this._parent.getBounds();var sbWidth=CalemConf["widget_scrollbar"]['browserRightMargin'];var width=pBz.width-sbWidth-vConf['xMargin'];var height=pBz.height-yOff-vConf['yMargin'];var sz=CalemViewUtil.validateGridSize(width,height);var gbz={x:0,y:yOff,width:sz.width,height:sz.height};this._grid.onLayoutChange(gbz);if(CalemDebug.isDebug()){CalemDebug.debug("CalemDataGridRender - parentEl "+CalemDebug.getBzText(pBz)+", new grid "+CalemDebug.getBzText(gbz));}}
 CalemDataGridRender.prototype._showData=function(){this._grid.showData();}
 CalemDataGridRender.prototype.onLayoutChange=function(){this._fitBounds(this._yOff,true);}
 CalemDataGridRender.prototype.resumeView=function(){this._grid.resumeView();}
-CalemDataGridRender.prototype._shutdown=function(){this._modelItem.removeDataChangeListener(this._grid.getDataChangeListener());this._grid._shutdown();}
+CalemDataGridRender.prototype._shutdown=function(){this._modelItem.removeDataChangeListener(this._grid.getDataChangeListener());this._modelItem.removeDataRefreshListener(this._grid.getDataRefreshListener());this._grid._shutdown();}
 function CalemLabelRender(parent,id,lbInfo,controller){if(arguments.length==0)return;CalemUiRender.call(this,parent,id,lbInfo,controller);}
 CalemLabelRender.prototype=new CalemUiRender;CalemLabelRender.prototype.constructor=CalemLabelRender;CalemLabelRender.prototype.toString=function(){return"CalemLabelRender";}
 CalemLabelRender.prototype.render=function(parentEl,yOff,clsName){var style=(DwtLabel.IMAGE_RIGHT|DwtLabel.ALIGN_LEFT);this._label=new DwtLabel(this._parent,style,clsName);this._label.setText(this._info.getLabel());this._label.reparentHtmlElement(parentEl);}
@@ -3744,7 +3755,7 @@ CalemUiController.prototype._publishEvents=function(){}
 CalemUiController.prototype.onLayoutChange=function(bz){this._onLayoutChange(bz);this._bz=bz;}
 CalemUiController.prototype._onLayoutChange=function(bz){}
 CalemUiController.prototype.showData=function(){this._showData();}
-function CalemDataGrid(parent,id,tableDd,customInfo,controller){if(arguments.length==0)return;CalemUiController.call(this,parent,id,tableDd,customInfo,controller);this._dataChangeListener=new AjxListener(this,this._onDataChanged);}
+function CalemDataGrid(parent,id,tableDd,customInfo,controller){if(arguments.length==0)return;CalemUiController.call(this,parent,id,tableDd,customInfo,controller);this._dataChangeListener=new AjxListener(this,this._onDataChanged);this._dataRefreshListener=new AjxListener(this,this._onDataRefresh);}
 CalemDataGrid.SELECTION_EVENTS=[CalemEvent.NO_SELECTION,CalemEvent.SINGLE_SELECTION,CalemEvent.MULTI_SELECTION,CalemEvent.DBL_CLICK_SELECTION];CalemDataGrid.prototype=new CalemUiController;CalemDataGrid.prototype.constructor=CalemDataGrid;CalemDataGrid.prototype.toString=function(){return"CalemDataGrid";}
 CalemDataGrid.prototype._createUiControl=function(){this._listView=new CalemListView(this._parent,null,null,this._tableDd,this._widgetInfo,this,this._widgetInfo.listInfo.getNoMaximize());this._listView.zShow(true);this._selectionListener=new AjxListener(this,this.onRowSelection);this._listView.addSelectionListener(this._selectionListener);this._actionListener=new AjxListener(this,this.onActionSelection);this._listView.addActionListener(this._actionListener);this._scrollBar=new CalemScrollBar(this._parent);var el=this._listView.getScrollBarEl();this._scrollBar.setParentEl(el,this);}
 CalemDataGrid.prototype._publishEvents=function(){this._modelItem.publishEvents(CalemDataGrid.SELECTION_EVENTS,this);}
@@ -3774,6 +3785,8 @@ CalemDataGrid.prototype._getSelectedItems=function(){var items=new AjxVector();v
 return items;}
 CalemDataGrid.prototype.getDataChangeListener=function(){return this._dataChangeListener;}
 CalemDataGrid.prototype._onDataChanged=function(evt){this._scrollBar.onDataChange(evt.getTotal());this._controller._onDataChanged(evt);}
+CalemDataGrid.prototype.getDataRefreshListener=function(){return this._dataRefreshListener;}
+CalemDataGrid.prototype._onDataRefresh=function(evt){this._scrollBar.onDataRefresh();}
 CalemDataGrid.prototype.resumeView=function(){var selected=this._getSelectedItems();this._calcViewSize();this._scrollBar.resumeView();this._listView.setSelectedItems(selected.getArray());this._reportSelection();}
 CalemDataGrid.prototype.onFieldChange=function(nodeChange){this._listView.__onFieldChange(nodeChange);}
 CalemDataGrid.prototype.canRemoveField=function(){return this._listView.__canRemoveField();}

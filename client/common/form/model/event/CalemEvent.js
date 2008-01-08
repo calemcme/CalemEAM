@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
- 
 /**
  * CalemEvent
  */
@@ -38,6 +37,12 @@ CalemEvent.CACHE_CHANGE = 'CACHE_CHANGE';
  * records are deleted or inserted.
  */
 CalemEvent.DATA_CHANGE = 'DATA_CHANGE';
+
+/**
+ * Data refresh event sent to controls when
+ * data is refreshed from server.
+ */
+CalemEvent.DATA_REFRESH = 'DATA_REFRESH';
 
 /**
  * Grid selection events - used in list form
