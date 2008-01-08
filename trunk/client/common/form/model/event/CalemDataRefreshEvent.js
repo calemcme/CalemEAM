@@ -18,20 +18,15 @@
  */
  
 /**
- * CalemDataChangeEvent
+ * CalemDataRefreshEvent
  */
-function CalemDataChangeEvent(total) {
+function CalemDataRefreshEvent(val) {
 	if (arguments.length == 0) return;
-	CalemEvent.call(this, CalemEvent.DATA_CHANGE);
-	this._total=total;
+	CalemEvent.call(this, CalemEvent.DATA_REFRESH);
 }
 
-CalemDataChangeEvent.prototype = new CalemEvent;
-CalemDataChangeEvent.prototype.constructor=CalemDataChangeEvent;
+CalemDataRefreshEvent.prototype = new CalemEvent;
+CalemDataRefreshEvent.prototype.constructor=CalemDataRefreshEvent;
 
-CalemDataChangeEvent.prototype.toString = function() { return "CalemDataChangeEvent"; }
+CalemDataRefreshEvent.prototype.toString = function() { return "CalemDataRefreshEvent"; }
 
-CalemDataChangeEvent.prototype.getTotal =
-function() {
-	return this._total;
-}

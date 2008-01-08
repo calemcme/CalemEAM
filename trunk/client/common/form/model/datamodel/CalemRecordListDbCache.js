@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemRecordListDbCache
  * The cached DB list impl.
@@ -111,6 +110,8 @@ function(rec) {
 CalemRecordListDbCache.prototype.deleteRecord =
 function(id) {
 	for (var i=0; i< this._recList.length; i++) {
+		//Sparsed array case
+		if (!this._recList[i]) continue;
 		if (this._recList[i].id==id) {
 			this._recList.splice(i, 1);
 			delete this._recMap[id];

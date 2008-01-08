@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemDataGrid
  * The data grid is a controller that uses CalemListView and CalemScrollBar to view a data set.
@@ -29,6 +28,7 @@ function CalemDataGrid(parent, id, tableDd, customInfo, controller) {
 	if (arguments.length == 0) return;
 	CalemUiController.call(this, parent, id, tableDd, customInfo, controller);
 	this._dataChangeListener = new AjxListener(this, this._onDataChanged);
+	this._dataRefreshListener = new AjxListener(this, this._onDataRefresh);
 }
 
 CalemDataGrid.SELECTION_EVENTS= [CalemEvent.NO_SELECTION, CalemEvent.SINGLE_SELECTION, 
@@ -334,6 +334,20 @@ function(evt) {
 	this._scrollBar.onDataChange(evt.getTotal());
 	//Notify controller (this path seems shorter, could have controller notify grid as well - a longer walk).
 	this._controller._onDataChanged(evt);
+} 
+
+/**
+ * provide listener and handler for Data refresh
+ */
+CalemDataGrid.prototype.getDataRefreshListener =
+function() {
+	return this._dataRefreshListener;
+} 
+
+CalemDataGrid.prototype._onDataRefresh =
+function(evt) {
+	//Report data change
+	this._scrollBar.onDataRefresh();
 } 
 
 /**

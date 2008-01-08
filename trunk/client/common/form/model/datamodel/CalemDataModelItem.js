@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
- 
 /**
  * CalemModelItem is the data model for a form.
  * It listens for events from UI and cache store.
@@ -144,6 +143,17 @@ CalemDataModelItem.prototype.removeDataChangeListener =
 function(listener) {
 	this.removeListener(CalemEvent.DATA_CHANGE, listener);
 } 
+
+CalemDataModelItem.prototype.addDataRefreshListener =
+function(listener) {
+	this.addListener(CalemEvent.DATA_REFRESH, listener);
+} 
+
+CalemDataModelItem.prototype.removeDataRefreshListener =
+function(listener) {
+	this.removeListener(CalemEvent.DATA_REFRESH, listener);
+} 
+
 
 /**
  * Current record moved or changed
@@ -317,6 +327,20 @@ function() {
 		}
 	}
 } 
+
+/**
+ * Data refresh handling
+ */
+CalemDataModelItem.prototype.onDataRefresh =
+function() {
+	this._onDataRefresh(); //specific functions.
+	var evt=new CalemDataRefreshEvent(true);
+	this.notifyListeners(CalemEvent.DATA_REFRESH, evt);
+} 
+
+CalemDataModelItem.prototype._onDataRefresh =
+function() {
+}
 
 /**
  * Remove all listeners.

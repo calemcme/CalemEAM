@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
- 
 /**
  * CalemDataModelItemDb 
  * Plays the role of local data cache.
@@ -166,6 +165,20 @@ function() {
 	}
 	this._reportPosition();
 }   
+
+/**
+ * Data refresh handling
+ */   
+CalemDataModelItemDb.prototype._onDataRefresh =
+function() {
+	//force to start from 0.
+	if (this._tableQuery) {
+		var range=new CalemQueryRange(0);
+		this._tableQuery.setRange(range);
+	}
+	//Force a cache reset
+	if (this._recList) this._recList._clearCache();
+} 
 
 /**
  * shutdown 

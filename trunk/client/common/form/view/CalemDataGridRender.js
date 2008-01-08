@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemDataGridRender
  *  
@@ -44,6 +43,7 @@ function(parentEl, yOff) {
 	this._showData();
 	//Register for events.
 	this._modelItem.addDataChangeListener(this._grid.getDataChangeListener());
+    this._modelItem.addDataRefreshListener(this._grid.getDataRefreshListener());
 }
 
 CalemDataGridRender.prototype._fitBounds =
@@ -88,6 +88,7 @@ CalemDataGridRender.prototype._shutdown =
 function() {
 	//remove listener for events.
 	this._modelItem.removeDataChangeListener(this._grid.getDataChangeListener());
+    this._modelItem.removeDataRefreshListener(this._grid.getDataRefreshListener());
 	//Tell grid to shutdown as well
 	this._grid._shutdown();
 } 
