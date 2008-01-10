@@ -632,9 +632,7 @@ AjxDateFormat.AmPmSegment.prototype.parse = function(date, s, index) {
 	}
 	var hours=date.getHours();
 	if (value) {
-		if (value==I18nMsg["periodAm"]) {
-			if (hours >= 12) hours -=12; // throw new AjxFormat.ParsingException(this._parent, this, "Invalid AM setting"); // I18n
-		} else if (value==I18nMsg["periodPm"]) {
+		if (value==I18nMsg["periodPm"]) {
 			if (hours < 12) date.setHours(hours+12);
 		}
 	} else {
