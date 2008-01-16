@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemView
  * This is the base view for use to render a form.
@@ -189,7 +188,7 @@ function(fld, fv) {
 
 CalemView.prototype.hasRender =
 function(fld) {
-	this._render.hasRender(fld);	
+	return this._render.hasRender(fld);	
 }
 
 /**
