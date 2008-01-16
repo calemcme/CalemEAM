@@ -955,7 +955,7 @@ function(fld, fv) {
 
 CalemForm.prototype.hasRender =
 function(fld) {
-	this._view.hasRender(fld);	
+	return this._view.hasRender(fld);	
 }
 
 CalemForm.prototype._showSoapError =

@@ -2957,7 +2957,7 @@ CalemView.prototype.getElVisible=function(){if(!this.getVisible())return false;e
 CalemView.prototype.getFieldChanged=function(fld){return this._render.getFieldChanged(fld);}
 CalemView.prototype.setValidRange=function(fld,min,max){if(!this._render)return;this._render.setValidRange(fld,min,max);}
 CalemView.prototype.setFieldValue=function(fld,fv){this._render.setFieldValue(fld,fv);}
-CalemView.prototype.hasRender=function(fld){this._render.hasRender(fld);}
+CalemView.prototype.hasRender=function(fld){return this._render.hasRender(fld);}
 CalemView.prototype.getFieldSearch=function(fld){return this._render.getFieldSearch(fld);}
 CalemView.prototype.getCustomizedView=function(){return this._render.getCustomizedView();}
 CalemView.prototype.embedController=function(controller){this.parent.embedController(controller);}
@@ -3925,7 +3925,7 @@ CalemForm.prototype._setFieldsReadOnly=function(flds){if(!flds)return;for(var i=
 CalemForm.prototype.setValidRange=function(fld,min,max){if(!this._view)return;this._view.setValidRange(fld,min,max);}
 CalemForm.prototype.onLookupSelect=function(fld,recLkup){}
 CalemForm.prototype.setFieldValue=function(fld,fv){this._view.setFieldValue(fld,fv);}
-CalemForm.prototype.hasRender=function(fld){this._view.hasRender(fld);}
+CalemForm.prototype.hasRender=function(fld){return this._view.hasRender(fld);}
 CalemForm.prototype._showSoapError=function(soapResp){var errorHandler;if(tranResp.errorInfo&&tranResp.errorInfo.id){errorHandler=eval(['new ',tranResp.errorInfo.id,'(tranResp.id, tranResp.errorInfo)'].join(''));}else{errorHandler=new CalemErrorInfo(tranResp.id)}
 CalemInfoDialog.showIt(CalemMsg.getMsg('error_server'),errorHandler.getMessage());}
 CalemForm.prototype._instantiate=function(data){}
