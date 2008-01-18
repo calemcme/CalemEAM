@@ -28,9 +28,9 @@ CalemModuleDef["modCalemContract"]= {
       toolBar: {
         CalemToolBarInfo: {
         	  type: 'CalemToolBar',
-        	  layout: ['modCalemVendor', 'sep', 'CalemContractFormList'],
+        	  layout: ['modCalemContract', 'sep', 'CalemContractFormList'],
         	  list: [
-	         {CalemLabelInfo: {id: 'modCalemVendor', className: 'CalemModuleLabel'}},
+	         {CalemLabelInfo: {id: 'modCalemContract', className: 'CalemModuleLabel'}},
 	         
 	         {CalemSeparator: {id: 'sep', className: 'CalemToolBarSeparator'}},
 	         
