@@ -86,8 +86,8 @@ function(rec) {
 		this._cached[this._recList.length]=CalemConst._CACHED; //Record it.
 	   this._recList.push(rec);
 		this._recMap[rec.id]=rec;	
+		this._total++;	
 	}
-	this._total++;
 }
 
 //Must go through the whole list (m-31)
@@ -117,10 +117,10 @@ function(id) {
 			this._recList.splice(i, 1);
 			delete this._recMap[id];
 			this._cached.splice(i, 1);
+			this._total--;
 			break;
 		}
 	}
-	this._total--;
 }
 
 //Dynamic scrolling is enabled here.
