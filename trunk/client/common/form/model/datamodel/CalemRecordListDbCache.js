@@ -97,6 +97,7 @@ function(rec) {
 	for (var i=0; i< this._recList.length; i++) {
 		if (this._recList[i].id==rec.id) {
 			this._recList[i]=rec;
+			break;
 		}
 	}
 }
@@ -116,6 +117,7 @@ function(id) {
 			this._recList.splice(i, 1);
 			delete this._recMap[id];
 			this._cached.splice(i, 1);
+			break;
 		}
 	}
 	this._total--;

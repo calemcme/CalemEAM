@@ -1481,9 +1481,9 @@ CalemRecordListDbCache.prototype.sort=function(ob,callback,start){if(this.getTot
 CalemRecordListDbCache.prototype.atLast=function(recNo){return(recNo==this._total-1);}
 CalemRecordListDbCache.prototype.add=function(rec){if(this._recMap[rec.id]){this._replace(rec);}else{this._cached[this._recList.length]=CalemConst._CACHED;this._recList.push(rec);this._recMap[rec.id]=rec;}
 this._total++;}
-CalemRecordListDbCache.prototype._replace=function(rec){this._recMap[rec.id]=rec;for(var i=0;i<this._recList.length;i++){if(this._recList[i].id==rec.id){this._recList[i]=rec;}}}
+CalemRecordListDbCache.prototype._replace=function(rec){this._recMap[rec.id]=rec;for(var i=0;i<this._recList.length;i++){if(this._recList[i].id==rec.id){this._recList[i]=rec;break;}}}
 CalemRecordListDbCache.prototype.getTotal=function(rec){return this._total;}
-CalemRecordListDbCache.prototype.deleteRecord=function(id){for(var i=0;i<this._recList.length;i++){if(!this._recList[i])continue;if(this._recList[i].id==id){this._recList.splice(i,1);delete this._recMap[id];this._cached.splice(i,1);}}
+CalemRecordListDbCache.prototype.deleteRecord=function(id){for(var i=0;i<this._recList.length;i++){if(!this._recList[i])continue;if(this._recList[i].id==id){this._recList.splice(i,1);delete this._recMap[id];this._cached.splice(i,1);break;}}
 this._total--;}
 CalemRecordListDbCache.prototype.sliceByVector=function(start,count,callback){var fetch=false;for(var i=start;i<(start+count);i++){if(!this._cached[i]==CalemConst._CACHED){fetch=true;break;}}
 if(!fetch){callback.run(this._sliceByVector(start,count));}else{var range=new CalemQueryRange(start);var fetchCallback=new AjxCallback(this,this.onBulkFetchCallback,{callback:callback,count:count,start:start});this._executeBulkFetch(range,fetchCallback);}}
