@@ -452,9 +452,9 @@ CalemMsg["language"] = "Sprache";
 
 CalemMsg["exit_calemeam"] = "CalemEAM meltet Sie bei Best&auml;tigung ab. W&auml;hle Abbruch um CalemEAM weiter zu nutzen.";
 
-CalemMsg["soap_InvalidLogin"] = "Anmeldung fehlgeschlagen. Bitte pr&uuml;fen Sie Benutzernamen und Passwort und versuchen es erneut.";
-CalemMsg["soap_NoActiveSession"] = "Ihre Sitzung ist am Server nicht mehr g&uuml;ltig. Sie werden abgemeldet.";
-CalemMsg["soap_default"] = "Am Server ist ein Fehler aufgetreten. Bitte kontaktieren Sie den System-Administrator.";
+CalemMsg["SF_InvalidLogin"] = "Anmeldung fehlgeschlagen. Bitte pr&uuml;fen Sie Benutzernamen und Passwort und versuchen es erneut.";
+CalemMsg["SF_NoActiveSession"] = "Ihre Sitzung ist am Server nicht mehr g&uuml;ltig. Sie werden abgemeldet.";
+CalemMsg["SF_Unknown"] = "Am Server ist ein Fehler aufgetreten. Bitte kontaktieren Sie den System-Administrator.";
 
 CalemMsg["modCalemWo"] = "Arbeitsauftrag";
 CalemMsg["modCalemAsset"] = "Anlage";
