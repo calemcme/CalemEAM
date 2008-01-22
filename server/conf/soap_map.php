@@ -31,13 +31,14 @@ if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
  * Soap Service mapping from method name to module and classes.
  * 
  */
-define('CALEM_SF_NO_POSTDATA', 		'NoPostData'); 
-define('CALEM_SF_INVALID_METHOD', 	'InvalidMethod');
-define('CALEM_SF_INVALID_HEADER',	'InvalidHeaders');
-define('CALEM_SF_INVLIAD_PARAMS',	'InvalidParams');
-define('CALEM_SF_INVALID_LOGIN', 	'InvalidLogin');
-define('CALEM_SF_NO_SESSION', 		'NoActiveSession');
-define('CALEM_SF_UNKNOWN', 			'Unknown');
+define('CALEM_SF_NO_POSTDATA', 		'SF_NoPostData'); 
+define('CALEM_SF_INVALID_METHOD', 	'SF_InvalidMethod');
+define('CALEM_SF_INVALID_HEADER',	'SF_InvalidHeaders');
+define('CALEM_SF_INVLIAD_PARAMS',	'SF_InvalidParams');
+define('CALEM_SF_INVALID_LOGIN', 	'SF_InvalidLogin');
+define('CALEM_SF_NO_SESSION', 		'SF_NoActiveSession');
+define('CALEM_SF_UNKNOWN', 			'SF_Unknown');
+
 //starting configuration
 $_CALEM_soap=array(
 	'Login'=>array('module'=>'admin', 'class'=>'CalemLoginSo'),

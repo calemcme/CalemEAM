@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -109,5 +108,10 @@ class CalemSession {
 	 */
 	public function toString() {
 		return 'CalemSession: {sessionId=' . $this->sid . ', data=' . var_export($this->data, true) . '}';
+	}
+	
+	public function toStringShort() {
+		$user=$this->get('user');
+		return 'CalemSession: {sessionId=' . $this->sid . ', id=' . $user['id'] . ', name=' . $user['username'] .  '}';
 	}
 }
