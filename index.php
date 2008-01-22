@@ -69,7 +69,7 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 				$ex=$e->getTraceAsString();
 				$logger->error("Exception in processing login. Error msg=" . $ex);
 			}
-			$loginErrorText= CalemMsg::getMsg('soap_InvalidLogin');
+			$loginErrorText= CalemMsg::getMsg('SF_InvalidLogin');
 		} else {
 			$loginErrorText=CalemMsg::getMsg("login_reqd");
 		}
@@ -99,7 +99,7 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 		$sesReload=CalemSession::load($sid);
 		if ($sesReload) {//Found a valid session so let's grant access
 			$GLOBALS['calem_ses_data']=$sesReload->get('user');
-			if ($logger->isInfoEnabled()) $logger->info("Found the correct session: " . $sesReload->toString());
+			if ($logger->isInfoEnabled()) $logger->info("Found the correct session: " . $sesReload->toStringShort());
 			//setup session info.
 			$si=$sesReload->get('setting');		
 			$lang=$si['lang'];	
