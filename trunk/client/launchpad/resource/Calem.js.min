@@ -332,7 +332,7 @@ CalemInfoDialog.prototype=new DwtDialog;CalemInfoDialog.prototype.constructor=Ca
 CalemInfoDialog.prototype._onClose=function(){this.popdown();if(this._callback)this._callback.run();}
 CalemInfoDialog.prototype.popupPrompt=function(title,prompt,callback){this.setTitle(title);this.setContent(prompt);this._callback=callback;this.popup();}
 function CalemSoapResponse(ex,data){if(ex){if(AjxUtil.isInstance(ex,AjxException)){this._ajxException=ex;}else{this._ajxException=new AjxException(ex);}
-var soapErrId='soap_'+this._ajxException.code;if(soapErrId in CalemMsg){this._errorMsg=CalemMsg[soapErrId];}else{this._errorMsg=CalemMsg.soap_default;}
+var soapErrId=this._ajxException.code;if(soapErrId in CalemMsg){this._errorMsg=CalemMsg[soapErrId];}else{this._errorMsg=CalemMsg.SF_Unknown;}
 this._errorMsgDetail=this._ajxException.dump();}
 this._data=data;}
 CalemSoapResponse.createException=function(ex){resp=new CalemSoapResponse(ex,null);return resp;}

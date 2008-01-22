@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * This is the response object from a soap call. The possible response objects are:
  * <ul>
@@ -36,11 +35,11 @@ function CalemSoapResponse(ex, data) {
       } else {
          this._ajxException=new AjxException(ex);
       }
-      var soapErrId='soap_'+this._ajxException.code;
+      var soapErrId=this._ajxException.code;
       if (soapErrId in CalemMsg) {
          this._errorMsg=CalemMsg[soapErrId];
       } else {
-         this._errorMsg=CalemMsg.soap_default;
+         this._errorMsg=CalemMsg.SF_Unknown;
       }
       this._errorMsgDetail=this._ajxException.dump();
    }

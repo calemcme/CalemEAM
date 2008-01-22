@@ -353,9 +353,9 @@ CalemMsg["installation_not_deleted"] = "The <b>installation</b> directory is not
 
 CalemMsg["exit_calemeam"] = "CalemEAM will log you out when you confirm. Select Cancel to continue use CalemEAM.";
 
-CalemMsg["soap_InvalidLogin"] = "Login failed. Please check your user name/password and try again.";
-CalemMsg["soap_NoActiveSession"] = "Your session is no longer valid on server. You will be logged out.";
-CalemMsg["soap_default"] = "An error happened in the server. Please contact your system admin.";
+CalemMsg["SF_InvalidLogin"] = "Login failed. Please check your user name/password and try again.";
+CalemMsg["SF_NoActiveSession"] = "Your session is no longer valid on server. You will be logged out.";
+CalemMsg["SF_Unknown"] = "An error happened in the server. Please contact your system admin.";
 
 CalemMsg["modCalemWo"] = "Work order";
 CalemMsg["modCalemAsset"] = "Asset";
