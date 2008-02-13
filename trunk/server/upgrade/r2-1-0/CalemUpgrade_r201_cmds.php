@@ -17,32 +17,27 @@
  
  * Contributor(s): 
  */
- 
+
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
-/**
- * Upgrade map
- */
-
-$_CALEM_upgrade=array();
-
-$_CALEM_upgrade['r2-1-0']= array(
-	 'from'=>array(
-	 	'r2-0-1'=>array(
-	 		'path'=>'server/upgrade/r2-1-0',
-	 		'class'=>'CalemUpgrade_r201'
-	 	) 	
-	 )
-);
-
-$_CALEM_upgrade['r2-0-1']= array(
-	 'from'=>array(
-	 	'r1-0-2'=>array(
-	 		'path'=>'server/upgrade/r2-0-1',
-	 		'class'=>'CalemUpgrade_r102'
-	 	) 	
-	 )
+$_CALEM_cmds = array(
+	//Mobile module
+	'new_mb_profile'=>array(
+		'cmd'=>'CalemCmdCreateTable',
+		'param'=>array(
+			'table'=>'mb_profile'
+		)		
+	),
+	
+	//Updates to existing tables
+	'alter_users'=>array(
+		'cmd'=>'CalemCmdAddField',
+		'param'=>array(
+			'table'=>'users',
+			'fields'=>array('profile_id')
+		)	
+	)
 );
 
 ?>

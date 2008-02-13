@@ -17,32 +17,17 @@
  
  * Contributor(s): 
  */
- 
+
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
-/**
- * Upgrade map
- */
-
-$_CALEM_upgrade=array();
-
-$_CALEM_upgrade['r2-1-0']= array(
-	 'from'=>array(
-	 	'r2-0-1'=>array(
-	 		'path'=>'server/upgrade/r2-1-0',
-	 		'class'=>'CalemUpgrade_r201'
-	 	) 	
-	 )
-);
-
-$_CALEM_upgrade['r2-0-1']= array(
-	 'from'=>array(
-	 	'r1-0-2'=>array(
-	 		'path'=>'server/upgrade/r2-0-1',
-	 		'class'=>'CalemUpgrade_r102'
-	 	) 	
-	 )
-);
-
+require_once _CALEM_DIR_ . 'server/upgrade/CalemUpgradeBo.php';
+ 
+class CalemUpgrade_r201 extends CalemUpgradeBo  {	
+	
+	public function getCmds() {
+		include 'CalemUpgrade_r201_cmds.php';
+		return $_CALEM_cmds;
+	}
+}
 ?>
