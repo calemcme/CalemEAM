@@ -1157,7 +1157,7 @@ CalemDbDropdown.prototype.getSql=function(){return["(",CalemJson.arrayToSql(this
 function CalemDbBoolean(value){if(arguments.length==0)return;CalemDbValue.call(this,value);}
 CalemDbBoolean.prototype=new CalemDbValue;CalemDbBoolean.prototype.constructor=CalemDbBoolean;CalemDbBoolean.prototype.getJson=function(){return["{CalemDbBoolean: ",this._value,"}"].join('');}
 CalemDbBoolean.prototype.setJson=function(obj){this._value=obj?1:0;}
-function CalemTableQuery(id,table,type){if(arguments.length==0)return;this._id=id;this._table=table;this._type=type||CalemTableQuery.GET;this._select=new CalemQuerySelect();this._where=new CalemQueryWhere();this._aliasKey=1;}
+function CalemTableQuery(id,table,type){if(arguments.length==0)return;this._id=id;this._table=table;this._fullId=(id==table)?table:[id,'_',table].join('');this._type=type||CalemTableQuery.GET;this._select=new CalemQuerySelect();this._where=new CalemQueryWhere();this._aliasKey=1;}
 CalemTableQuery.GET='GET';CalemTableQuery.GET_COUNT='GET_COUNT';CalemTableQuery.UPDATED='UPDATED';CalemTableQuery.DELETED='DELETED';CalemTableQuery.prototype.toString=function(){return'CalemTableQuery';}
 CalemTableQuery.prototype.nextAliasKey=function(){return this._aliasKey++;}
 CalemTableQuery.prototype.getType=function(){return this._type;}
@@ -1180,18 +1180,18 @@ CalemTableQuery.prototype.getSql=function(){var rtn=[this._select.getSql()," FRO
 CalemTableQuery.prototype.getCountSql=function(){var rtn=["SELECT count(*) FROM ",this._table].join('');if(this._where)rtn=[rtn,' ',this._where.getCountSql()].join('');return rtn;}
 CalemTableQuery.prototype.getSoap=function(){return{table:this._table,type:this._type,sql:this.getSql(),countSql:this.getCountSql()};}
 CalemTableQuery.prototype.getSoapCount=function(){return{table:this._table,type:CalemTableQuery.GET_COUNT,countSql:this.getCountSql()};}
-CalemTableQuery.prototype.getFullTableId=function(){return this._table;}
+CalemTableQuery.prototype.getFullTableId=function(){return this._fullId;}
+CalemTableQuery.prototype.setFullTableId=function(fid){this._fullId=fid;}
 CalemTableQuery.prototype.getTableId=function(){return this._table;}
 CalemTableQuery.prototype.getId=function(){return this._id;}
 function CalemQueryUpdated(id,table,time,fld){if(arguments.length==0)return;CalemTableQuery.call(this,id,table,CalemTableQuery.UPDATED);var sel=new CalemSelectField(this._table);this.addSelect(sel);this.setTimeValue(time,fld);}
 CalemQueryUpdated.prototype=new CalemTableQuery;CalemQueryUpdated.prototype.constructor=CalemQueryUpdated;CalemQueryUpdated.prototype.toString=function(){return'CalemQueryUpdated';}
 CalemQueryUpdated.prototype.setTimeValue=function(val,fld){fld=fld||'modified_time';fld=new CalemDbField(this._table,fld);val=new CalemDbString(val);var exprTime=new CalemDbExpr(fld,CalemDbExpr.GTEQ,val);this.setWhere(this._table,exprTime);}
 CalemQueryUpdated.prototype.getCountSql=function(){return["SELECT count(*) FROM ",this._table].join('');}
-function CalemQueryDeleted(id,table,time){if(arguments.length==0)return;CalemTableQuery.call(this,id,CalemQueryDeleted.TABLE,CalemTableQuery.DELETED);this._srcTable=table;var sel=new CalemSelectField(this._table,'rec_id');this.addSelect(sel);this.setTimeValue(time);}
+function CalemQueryDeleted(id,table,time){if(arguments.length==0)return;CalemTableQuery.call(this,id,CalemQueryDeleted.TABLE,CalemTableQuery.DELETED);this._srcTable=table;this._fullId=[this._table,'_',this._srcTable].join('');var sel=new CalemSelectField(this._table,'rec_id');this.addSelect(sel);this.setTimeValue(time);}
 CalemQueryDeleted.TABLE='recycle_bin';CalemQueryDeleted.prototype=new CalemTableQuery;CalemQueryDeleted.prototype.constructor=CalemQueryDeleted;CalemQueryDeleted.prototype.toString=function(){return'CalemQueryDeleted';}
 CalemQueryDeleted.prototype.setTimeValue=function(value){var andExpr=new CalemExprAnd();var fld=new CalemDbField(this._table,'created_time');var val=new CalemDbString(value);var exprTime=new CalemDbExpr(fld,CalemDbExpr.GTEQ,val);fld=new CalemDbField(CalemQueryDeleted.TABLE,'table_name');val=new CalemDbString(this._srcTable);var exprTable=new CalemDbExpr(fld,CalemDbExpr.EQ,val);andExpr.add(exprTime);andExpr.add(exprTable);this.setWhere(this._table,andExpr);}
 CalemQueryDeleted.prototype.getSoap=function(){return{table:this._srcTable,type:this._type,sql:this.getSql()};}
-CalemQueryDeleted.prototype.getFullTableId=function(){return[this._table,'_',this._srcTable].join('');}
 CalemQueryDeleted.prototype.getTableId=function(){return this._srcTable;}
 function CalemQuerySelect(){this._select=new Array();}
 CalemQuerySelect.prototype.add=function(fld){this._replace(fld);}
@@ -4423,15 +4423,15 @@ function CalemBoUtil(){}
 CalemBoUtil.getInstance=function(){if(!CalemBoUtil.singleton){CalemBoUtil.singleton=new CalemBoUtil();}
 return CalemBoUtil.singleton;}
 CalemBoUtil.prototype.canDeleteByLookup=function(tbList,lkupFld,lkupVal,callback){var reg=CalemContext.getInstance().getRegistry();var dbQry=new CalemDbQuery();for(var i=0;i<tbList.length;i++){var table=tbList[i];var fld=lkupFld;if(typeof(table)=='object'){fld=table.fld;table=table.table;}
-var dd=reg.getTableDd(table);var qry=dd.buildGetAllQueryByLookup(fld,lkupVal);dbQry.add(qry);}
+var dd=reg.getTableDd(table);var qry=dd.buildGetAllQueryByLookup(fld,lkupVal);qry.setFullTableId([table,"_",fld].join(''));dbQry.add(qry);}
 reg.getCache().bulkLoadCountBypassCache(dbQry,new AjxCallback(this,this.onDeleteByLookupResponse,callback));}
 CalemBoUtil.prototype.onDeleteByLookupResponse=function(callback,countList){var tbl=false;for(var i=0;i<countList.length;i++){if(countList[i]['count']>0){tbl=countList[i]['table'];break;}}
 if(tbl){CalemInfoDialog.showIt(CalemMsg.getMsg('form_delete_title'),AjxMessageFormat.format(CalemMsg.getMsg('delete_dependency_no_del'),[CalemMsg.getMsg(tbl),tbl]));}else{callback.run(true);}}
 CalemBoUtil.isUserInAdminGroup=function(){var gid=CalemContext.getInstance().getGroupId();return(gid==CalemConst.CALEM_OOB||gid==CalemConst.CUSTOM_SYSTEM);}
 function CalemUserBo(){}
-CalemUserBo.getInstance=function(){if(!CalemUserBo.singleton){CalemUserBo.singleton=new CalemUserBo();}
+CalemUserBo._details=[{table:'workorder',fld:'created_id'},{table:'workorder',fld:'modified_id'},{table:'workorder',fld:'assigned_to_id'},'wo_labor'];;CalemUserBo.getInstance=function(){if(!CalemUserBo.singleton){CalemUserBo.singleton=new CalemUserBo();}
 return CalemUserBo.singleton;}
-CalemUserBo.prototype.canDelete=function(recTitle,callback){callback.run(true);}
+CalemUserBo.prototype.canDelete=function(rec,callback){var boUtil=CalemBoUtil.getInstance();boUtil.canDeleteByLookup(CalemUserBo._details,'user_id',rec.id,callback);}
 function CalemAclGroupBo(){}
 CalemAclGroupBo.getInstance=function(){if(!CalemAclGroupBo.singleton){CalemAclGroupBo.singleton=new CalemAclGroupBo();}
 return CalemAclGroupBo.singleton;}

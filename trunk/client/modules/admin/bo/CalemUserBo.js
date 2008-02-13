@@ -17,12 +17,13 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemUserBo.
  */
 function CalemUserBo() {
 }
+
+CalemUserBo._details = [{table: 'workorder', fld: 'created_id'},{table: 'workorder', fld: 'modified_id'}, {table: 'workorder', fld: 'assigned_to_id'}, 'wo_labor'];;
 
 CalemUserBo.getInstance =
 function() {
@@ -36,6 +37,7 @@ function() {
  * Can the user be deleted?
  */
 CalemUserBo.prototype.canDelete =
-function(recTitle, callback) {
-	callback.run(true);
+function(rec, callback) {
+	var boUtil=CalemBoUtil.getInstance();
+	boUtil.canDeleteByLookup(CalemUserBo._details, 'user_id', rec.id, callback);
 }

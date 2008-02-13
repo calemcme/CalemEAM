@@ -26,6 +26,7 @@ function CalemTableQuery(id, table, type) {
 	if (arguments.length == 0) return;
 	this._id=id;	
 	this._table=table;
+	this._fullId=(id==table) ? table : [id,'_',table].join('');
 	this._type=type || CalemTableQuery.GET;
 	this._select=new CalemQuerySelect();
 	this._where=new CalemQueryWhere();	
@@ -177,7 +178,12 @@ function() {
 
 CalemTableQuery.prototype.getFullTableId =
 function() {
-	return this._table;
+	return this._fullId;
+}
+
+CalemTableQuery.prototype.setFullTableId =
+function(fid) {
+	this._fullId=fid;
 }
 
 CalemTableQuery.prototype.getTableId =
@@ -241,6 +247,7 @@ function CalemQueryDeleted(id, table, time) {
 	if (arguments.length==0) return;
 	CalemTableQuery.call(this, id, CalemQueryDeleted.TABLE, CalemTableQuery.DELETED);
 	this._srcTable=table;
+	this._fullId=[this._table, '_', this._srcTable].join('');
 	//Add selection
 	var sel=new CalemSelectField(this._table, 'rec_id');
 	this.addSelect(sel);
@@ -280,11 +287,6 @@ function(value) {
 CalemQueryDeleted.prototype.getSoap =
 function() {
 	return {table: this._srcTable, type: this._type, sql: this.getSql()};
-}
-
-CalemQueryDeleted.prototype.getFullTableId =
-function() {
-	return [this._table, '_', this._srcTable].join('');
 }
 
 CalemQueryDeleted.prototype.getTableId =
