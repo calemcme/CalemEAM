@@ -50,6 +50,7 @@ function(tbList, lkupFld, lkupVal, callback) {
 		}
 		var dd=reg.getTableDd(table);
 		var qry=dd.buildGetAllQueryByLookup(fld, lkupVal);
+		qry.setFullTableId([table,"_",fld].join('')); 
 		dbQry.add(qry);
 	}
 	//Now do a bulk query for count
