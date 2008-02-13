@@ -78,8 +78,10 @@ class CalemInstDbExpressModel extends CalemInstModel {
 			$dbSetup->validate();
 
 			//Upgrade if applicable
-			if ($this->upgradeHdlr) {
-				$this->upgradeHdlr->upgrade();
+			$upgradeHdlr=$this->getUpgradeHdlr();
+			if ($upgradeHdlr) {
+				$GLOBALS['logger']->debug('DbExpressSetupModel: doing an upgrade; hdlr=' . get_class($upgradeHdlr));
+				$upgradeHdlr->upgrade();
 			}
 			//Load Init data
 			require_once _CALEM_DIR_ . 'server/setup/CalemLoadInitData.php';

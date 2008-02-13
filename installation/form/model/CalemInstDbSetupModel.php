@@ -81,7 +81,8 @@ class CalemInstDbSetupModel extends CalemInstModel {
 				$dbSetup->validate();
 			}
 			//What about upgrade
-			if ($this->getUpgrade()) {
+			if ($this->upgradeHdlr) {
+				$GLOBALS['logger']->debug('DbSetupModel: doing an upgrade; hdlr=' . get_class($this->upgradeHdlr));
 				$this->upgradeHdlr->upgrade();
 			}
 			//Load Init data
