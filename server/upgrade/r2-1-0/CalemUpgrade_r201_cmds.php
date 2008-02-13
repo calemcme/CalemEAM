@@ -22,22 +22,7 @@
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $_CALEM_cmds = array(
-	//Mobile module
-	'new_mb_profile'=>array(
-		'cmd'=>'CalemCmdCreateTable',
-		'param'=>array(
-			'table'=>'mb_profile'
-		)		
-	),
 	
-	//Updates to existing tables
-	'alter_users'=>array(
-		'cmd'=>'CalemCmdAddField',
-		'param'=>array(
-			'table'=>'users',
-			'fields'=>array('profile_id')
-		)	
-	)
 );
 
 ?>

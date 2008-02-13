@@ -74,7 +74,7 @@ abstract class CalemUpgradeBo extends CalemBo {
 			$this->logger->error("Error in creating upgrade log, error=" . $e->getMessage());
 		}
 		if (!$succ) {
-			throw $results;	
+			throw new Exception($results);	
 		}
 		return $results;
 	}
