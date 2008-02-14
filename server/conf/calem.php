@@ -209,9 +209,22 @@ $_CALEM_dist=array(
 		'CalemMsg_en_GB.js'=>array('AjxMsg'=>array('AjxMsg'),
                            'I18nMsg'=>array('I18nMsg', 'I18nMsg_en_GB'),
                            'CalemMsg'=>array('CalemMsg', 'CalemMsgCustom')), 
-      'CalemMsg_de_DE.js'=>array('AjxMsg'=>array('AjxMsg', 'AjxMsg_de'),
+	   //de_de
+        'CalemMsg_de_DE.js'=>array('AjxMsg'=>array('AjxMsg', 'AjxMsg_de'),
                            'I18nMsg'=>array('I18nMsg', 'I18nMsg_de', 'I18nMsg_de_DE'),
-                           'CalemMsg'=>array('CalemMsg_de', 'CalemMsgCustom_de')),									
+                           'CalemMsg'=>array('CalemMsg_de', 'CalemMsgCustom_de')),
+							
+        'CalemMsg_de_LU.js'=>array('AjxMsg'=>array('AjxMsg', 'AjxMsg_de'),
+                           'I18nMsg'=>array('I18nMsg', 'I18nMsg_de', 'I18nMsg_de_LU'),
+                           'CalemMsg'=>array('CalemMsg_de', 'CalemMsgCustom_de')),
+							
+ 	    'CalemMsg_de_AT.js'=>array('AjxMsg'=>array('AjxMsg', 'AjxMsg_de'),
+                           'I18nMsg'=>array('I18nMsg', 'I18nMsg_de', 'I18nMsg_de_AT'),
+                           'CalemMsg'=>array('CalemMsg_de', 'CalemMsgCustom_de')),
+						   
+        'CalemMsg_de_CH.js'=>array('AjxMsg'=>array('AjxMsg', 'AjxMsg_de'),
+                           'I18nMsg'=>array('I18nMsg', 'I18nMsg_de', 'I18nMsg_de_CH'),
+                           'CalemMsg'=>array('CalemMsg_de', 'CalemMsgCustom_de')),
       //ch_cn
       'CalemMsg_cn.js'=> array('AjxMsg'=>array('AjxMsg_cn'),
             					'I18nMsg'=>array('I18nMsg_zh', 'I18nMsg_zh_CN'),
@@ -227,7 +240,10 @@ $_CALEM_dist=array(
     	'English (Australia)'=>array('id'=>'en_AU'),
     	'English (Canada)'=>array('id'=>'en_CA'),
     	'English (UK)'=>array('id'=>'en_GB'),
-		'German'=>array('id'=>'de_DE')
+		'Deutsch (Deutschland)'=>array('id'=>'de_DE'),
+		'Deutsch (Luxemburg)'=>array('id'=>'de_LU'),
+		'Deutsch (Österreich)'=>array('id'=>'de_AT'),
+		'Deutsch (Schweiz)'=>array('id'=>'de_CH')
     ),
     'setting_cookie_expire'=>1209600, //Two weeks
    //custom items to include
