@@ -3106,7 +3106,7 @@ CalemEditRender.prototype=new CalemFieldRender;CalemEditRender.prototype.constru
 CalemEditRender.prototype.setupValidation=function(){this._control.setValidationCallback(this._controller.getValidationCallback());this._control.setFieldInfo(this.getFieldInfo());this.setupValidRangeByDd();}
 CalemEditRender.prototype.setupValidRangeByDd=function(){this._minNumVal=this._tableDd.getMinValue(this._field);this._maxNumVal=this._tableDd.getMaxValue(this._field);}
 CalemEditRender.prototype.setValidRange=function(min,max){this._minNumVal=min;this._maxNumVal=max;}
-CalemEditRender.prototype._validateRange=function(value){if(value==null||value=='')return;if(this._minNumVal&&value<this._minNumVal)
+CalemEditRender.prototype._validateRange=function(value){if(this._minNumVal&&value<this._minNumVal)
 throw AjxMessageFormat.format(AjxMsg.numberLessThanMin,this._minNumVal);if(this._maxNumVal&&value>this._maxNumVal)
 throw AjxMessageFormat.format(AjxMsg.numberMoreThanMax,this._maxNumVal);}
 CalemEditRender.prototype.setFocus=function(){this._control.focus();}

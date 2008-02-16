@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemEditRender
  * This is the real render class for each control.
@@ -58,9 +57,11 @@ function(min, max) {
 	this._maxNumVal= max;
 }
 
+/**
+ * Value is already validated as numerical type.
+ */
 CalemEditRender.prototype._validateRange =
 function(value) {
-	if (value==null || value == '') return;
 	if (this._minNumVal && value < this._minNumVal)
 		throw AjxMessageFormat.format(AjxMsg.numberLessThanMin, this._minNumVal);
 	if (this._maxNumVal && value > this._maxNumVal)
