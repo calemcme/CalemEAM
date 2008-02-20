@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -61,6 +60,7 @@ class CalemBulkFetchSo extends CalemWsFacade {
  			$serverTime=gmdate($_CALEM_conf['calem_server_time_format']);
  			try {
 				 $resp=call_user_func(array($this, 'handle_'.$query->type), $query, $serverTime);	
+				 $resp['ftId']=$key; //This is the full table id to map back.	
 				 $result[]=$resp;				
  			} catch (Exception $e) {
  				$this->logger->error("Exception in processing BulkFetch. Error msg=" . $e->getTraceAsString());
