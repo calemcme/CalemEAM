@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -31,19 +30,10 @@ class CalemDebug {
 	}
 	
 	/**
-	 * Get post data
+	 * Collect info from exception
 	 */
-	function getPostData() {
-		if (isset($HTTP_RAW_POST_DATA)) {
-			$post=$HTTP_RAW_POST_DATA;
-		} elseif (isset($_SERVER['HTTP_RAW_POST_DATA'])) {
-			$post=$_SERVER['HTTP_RAW_POST_DATA'];
-		} elseif (isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
-			$post=$GLOBALS['HTTP_RAW_POST_DATA'];
-		} else {//Try to read from php://input
-			$post=file_get_contents('php://input');
-		}
-		return $post;
+	public static function toStackTrace(Exception $e) {
+		return get_class($e) . ": " . $e->getMessage() . "; " . $e->getTraceAsString();
 	}
 }
 ?>

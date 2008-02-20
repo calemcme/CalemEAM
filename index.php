@@ -66,8 +66,8 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 				$loginSo->initByWeb();
 				list($succ, $ses)=$loginSo->doLogin($login_username, $login_password);
 			} catch (Exception $e) {
-				$ex=$e->getTraceAsString();
-				$logger->error("Exception in processing login. Error msg=" . $ex);
+				require_once _CALEM_DIR_ . 'server/include/util/CalemDebug.php';
+				$logger->error("Exception in processing login. Error msg=" . CalemDebug::toStackTrace($e));
 			}
 			$loginErrorText= CalemMsg::getMsg('SF_InvalidLogin');
 		} else {
