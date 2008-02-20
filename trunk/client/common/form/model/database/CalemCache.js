@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
- 
 /**
  * Constructor
  */
@@ -143,7 +142,7 @@ function(params, resp) {
 	var soapQuery=params.soapQuery;
 	for (var i=0; i< resultList.length; i++) {
 		var result=resultList[i];
-		var tblQuery=soapQuery.getQuery(result.table);
+		var tblQuery=soapQuery.getQuery(result.ftId); //Use full table Id to get back the result.
 		var tableDd=this._registry.getTableDd(tblQuery.getId()); //support view
 		if (!tableDd.isCached()) {
 			rawSet[result.table]=result;
