@@ -86,7 +86,7 @@ CalemConf["soap_format"] = "js";
 /**
  * Invalid login or session expiration
  */
-CalemConf['soap_sessionError'] = {'NoActiveSession':true};
+CalemConf['soap_sessionError'] = {'SF_NoActiveSession':true};
 
 /**
  * Desktop topBar
