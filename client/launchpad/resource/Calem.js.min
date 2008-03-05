@@ -6603,12 +6603,15 @@ CalemWoPartFormEdit.prototype._render=function(){CalemFormEdit.prototype._render
 function CalemWoToolCheckoutFormEdit(parent,formId,data){if(arguments.length==0)return;CalemWoPartCheckoutFormEdit.call(this,parent,formId,data);}
 CalemWoToolCheckoutFormEdit.prototype=new CalemWoPartCheckoutFormEdit;CalemWoToolCheckoutFormEdit.prototype.constructor=CalemWoToolCheckoutFormEdit;CalemWoToolCheckoutFormEdit.prototype.toString=function(){return"CalemWoToolCheckoutFormEdit";}
 CalemWoToolCheckoutFormEdit.prototype.getLookupFormByFld=function(tbl,fld){return(fld=='in_id')?'CalemInToolFormLookup':null;}
+CalemWoToolCheckoutFormEdit.prototype.onInTranDoneAction=function(){this._closeAndResumeParentForm(new CalemReloadDataAction('wo_tool'));}
 function CalemWoToolAddFormEdit(parent,formId,data){if(arguments.length==0)return;CalemWoPartAddFormEdit.call(this,parent,formId,data);}
 CalemWoToolAddFormEdit.prototype=new CalemWoPartAddFormEdit;CalemWoToolAddFormEdit.prototype.constructor=CalemWoToolAddFormEdit;CalemWoToolAddFormEdit.prototype.toString=function(){return"CalemWoToolAddFormEdit";}
+CalemWoToolAddFormEdit.prototype.onInTranDoneAction=function(){this._closeAndResumeParentForm(new CalemReloadDataAction('wo_tool'));}
 function CalemWoToolReturnFormEdit(parent,formId,data){if(arguments.length==0)return;CalemWoPartReturnFormEdit.call(this,parent,formId,data);}
 CalemWoToolReturnFormEdit.prototype=new CalemWoPartReturnFormEdit;CalemWoToolReturnFormEdit.prototype.constructor=CalemWoToolReturnFormEdit;CalemWoToolReturnFormEdit.prototype.toString=function(){return"CalemWoToolReturnFormEdit";}
 CalemWoToolReturnFormEdit.prototype._onSave=function(evt){var row=this._setupInputRow(row);row['icg_id']='icg_tool';var cache=CalemContext.getInstance().getRegistry().getCache();var inRec=cache.findRecordById('inventory',row['in_id']);if(inRec){row['rent_uom_id']=inRec.getField('rent_uom_id').getRawValue();row['rent_rate']=inRec.getField('rent_rate').getRawValue();}
 var ebInfo=new CalemEmbedInfo(this._parent,'CalemInReturnFormList',{tranRow:row});this._embedForm(ebInfo);}
+CalemWoToolReturnFormEdit.prototype._onCancel=function(){this._closeAndResumeParentForm(new CalemReloadDataAction('wo_tool'));}
 function CalemWoToolFormList(parent,formId,data){if(arguments.length==0)return;CalemFormListDet.call(this,parent,formId,data);this._woToolNew=new AjxListener(this,this.onWoToolNew);this._woToolAdd=new AjxListener(this,this.onWoToolAdd);this._woToolReturn=new AjxListener(this,this.onWoToolReturn);}
 CalemWoToolFormList.prototype=new CalemFormListDet;CalemWoToolFormList.prototype.constructor=CalemWoToolFormList;CalemWoToolFormList.prototype.toString=function(){return"CalemWoToolFormList";}
 CalemWoToolFormList.prototype._getFormReadId=function(evt){return'CalemWoToolFormRead';}

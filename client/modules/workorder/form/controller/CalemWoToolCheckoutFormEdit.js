@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemWoToolCheckoutFormEdit
  */
@@ -35,4 +34,9 @@ CalemWoToolCheckoutFormEdit.prototype.getLookupFormByFld =
 function(tbl, fld) {
 	return (fld=='in_id') ? 'CalemInToolFormLookup' : null;
 } 
+
+CalemWoToolCheckoutFormEdit.prototype.onInTranDoneAction =
+function() {
+	this._closeAndResumeParentForm(new CalemReloadDataAction('wo_tool'));
+}
 
