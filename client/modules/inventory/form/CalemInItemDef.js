@@ -897,7 +897,7 @@ CalemItemDef['CalemInReturnCheckoutToFormEdit']={
 CalemItemDef['CalemInReturnFormList']={
 	CalemFormInfo: {
 		id: 'CalemInReturnFormList',
-		title: 'in_checkout_tran',
+		title: 'in_tran_checkout',
 		icon: 'CalemInReturn',
 		controller: 'CalemInReturnFormList',
 		model: 'in_tran', 
