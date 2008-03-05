@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemWoToolReturnFormEdit
  */
@@ -45,6 +44,11 @@ function(evt) {
 	//Next figure out location to check out from.
 	var ebInfo=new CalemEmbedInfo(this._parent, 'CalemInReturnFormList', {tranRow: row});
 	this._embedForm(ebInfo);
+}
+
+CalemWoToolReturnFormEdit.prototype._onCancel =
+function() {
+	this._closeAndResumeParentForm(new CalemReloadDataAction('wo_tool'));
 }
 
 

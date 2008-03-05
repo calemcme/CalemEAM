@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemWoToolAddFormEdit
  */
@@ -30,6 +29,11 @@ CalemWoToolAddFormEdit.prototype = new CalemWoPartAddFormEdit;
 CalemWoToolAddFormEdit.prototype.constructor = CalemWoToolAddFormEdit;
 
 CalemWoToolAddFormEdit.prototype.toString = function() { return "CalemWoToolAddFormEdit";}
+
+CalemWoToolAddFormEdit.prototype.onInTranDoneAction =
+function() {
+	this._closeAndResumeParentForm(new CalemReloadDataAction('wo_tool'));
+}
 
 
 
