@@ -44,6 +44,8 @@ class CalemGzip {
  	 * Assume content is constructed properly based on zip flag. 
  	 */
  	public static function gzEndFlush($zip=false, $encoding=null) {
+ 	  global $_CALEM_conf;
+ 	  if ($_CALEM_conf['ws_conn_close']) header("Connection: close");
      if ($zip) {
      	 header("Content-Encoding: ".$encoding);
      }
@@ -57,6 +59,8 @@ class CalemGzip {
  	public static function gzSoapCompressEndFlush($status, $zip=false, $encoding=null, $logger=null) {
  		header($status);
 		header("Content-Type: text/xml; charset=UTF-8");
+		global $_CALEM_conf;
+		if ($_CALEM_conf['ws_conn_close']) header("Connection: close");
  	   if ($zip) {
      	 	header("Content-Encoding: ".$encoding);
        	$contents = ob_get_contents();

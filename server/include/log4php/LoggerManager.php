@@ -141,12 +141,12 @@ class LoggerManager {
 // ---------------------------------------------------------------------------
 
 if (!defined('LOG4PHP_DEFAULT_INIT_OVERRIDE')) {
-    if (isset($_ENV['log4php.defaultInitOverride'])) {
+    if (getenv('log4php.defaultInitOverride')) {
         /**
          * @ignore
          */
         define('LOG4PHP_DEFAULT_INIT_OVERRIDE', 
-            LoggerOptionConverter::toBoolean($_ENV['log4php.defaultInitOverride'], false)
+            LoggerOptionConverter::toBoolean(getenv('log4php.defaultInitOverride'), false)
         );
     } elseif (isset($GLOBALS['log4php.defaultInitOverride'])) {
         /**
@@ -164,7 +164,7 @@ if (!defined('LOG4PHP_DEFAULT_INIT_OVERRIDE')) {
          *
          * <p>If it is not user defined, log4php tries to autoconfigure using (in order):</p>
          *
-         * - the <code>$_ENV['log4php.defaultInitOverride']</code> variable.
+         * - the <code>getenv('log4php.defaultInitOverride']</code> variable.
          * - the <code>$GLOBALS['log4php.defaultInitOverride']</code> global variable.
          * - defaults to <i>false</i>
          *
@@ -175,11 +175,11 @@ if (!defined('LOG4PHP_DEFAULT_INIT_OVERRIDE')) {
 }
 
 if (!defined('LOG4PHP_CONFIGURATION')) {
-    if (isset($_ENV['log4php.configuration'])) {
+    if (getenv('log4php.configuration')) {
         /**
          * @ignore
          */
-        define('LOG4PHP_CONFIGURATION', trim($_ENV['log4php.configuration']));
+        define('LOG4PHP_CONFIGURATION', trim(getenv('log4php.configuration')));
     } else {
         /**
          * Configuration file.
@@ -189,7 +189,7 @@ if (!defined('LOG4PHP_CONFIGURATION')) {
          * <p>If not set by user, log4php tries to set it automatically using 
          * (in order):</p>
          *
-         * - the <code>$_ENV['log4php.configuration']</code> enviroment variable.
+         * - the <code>getenv('log4php.configuration']</code> enviroment variable.
          * - defaults to 'log4php.properties'.
          *
          * @var string
