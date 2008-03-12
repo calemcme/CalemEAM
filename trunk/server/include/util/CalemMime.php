@@ -24,12 +24,12 @@ if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 require_once _CALEM_DIR_ . 'server/upload/CalemMimeType.php';
 
 class CalemMime {
-	const MIME_DEFULT='application/octet-stream';
+	const MIME_DEFAULT='application/octet-stream';
 	
 	public static function getMime($fn) {
 		global $_CALEM_mime;
 		$pp = pathinfo($fn);
-		$mt=$_CALEM_mime[$pp['extension']];
+		$mt=$_CALEM_mime[strtolower($pp['extension'])];
 		return $mt ? $mt : self::MIME_DEFAULT;
 	}
 	

@@ -102,16 +102,16 @@ class CalemGzip {
  		$mime=CalemMime::getMime($fn);
  		header("Content-Type: " . $mime);
  		$disp=CalemMime::getDisposition($mime);
-    	header("Content-disposition: " . ($disp ? $disp . "; " : '') . "filename=\"".basename($fn)."\"");
+    	header("Content-Disposition: " . ($disp ? $disp . "; " : '') . "filename=".basename($fn));
  		if ($gzip && $canZip) {
  			header("Content-Encoding: ".$canZip);
  			$zipContents=gzencode($contents);
- 			header("Content-length: ".strlen($zipContents));
+ 			header("Content-Length: ".strlen($zipContents));
  			print($zipContents);
  			global $logger;
  			if ($logger && $logger->isDebugEnabled()) $logger->debug("Zip contents from " . strlen($contents) . " to " . strlen($zipContents));
  		} else {
- 			header("Content-length: ".strlen($contents));
+ 			header("Content-Length: ".strlen($contents));
  			print $contents;
  		}
  	}
