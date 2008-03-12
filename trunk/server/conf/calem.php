@@ -162,7 +162,6 @@ $_CALEM_dist=array(
 	'CalemExportExcel'=>'server/modules/report/CalemExportExcel.php',
 	'CalemDashboard'=>'server/modules/dashboard/CalemDashboard.php',
 	'CalemDashboardExport'=>'server/include/charts/share/export.php',
-	'CalemDashboardExport'=>'server/include/charts/share/export.php',
 	'CalemFileUpload'=>'server/upload/CalemFileUpload.php',
 	'CalemFileView'=>'server/upload/CalemFileView.php',
 	
@@ -172,6 +171,8 @@ $_CALEM_dist=array(
       'document','schedule', 'rcm','contact', 'contract', 'vendor', 
       'inspection', 'training', 'project', 'dashboard'
 	),
+	//WS service to close connection
+	'ws_conn_close'=>true,
 	//Default SOAP return format - must be XML for unit tests to pass.
 	'default_soap_output_format'=>'XML',
 	//Default style sheet

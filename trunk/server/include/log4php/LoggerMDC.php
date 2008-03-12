@@ -100,7 +100,7 @@ class LoggerMDC {
                 
                 LoggerLog::debug("LoggerMDC::get() a _ENV[$varName] is requested.");
                 
-                return $_ENV[$varName];
+                return getenv($varName);
             } elseif (isset($GLOBALS['log4php.LoggerMDC.ht'][$key])) {
             
                 LoggerLog::debug("LoggerMDC::get() a user key is requested.");

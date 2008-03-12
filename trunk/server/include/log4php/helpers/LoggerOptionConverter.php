@@ -82,8 +82,8 @@ class LoggerOptionConverter {
 
         if (defined($key)) {
             return (string)constant($key);
-        } elseif (isset($_ENV[$key])) {
-            return (string)$_ENV[$key];
+        } elseif (getenv($key)) {
+            return (string)getenv($key);
         } else {
             return $def;
         }

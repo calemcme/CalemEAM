@@ -112,11 +112,6 @@ class CalemDbHandler {
 				$rtn .= 'default \'' . $types['default'] . '\' ';
 			} //done with a field construction, add a comma here
 		}//Done with field loop
-		if (isset($table_data['db_engine'])) { //Database engine definition
-			$rtn .= 'ENGINE='.$table_data['db_engine'];
-		} else if (isset($_CALEM_conf['db_engine'])){
-			$rtn .= 'ENGINE'.$_CALEM_conf['db_engine'];
-		}
 		return $rtn;
 	}
 	
@@ -125,8 +120,17 @@ class CalemDbHandler {
 	 */
 	public function getCreateTable(array $table_data) {
 		//Invoke sub class to construct the fields definition list
-		return 'CREATE TABLE ' . $table_data['table_name'] . ' ('
+		$rtn= 'CREATE TABLE ' . $table_data['table_name'] . ' ('
 				. $this->getTableFieldList($table_data) . ')';
+		if (isset($table_data['db_engine'])) { //Database engine definition
+			 $rtn .= ' ENGINE='.$table_data['db_engine'];
+		} else {
+			global $_CALEM_conf;
+			if (isset($_CALEM_conf['db_engine'])){
+				$rtn .= ' ENGINE=' . $_CALEM_conf['db_engine'];
+			}
+		}
+		return $rtn;
 	}
 	/**
 	 * Custom field

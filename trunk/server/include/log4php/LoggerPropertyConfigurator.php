@@ -78,7 +78,7 @@ define('LOG4PHP_LOGGER_PROPERTY_CONFIGURATOR_INTERNAL_ROOT_NAME',   "root");
  * and if not found there, it is
  * then searched in the configuration file being parsed.  The
  * corresponding value replaces the ${variableName} sequence.</p>
- * <p>For example, if <b>$_ENV['home']</b> env var is set to
+ * <p>For example, if <b>getenv('home']</b> env var is set to
  * <b>/home/xyz</b>, then every occurrence of the sequence
  * <b>${home}</b> will be interpreted as
  * <b>/home/xyz</b>. See {@link LoggerOptionConverter::getSystemProperty()}
