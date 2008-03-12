@@ -32,8 +32,8 @@
  */
 
 if (!defined('_CALEM_DIR_')) {
-	if (isset($_ENV['CALEM_DIR'])) {
-		define('_CALEM_DIR_', $_ENV['CALEM_DIR']);
+	if (getenv('CALEM_DIR'])) {
+		define('_CALEM_DIR_', getenv('CALEM_DIR'));
 	} else {
 		chdir('../..');
 		define('_CALEM_DIR_', getcwd() . '/'); 
