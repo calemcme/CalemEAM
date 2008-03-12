@@ -30,11 +30,11 @@
  */
 
 if (!defined('_CALEM_DIR_')) {
-	if (!isset($_ENV['CALEM_DIR'])) {
+	if (!getenv('CALEM_DIR')) {
 	chdir('..');
 	define('_CALEM_DIR_', getcwd() . '/'); 
 	} else {
-		define('_CALEM_DIR_', $_ENV['CALEM_DIR']);	
+		define('_CALEM_DIR_', getenv('CALEM_DIR'));	
 	}
 	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'etc/log4php.properties');
 }
@@ -43,7 +43,8 @@ require_once _CALEM_DIR_ . 'build/CalemZipJs.php';
 
 echo date("F j, Y, g:i:s a") . " - Start ZipJs - <br>\n";
 $tmBuild=microtime(true);
-$build= (isset($_ENV['CALEM_BUILD']) && $_ENV['CALEM_BUILD']==1);
+$build= getEnv('CALEM_BUILD');
+
 $zipJs=new CalemZipJs();
 $tmRpt=$zipJs->execute($build);
 $timeZip=microtime(true) - $tmBuild;
