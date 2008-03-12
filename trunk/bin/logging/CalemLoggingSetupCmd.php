@@ -19,7 +19,7 @@
  */
 
 if (!defined('_CALEM_DIR_')) {
-	if (!isset($_ENV['CALEM_DIR'])) {
+	if (!getenv('CALEM_DIR')) {
 		$cr=getcwd();
 		if (strpos($cr, 'logging')!==false) {
 		chdir('../..');
@@ -28,7 +28,7 @@ if (!defined('_CALEM_DIR_')) {
 		}
 		define('_CALEM_DIR_', getcwd() . '/');	
 	} else {
-		define('_CALEM_DIR_', $_ENV['CALEM_DIR']);	
+		define('_CALEM_DIR_', getenv('CALEM_DIR'));	
 	}
 }
 require_once 'CalemLoggingSetup.php';
