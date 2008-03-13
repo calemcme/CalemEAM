@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -102,7 +101,7 @@ class CalemGzip {
  		$mime=CalemMime::getMime($fn);
  		header("Content-Type: " . $mime);
  		$disp=CalemMime::getDisposition($mime);
-    	header("Content-Disposition: " . ($disp ? $disp . "; " : '') . "filename=".basename($fn));
+    	header("Content-Disposition: " . ($disp ? $disp . "; " : '') . "filename=\"".basename($fn)."\"");
  		if ($gzip && $canZip) {
  			header("Content-Encoding: ".$canZip);
  			$zipContents=gzencode($contents);
