@@ -29,13 +29,13 @@ require_once _CALEM_DIR_ . 'server/include/core/CalemFactory.php';
 class CalemDocUploadDbo extends CalemDbo {		
 	//Add in number and abc time
 	public function beforeInsert($baseTable, $baseData, $customTable, $customData) {
-		$baseData['file_upload']=basename($baseData['file_upload']);
+		$baseData['file_upload']=base64_decode($baseData['file_upload']);
 		return $baseData;
 	}
 	
 	public function beforeUpdate($baseTable, $baseCurrent, $baseUpdate) {
 		if (isset($baseUpdate['file_upload'])) {
-			$baseUpdate['file_upload']=basename($baseUpdate['file_upload']);
+			$baseUpdate['file_upload']=base64_decode($baseUpdate['file_upload']);
 		}
 		return $baseUpdate;
 	}

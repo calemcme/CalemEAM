@@ -47,7 +47,8 @@ class CalemCmdFileUploadBo extends CalemBo {
 		$bn=basename($_FILES[$this->uploadName]['name']);
 		$uploadfile = _CALEM_DIR_ . $dir . $bn;
 		if (move_uploaded_file($_FILES[$this->uploadName]['tmp_name'], $uploadfile)) {
-  			print "{SUCC:".$bn;
+			//Base64 encode it.
+  			print "{SUCC:".base64_encode($bn);
   			if ($this->logger->isInfoEnabled()) $this->logger->info("File is uploaded to " . $uploadfile);
 		} else {
 			print "File uploaded is invalid. The upload failed.";
