@@ -40,7 +40,7 @@ CalemTableDd.MEMORY='memory';
 CalemTableDd.DATABASE='database';
 CalemTableDd.GETALL= -1;
 
-CalemTableDd.TEXT_INPUT_LENGTH=65536;
+CalemTableDd.LEN_TEXT_INPUT=65536;
 CalemTableDd.GUID_LENGTH = 36;
 
 //Field types
