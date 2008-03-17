@@ -136,8 +136,8 @@ class CalemWoGenReleaseBo extends CalemBo {
 		$pmAssetDbo=CalemFactory::getDbo('pm_asset');
 		$pmAssetRow=$pmAssetDbo->fetchById($pmAssetRow['id']);	
 		$pmAssetDbo->setChangeBulk(
-			array('last_released'=>CalemText::getServerDateTime($dueDate),
-			      'next_due_date'=>CalemText::getServerDateTime($nextDueDate),
+			array('last_released'=>CalemText::getServerDate($dueDate),
+			      'next_due_date'=>CalemText::getServerDate($nextDueDate),
 			      'release_count'=>$pmAssetRow['release_count']+1));
 		$pmAssetDbo->setIdForUpdate($pmAssetRow['id']);			      
 		$pmAssetDbo->update();
