@@ -63,10 +63,10 @@ require_once _CALEM_DIR_ . 'server/include/core/session/CalemSession.php';
 	 		//Encode the result properly and send
 	 		$this->wsHdlr->sendResult($response);
  		} catch (CalemSoapException $ce) {
- 			$this->logger->error("Error in processing soap request: " . $e->getMessage());
- 			$this->wsHdlr->sendFault($ce->getCode(), $e->getMessage());
+ 			$this->logger->error("Soap exception in soap request:" . $ce->getMessage());
+ 			$this->wsHdlr->sendFault($ce->getCode(), $ce->getMessage());
  		} catch (Exception $e) {
- 			$this->logger->error("Error in processing soap request: " . $e->getMessage());
+ 			$this->logger->error("Exception in soap request:" . $e->getMessage());
  			$this->wsHdlr->sendFault(CALEM_SF_UNKNOWN, $e->getMessage());
  		} 
  	}
