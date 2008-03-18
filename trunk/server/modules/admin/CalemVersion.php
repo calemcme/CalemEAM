@@ -40,6 +40,11 @@ class CalemVersion {
 		return new CalemVersion($row['vid'], $row['note'], $props);
 	}
 	
+	public static function getCurrentVersion() {
+		include _CALEM_DIR_ . 'server/conf/version_def.php';
+		return new CalemVersion($_CALEM_version['vid'], $_CALEM_version['note'], $_CALEM_version['props']);	
+	}
+	
 	public function getVid() {return $this->vid;}
 	public function getNote() {return $this->note;}
 	public function getProps() {return $this->props;}
