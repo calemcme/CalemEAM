@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 /**
  * This is the login form.
  */
@@ -77,6 +76,10 @@
      }
      $localeList .=']';
      if ($logger->isDebugEnabled()) $logger->debug("localeList=" . $localeList);
+     //Product info
+     require_once _CALEM_DIR_ . 'server/modules/admin/CalemVersion.php';
+     $vi=CalemVersion::getCurrentVersion();
+     $calemProdInfo=$vi->getNote();
 ?>	
 	<script language="JavaScript">
 		function launch() {
@@ -91,5 +94,6 @@
 		calemSoapUrl='<?php print $calemSoapUrl ?>';
 		calemUseAlternateColor = <?php print $calemAlternateColor ?>;
 		calemLocaleList= eval(<?php print $localeList ?>);
+		calemProdInfo='<?php print $calemProdInfo ?>';
 	   AjxCore.addOnloadListener(launch);
 	</script>

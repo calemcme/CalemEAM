@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * This toolbar includes a logo and the following functions:
  * - logout
@@ -51,6 +50,9 @@ CalemExitToolBarController.prototype._createToolBar =
 function() {
 	this._tb=new CalemToolBar(this._parent, this._conf.posInfo, this._conf.tbInfo);
 	var tbDef=CalemJson.setJson(this._conf.tbDef);
+	if (CalemConf['desktop_mainView']['prodInfoConf']['disp']=='tooltip') {
+		CalemMenuDef['CalemHelp']['tooltip'] = calemProdInfo;
+	}
 	this._tb.createToolBar(tbDef, this._listenerFactory);
 	this._tb.zShow(true);
 }
