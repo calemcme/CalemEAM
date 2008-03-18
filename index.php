@@ -45,9 +45,9 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 	//Start handling the request.
 	$logger=&LoggerManager::getLogger('main');
 	$sid=isset($_REQUEST['sessionId'])?$_REQUEST['sessionId']:null;
-	if ($logger->isDebugEnabled()) {
+	if ($logger->isInfoEnabled()) {
 		require_once _CALEM_DIR_ . 'server/include/util/CalemHttpHelper.php';
-		$logger->debug("sid=$sid; aid=" . $_REQUEST['aid']. ", Post data: " . CalemHttpHelper::getPostData());
+		$logger->info("uri=" . $_SERVER['REQUEST_URI'] . ", post: " . CalemHttpHelper::getPostData() . ', agent=' . $_SERVER['HTTP_USER_AGENT']);
 	}
 	$action=isset($_REQUEST['calemAction']) ? $_REQUEST['calemAction'] : null;
 	//This is the only action supported so far so make it simple at this point.
