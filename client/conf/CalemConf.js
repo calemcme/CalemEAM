@@ -155,6 +155,7 @@ CalemConf["desktop_modBarViewMore"]={id: "txtCalemMore", icon: "CalemMoreIcon"};
  */ 
 CalemConf["desktop_mainView"] = {
    showFirstMod: 1,
+   prodInfoConf: {disp: 'tooltip'},
 	welcomeConf: {id: 'theme_headline_center', msg: 'welcome_with_time', repeat: true, interval: 60000},
 	shell: {
 		className: null,
