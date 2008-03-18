@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 /**
  * This is the common resource.
  */
@@ -27,17 +26,8 @@
  if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $loaded=false;    
-if ($loadmode=='indv') {
-	//Meta data in package mode
-	if ($_CALEM_conf['calem_mode']==CALEM_DEVELOPMENT) { //dev-mode using individual files.
-	   print "<script type=\"text/javascript\" src=\"" . $calemRootUrl . "/public/JsPkg.php?js=Metadata" . "&loadmode=aggr" . "\"></script>";
-   	print "<script type=\"text/javascript\" src=\"" . $calemRootUrl . "/public/JsMessages.php?lang=" . $lang . "\"></script>";
-		require_once _CALEM_DIR_ . 'public/JsAjax.php';
-		require_once _CALEM_DIR_ . 'public/JsCalem.php';
-		$loaded=true;
-	} else {
-	  $loadmode='aggr'; //for custom loading below.	
-	}
+if ($loadmode=='indv' || $loadmode=="aggr") {
+	$loadmode='min';
 } 
 
 if (!$loaded) {
