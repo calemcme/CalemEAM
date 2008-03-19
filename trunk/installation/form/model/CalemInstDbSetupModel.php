@@ -83,7 +83,8 @@ class CalemInstDbSetupModel extends CalemInstModel {
 			//What about upgrade
 			if ($this->upgradeHdlr) {
 				$GLOBALS['logger']->debug('DbSetupModel: doing an upgrade; hdlr=' . get_class($this->upgradeHdlr));
-				$this->upgradeHdlr->upgrade();
+				$results=$this->upgradeHdlr->upgrade();
+				$GLOBALS['logger']->info("upgrade results: " . var_export($results, true));
 			}
 			//Load Init data
 			require_once _CALEM_DIR_ . 'server/setup/CalemLoadInitData.php';
