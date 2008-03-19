@@ -42,7 +42,7 @@ $_CALEM_table=array(
     	),
     	'file_upload'=>array(
     		'type'=>'varchar',
-    		'length'=>'76',
+    		'length'=>'250',
     		'required'=>true
     	),
     	'access_id'=>array(

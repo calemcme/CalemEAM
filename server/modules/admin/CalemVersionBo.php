@@ -65,8 +65,11 @@ class CalemVersionBo extends CalemBo {
    	$dh=CalemFactory::getDbHandler();
    	if (!$dh->tableExists($this->dbo, 'version')) return $rtn;
    		$row=$this->dbo->fetchById(VERSION_ID);
+   		if ($this->logger->isInfoEnabled()) $this->logger->info('Version row=' . var_export($row, true));
    		$rtn=CalemVersion::decode($row);	
    	} catch (CalemDboDataNotFoundException $dn) {
+   		require_once _CALEM_DIR_ . 'server/include/util/CalemDebug.php';
+   		$this->logger->warn('Data not found: ' . CalemDebug::toStackTrace($dn));
    	}
    	return $rtn;   		
    }
@@ -137,6 +140,7 @@ class CalemVersionBo extends CalemBo {
 			require_once _CALEM_DIR_ . 'server/upgrade/CalemUpgradeMap.php';
 			$rtn=CalemUpgradeMap::getHandler($newVersion, $currVersion);	
 		}
+		if ($this->logger->isInfoEnabled()) $this->logger->info('newVer=' . $newVersion->getVid() . ", currVer=" . $currVersion->getVid() . ', hdlr=' . ($rtn ? get_class($rtn) : ''));
 		return $rtn;
    }
 }

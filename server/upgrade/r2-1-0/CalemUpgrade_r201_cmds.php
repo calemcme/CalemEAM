@@ -22,7 +22,14 @@
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $_CALEM_cmds = array(
-	
+    //File name in upload extended to 250 chars
+    'alter_doc_upload'=>array(
+	'cmd'=>'CalemCmdModifyFieldType',
+	'param'=>array(
+		'table'=>'doc_upload',
+		'fields'=>array('file_upload')
+	)	
+     )	
 );
 
 ?>
