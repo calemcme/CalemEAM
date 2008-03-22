@@ -124,6 +124,17 @@ function() {
 	return this._range;
 }
 
+//Add update time expr.
+CalemTableQuery.prototype.addStaleTime =
+function(updateTime) {
+	var fn='modified_time';
+	var fld=new CalemDbField(this._table, fn);
+	var val=new CalemDbString(updateTime);
+	var exprTime=new CalemDbExpr(fld, CalemDbExpr.GTEQ, val);
+	//add to query
+	this.setWhere(this._table, exprTime);
+}
+
 //Serialization for persistence.
 CalemTableQuery.prototype.getJson =
 function() {
@@ -202,6 +213,8 @@ function() {
  * @param table - table to query updated values
  * @param time - data changed after the time to be fetched
  * @param fld - field to apply the time
+ * 
+ * @deprecated to reuse table query (for including custom fields and other exprs)
  */
 function CalemQueryUpdated(id, table, time, fld) {
 	if (arguments.length==0) return;

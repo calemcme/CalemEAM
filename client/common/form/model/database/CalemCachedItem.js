@@ -17,7 +17,6 @@
  * Contributor(s): 
  */
  
-
 /**
  * CalemCachedItem wraps a CalemRecordList and provide services and access control over the data
  * cached for a table. For instance the sort order cannot be altered for this cached table.
@@ -74,7 +73,9 @@ function(dbQuery, forceReload) {
 	//Add both deleted and updated queries
 	var deletedQuery=new CalemQueryDeleted(this._id, this._id, this._lastServerDeletedTime);
 	dbQuery.add(deletedQuery);
-	var updatedQuery=new CalemQueryUpdated(this._id, this._id, this._lastServerUpdatedTime);
+	//Updated query
+	var updatedQuery=this._recList.getTableDd().buildGetAllQuery();
+	updatedQuery.addStaleTime(this._lastServerUpdatedTime);
 	dbQuery.add(updatedQuery);
 }
 
