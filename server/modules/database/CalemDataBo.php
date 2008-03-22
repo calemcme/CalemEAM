@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -64,7 +63,7 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboUpdateConflictE
  		$id=$dbo->getId();
  		try{	
  			//Custom changes
- 			if ($customTable) {
+ 			if ($customData && count($customData)>0) {
  				$customData['zc_id']=$id;
  				$customDbo=CalemFactory::getDboCustom($customTable);
  				$customDbo->setChangeBulk($customData);
@@ -152,13 +151,22 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboUpdateConflictE
  			if (count($baseUpdate)>0) {
 	 			$tableDd = $rsMgr->getTableDd($baseTable);
 	 			$baseUpdate=$dbo->beforeUpdate($baseTable, $baseCurrent, $baseUpdate);
-	 			$this->updateOneTable($baseTable, $dbo, $baseCurrent['id'], $baseCurrent, $baseUpdate, $tableDd);
+	 			$this->updateOneTable($baseTable, $dbo, $baseCurrent['id'], $baseCurrent, $baseUpdate, $tableDd, $fetchSql);
  			}
  			//custom table
  			if ($customTable && count($customUpdate) > 0) {
  				$dboCustom = CalemFactory::getDboCustom($customTable);
  				$tableDd = $rsMgr->getTableDdCustom($customTable);
+ 				try {
  				$this->updateOneTable($customTable, $dboCustom, $baseCurrent['id'], $customCurrent, $customUpdate, $tableDd);
+ 				} catch (CalemDboDataNotFoundException $dne) {
+		 			//Data does not exist, so let's do an insertion
+		 			if ($this->logger->isDebugEnabled()) $this->logger->debug("Custom field not found for update, so do an insertion, table=" . $baseTable);
+		 			$customUpdate['zc_id']=$baseCurrent['id'];
+	 				$customDbo=CalemFactory::getDboCustom($customTable);
+	 				$customDbo->setChangeBulk($customUpdate);
+	 				$customDbo->insert();
+		 		} 
  			}
  		} catch (CalemDboUpdateConflictException $e) {
  			$dbo->rollback();
@@ -187,10 +195,11 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboUpdateConflictE
  		return $feedback;
  	}
  	
- 	public function updateOneTable($table, $dbo, $id, $current, $update, $tableDd) {
+ 	public function updateOneTable($table, $dbo, $id, $current, $update, $tableDd, $fetchSql=null) {
  		try {
- 			//Now fetch data back.
- 			$results=$dbo->fetchBySqlParam($dbo->getSqlFetchById(), array($id));
+ 			//Now fetch data back based on client requirement.
+ 			$fetchSql= ($fetchSql ? $fetchSql : $dbo->getSqlFetchById());
+ 			$results=$dbo->fetchBySqlParam($fetchSql, array($id));
  			$server=$results[0];
  			$this->getUpdateConflict($current, $update, $server, $tableDd);
 			//Prepare for update.
@@ -199,6 +208,9 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboUpdateConflictE
  			$dbo->update(); //Update result.
  		} catch (CalemDboUpdateConflictException $e) {
  			throw $e;
+ 		} catch (CalemDboDataNotFoundException $dne) {
+ 			//Data does not exist
+ 			throw $dne;
  		} catch (Exception $ex) {
  			$errorInfo=$dbo->getErrorInfo();	
  			throw new CalemDataBoException($table, $ex, $errorInfo);
