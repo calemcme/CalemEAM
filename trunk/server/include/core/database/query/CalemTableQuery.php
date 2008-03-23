@@ -354,13 +354,13 @@ class CalemTableJoin {
 	private $rightFld;
 	private $aliasKey;
 	
-	public function __construct($type, $leftTbl, $leftFld, $rightTbl, $rightFld, $aliasKey) {
+	public function __construct($type, $leftTbl, $leftFld, $rightTbl, $rightFld, $aliasKey=null) {
 		$this->type=$type;
 		$this->leftTbl=$leftTbl;
 		$this->leftFld=$leftFld;
 		$this->rightTbl=$rightTbl;
 		$this->rightFld=$rightFld;
-		$this->aliasKey=$aliasKey;
+		$this->aliasKey= ($aliasKey ? $aliasKey : ($this->rightTbl . '_' . $this->leftFld) );
 	}
 	
 	public function getLeftField() {
@@ -376,7 +376,7 @@ class CalemTableJoin {
 	}
 	
 	public function getAlias () {
-		return $this->rightTbl . '_' . $this->leftFld;
+		return $this->aliasKey;
 	}
 	
 	public function isLeftJoin() {

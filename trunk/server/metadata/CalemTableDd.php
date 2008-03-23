@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -79,7 +78,7 @@ class CalemTableDd {
 		$this->allFieldList=array_keys($this->allTableDef['fields']);
 		
 		//Custom table stuff
-		$file= _CALEM_DIR_ . 'custom/global/metadata/' . $table_name . '.metadata';
+		$file= _CALEM_DIR_ . 'custom/global/metadata/' . $this->getCustomTableName() . '.metadata';
 		if (!file_exists($file)) {//All is well, no custom table info
 			return;	
 		}
@@ -89,8 +88,8 @@ class CalemTableDd {
 		$this->customFieldList=array_keys($this->customTableDef['fields']);
 		
 		//Combine with all
-		$this->allFieldList=$this->baseFieldList + $this->customFieldList;
-		$this->allTableDef['fields']=$this->baseFieldDef['fields']+$this->customTableDef['fields'];		
+		$this->allFieldList=array_merge($this->baseFieldList, $this->customFieldList);
+		$this->allTableDef['fields']=array_merge($this->baseTableDef['fields'], $this->customTableDef['fields']);		
    }
    
    private function getResourceMgr() {
@@ -326,11 +325,11 @@ class CalemTableDd {
 		$tableQuery=$this->buildQueryJoins($this->getBaseFields(), $tableName, $tableQuery, $includeMd);
 		//Check custom table - custom fields don't support join fields.
 		if ($this->getCustomFields()) {//a) add a join; b) add select fields
-			$sf=new CalemSelectField($this->getCustomTableName());
+			$sf=new CalemSelectField($this->getCustomTableAlias());
 			$tableQuery->addSelect($sf);
 			$join= new CalemTableJoin(CalemTableJoin::LEFT, $tableName, 'id', 
 									$this->getCustomTableName(), CUSTOM_FIELD_ID);
-			$tableQuery.setWhere($this->getCustomTableName(), null, $join);									
+			$tableQuery->setWhere($this->getCustomTableName(), null, $join);									
 		}	
 		return $tableQuery;
 	}
@@ -343,8 +342,7 @@ class CalemTableDd {
 				if ($lkupDd->isDropdown() || (!$includeMd && $this->isLookupMd($fid))) continue;
 				//a) Add a join for where and b) a field in select list.
 				$join=$this->getJoin($fid);
-				$alias= $tableQuery->nextAliasKey();
-				$tableJoin=new CalemTableJoin(CalemTableJoin::LEFT, $tableName, $fid, $join['table'], $join['field'], $alias);
+				$tableJoin=new CalemTableJoin(CalemTableJoin::LEFT, $tableName, $fid, $join['table'], $join['field']);
 				$tableQuery->setWhere($tableJoin->getAlias(), null, $tableJoin);
 				//Add selection field.
 				$tableQuery->addSelect(new CalemSelectField($tableJoin->getAlias(), $join['lkupField'], 
@@ -357,6 +355,13 @@ class CalemTableDd {
 	public function isLookupMd($fld) {
 		$rtn=$this->allTableDef['fields'][$fld];
 		return ($rtn['lookup'] && isset($rtn['md']) && $rtn['md']);
+	}
+	
+	/**
+	 * Custom table must use an alias that's used in join with the id field.
+	 */
+	public function getCustomTableAlias() {
+		return $this->getCustomTableName() . "_id";
 	}
 	
 	public function getOrderBy() {
