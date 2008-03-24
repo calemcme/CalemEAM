@@ -140,7 +140,7 @@ class CalemVersionBo extends CalemBo {
 			require_once _CALEM_DIR_ . 'server/upgrade/CalemUpgradeMap.php';
 			$rtn=CalemUpgradeMap::getHandler($newVersion, $currVersion);	
 		}
-		if ($this->logger->isInfoEnabled()) $this->logger->info('newVer=' . $newVersion->getVid() . ", currVer=" . $currVersion->getVid() . ', hdlr=' . ($rtn ? get_class($rtn) : ''));
+		if ($this->logger->isInfoEnabled()) $this->logger->info('newVer=' . $newVersion->getVid() . ", currVer=" . ($currVersion ? $currVersion->getVid() : '') . ', hdlr=' . ($rtn ? get_class($rtn) : ''));
 		return $rtn;
    }
 }
