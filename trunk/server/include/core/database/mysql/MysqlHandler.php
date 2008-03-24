@@ -202,7 +202,7 @@ final class MysqlHandler extends CalemDbHandler implements CalemDbHandlerInterfa
 		$exist=false;
 		foreach ($conn->query('show databases', PDO::FETCH_ASSOC) as $row) {
 			if ($this->logger->isDebugEnabled()) $this->logger->debug('database: ' . var_export($row, true));
-			if ($row['Database']==$db_name) {
+			if (strtolower($row['Database'])==strtolower($db_name) ) {
 				$exist=true;
 				break;	
 			}
