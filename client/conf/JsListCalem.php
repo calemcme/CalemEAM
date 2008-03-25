@@ -388,7 +388,6 @@ $_CALEM_scripts=array(
 			'/common/form/controller/CalemFormNew.js',
 			'/common/form/controller/CalemFormNewCacheLoad.js',
 			'/common/form/controller/CalemFormEdit.js',
-			'/common/form/controller/CalemFormEditDet.js',
 			'/common/form/controller/CalemFormRead.js',
 			'/common/form/controller/CalemFormReadDet.js',
 			'/common/form/controller/CalemFormChart.js',

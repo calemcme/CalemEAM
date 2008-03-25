@@ -23,10 +23,10 @@
  */
 function CalemPmAssetMeterFormEdit(parent, formId, data) {
 	if (arguments.length==0) return;
-	CalemFormEditDet.call(this, parent, formId, data);
+	CalemFormEdit.call(this, parent, formId, data);
 }
 
-CalemPmAssetMeterFormEdit.prototype = new CalemFormEditDet;
+CalemPmAssetMeterFormEdit.prototype = new CalemFormEdit;
 CalemPmAssetMeterFormEdit.prototype.constructor = CalemPmAssetMeterFormEdit;
 
 CalemPmAssetMeterFormEdit.prototype.toString = function() { return "CalemPmAssetMeterFormEdit";}
