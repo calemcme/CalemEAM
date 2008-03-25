@@ -1,0 +1,14 @@
+CalemEAM's Dashboard uses amCharts (http://www.amcharts.com/). 
+You can download amCharts (amLine, amColumn and amPie) and place it under this directory.
+The directory would look like this under this directory:
+CalemEAM
+  - server
+     - include
+        - charts
+          - amcolumn (this is amColumn)
+          - amline (this is amLine)
+          - ampie (this is amPie)
+          - share (this is the export.php file for print amCharts)
+          
+
+
