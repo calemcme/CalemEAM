@@ -45,7 +45,7 @@ CalemNewWoPmFormLookup.prototype.initQueryByForm =
 function(tblQuery) {
 	if (this._row['pm_select_id']=='wps_asset') {
 		var jn=new CalemTableJoin(CalemTableJoin.INNTER, 'pm', 'id', 'pm_asset', 'pm_id');
-		var fld=new CalemDbField('pm_asset', 'asset_id');
+		var fld=new CalemDbField('pm_asset_id', 'asset_id'); //m114 - use proper alias here based on join
 		var val=new CalemDbString(this._row['asset_id']);
 		var expr=new CalemDbExpr(fld, CalemDbExpr.EQ, val);
 		tblQuery.setWhere('pm_asset', expr, jn);
