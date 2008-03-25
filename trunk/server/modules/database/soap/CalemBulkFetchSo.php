@@ -63,7 +63,8 @@ class CalemBulkFetchSo extends CalemWsFacade {
 				 $resp['ftId']=$key; //This is the full table id to map back.	
 				 $result[]=$resp;				
  			} catch (Exception $e) {
- 				$this->logger->error("Exception in processing BulkFetch. Error msg=" . $e->getTraceAsString());
+ 				require_once _CALEM_DIR_ . 'server/include/util/CalemDebug.php';
+ 				$this->logger->error("Exception in BulkFetch. Error msg=" . CalemDebug::toStackTrace($e));
  			}
  		}
  		return $result;
