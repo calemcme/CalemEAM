@@ -18,7 +18,6 @@
  * Contributor(s): 
  */
 
-
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -116,10 +115,6 @@ class CalemWoGenBo extends CalemBo {
 		try {			
 			//1st pass - go by the dependency
 			$this->pdm=$this->pdmBo->getPdm();
-			//cl-debug
-			if ($this->logger->isDebugEnabled()) {
-				$this->logger->debug("wo gen: pdm=" . var_export($this->pdm, true) . ", pms=" . var_export($this->pms, true));	
-			}
 			if ($this->pdm && $this->pdm['sort']) {
 				foreach ($this->pdm['sort'] as $pmId=>$val) {
 					if (!$this->pms[$pmId]) continue;
