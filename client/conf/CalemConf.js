@@ -966,4 +966,4 @@ CalemConf['file_upload'] ={
  */
 CalemConf['asset_conf'] = {
 	serviceFlds: ['status_id', 'parent_id', 'location_id', 'owner_id']
-}
+};
