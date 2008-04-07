@@ -63,3 +63,5 @@ class CalemBudgetBo extends CalemBo {
 		$budgetDbo->update();		
 	}
 }
+
+?>
