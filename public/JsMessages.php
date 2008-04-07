@@ -67,4 +67,3 @@ CalemGzip::gzStart();
 print $data;
 CalemGzip::gzEndFlush(false);
 ?>
-

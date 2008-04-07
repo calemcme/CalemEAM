@@ -39,4 +39,3 @@ require_once _CALEM_DIR_ . 'client/launchpad/CalemIncludeJsPkg.php';
 	$jsPkg->downloadBulk($bulk);
 
 ?>
-
