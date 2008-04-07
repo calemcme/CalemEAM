@@ -147,3 +147,5 @@ class CalemBulkFetchSo extends CalemWsFacade {
 		return array('fields'=>$fields, 'data'=>$data);		
  	}	
 }
+
+?>
