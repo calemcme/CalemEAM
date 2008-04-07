@@ -57,3 +57,4 @@ class CalemLang {
 		return $this->lang['def'][$id];
 	}
 }
+?>
