@@ -40,4 +40,3 @@ class CalemReadDefaultRender extends CalemFieldReadRender {
 	}
 }
 ?>
-
