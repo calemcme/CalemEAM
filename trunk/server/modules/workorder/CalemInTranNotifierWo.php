@@ -188,3 +188,5 @@ class CalemInTranNotifierWo extends CalemInTranNotifierNone {
 		$assetHdlr->on_itt_return_icg_tool($it);	
 	}
 }
+
+?>

@@ -140,3 +140,5 @@ class CalemWoReservedBo extends CalemBo {
 		$inDbo->update();
 	}
 }
+
+?>

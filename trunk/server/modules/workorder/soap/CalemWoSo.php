@@ -59,3 +59,5 @@ class CalemWoSo extends CalemWsFacade {
  		return $result;
  	}
 }
+
+?>

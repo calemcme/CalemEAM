@@ -33,3 +33,5 @@ class CalemWoPlannedDowntimeDbo extends CalemWoDowntimeDbo {
 		return 'planned_downtime_hours';
 	}
 }
+
+?>

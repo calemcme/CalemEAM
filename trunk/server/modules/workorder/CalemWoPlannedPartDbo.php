@@ -65,3 +65,5 @@ class CalemWoPlannedPartDbo extends CalemDbo {
 		$rsvdBo->updateReservedSafe($woId, $inId, $qty);
 	}
 }
+
+?>
