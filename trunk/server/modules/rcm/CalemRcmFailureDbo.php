@@ -46,3 +46,5 @@ class CalemRcmFailureDbo extends CalemDbo {
 		return $baseUpdate;
 	}
 }
+
+?>
