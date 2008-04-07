@@ -238,3 +238,5 @@ class CalemReqBo extends CalemBo {
 		$this->onReqItemChanged($inId, $reqId, $qty, $uc, $uom);			      
 	} 
 }
+
+?>
