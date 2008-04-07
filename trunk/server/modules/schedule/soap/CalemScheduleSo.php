@@ -56,3 +56,5 @@ class CalemScheduleSo extends CalemWsFacade {
  		return $result;
  	}
 }
+
+?>
