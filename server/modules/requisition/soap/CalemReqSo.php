@@ -60,3 +60,5 @@ class CalemReqSo extends CalemWsFacade {
  		return $result;
  	}
 }
+
+?>
