@@ -83,3 +83,5 @@ class CalemMeterTransactionDbo extends CalemDbo {
 		$meterDbo->update();
 	}
 }
+
+?>

@@ -69,3 +69,5 @@ class CalemInTranNotifierAsset extends CalemInTranNotifierNone {
 		$assetDbo->update();	
 	}
 }
+
+?>

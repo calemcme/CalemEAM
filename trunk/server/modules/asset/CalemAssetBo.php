@@ -55,3 +55,5 @@ class CalemAssetBo extends CalemBo {
  		$assetDbo->update();
  	} 		
 }
+
+?>
