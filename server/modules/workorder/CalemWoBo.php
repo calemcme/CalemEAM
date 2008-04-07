@@ -80,3 +80,5 @@ class CalemWoBo extends CalemBo {
 		return $lc;	
 	}
 }
+
+?>

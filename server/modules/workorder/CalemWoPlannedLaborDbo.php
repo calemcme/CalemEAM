@@ -72,3 +72,5 @@ class CalemWoPlannedLaborDbo extends CalemDbo {
 		return 'planned_labor_hours';
 	}
 }
+
+?>

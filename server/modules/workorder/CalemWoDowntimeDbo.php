@@ -70,3 +70,5 @@ class CalemWoDowntimeDbo extends CalemDbo {
 		return 'actual_downtime_hours';
 	}
 }
+
+?>

@@ -141,3 +141,5 @@ class CalemWoLaborDbo extends CalemDbo {
 		return $craftRow;
 	}
 }
+
+?>

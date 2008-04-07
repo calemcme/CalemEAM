@@ -85,3 +85,5 @@ class CalemWoSchedLaborDbo extends CalemWoPlannedLaborDbo {
 		$schedBo->scheduleUser($uid, CalemText::datetimeToDate($startTime), $shiftId, $hours);
 	}
 }
+
+?>
