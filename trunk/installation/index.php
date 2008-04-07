@@ -24,8 +24,7 @@
  */ 
 
 if (!defined('_CALEM_DIR_')) {
-	chdir('..');
-	define('_CALEM_DIR_', getcwd() . '/'); 
+	define('_CALEM_DIR_', dirname(dirname(__FILE__)) . '/'); 
 	define('LOG4PHP_CONFIGURATION', _CALEM_DIR_ . 'etc/log4php.properties');
 }
 
