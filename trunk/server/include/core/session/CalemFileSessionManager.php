@@ -49,3 +49,5 @@ class CalemFileSessionManager extends CalemFileCacheManager {
        return self::$sesInstance;
    }
 }
+
+?>

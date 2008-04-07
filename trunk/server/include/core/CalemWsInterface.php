@@ -31,3 +31,5 @@ interface CalemWsInterface {
 	public function sendResult($response);	
 	public function getSid();
 }	 
+
+?>

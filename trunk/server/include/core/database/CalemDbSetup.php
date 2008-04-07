@@ -238,3 +238,5 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDbo.php';
  	}
  	
  }
+
+?>

@@ -93,3 +93,5 @@ class CalemFileCacheManager implements CalemCacheManagerInterface {
 		}
 	}
 }
+
+?>

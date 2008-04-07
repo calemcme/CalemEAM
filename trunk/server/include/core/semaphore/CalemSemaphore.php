@@ -50,3 +50,5 @@ class CalemSemaphore {
 		return $this->expireTime;
 	}	
 }
+
+?>
