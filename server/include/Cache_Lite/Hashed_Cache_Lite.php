@@ -185,3 +185,5 @@ class Hashed_Cache_Lite extends Cache_Lite
 }
 
 // end of script
+
+?>
