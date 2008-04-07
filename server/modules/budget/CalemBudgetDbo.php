@@ -44,3 +44,5 @@ class CalemBudgetDbo extends CalemDbo {
 		return $baseData;
 	}
 }
+
+?>

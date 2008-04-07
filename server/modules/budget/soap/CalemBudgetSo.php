@@ -60,3 +60,5 @@ class CalemBudgetSo extends CalemWsFacade {
  		return $result;
  	}
 }
+
+?>
