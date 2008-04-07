@@ -102,3 +102,5 @@ class CalemPoSo extends CalemWsFacade {
  		return $result;
  	}
 }
+
+?>

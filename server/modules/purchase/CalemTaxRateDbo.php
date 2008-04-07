@@ -68,3 +68,5 @@ class CalemTaxRateDbo extends CalemDbo {
 		} catch (CalemDboDataNotFoundException $ex) {}	
 	}
 }
+
+?>
