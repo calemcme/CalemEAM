@@ -77,3 +77,5 @@ class CalemTableMap {
 	   $vDir->close();		
 	}
 }
+
+?>
