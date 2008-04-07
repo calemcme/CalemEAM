@@ -58,3 +58,5 @@ class CalemSchedulerJobDbo extends CalemDbo {
 		return $tm;
 	}
 }
+
+?>

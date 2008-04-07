@@ -73,3 +73,5 @@ class CalemAclGroupDbo extends CalemDbo {
  		$loader->load();	
  	}
 }
+
+?>
