@@ -115,3 +115,5 @@ class CalemSession {
 		return 'CalemSession: {sessionId=' . $this->sid . ', id=' . $user['id'] . ', name=' . $user['username'] .  '}';
 	}
 }
+
+?>

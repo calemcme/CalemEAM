@@ -92,3 +92,5 @@ class CalemResourceManager implements CalemResourceManagerInterface {
 		return $this->table_map;	
 	}
 }
+
+?>

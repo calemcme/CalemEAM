@@ -35,3 +35,5 @@ require_once _CALEM_DIR_ . 'server/include/log4php/LoggerManager.php';
  		$this->logger=&LoggerManager::getLogger(get_class($this));
  	}
 }
+
+?>
