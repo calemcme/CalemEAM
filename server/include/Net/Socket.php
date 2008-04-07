@@ -574,3 +574,5 @@ class Net_Socket extends PEAR {
     }
 
 }
+
+?>
