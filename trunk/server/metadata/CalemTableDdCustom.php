@@ -51,3 +51,5 @@ class CalemTableDdCustom extends CalemTableDd {
 		$this->allFieldList=$this->baseFieldList;
    }
 }
+
+?>
