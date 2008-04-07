@@ -28,3 +28,5 @@ require_once _CALEM_DIR_ . 'server/modules/inventory/CalemInTranNotifierNone.php
 class CalemInTranNotifierIn extends CalemInTranNotifierNone {
 	//No action at this time.
 }
+
+?>

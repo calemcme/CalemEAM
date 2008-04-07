@@ -60,3 +60,4 @@ class CalemInOrderGenSo extends CalemWsFacade {
  		return $result;
  	}	
 }
+?>

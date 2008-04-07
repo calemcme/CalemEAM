@@ -36,3 +36,5 @@ class CalemInStockDbo extends CalemDbo {
         }
 	}
 }
+
+?>

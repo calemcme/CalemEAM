@@ -44,3 +44,5 @@ class CalemInVendorDbo extends CalemDbo {
 		$this->updateBySqlParam('update in_vendor set is_primary=0 where in_id=? and vendor_id <> ?', array($inId, $vendId));
 	}
 }
+
+?>

@@ -38,3 +38,5 @@ class CalemInTranNotifierFactory extends CalemBo {
 		return $nl;
 	}
 }
+
+?>

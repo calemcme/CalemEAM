@@ -168,3 +168,5 @@ class CalemInBo extends CalemBo {
 		return $vRow;
 	}
 }
+
+?>
