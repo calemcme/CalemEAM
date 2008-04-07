@@ -37,3 +37,5 @@ class CalemAssetDbo extends CalemDbo {
 		return $baseData;
 	}
 }
+
+?>
