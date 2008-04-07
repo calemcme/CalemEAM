@@ -67,3 +67,5 @@ class CalemSecurityBo implements CalemSecurityBoIf {
 		return array($succ, $user);
 	}
 }
+
+?>

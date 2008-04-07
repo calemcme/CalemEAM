@@ -98,3 +98,5 @@ class CalemScheduler {
  		$this->semBo->set($sem);
  	}
 }
+
+?>

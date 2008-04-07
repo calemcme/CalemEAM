@@ -69,3 +69,5 @@ class CalemUserDbo extends CalemDbo {
 		return $this->row['req_approval_id'];	
 	}
 }
+
+?>
