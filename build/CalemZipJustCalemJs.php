@@ -47,4 +47,3 @@ class CalemZipJustCalemJs extends CalemZipJustJs {
 	}
 }
 ?>
-
