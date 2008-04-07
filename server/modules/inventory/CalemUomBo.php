@@ -68,3 +68,5 @@ class CalemUomBo extends CalemBo {
 		return $rtn*$srcQty;
 	}
 }
+
+?>

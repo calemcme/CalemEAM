@@ -94,3 +94,5 @@ class CalemInCostFifoBo extends CalemBo implements CalemInCostIf {
 		$this->setUnitCostByReceive($inId, $ciUnitCost, $qty);
 	}
 }
+
+?>

@@ -87,3 +87,5 @@ class CalemInOrderGenBo extends CalemBo {
 		$reqId=$reqBo->createInOrderRequest($reqRow, $inId, $inRow['qty_to_order'], $inRow['uom_id']);
 	}
 }
+
+?>

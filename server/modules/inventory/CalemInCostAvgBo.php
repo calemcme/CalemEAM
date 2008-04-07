@@ -79,3 +79,5 @@ class CalemInCostAvgBo extends CalemBo implements CalemInCostIf {
 		$this->setUnitCostByReceive($inId, $ciUnitCost, $qty);
 	}
 }
+
+?>
