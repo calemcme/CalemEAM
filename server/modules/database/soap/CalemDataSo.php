@@ -186,3 +186,5 @@ class CalemDataSo extends CalemWsFacade {
  		return $result;
  	}
 }
+
+?>
