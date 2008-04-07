@@ -69,4 +69,3 @@ class CalemZipMessageJs extends CalemZipBaseJs {
 	}
 }
 ?>
-

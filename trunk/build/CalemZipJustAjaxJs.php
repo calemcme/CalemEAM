@@ -35,4 +35,3 @@ class CalemZipJustAjaxJs extends CalemZipJustJs {
 	}
 }
 ?>
-
