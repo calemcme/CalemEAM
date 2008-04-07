@@ -70,3 +70,5 @@ class CalemPoItemDbo extends CalemDbo {
 		}  
 	}
 }
+
+?>

@@ -161,3 +161,5 @@ class CalemPoDbo extends CalemDbo {
 		$poItemDbo->updateBySqlParam('update po_item set qty=0 where po_id=?', $poId);
 	}
 }
+
+?>
