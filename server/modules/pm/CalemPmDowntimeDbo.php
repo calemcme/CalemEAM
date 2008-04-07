@@ -66,3 +66,5 @@ class CalemPmDowntimeDbo extends CalemDbo {
 		$pmDbo->update();	
 	}
 }
+
+?>

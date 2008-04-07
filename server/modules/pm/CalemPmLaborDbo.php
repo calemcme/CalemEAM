@@ -66,3 +66,5 @@ class CalemPmLaborDbo extends CalemDbo {
 		$pmDbo->update();	
 	}
 }
+
+?>

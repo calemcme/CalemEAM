@@ -67,3 +67,5 @@ class CalemPmScheduleBo extends CalemBo {
 		return $this->scheduleInfo->isDateInRange($dt);
 	}
 }
+
+?>
