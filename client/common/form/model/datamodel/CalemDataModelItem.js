@@ -248,7 +248,8 @@ CalemDataModelItem.prototype.createNewRecord =
 function() {
 	this._recList=this._createEmptyRecList();
 	var recDefault=this._tableDd.getDefaultRecord();
-	this._currentRec=new CalemRecord(this._recList, recDefault.fldList, recDefault.recDefault);
+	var fldMap=new CalemFieldMap(recDefault.fldList);
+	this._currentRec=new CalemRecord(this._recList, fldMap, recDefault.recDefault);
 }
 
 CalemDataModelItem.prototype.getCurrentRecord =
