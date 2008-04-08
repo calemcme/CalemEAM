@@ -42,7 +42,6 @@ $_CALEM_dist['wo_conf']=array(
 		   'target'=>'wo_planned_tool',
 		   'fieldMap'=>array(
 		   	'in_id'=>'in_id',
-		   	'duration'=>'duration',
 		   	'qty'=>'qty',
 		   	'note'=>'note'		   
 		   )
