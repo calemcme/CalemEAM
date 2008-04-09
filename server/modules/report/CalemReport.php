@@ -58,11 +58,12 @@ if ($logger->isInfoEnabled()) $logger->info('rid=' . $rid . ', query=' . var_exp
 $calemImgCss=$calemRootUrl . '/client/themes/' . $theme . "/" . $theme . "_img.css";
 $dwtImgCss=$calemRootUrl . '/client/themes/image/hiRes/dwtimgs.css';
 $calemReportCss=$calemRootUrl . '/client/themes/' . $theme . "/" . $theme . "_print.css";
-if (is_file(_CALEM_DIR_ . 'client/themes/' . $_CALEM_conf['report_conf']['logo'])) {
-	$calemReportIcon=$calemRootUrl . '/client/themes/' . $_CALEM_conf['report_conf']['logo'];
-} else {
-$calemReportIcon=$calemRootUrl . '/client/themes/calemeam.png';
+$customReportIcon=null;
+$clg= ($_CALEM_conf['report_conf']['custom_logo'] ? $_CALEM_conf['report_conf']['custom_logo'] : 'custom_logo.png');
+if (is_file(_CALEM_DIR_ . 'client/themes/' . $clg)) {
+  $customReportIcon=$calemRootUrl . '/client/themes/' . $clg;
 }
+$calemReportIcon=$calemRootUrl . '/client/themes/calemeam.png';
 $calemReportPrintIcon=$calemRootUrl . '/client/themes/' . $theme . "/icons/printer.png";
 //Identify controller
 $controller= CalemReportMap::getController($rid, $query);
