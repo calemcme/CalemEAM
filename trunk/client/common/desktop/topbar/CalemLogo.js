@@ -29,7 +29,8 @@
  */
 function CalemLogo(parent) {
 	this._parent = parent;
-	this._conf=CalemConf["desktop_logo"];
+	this._icon="/client/themes/calemeam.png";
+	this._url="http://www.calemeam.com"
 	this.createLogo();
 } 
 
@@ -39,7 +40,7 @@ function CalemLogo(parent) {
 CalemLogo.prototype.createLogo =
 function() {
    this._logoDiv=document.getElementById('theme_headline_logo');
-   this._logoDiv.innerHTML=["<img src='", calemRootUrl, this._conf["logoIcon"], "' onclick=\"javascript:window.open('", 
-                       this._conf["logoUrl"], "')\">"].join("");
+   this._logoDiv.innerHTML=["<img src='", calemRootUrl, this._icon, "' onclick=\"javascript:window.open('", 
+                       this._url, "', 'CalemEAM - Open Source EAM/CMMS')\">"].join("");
 }
 	 
