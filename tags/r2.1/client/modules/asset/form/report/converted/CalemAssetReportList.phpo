@@ -1,0 +1,1 @@
+a:1:{s:13:"CalemFormInfo";a:7:{s:2:"id";s:20:"CalemAssetReportList";s:5:"title";s:17:"asset_report_list";s:4:"icon";s:10:"CalemAsset";s:10:"controller";s:15:"CalemReportList";s:5:"model";s:5:"asset";s:4:"view";a:1:{s:16:"CalemViewRefInfo";a:1:{s:2:"id";s:20:"CalemAssetReportList";}}s:11:"replaceType";N;}}
