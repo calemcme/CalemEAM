@@ -4305,8 +4305,9 @@ CalemFormSearchEdit.prototype.onSoapSaveCallback=function(){this._closeAndResume
 CalemFormSearchEdit.prototype.onSoapApplySaveCallback=function(){this._onApply();}
 CalemFormSearchEdit.prototype._onApply=function(){this._closeAndResumeParentForm(new CalemApplySearchAction(this._searchInfo));}
 CalemFormSearchEdit.prototype.validateLookup=function(lkupTable,lkupFld,fld,value,callback){var hostForm=this.getHostForm(2);hostForm.validateLookup(lkupTable,lkupFld,fld,value,callback);}
-function CalemLogo(parent){this._parent=parent;this._conf=CalemConf["desktop_logo"];this.createLogo();}
-CalemLogo.prototype.createLogo=function(){this._logoDiv=document.getElementById('theme_headline_logo');this._logoDiv.innerHTML=["<img src='",calemRootUrl,this._conf["logoIcon"],"' onclick=\"javascript:window.open('",this._conf["logoUrl"],"')\">"].join("");}
+function CalemLogo(parent){this._parent=parent;this._icon="/client/themes/calemeam.png";this._url="http://www.calemeam.com"
+this.createLogo();}
+CalemLogo.prototype.createLogo=function(){this._logoDiv=document.getElementById('theme_headline_logo');this._logoDiv.innerHTML=["<img src='",calemRootUrl,this._icon,"' onclick=\"javascript:window.open('",this._url,"', 'CalemEAM - Open Source EAM/CMMS')\">"].join("");}
 function CalemExitToolBarController(parent,logoutListener,conf){CalemController.call(this,parent);this._logoutListener=logoutListener;this._helpListener=new AjxListener(this,this.onHelp);this._conf=conf?conf:CalemConf["desktop_exitToolBar"];this._createToolBar();}
 CalemExitToolBarController.prototype=new CalemController;CalemExitToolBarController.prototype.constructor=CalemExitToolBarController;CalemExitToolBarController.prototype.toString=function(){return"CalemExitToolBarController";}
 CalemExitToolBarController.prototype._createToolBar=function(){this._tb=new CalemToolBar(this._parent,this._conf.posInfo,this._conf.tbInfo);var tbDef=CalemJson.setJson(this._conf.tbDef);if(CalemConf['desktop_mainView']['prodInfoConf']['disp']=='tooltip'){CalemMenuDef['CalemHelp']['tooltip']=calemProdInfo;}
