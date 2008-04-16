@@ -56,7 +56,7 @@ function(data) {
 	expr=new CalemDbExpr(fld, CalemDbExpr.EQ, val);
 	this._andExpr.add(expr);
 	//Add req status
-	fld=new CalemDbField('requisition1', 'status_id'); //manually fix the table Id.
+	fld=new CalemDbField('requisition_req_id', 'status_id'); //manually fix the table Id.
 	val=new CalemDbString('req_status_approved');
 	expr=new CalemDbExpr(fld, CalemDbExpr.EQ, val);
 	this._andExpr.add(expr);	  		
