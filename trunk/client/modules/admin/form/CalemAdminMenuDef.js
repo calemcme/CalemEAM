@@ -154,16 +154,6 @@ CalemMenuDef['CalemTbTableDesign'] = {
 	onSelect: {CalemMenuSelect: {listener: 'TableDesignListener'}}
 };
 
-CalemMenuDef['CalemTbTableDesign'] = {
-	id: 'CalemTbTableDesign',
-	title: 'table_customize',
-	icon: 'CalemTableDesign',
-	disIcon: null,
-	enabled: true,
-	tooltip: null,  				   
-	onSelect: {CalemMenuSelect: {listener: 'TableDesignListener'}}
-};
-
 CalemMenuDef['CalemTbDropdownDesign'] = {
 	id: 'CalemTbDropdownDesign',
 	title: 'dropdown_customize',
