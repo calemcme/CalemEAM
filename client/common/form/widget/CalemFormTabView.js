@@ -413,7 +413,7 @@ function(tabKey, activate) {
 CalemFormTabView.prototype._addMoreButton =
 function() {
 	var tabKey=this._conf.displayTabs;
-	title=CalemMsg.getMsg(this._conf["moreTab"]['title']);
+	var title=CalemMsg.getMsg(this._conf["moreTab"]['title']);
 	this._tabs[tabKey]=new Object();
 	this._tabs[tabKey]["title"] = title;
 	this._moreBtn=this._tabs[tabKey]["button"]= this._tabBar.addMoreButton(tabKey, this._conf['moreTab']['icon'], 
