@@ -22,12 +22,12 @@
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
-require_once _CALEM_DIR_ . 'server/include/core/CalemWsFacade.php';
+require_once _CALEM_DIR_ . 'server/include/core/CalemSoapRequest.php';
 require_once _CALEM_DIR_ . 'server/include/core/CalemFactory.php';
 require_once _CALEM_DIR_ . 'server/include/util/CalemJson.php';
 require_once _CALEM_DIR_ . 'server/modules/schedule/CalemSchedBo.php';
 
-class CalemScheduleSo extends CalemWsFacade {
+class CalemScheduleSo extends CalemSoapRequest {
 	private $schedBo;
 	
 	public function __construct() {

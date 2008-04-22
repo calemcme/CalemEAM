@@ -21,13 +21,13 @@
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
-require_once _CALEM_DIR_ . 'server/include/core/CalemWsFacade.php';
+require_once _CALEM_DIR_ . 'server/include/core/CalemSoapRequest.php';
 require_once _CALEM_DIR_ . 'server/include/core/database/CalemDbo.php';
 
 /**
  * This class provides bulk fetch service.
  */
-class CalemBulkFetchSo extends CalemWsFacade {
+class CalemBulkFetchSo extends CalemSoapRequest {
 	private $dbResult;
 	private $dbo;
 	

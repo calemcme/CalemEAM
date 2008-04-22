@@ -22,7 +22,7 @@
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
-require_once _CALEM_DIR_ . 'server/include/core/CalemWsFacade.php';
+require_once _CALEM_DIR_ . 'server/include/core/CalemSoapRequest.php';
 require_once _CALEM_DIR_ . 'server/include/core/CalemFactory.php';
 require_once _CALEM_DIR_ . 'server/include/util/CalemJson.php';
 require_once _CALEM_DIR_ . 'server/modules/inventory/CalemInTranBo.php';
@@ -30,7 +30,7 @@ require_once _CALEM_DIR_ . 'server/modules/inventory/CalemInTranBo.php';
 /**
  * IN Transactions
  */
-class CalemInTranSo extends CalemWsFacade {
+class CalemInTranSo extends CalemSoapRequest {
 	private $inTranBo;
 	
 	public function __construct() {
