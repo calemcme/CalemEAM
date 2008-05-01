@@ -36,6 +36,7 @@ class CalemInstSaveConfModel extends CalemInstModel {
 		 * Creating directories and build cache.
 		 */
 		try {
+                        $this->controller->setupDbInfo();
 			$zipJs=new CalemZipJs();
 			$tmRpt=$zipJs->execute();
 		} catch (Exception $e) {
