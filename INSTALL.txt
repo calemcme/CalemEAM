@@ -1,9 +1,6 @@
-Install CalemEAM r2.0.1
-Installation guide is available at http://www.calemeam.com/support_setup.html if you
-are installing CalemEAM the first time.
-
-To upgrade from r1.0.2 to r2.0.1 follow the upgrade guide at 
-http://www.calemeam.com/apps/wiki/index.php?title=CalemInstallation#Upgrade_from_r1.0.2_to_r2.0.1
+Install Calem Community Edition r2.1
+Installation guide is available at: 
+http://www.calemeam.com/eam/index.php?option=com_content&view=article&id=72&Itemid=87.
 
 
   
