@@ -2,7 +2,7 @@ Calem Community Edition R2.1 Release Notes
 May 2008
 
 NOTE:
-Calem Community Edition is under CalemEAM Public License.
+Calem Community Edition is licensed under CalemEAM Public License.
 You must agree and comply with the license terms in order to 
 use Calem Community Edition.
 
@@ -51,5 +51,5 @@ and computerized maintenance management systems (CMMS). CalemEAM offers subscrip
 services to Calem Professional and Calem Enterprise. The subscription services include
 technical support and Calem Mobile solution. 
 
-You can more information about CalemEAM's products and services at http://www.calemeam.com.
+Visit http://www.calemeam.com for more information about CalemEAM's products and services.
 
