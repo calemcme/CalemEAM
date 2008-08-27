@@ -32,7 +32,7 @@
  */
 
 if (!defined('_CALEM_DIR_')) {
-	if (getenv('CALEM_DIR'])) {
+	if (getenv('CALEM_DIR')) {
 		define('_CALEM_DIR_', getenv('CALEM_DIR'));
 	} else {
 		chdir('../..');
