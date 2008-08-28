@@ -885,7 +885,7 @@ CalemConf['sys_currency'] = {
  * Some dropdown constants
  */
 CalemConf['dropdowns'] = {
-	admin_type: {admin_none: 'admin_none', admin_group: 'admin_group', admin_system: 'admin_system'}
+	admin_type: {admin_none: 'search_admin_none', admin_group: 'search_admin_group', admin_system: 'search_admin_system'}
 }
 
 /**
