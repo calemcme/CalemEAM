@@ -1,3 +1,17 @@
+============================================
+Calem Community Edition R2.1a Release Notes
+October 2013
+
+NOTE:
+Calem Community Edition is licensed under CalemEAM Public License.
+You must agree and comply with the license terms in order to 
+use Calem Community Edition.
+
+Calem Community Edition R2.1a includes the fix for the following installation issue in a hosted environment.
+http://eam.calemeam.com/eam/index.php?option=com_wrapper&view=wrapper&Itemid=84
+
+
+============================================
 Calem Community Edition R2.1 Release Notes
 May 2008
 
