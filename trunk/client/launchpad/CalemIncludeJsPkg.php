@@ -100,7 +100,7 @@ class CalemIncludeJsPkg {
 		}
 		
 		//Disable browser side cache
-		header('Cache-Control', 'no-cache');
+		header('Cache-Control: no-cache');
 		//Output data
 		CalemGzip::gzStart();
 		print $js;

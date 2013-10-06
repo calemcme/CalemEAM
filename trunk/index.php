@@ -41,7 +41,7 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemMsg.php';
 		CalemExit::exitCalem();	
 	}
 	//Disable browser side cache
-	//header('Cache-Control', 'no-cache');
+	header('Cache-Control: no-cache');
 	//Start handling the request.
 	$logger=&LoggerManager::getLogger('main');
 	$sid=isset($_REQUEST['sessionId'])?$_REQUEST['sessionId']:null;
