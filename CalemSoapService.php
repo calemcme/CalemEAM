@@ -36,7 +36,7 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemHttpHelper.php';
 require_once 'SOAP/Parser.php';
 
     //Disable browser side cache
-	header('Cache-Control', 'no-cache');
+	header('Cache-Control: no-cache');
 	//Start handling the request.
 	$logger=&LoggerManager::getLogger('CalemSoapService');
 	$postData=CalemHttpHelper::getPostData();

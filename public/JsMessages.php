@@ -61,7 +61,7 @@ foreach ($mapping as $class=>$files) {
 //Done parsing messages, now decide the output mode
 //Disable browser side cache
 if (!headers_sent()) {
-	header('Cache-Control', 'no-cache');
+	header('Cache-Control: no-cache');
 }
 CalemGzip::gzStart();
 print $data;
