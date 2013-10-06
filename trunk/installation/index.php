@@ -31,7 +31,7 @@ if (!defined('_CALEM_DIR_')) {
 require_once _CALEM_DIR_ . 'server/conf/calem.php'; //Configuration
 	
 	//Disable browser side cache
-	header('Cache-Control', 'no-cache');
+	//header('Cache-Control', 'no-cache');
 	//Use PHP session to track installation states
 	session_start();
 	//Configuring log4php as part of installation
