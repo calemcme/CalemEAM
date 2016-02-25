@@ -53,25 +53,26 @@ function(dontCallParent) {
 DwtMouseEvent.prototype.setFromDhtmlEvent =
 function(ev) {
 	ev = DwtUiEvent.prototype.setFromDhtmlEvent.call(this, ev);
-	if (ev.offsetX != null) { // IE
-		if ((ev.button & 1) != 0)
+	//Based on Kabuki 701.
+	if (ev.which) { // Mozilla or Safari3
+		switch (ev.which) {
+			case 1:  this.button = DwtMouseEvent.LEFT; break;
+			case 2:  this.button = DwtMouseEvent.MIDDLE; break;
+			case 3:  this.button = DwtMouseEvent.RIGHT; break;
+			default: this.button = DwtMouseEvent.NONE;
+		}
+	} else if (ev.button) { // IE
+		if ((ev.button & 1) != 0) {
 			this.button = DwtMouseEvent.LEFT;
-		else if ((ev.button & 2) != 0)
+		} else if ((ev.button & 2) != 0) {
 			this.button = DwtMouseEvent.RIGHT;
-		else if ((ev.button & 4) != 0)
+		} else if ((ev.button & 4) != 0) {
 			this.button = DwtMouseEvent.MIDDLE;
-		else
+		} else {
 			this.button = DwtMouseEvent.NONE;
-	} else if (ev.layerX != null) { // Mozilla
-		if (ev.which == 1)
-			this.button = DwtMouseEvent.LEFT;
-		else if (ev.which == 2)
-			this.button = DwtMouseEvent.MIDDLE;
-		else if (ev.which == 3)
-			this.button = DwtMouseEvent.RIGHT;
-		else
-			this.button = DwtMouseEvent.NONE;
+		}
 	}
+	
 	if (AjxEnv.isMac) {
 		// if ctrlKey and LEFT mouse, turn into RIGHT mouse with no ctrl key
 		if (this.ctrlKey && this.button == DwtMouseEvent.LEFT) {
