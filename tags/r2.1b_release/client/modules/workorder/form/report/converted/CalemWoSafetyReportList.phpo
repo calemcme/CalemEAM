@@ -1,0 +1,1 @@
+a:1:{s:13:"CalemFormInfo";a:7:{s:2:"id";s:23:"CalemWoSafetyReportList";s:5:"title";s:9:"wo_safety";s:4:"icon";s:7:"CalemWo";s:10:"controller";s:18:"CalemReportListDet";s:5:"model";s:9:"wo_safety";s:4:"view";a:1:{s:16:"CalemViewRefInfo";a:1:{s:2:"id";s:23:"CalemWoSafetyReportList";}}s:11:"replaceType";N;}}
