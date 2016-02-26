@@ -1,3 +1,15 @@
+===========================================
+Calem Community Edition R2.1b Release Notes
+Feburary 2016
+
+NOTE:
+Calem Community Edition is licensed under CalemEAM Public License.
+You must agree and comply with the license terms in order to 
+use Calem Community Edition.
+
+Calem Community Edition R2.1b includes the fix for the following issue:
+- I installed CMMS on my site. But when login, I can't click on any and all on the page is not clickable.
+
 ============================================
 Calem Community Edition R2.1a Release Notes
 October 2013
