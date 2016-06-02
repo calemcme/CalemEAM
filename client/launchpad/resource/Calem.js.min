@@ -3062,10 +3062,10 @@ CalemFormErrorRender.prototype.setErrorMsg=function(errMsg){this.setText(errMsg)
 function CalemChartRender(parent,id,cInfo,controller){if(arguments.length==0)return;CalemUiRender.call(this,parent,id,cInfo,controller);this._chartId=[this._info.getId(),'_',this._controller.getId(),'_',this._controller.getMdTabId()].join('');this._conf=CalemConf['chart_engine'];}
 CalemChartRender.prototype=new CalemUiRender;CalemChartRender.prototype.constructor=CalemChartRender;CalemChartRender.prototype.toString=function(){return"CalemChartRender";}
 CalemChartRender.prototype.render=function(parentEl,yOff){this._yOff=yOff;this._chartBz=this._getChartBounds(yOff);this._chartDiv=document.createElement("div");this._chartDiv.className='CalemChartDiv';this._chartDiv.id=Dwt.getNextId();parentEl.appendChild(this._chartDiv);this._showChart();}
-CalemChartRender.prototype._showChart=function(){this._so=new SWFObject(this.getSwfUrl(),this._chartId,this._chartBz.width,this._chartBz.height,this._conf['flashVersion'],this._conf['backgroundColor']);this._so.addVariable("settings_file",escape(this.getSettingUrl()));this._so.addVariable("data_file",escape(this.getDataUrl()));this._so.addVariable("preloader_color",this._conf['preloaderColor']);this._so.write(this._chartDiv.id);if(this._controller.setChartObj){this._controller.setChartObj(document.getElementById(this._chartId));this._controller.setDataParam(this.getDataUrl());}}
+CalemChartRender.prototype._showChart=function(){var cid=Dwt.getNextId();this._chartDiv.innerHTML=['<iframe id=',cid,' src="'+this.getDataUrl(),'" style="border: 0px; width: ',this._chartBz.width,'px; height: ',this._chartBz.height,'px;"></iframe>'].join('');this._chartObj=document.getElementById(cid);if(this._controller.setChartObj){this._controller.setChartObj(this._chartObj);this._controller.setDataParam(this.getDataUrl());}}
 CalemChartRender.prototype.getSwfUrl=function(){return calemRootUrl+this.getChartSwf();}
 CalemChartRender.prototype.getSettingUrl=function(){return[calemRequestUrl,'?aid=',this._conf['aid'],'&did=',this._info.getId(),'&tid=',this._conf['tidSetting']].join('');}
-CalemChartRender.prototype.getDataUrl=function(){return[calemRequestUrl,'?aid=',this._conf['aid'],'&did=',this._info.getId(),'&tid=',this._conf['tidData']].join('');}
+CalemChartRender.prototype.getDataUrl=function(){return[calemRequestUrl,'?aid=',this._conf['aid'],'&did=',this._info.getId(),'&tid=',this._conf['tidData'],'&ww=',this._chartBz.width,'&hh=',this._chartBz.height].join('');}
 CalemChartRender.prototype._getChartBounds=function(yOff){var vConf=CalemConf['view_engine']['chart'];var pBz=this._parent.getBounds();var sbWidth=CalemConf["widget_scrollbar"]['browserRightMargin'];var width=pBz.width-sbWidth-vConf['xMargin'];var height=pBz.height-yOff-vConf['yMargin'];var sz=CalemViewUtil.validateGridSize(width,height);var gbz={x:0,y:yOff,width:sz.width,height:sz.height};if(CalemDebug.isDebug()){CalemDebug.debug("CalemChartRender - parentEl "+CalemDebug.getBzText(pBz)+", new chart "+CalemDebug.getBzText(gbz));}
 return gbz;}
 CalemChartRender.prototype.onLayoutChange=function(){}
@@ -4097,8 +4097,8 @@ CalemFormReadDet.prototype._onEdit=function(evt){var item=CalemEvent.getItem(evt
 function CalemFormChart(parent,formId,data){if(arguments.length==0)return;CalemForm.call(this,parent,formId,data);this._printListener=new AjxListener(this,this.onPrint);this._reload=['&',CalemConf['chart_engine']['forceload'],'=1'].join('');this._resetData=new AjxTimedAction(this,this._onResetData);}
 CalemFormChart.prototype=new CalemForm;CalemFormChart.prototype.constructor=CalemFormChart;CalemFormChart.prototype.toString=function(){return"CalemFormChart";}
 CalemFormChart.prototype._loadData=function(){this.onDataLoaded();}
-CalemFormChart.prototype._onDataRefresh=function(){this._chartObj.reloadData(this._dataParam+this._reload);AjxTimedAction.scheduleAction(this._resetData,CalemConf['chart_engine']['resetDelay']);}
-CalemFormChart.prototype._onResetData=function(){this._chartObj.reloadData(this._dataParam);}
+CalemFormChart.prototype._onDataRefresh=function(){this._chartObj.src=this._dataParam+this._reload;}
+CalemFormChart.prototype._onResetData=function(){this._chartObj.src=this._dataParam;}
 CalemFormChart.prototype.getPrintListener=function(){return this._printListener;}
 CalemFormChart.prototype._onPrint=function(ev){this._chartObj.exportImage(CalemViewUtil.getChartExportUrl());}
 CalemFormChart.prototype.getRender=function(info){var render;if(!(render=CalemConf['view_engine']['viewReadRender'][info.getClassName()])){render=CalemForm.prototype.getRender.call(this,info);}
