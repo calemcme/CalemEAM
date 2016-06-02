@@ -14,10 +14,10 @@
  * The Initial Developer of the Original Code is CalemEAM Inc.
  * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
  * All Rights Reserved.
- 
- * Contributor(s): 
+
+ * Contributor(s):
  */
- 
+
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -30,8 +30,9 @@ $_CALEM_dash=array();
 $_CALEM_dash['dash_wo_orig_day']= array(
 	  'path'=>'dashlet/wo_orig_day',
 	  'class'=>'CalemDashWoOrigDayBo',
-	  'data'=>'wo_orig_day_data.xml',
-	  'settings'=>'server/modules/dashboard/settings/amline_settings.xml',
+	  'data'=>'wo_orig_day_data.json',     	 # change to json file instead of xml
+    # take out settings later
+	  # 'settings'=>'server/modules/dashboard/settings/amline_settings.xml',
 );
 
 $_CALEM_dash['dash_wo_orig_md']= array(

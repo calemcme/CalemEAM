@@ -13,13 +13,13 @@
  * The Initial Developer of the Original Code is CalemEAM Inc.
  * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
  * All Rights Reserved.
- 
- * Contributor(s): 
+
+ * Contributor(s):
  */
 
 /**
  * CalemChartRender
- *  
+ *
  */
 function CalemChartRender(parent, id, cInfo, controller) {
 	if (arguments.length==0) return;
@@ -46,19 +46,17 @@ function(parentEl, yOff) {
 
 CalemChartRender.prototype._showChart =
 function() {
-	this._so = new SWFObject(this.getSwfUrl(), this._chartId, this._chartBz.width, 
-	                  this._chartBz.height, this._conf['flashVersion'], this._conf['backgroundColor']);
-	this._so.addVariable("settings_file", escape(this.getSettingUrl()));
-	this._so.addVariable("data_file", escape(this.getDataUrl()));
-	this._so.addVariable("preloader_color", this._conf['preloaderColor']);
-	this._so.write(this._chartDiv.id);
-	//Set up the chart on form
-	if (this._controller.setChartObj) {
-		this._controller.setChartObj(document.getElementById(this._chartId));
-		this._controller.setDataParam(this.getDataUrl());
-	}
+   var cid=Dwt.getNextId();
+   this._chartDiv.innerHTML=[
+      '<iframe id=', cid, ' src="'+this.getDataUrl(), '" style="border: 0px; width: ', this._chartBz.width, 'px; height: ', this._chartBz.height, 'px;"></iframe>'
+   ].join('');
+   this._chartObj=document.getElementById(cid);
+              //Set up the chart on form
+              if (this._controller.setChartObj) {
+                           this._controller.setChartObj(this._chartObj);
+                            this._controller.setDataParam(this.getDataUrl());
+              }
 }
-
 CalemChartRender.prototype.getSwfUrl =
 function() {
 	return calemRootUrl + this.getChartSwf();
@@ -70,7 +68,8 @@ function() {
 }
 CalemChartRender.prototype.getDataUrl =
 function() {
-	return [calemRequestUrl, '?aid=', this._conf['aid'], '&did=', this._info.getId(), '&tid=', this._conf['tidData']].join('');
+	return [calemRequestUrl, '?aid=', this._conf['aid'], '&did=', this._info.getId(),
+					'&tid=', this._conf['tidData'], '&ww=', this._chartBz.width, '&hh=', this._chartBz.height].join('');
 }
 
 
@@ -100,4 +99,3 @@ function() {
 CalemChartRender.prototype.resumeView =
 function() {
 }
-

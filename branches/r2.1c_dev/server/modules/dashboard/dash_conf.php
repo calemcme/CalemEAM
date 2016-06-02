@@ -14,15 +14,15 @@
  * The Initial Developer of the Original Code is CalemEAM Inc.
  * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
  * All Rights Reserved.
- 
- * Contributor(s): 
+
+ * Contributor(s):
  */
 
 /**
- * This file defined the configuration for this installation by 
- * combining the custom with the distributed installation. 
+ * This file defined the configuration for this installation by
+ * combining the custom with the distributed installation.
  */
- 
+
 //Checking basic initialization
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
@@ -39,7 +39,7 @@ $_CALEM_dist['dash_conf']=array(
 			'woo_request'=>' axis="left" color="0xAB3C49" ',
 			'woo_pm'=>' axis="left" color="0x3CAB3C" ',
 			'woo_rework'=>' axis="left" color="0x4E4141" ',
-			'woo_other'=>' axis="left" color="0x4C49BA" '		
+			'woo_other'=>' axis="left" color="0x4C49BA" '
 		),
 		'graph_attrs_default'=>' axis="left" ',
 	),
@@ -48,7 +48,7 @@ $_CALEM_dist['dash_conf']=array(
 			'woo_request'=>' axis="left" color="0xAB3C49" ',
 			'woo_pm'=>' axis="left" color="0x3CAB3C" ',
 			'woo_rework'=>' axis="left" color="0x4E4141" ',
-			'woo_other'=>' axis="left" color="0x4C49BA" '		
+			'woo_other'=>' axis="left" color="0x4C49BA" '
 		),
 		'graph_attrs_default'=>' axis="left" ',
 	),

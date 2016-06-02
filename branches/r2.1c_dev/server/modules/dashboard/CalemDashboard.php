@@ -14,8 +14,8 @@
  * The Initial Developer of the Original Code is CalemEAM Inc.
  * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
  * All Rights Reserved.
- 
- * Contributor(s): 
+
+ * Contributor(s):
  */
 
 //Checking basic initialization
@@ -27,7 +27,12 @@ require _CALEM_DIR_ . 'server/modules/dashboard/CalemDashMap.php';
 //Provide data or settings in this case
 $did=$_REQUEST['did']; //dash id
 $tid=$_REQUEST['tid']; //type id
+$ww = $_REQUEST['ww'] - 4;
+$hh = $_REQUEST['hh'] - 4;
 $reload=isset($_REQUEST['forceload']);
 $controller= CalemDashMap::getController($did);
-call_user_func(array($controller, "get_" . $tid), $reload);
+$data = call_user_func(array($controller, "get_" . $tid), $reload);
+require_once _CALEM_DIR_ . 'server/modules/dashboard/tpl/CalemC3.php';
+//Close down logger
+CalemExit::exitCalem();
 ?>
