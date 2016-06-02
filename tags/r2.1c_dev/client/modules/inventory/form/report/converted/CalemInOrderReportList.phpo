@@ -1,0 +1,1 @@
+a:1:{s:13:"CalemFormInfo";a:7:{s:2:"id";s:22:"CalemInOrderReportList";s:5:"title";s:13:"in_order_list";s:4:"icon";s:7:"CalemIn";s:10:"controller";s:15:"CalemReportList";s:5:"model";s:13:"in_order_list";s:4:"view";a:1:{s:16:"CalemViewRefInfo";a:1:{s:2:"id";s:22:"CalemInOrderReportList";}}s:11:"replaceType";N;}}
