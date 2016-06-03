@@ -14,8 +14,8 @@
  * The Initial Developer of the Original Code is CalemEAM Inc.
  * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
  * All Rights Reserved.
- 
- * Contributor(s): 
+
+ * Contributor(s):
  */
 
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
@@ -35,7 +35,7 @@ class CalemDashWoAgePriBo extends CalemDashBo {
 	protected $data;
 	protected $nullPri;
 	protected $cf;
-	
+
 	public function __construct() {
 		parent::__construct();
 		$this->dbo=CalemFactory::getDbo('workorder');
@@ -43,7 +43,7 @@ class CalemDashWoAgePriBo extends CalemDashBo {
 		$this->sb=CalemFactory::getSb($this->conf['sb']);
 		$this->_initIt();
  	}
- 	
+
  	public function _initIt() {
  		$cf=$this->conf['dash_wo_age_pri'];
 		$this->nullPri=$cf['nullPri'];
@@ -52,75 +52,104 @@ class CalemDashWoAgePriBo extends CalemDashBo {
 		$this->ranges=$cf['ranges'];
 		$this->series=$cf['series'];
  	}
- 	
+
  	//Check for data changes
  	public function getDataChanged() {
  		$mt=filemtime($this->dataFile);
  		return (mktime()-$mt > $this->conf['ttl']);
  	}
- 	
+
  	//Add a data point
  	public function addData($row) {
  		$pri=$row['priority_id'] ? $row['priority_id'] : $this->nullPri;
  		$sid=$this->getSeriesId($row['days']);
  		if (isset($this->data[$pri][$sid])) {
- 			$this->data[$pri][$sid]++;	
+ 			$this->data[$pri][$sid]++;
  		} else {
  			$this->data[$pri][$sid]=1;
  		}
  	}
- 	
+
  	public function getSeriesId($days) {
  		$idx=count($this->ranges);
  		for ($i=0; $i < $idx; $i++) {
  			if ($days < $this->ranges[$i]) {
  				$idx=$i;
  				break;
- 			}	
- 		}	
+ 			}
+ 		}
  		return $this->series[$idx];
  	}
- 	
+
 	/**
-	 * Update local data file - data collection for the report.
-	 */
+	* Update local data file - data collection for the report.
+	*/
 	public function generateChartData() {
 		try {
 			$rtn=$this->dbo->fetchBySql($this->sb->getWoAgePri());
-		} catch (CalemDboDataNotFoundException $e) {	
+		} catch (CalemDboDataNotFoundException $e) {
 		}
-		
-		$xml='<chart><series>';
-		foreach ($this->series as $key) {
-			$xml .= '<value xid="' . $key . '">' . KEY_PREFIX . $key . "</value>\n";	
+
+		$innerarrays = array();        # organizer of column arrays
+		$xsarray[0] = 'categs';
+		$groups = array();
+
+		foreach ($this->series as $key) {             # fill xsarray with categories
+			array_push($xsarray, KEY_PREFIX . $key);
 		}
-		$xml .= "</series>\n<graphs>";
-		//Now collecting data by scan through it.
+
+		# collect data by scanning through it
 		$this->data=array();
 		for ($i=0; $rtn && $i < count($rtn); $i++) {
-			$this->addData($rtn[$i]);	
+			$this->addData($rtn[$i]);
 		}
-		//Putting the data into xml
+
+		# putting the data into arrays
 		foreach ($this->ddData as $key=>$value) {
-			$xml .= '<graph gid="' . $key . '" title="' . KEY_PREFIX . $key . '">' . "\n";
+			$innerarrays[KEY_PREFIX . $key] = array(KEY_PREFIX . $key);
+			array_push($groups, KEY_PREFIX . $key);
 			foreach ($this->series as $ks) {
-				$xml .= '<value xid="' . $ks . '">' . (isset($this->data[$key][$ks]) ? $this->data[$key][$ks] : 0) . "</value>\n"; 	
+
+				$val = (isset($this->data[$key][$ks]) ? $this->data[$key][$ks] : 0);
+				array_push($innerarrays[KEY_PREFIX . $key], $val);
 			}
-			$xml .="</graph>\n";
 		}
-		$xml .= '</graphs></chart>';
-		file_put_contents($this->dataFile, $xml);
+
+		$cols = array($xsarray);
+		foreach($innerarrays as $key => $value) {
+			array_push($cols, $value);
+		}
+
+		$json = array();       # create object to serialize into json and write file
+		$json['bindto'] = '#graph';
+		$json['axis']['x']['type'] = 'category';
+		$json['data']['type'] = 'bar';
+		$json['data']['x'] = $xsarray[0];
+		$json['data']['groups'] = array($groups);
+		$json['data']['columns'] = $cols;
+
+		$jtxt = json_encode($json, JSON_PRETTY_PRINT);
+		file_put_contents($this->dataFile, $jtxt);
 	}
-	
+
 	public function getChartDataByLocale() {
-		$cnts=file_get_contents($this->dataFile);
+
+		$cnts = file_get_contents($this->dataFile);
+		$names = array();
+		$unscnts = json_decode($cnts, true);
+
 		foreach ($this->ddData as $key=>$value) {
-			$cnts=str_replace(KEY_PREFIX . $key, CalemMsg::getMsg($key), $cnts);
+			$names[KEY_PREFIX . $key] = CalemMsg::getMsg($key);
 		}
+
+		$newnames = array('categs');
 		foreach ($this->series as $key) {
-			$cnts=str_replace(KEY_PREFIX . $key, CalemMsg::getMsg($key), $cnts);
+			array_push($newnames, CalemMsg::getMsg($key));
 		}
-		return $cnts;
+		array_shift($unscnts['data']['columns']);
+		$unscnts['data']['names'] = $names;
+		array_push($unscnts['data']['columns'], $newnames);
+		return $unscnts;
 	}
 }
 ?>
