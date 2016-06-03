@@ -38,7 +38,7 @@ $_CALEM_dash['dash_wo_orig_day']= array(
 $_CALEM_dash['dash_wo_orig_md']= array(
 	  'path'=>'dashlet/wo_orig_md',
 	  'class'=>'CalemDashWoOrigMdBo',
-	  'data'=>'wo_orig_md_data.xml',
+	  'data'=>'wo_orig_md_data.json',
 	  'settings'=>'server/modules/dashboard/settings/amline_settings.xml',
 );
 
@@ -52,8 +52,8 @@ $_CALEM_dash['dash_wo_status_pie']= array(
 $_CALEM_dash['dash_wo_age_pri']= array(
 	  'path'=>'dashlet/wo_age_pri',
 	  'class'=>'CalemDashWoAgePriBo',
-	  'data'=>'wo_age_pri_data.xml',
-	  'settings'=>'server/modules/dashboard/settings/amcolumn_settings_vert.xml',
+	  'data'=>'wo_age_pri_data.json'
+	  # 'settings'=>'server/modules/dashboard/settings/amcolumn_settings_vert.xml',
 );
 
 ?>
