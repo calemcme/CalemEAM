@@ -14,8 +14,8 @@
  * The Initial Developer of the Original Code is CalemEAM Inc.
  * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
  * All Rights Reserved.
- 
- * Contributor(s): 
+
+ * Contributor(s):
  */
 
 if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
@@ -26,101 +26,110 @@ require_once _CALEM_DIR_ . 'server/modules/dashboard/dashlet/wo_orig_day/CalemDa
  * dash_wo_orig_day service class
  */
 class CalemDashWoOrigMdBo extends CalemDashWoOrigDayBo {
-	
+
 	public function __construct() {
 		parent::__construct();
 		$this->dbo=CalemFactory::getDbo('dash_wo_orig_md');
  	}
- 	
+
  	public function getSqlCheck() {
  	 	return 'select count(*) from dash_wo_orig_md where modified_time > ?';
  	}
- 	
+
 	/**
 	 * Update local data file - data collection for the report.
+	 * for wo orig md
 	 */
 	public function generateChartData() {
-		$conf=$this->conf['dash_wo_orig_md'];
-		//First of all, let's get data out.
-		$rtn=null;
-		try {
-			$rtn=$this->dbo->fetchBySql('select * from dash_wo_orig_md order by id');
-		} catch (CalemDboDataNotFoundException $e) {	
-		}
-		//Next let's prepare data for the charts
-		$series="<xaxis>";
-		$ddData=$this->ddDbo->getData();
-		$graph=array();
-		$grp=1;
-		$xid=0;
-		foreach ($ddData as $key=>$val) {
-			$graph[$key]='<graph gid="' . $grp++ .'" ';
-			if (isset($conf['graph_attrs'][$key])) {
-				$graph[$key] .= $conf['graph_attrs'][$key];
-			} else {
-				$graph[$key] .= $conf['graph_attrs_default']; 
-			}
-			$graph[$key] .= ' title="' . KEY_PREFIX . $key . '" >';
-		} 
-		//Now walk through the data in steps.
-		$thisMd=gmdate('Y-m-01');
-		$startMd=null;
-		for ($idx=0; $rtn && $idx < count($rtn); $idx++) {
-			$dbMd=$rtn[$idx]['id'];
-			if (!$startMd) {
-				$startMd=$dbMd;	
-				$startTime=CalemText::parseServerDate($startMd);
-			} else {
-				while ($startMd < $dbMd) {
-					list($series, $graph, $startMd, $startTime, $xid)=$this->unserializeOneDay($startMd, $startTime, $xid, null, $series, $graph);
-				}
-			}
-			list($series, $graph, $startMd, $startTime, $xid)=$this->unserializeOneDay($startMd, $startTime, $xid, $rtn[$idx]['counts'], $series, $graph);
-		} 
-		//Let's make sure we're done here
-		if (!$startMd) {//No data points
-			list($series, $graph, $startMd, $startTime, $xid)=$this->unserializeOneDay($thisMd, null, $xid, null, $series, $graph);
-		} else {
-			while ($startMd <= $thisMd) {
-				list($series, $graph, $startMd, $startTime, $xid)=$this->unserializeOneDay($startMd, $startTime, $xid, null, $series, $graph);
-			}
-		}
-			
-		//Now assemble the info together.
-		$rtn='<chart>' . $series . '</xaxis> <graphs> ';
-		foreach ($graph as $key=>$val) {
-			$rtn .= $val . '</graph>' . "\n";	
-		}
-		$rtn .= '</graphs></chart>';
-		file_put_contents($this->dataFile, $rtn);
+	  $conf=$this->conf['dash_wo_orig_md'];
+	  //First of all, let's get data out.
+	  $rtn=null;
+	  try {
+	    $rtn=$this->dbo->fetchBySql('select * from dash_wo_orig_md order by id');
+	  } catch (CalemDboDataNotFoundException $e) {
+	  }
+	  //Next let's prepare data for the charts
+
+	  $ddData = $this->ddDbo->getData();            # get data
+	  $datesArray = array('dates');
+	  $colarrays = array();                         # will be array of strings, but we need an array of arrays
+
+	  foreach ($ddData as $key=>$val) {
+	    $colarrays[$key] = array(KEY_PREFIX . $key);
+	  }
+
+	  //Now walk through the data in steps.
+	  $thisMd = gmdate('Y-m-01');
+	  $startMd = null;
+	  for ($idx = 0; $rtn && $idx < count($rtn); $idx++) {
+	    $dbMd = $rtn[$idx]['id'];
+	    if (!$startMd) {
+	      $startMd = $dbMd;
+	      $startTime = CalemText::parseServerDate($startMd);
+	    } else {
+	      while ($startMd < $dbMd) {
+	        list($datesArray, $colarrays, $startMd, $startTime) =
+	        $this->unserializeOneDay($startMd, $startTime, null, $datesArray, $colarrays);
+	      }
+	    }
+	    list($datesArray, $colarrays, $startMd, $startTime) =
+	    $this->unserializeOneDay($startMd, $startTime, $rtn[$idx]['counts'], $datesArray, $colarrays);
+	  }
+	  //Let's make sure we're done here
+	  if (!$startMd) {//No data points
+	    list($datesArray, $colarrays, $startMd, $startTime) =
+	    $this->unserializeOneDay($thisMd, null, null, $datesArray, $colarrays);
+	  } else {
+	    while ($startMd <= $thisMd) {
+	      list($datesArray, $colarrays, $startMd, $startTime) =
+	      $this->unserializeOneDay($startMd, $startTime, null, $datesArray, $colarrays);
+	    }
+	  }
+	  //Now assemble the info together.
+	  $finalcolarrays = array($datesArray);
+	  foreach ($colarrays as $key=>$val) {
+	    array_push($finalcolarrays, $val);
+	  }
+
+	  $json = array();
+	  $json['bindto'] = '#graph';
+	  $json['grid']['y']['show'] = true;
+	  $json['axis']['x']['type'] = 'timeseries';
+	  $json['axis']['x']['tick']['format'] = '%Y-%m-%d';
+	  $json['data']['x'] = 'dates';
+	  $json['data']['columns'] = $finalcolarrays;
+	  $jsontxt = json_encode($json, JSON_PRETTY_PRINT);
+
+	  file_put_contents($this->dataFile, $jsontxt);
 	}
-	
-	public function unserializeOneDay($startMd, $startTime, $xid, $counts, $series, $graph) {
-		$data= $counts ? unserialize($counts) : array();
-		$series .= '<value xid="' . $xid . '">' . $startMd . '</value>' . "\n";
-		foreach ($graph as $key=>$val) {
-			$graph[$key] .= '<value xid="' . $xid . '">' . ($data[$key] ? $data[$key] : 0) . '</value>' . "\n";	
-		}
-		$xid++;
-		if ($startTime!=null) {
-			$startTime=strtotime("1 month", $startTime);
-			$startMd=gmdate('Y-m-01', $startTime);
-		}
-		return array($series, $graph, $startMd, $startTime, $xid);
+
+	public function unserializeOneDay($startMd, $startTime, $counts, $datesArray, $colarrays) {
+
+	  $data = $counts ? unserialize($counts) : array();
+	  array_push($datesArray, $startMd);
+	  foreach ($colarrays as $key=>$val) {
+	    $quantity = $data[$key] ? $data[$key] : 0;
+	    array_push($colarrays[$key], $quantity);
+	  }
+	  if ($startTime!=null) {
+	    $startTime=strtotime("1 month", $startTime);
+	    $startMd=gmdate('Y-m-01', $startTime);
+	  }
+	  return array($datesArray, $colarrays, $startMd, $startTime);
 	}
-	
+
 	public function getMdByServerDatetime($dt) {
 		$dt=CalemText::parseServerDatetime($dt);
-		return gmdate('Y-m-01', $dt);	
+		return gmdate('Y-m-01', $dt);
 	}
-	
+
 	//Data change listeners
 	public function onDataInserted_CalemWoDbo($dataPkt) {
 		$id=$this->getMdByServerDatetime($dataPkt['baseData']['orig_time']);
 		$orig=$dataPkt['baseData']['origin_id'];
 		$this->incCount($id, $orig);
 	}
-	
+
 	//Updated listener
 	public function onDataUpdated_CalemWoDbo($dataPkt) {
 		$old_id=$this->getMdByServerDatetime($dataPkt['baseCurrent']['orig_time']);
@@ -131,7 +140,7 @@ class CalemDashWoOrigMdBo extends CalemDashWoOrigDayBo {
 		if ($old_id && $old_orig) $this->decCount($old_id, $old_orig);
 		if ($new_id && $new_orig) $this->incCount($new_id, $new_orig);
 	}
-	
+
 	//Deleted listener
 	public function onDataDeleted_CalemWoDbo($dataPkt) {
 		$id=$this->getMdByServerDatetime($dataPkt['baseData']['orig_time']);
