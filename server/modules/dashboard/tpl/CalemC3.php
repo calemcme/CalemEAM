@@ -34,6 +34,7 @@
 <html>
 <script type="text/javascript" src="<?php print $calemRootUrl ?>/public/js/lib/d3/d3.min.js"></script>
   <script type="text/javascript" src="<?php print $calemRootUrl ?>/public/js/lib/c3/c3.min.js"></script>
+  <link href="<?php print $calemRootUrl ?>/public/js/lib/c3/c3.calem.css" rel="stylesheet" type="text/css">
   <link href="<?php print $calemRootUrl ?>/public/js/lib/c3/c3.min.css" rel="stylesheet" type="text/css">
 
 <body style="margin: 0px;">
