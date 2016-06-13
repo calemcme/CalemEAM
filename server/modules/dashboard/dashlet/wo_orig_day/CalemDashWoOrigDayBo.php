@@ -113,11 +113,7 @@ class CalemDashWoOrigDayBo extends CalemDashBo {
 		$paramsForC3['bindto'] = '#graph';
 		$paramsForC3['grid'] = array('y' => array('show' =>  true));
 		$paramsForC3['axis'] = array('x' => array('type' =>  'timeseries',
-																							'tick' =>  array('format' => '%Y-%m-%d'),
-																							'label' => array('text' => 'Date',
-																															 'position' => 'outer-center')),
-																 'y' => array('label' => array('text' => 'Number of Work Orders',
-															 																 'position' => 'outer-center')));
+																							'tick' =>  array('format' => '%Y-%m-%d')));
 		$paramsForC3['data']['x'] = 'dates';
 		$paramsForC3['data']['columns'] = $cols;
 
