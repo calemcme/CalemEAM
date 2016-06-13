@@ -1,10 +1,22 @@
 ===========================================
+Calem Community Edition R2.1c Release Notes
+June 2016
+
+NOTE:
+Calem Community Edition is licensed under CalemEAM Public License.
+You must agree and comply with the license terms in order to
+use Calem Community Edition.
+
+Calem Community Edition R2.1c includes the following change:
+- Changed dashboard graphs from using flash to Javascript library, C3.js.
+
+===========================================
 Calem Community Edition R2.1b Release Notes
 Feburary 2016
 
 NOTE:
 Calem Community Edition is licensed under CalemEAM Public License.
-You must agree and comply with the license terms in order to 
+You must agree and comply with the license terms in order to
 use Calem Community Edition.
 
 Calem Community Edition R2.1b includes the fix for the following issue:
@@ -16,7 +28,7 @@ October 2013
 
 NOTE:
 Calem Community Edition is licensed under CalemEAM Public License.
-You must agree and comply with the license terms in order to 
+You must agree and comply with the license terms in order to
 use Calem Community Edition.
 
 Calem Community Edition R2.1a includes the fix for the following installation issue in a hosted environment.
@@ -31,7 +43,7 @@ May 2008
 
 NOTE:
 Calem Community Edition is licensed under CalemEAM Public License.
-You must agree and comply with the license terms in order to 
+You must agree and comply with the license terms in order to
 use Calem Community Edition.
 
 Calem Community Edition R2.1 includes enhancements and bug fixes listed below.
@@ -39,7 +51,7 @@ Calem Community Edition R2.1 includes enhancements and bug fixes listed below.
 New Features in Calem Community Edition R2.1
 - Web-based installation
 - Asset List Report
-- List report export to Microsoft Excel 
+- List report export to Microsoft Excel
 
 Bug Fixes and Enhancements
 - 0000121: [Purchase] Invalid SQL when adding items to PO from req
@@ -74,10 +86,9 @@ Bug Fixes and Enhancements
 
 CalemEAM
 
-CalemEAM is a commercial open source provider for enterprise asset management (EAM) 
-and computerized maintenance management systems (CMMS). CalemEAM offers subscription 
+CalemEAM is a commercial open source provider for enterprise asset management (EAM)
+and computerized maintenance management systems (CMMS). CalemEAM offers subscription
 services to Calem Professional and Calem Enterprise. The subscription services include
-technical support and Calem Mobile solution. 
+technical support and Calem Mobile solution.
 
 Visit http://www.calemeam.com for more information about CalemEAM's products and services.
-
