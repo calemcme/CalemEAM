@@ -96,9 +96,10 @@ class CalemDashWoOrigMdBo extends CalemDashWoOrigDayBo {
 	  $json['grid']['y']['show'] = true;
 	  $json['axis']['x']['type'] = 'timeseries';
 	  $json['axis']['x']['tick']['format'] = '%Y-%m-%d';
-	  $json['axis']['x']['tick']['rotate'] = 45;  # rotate axis labels for scaling
+	  $json['axis']['x']['tick']['rotate'] = 15;  # rotate axis labels for scaling
 	  $json['data']['x'] = 'dates';
 	  $json['data']['columns'] = $finalcolarrays;
+		$json['point']['show'] = false;
 	  $jsontxt = json_encode($json, JSON_PRETTY_PRINT);
 
 	  file_put_contents($this->dataFile, $jsontxt);
