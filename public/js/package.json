@@ -1,0 +1,14 @@
+{
+  "name": "calemeam",
+  "version": "2.1.2",
+  "description": "Calem Community Edition",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "CalemEAM",
+  "license": "Mozilla Public License 1.1 (MPL 1.1)",
+  "dependencies": {
+    "c3": "^0.4.11"
+  }
+}

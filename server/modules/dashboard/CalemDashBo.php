@@ -14,8 +14,8 @@
  * The Initial Developer of the Original Code is CalemEAM Inc.
  * Portions created by CalemEAM are Copyright (C) 2007 CalemEAM Inc.;
  * All Rights Reserved.
- 
- * Contributor(s): 
+
+ * Contributor(s):
  */
 
 //Checking basic initialization
@@ -30,61 +30,61 @@ require_once _CALEM_DIR_ . 'server/include/core/CalemFactory.php';
  * Common function for dash BO
  */
 class CalemDashBo extends CalemBo {
-	protected $conf;	
+	protected $conf;
 	protected $id;
 	protected $settings;
 	protected $dataFile;
-	
+
 	public function __construct() {
 		parent::__construct();
-		global $_CALEM_conf;	
+		global $_CALEM_conf;
  		$this->conf=$_CALEM_conf['dash_conf'];
  	}
- 	
+
  	public function init($id, $stg, $data) {
  		$this->id=$id;
- 		$this->settings=$stg;	
+ 		$this->settings=$stg;
  		$this->dataFile=$data;
  	}
- 	
+
  	public function getSettings($reload=false) {
- 		return is_file($this->settings) ? file_get_contents($this->settings) : '';	
+ 		return is_file($this->settings) ? file_get_contents($this->settings) : '';
  	}
- 	
+
  	public function getSettingsByLocale() {
  		$stg=$this->getSettings();
  		$stg=str_replace($this->conf['decimal_holder'], $this->conf['decimal_sep'], $stg);
- 		return str_replace($this->conf['title_holder'], CalemMsg::getMsg($this->id), $stg);	
+ 		return str_replace($this->conf['title_holder'], CalemMsg::getMsg($this->id), $stg);
  	}
- 	
+
  	public function get_settings() {
  		CalemGzip::gzContents($this->getSettingsByLocale(), $this->conf['gzip'], $this->logger);
  	}
- 	
+
  	public function get_data($reload=false) {
- 		$data=$this->getChartData($reload);
- 		CalemGzip::gzContents($data, $this->conf['gzip'], $this->logger);
+		return $this->getChartData($reload);
  	}
- 	
+
  	/**
  	 * Load data includes:
  	 * a) reconstruct data if server data is changed
  	 * b) replace with local strings when data is created
  	 */
  	public function getChartData($reload=false) {
- 		if ($reload || !is_file($this->dataFile) || $this->getDataChanged()) {
- 			$this->generateChartData();	
+
+	  if ($reload || !is_file($this->dataFile) || $this->getDataChanged()) {
+ 			$this->generateChartData();
  		}
- 		return $this->getChartDataByLocale(); 		
+ 		return $this->getChartDataByLocale();
  	}
- 	
+
  	public function getId() {
  		return $this->id;
  	}
- 	
+
  	public function getDataFile() {
- 		return $this->dataFile;	
+ 		return $this->dataFile;
  	}
 }
- 	
+
 ?>
