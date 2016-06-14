@@ -114,10 +114,11 @@ class CalemDashWoOrigDayBo extends CalemDashBo {
 		$paramsForC3['grid'] = array('y' => array('show' =>  true));
 		$paramsForC3['axis'] = array('x' => array('type' =>  'timeseries',
 																							'tick' =>  array('format' => '%Y-%m-%d',
-																															 'rotate' => 45)));
+																															 'rotate' => 15)));
 																															 # rotate axis labels for scaling
 		$paramsForC3['data']['x'] = 'dates';
 		$paramsForC3['data']['columns'] = $cols;
+		$paramsForC3['point']['show'] = false;
 
 		$jsontxt = json_encode($paramsForC3, JSON_PRETTY_PRINT);
 
