@@ -1,4 +1,16 @@
 ===========================================
+Calem Community Edition R2.1d Release Notes
+July 2016
+
+NOTE:
+Calem Community Edition is licensed under CalemEAM Public License.
+You must agree and comply with the license terms in order to
+use Calem Community Edition.
+
+Calem Community Edition R2.1d includes the following change:
+- Added PHP 7 support. You can now install Calem Community Edition with PHP 7.
+
+===========================================
 Calem Community Edition R2.1c Release Notes
 June 2016
 
