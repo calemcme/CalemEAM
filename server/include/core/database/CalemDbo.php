@@ -287,7 +287,7 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
 		//Construct insert stmt.
 		$sql=$this->getInsertSql();
 		//Prepare the stmt
-		$stmt=$this->conn->prepare($sql);
+		$stmt=$this->conn->prepare2($sql);
 		$this->bindChanges($stmt);
 		$this->conn->beginTransaction();
 		try {
@@ -376,7 +376,7 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
 		$this->setModifiedTime();
 		$sql=$this->getUpdateSql();
 		//Prepare the stmt
-		$stmt=$this->conn->prepare($sql);
+		$stmt=$this->conn->prepare2($sql);
 		$this->bindChanges($stmt);
 		$this->conn->beginTransaction();
 		try {
@@ -403,7 +403,7 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
 	 * Fetch functions by SQL directly.
 	 */
 	public function fetchBySql($sql, $firstRec=false) {
-		$stmt=$this->conn->prepare($sql);
+		$stmt=$this->conn->prepare2($sql);
 		return $this->_fetchBySql($stmt, $sql, $firstRec);
 	}	
 	
@@ -478,7 +478,7 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
 	 * Param preparation
 	 */
 	protected function _prepareStatement($sql, $param) {
-		$stmt=$this->conn->prepare($sql);
+		$stmt=$this->conn->prepare2($sql);
 		$i=1;
 		if (is_array($param)) {
 			foreach ($param as $val) {
@@ -495,7 +495,7 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
 	 */
 	public function insertBySql($sql) {
 		//Prepare the stmt
-		$stmt=$this->conn->prepare($sql);
+		$stmt=$this->conn->prepare2($sql);
 		$this->conn->beginTransaction();
 		try {
 			$stmt->execute();
@@ -526,7 +526,7 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
 	 */
 	public function updateBySql($sql) {
 		//Prepare the stmt
-		$stmt=$this->conn->prepare($sql);
+		$stmt=$this->conn->prepare2($sql);
 		$this->_updateBySql($stmt, $sql);	
 	}
 	
@@ -579,7 +579,7 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
 	}
 	
 	public function deleteBySql($sql, $recycle=false) {
-		$stmt=$this->conn->prepare($sql);
+		$stmt=$this->conn->prepare2($sql);
 		$this->_deleteBySql($stmt, $sql);
 	}
 	
@@ -621,7 +621,7 @@ require_once _CALEM_DIR_ . 'server/include/core/database/CalemDboDeletionExcepti
 	}
 	
 	public function executeBySql($sql) {
-		$stmt=$this->conn->prepare($sql);
+		$stmt=$this->conn->prepare2($sql);
 		$this->_executeBySql($stmt, $sql);
 	}
 	

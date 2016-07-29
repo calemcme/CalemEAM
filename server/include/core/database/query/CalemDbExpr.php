@@ -211,7 +211,7 @@ class CalemDbTime extends CalemDbString {
  * 
  */
 class CalemDbParamHolder extends CalemDbValue {
-	public function getSql() {
+	public function getSql($op=null) {
 		return '?';
 	}
 }

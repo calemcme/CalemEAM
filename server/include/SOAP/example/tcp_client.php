@@ -1,7 +1,6 @@
 <?php
 /**
- * This class provides methods to detect and convert binary data from an to
- * hexadecimal strings.
+ * TCP client.
  *
  * PHP versions 4 and 5
  *
@@ -14,32 +13,29 @@
  *
  * @category   Web Services
  * @package    SOAP
- * @author     Dietrich Ayala <dietrich@ganx4.com> Original Author
  * @author     Shane Caraveo <Shane@Caraveo.com>   Port to PEAR and more
+ * @author     Jan Schneider <jan@horde.org>       Maintenance
  * @copyright  2003-2007 The PHP Group
  * @license    http://www.php.net/license/2_02.txt  PHP License 2.02
  * @link       http://pear.php.net/package/SOAP
  */
-class SOAP_Type_hexBinary {
 
-    function to_bin($value)
-    {
-        return pack('H' . strlen($value), $value);
-    }
+require_once 'SOAP/Client.php';
 
-    function to_hex($value)
-    {
-        return bin2hex($value);
-    }
+/* Client. */
+$soapclient = new SOAP_Client('tcp://127.0.0.1:82');
 
-    function is_hexbin($value)
-    {
-        // First see if there are any invalid chars.
-        if (!strlen($value) || preg_match('/[^A-Fa-f0-9]/', $value)) {
-            return false;
-        }
+/* Namespace. */
+$options = array('namespace' => 'urn:SOAP_Example_Server', 'trace' => true);
 
-        return strcasecmp($value, SOAP_Type_hexBinary::to_hex(SOAP_Type_hexBinary::to_bin($value))) == 0;
-    }
+/* One. */
+$params = array('string' => 'this is string 1');
+$ret1 = $soapclient->call('echoString', $params, $options);
+echo "WIRE: \n" . $soapclient->getWire();
+print_r($ret1);
 
-}
+/* Two. */
+$params = array('string' => 'this is string 2');
+$ret2 = $soapclient->call('echoString', $params, $options);
+echo "WIRE: \n" . $soapclient->getWire();
+print_r($ret2);

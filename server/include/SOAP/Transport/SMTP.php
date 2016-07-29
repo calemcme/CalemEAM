@@ -146,18 +146,17 @@ class SOAP_Transport_SMTP extends SOAP_Transport
             'password' => $this->password,
             'auth' => $this->auth
         );
-        $mailer =& new Mail_smtp($mailer_params);
+        $mailer = new Mail_smtp($mailer_params);
         $result = $mailer->send($this->urlparts['path'], $headers, $out);
         if (!PEAR::isError($result)) {
-            $val =& new SOAP_Value('Message-ID', 'string', $headers['Message-ID']);
+            $val = new SOAP_Value('Message-ID', 'string', $headers['Message-ID']);
         } else {
-            $sval[] =& new SOAP_Value('faultcode', 'QName', 'SOAP-ENV:Client');
-            $sval[] =& new SOAP_Value('faultstring', 'string', "couldn't send SMTP message to {$this->urlparts['path']}");
-            $val =& new SOAP_Value('Fault', 'Struct', $sval);
+            $sval[] = new SOAP_Value('faultcode', 'QName', SOAP_BASE::SOAPENVPrefix().':Client');
+            $sval[] = new SOAP_Value('faultstring', 'string', "couldn't send SMTP message to {$this->urlparts['path']}");
+            $val = new SOAP_Value('Fault', 'Struct', $sval);
         }
 
-        $mqname =& new QName($method, $namespace);
-        $methodValue =& new SOAP_Value('Response', 'Struct', array($val));
+        $methodValue = new SOAP_Value('Response', 'Struct', array($val));
 
         $this->incoming_payload = $this->makeEnvelope($methodValue,
                                                       $this->headers,
@@ -189,16 +188,16 @@ class SOAP_Transport_SMTP extends SOAP_Transport
     function _validateUrl()
     {
         if (!is_array($this->urlparts)) {
-            $this->_raiseSoapFault("Unable to parse URL $url");
+            $this->_raiseSoapFault("Unable to parse URL $this->url");
             return false;
         }
         if (!isset($this->urlparts['scheme']) ||
             strcasecmp($this->urlparts['scheme'], 'mailto') != 0) {
-                $this->_raiseSoapFault("Unable to parse URL $url");
+                $this->_raiseSoapFault("Unable to parse URL $this->url");
                 return false;
         }
         if (!isset($this->urlparts['path'])) {
-            $this->_raiseSoapFault("Unable to parse URL $url");
+            $this->_raiseSoapFault("Unable to parse URL $this->url");
             return false;
         }
         return true;

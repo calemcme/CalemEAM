@@ -63,7 +63,7 @@ require_once _CALEM_DIR_ . 'server/include/XML/Serializer.php';
  		global $_CALEM_conf;
  		$this->responseFormat = $_CALEM_conf['default_soap_output_format'];
  		//Build the serialization object
- 		$this->sz = &new XML_Serializer($_CALEM_conf['calem_xml_serializer_option']);
+ 		$this->sz = new XML_Serializer($_CALEM_conf['calem_xml_serializer_option']);
  	}
  	
  	/**

@@ -22,8 +22,12 @@
  * @link       http://pear.php.net/package/SOAP
  */
 
+/** SOAP_Base */
 require_once 'SOAP/Base.php';
 
+/**
+ * @package SOAP
+ */
 class SOAP_DISCO_Server extends SOAP_Base_Object {
 
     var $namespaces     = array(SCHEMA_WSDL => 'wsdl', SCHEMA_SOAP => 'soap');
@@ -90,7 +94,7 @@ class SOAP_DISCO_Server extends SOAP_Base_Object {
             $flipped = array_flip($this->soap_server->_namespaces);
             $this->namespaces[$this->_service_ns] = 'tns';
             $this->namespaces[$flipped['xsd']] = 'xsd';
-            $this->namespaces[$flipped['SOAP-ENC']] = 'SOAP-ENC';
+            $this->namespaces[$flipped[SOAP_BASE::SOAPENCPrefix()]] = SOAP_BASE::SOAPENCPrefix();
         }
 
         // DEFINITIONS
@@ -208,10 +212,10 @@ class SOAP_DISCO_Server extends SOAP_Base_Object {
                         $el['attr']['type'] = $_vartypens . ':' . $_vartype;
                     } else {
                         $ctype['complexContent']['attr'] = '';
-                        $ctype['complexContent']['restriction']['attr']['base'] = 'SOAP-ENC:Array';
-                        foreach ($_vartype as $array_var => $array_type) {
+                        $ctype['complexContent']['restriction']['attr']['base'] = SOAP_BASE::SOAPENCPrefix().':Array';
+                        foreach ($_vartype as $array_type) {
                             list($_vartypens, $_vartype) = $this->_getTypeNs($array_type);
-                            $ctype['complexContent']['restriction']['attribute']['attr']['ref'] = 'SOAP-ENC:arrayType';
+                            $ctype['complexContent']['restriction']['attribute']['attr']['ref'] = SOAP_BASE::SOAPENCPrefix().':arrayType';
                             $ctype['complexContent']['restriction']['attribute']['attr']['wsdl:arrayType'] = $_vartypens . ':' . $_vartype . '[]';
                         }
                     }
@@ -362,7 +366,7 @@ class SOAP_DISCO_Server extends SOAP_Base_Object {
                 $this->_wsdl['definitions']['attr']['xmlns:' . $ns_pref] = $m[1][0];
             }
             $typens = $this->namespaces[$m[1][0]];
-            $type = ereg_replace($m[0][0],'',$type);
+            $type = preg_replace($m[0][0],'',$type);
         } else {
             $typens = 'xsd';
         }
@@ -372,8 +376,8 @@ class SOAP_DISCO_Server extends SOAP_Base_Object {
     function _ifComplexTypeExists($typesArray, $type_name)
     {
         if (is_array($typesArray)) {
-            foreach ($typesArray as $index => $type_data) {
-                if ($typesArray[$index]['attr']['name'] == $type_name) {
+            foreach ($typesArray as $type_data) {
+                if ($type_data['attr']['name'] == $type_name) {
                     return true;
                 }
             }

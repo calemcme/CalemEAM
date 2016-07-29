@@ -282,6 +282,9 @@ class Cache_Lite
         foreach($options as $key => $value) {
             $this->setOption($key, $value);
         }
+       if ( !function_exists('set_magic_quotes_runtime') ) {
+          function set_magic_quotes_runtime($value) { return true;}
+       }
     }
     
     /**

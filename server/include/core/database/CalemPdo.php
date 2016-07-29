@@ -68,7 +68,7 @@ require_once _CALEM_DIR_ . 'server/include/util/CalemDebug.php';
  	 * @return CalemPDOStatement
  	 * PDOStatement PDO::prepare(string statement [, array driver_options])
  	 */
- 	public function prepare($sql, array $driver_options=NULL) {
+ 	public function prepare2($sql, array $driver_options=NULL) {
  		if (!isset($driver_options)) {
  			$driver_options=$this->stmt_options;
  		}

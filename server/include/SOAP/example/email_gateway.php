@@ -1,7 +1,11 @@
 <?php
 /**
- * This class provides methods to detect and convert binary data from an to
- * hexadecimal strings.
+ * This reads a message from stdin, and passes the request to a SOAP server
+ * residing on a web server, sends the response out as an email. You can use
+ * this from qmail by creating a .qmail-soapgateway file with:
+ * <code>
+ * | /usr/bin/php /path/to/email_server.php
+ * </code>
  *
  * PHP versions 4 and 5
  *
@@ -14,32 +18,29 @@
  *
  * @category   Web Services
  * @package    SOAP
- * @author     Dietrich Ayala <dietrich@ganx4.com> Original Author
  * @author     Shane Caraveo <Shane@Caraveo.com>   Port to PEAR and more
+ * @author     Jan Schneider <jan@horde.org>       Maintenance
  * @copyright  2003-2007 The PHP Group
  * @license    http://www.php.net/license/2_02.txt  PHP License 2.02
  * @link       http://pear.php.net/package/SOAP
  */
-class SOAP_Type_hexBinary {
 
-    function to_bin($value)
-    {
-        return pack('H' . strlen($value), $value);
-    }
+/* SOAP_Server_Email_Gateway */
+require_once 'SOAP/Server/Email_Gateway.php';
 
-    function to_hex($value)
-    {
-        return bin2hex($value);
-    }
-
-    function is_hexbin($value)
-    {
-        // First see if there are any invalid chars.
-        if (!strlen($value) || preg_match('/[^A-Fa-f0-9]/', $value)) {
-            return false;
-        }
-
-        return strcasecmp($value, SOAP_Type_hexBinary::to_hex(SOAP_Type_hexBinary::to_bin($value))) == 0;
-    }
-
+/* Read stdin. */
+$fin = fopen('php://stdin', 'rb');
+if (!$fin) {
+    exit(1);
 }
+
+$email = '';
+while (!feof($fin) && $data = fread($fin, 8096)) {
+    $email .= $data;
+}
+
+fclose($fin);
+
+/* Do it! */
+$server = new SOAP_Server_Email_Gateway();
+$server->service($data, 'http://localhost/soap/example/server.php');

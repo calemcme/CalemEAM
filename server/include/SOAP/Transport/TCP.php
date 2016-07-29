@@ -136,11 +136,11 @@ class SOAP_Transport_TCP extends SOAP_Transport
     function _validateUrl()
     {
         if (!is_array($this->urlparts) ) {
-            $this->_raiseSoapFault("Unable to parse URL $url");
+            $this->_raiseSoapFault("Unable to parse URL $this->url");
             return false;
         }
         if (!isset($this->urlparts['host'])) {
-            $this->_raiseSoapFault("No host in URL $url");
+            $this->_raiseSoapFault("No host in URL $this->url");
             return false;
         }
         if (!isset($this->urlparts['path']) || !$this->urlparts['path']) {

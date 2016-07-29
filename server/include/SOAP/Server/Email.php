@@ -19,6 +19,7 @@
  * @link       http://pear.php.net/package/SOAP
  */
 
+/** SOAP_Server */
 require_once 'SOAP/Server.php';
 require_once 'SOAP/Client.php';
 require_once 'SOAP/Transport.php';
@@ -95,11 +96,9 @@ class SOAP_Server_Email extends SOAP_Server {
         /* If neither matches, we'll just try it anyway. */
         if (stristr($data, 'Content-Type: application/dime')) {
             $this->_decodeDIMEMessage($data, $this->headers, $attachments);
-            $useEncoding = 'DIME';
         } elseif (stristr($data, 'MIME-Version:')) {
             /* This is a mime message, let's decode it. */
             $this->_decodeMimeMessage($data, $this->headers, $attachments);
-            $useEncoding = 'Mime';
         } else {
             /* The old fallback, but decodeMimeMessage handles things fine. */
             $this->_parseEmail($data);
@@ -145,8 +144,7 @@ class SOAP_Server_Email extends SOAP_Server {
 
         /* Get the character encoding of the incoming request treat incoming
          * data as UTF-8 if no encoding set. */
-        if (!$response &&
-            !$this->_getContentEncoding($this->headers['content-type'])) {
+        if (!$this->_getContentEncoding($this->headers['content-type'])) {
             $this->xml_encoding = SOAP_DEFAULT_ENCODING;
             /* An encoding we don't understand, return a fault. */
             $this->_raiseSoapFault('Unsupported encoding, use one of ISO-8859-1, US-ASCII, UTF-8', '', '', 'Server');
@@ -167,7 +165,7 @@ class SOAP_Server_Email extends SOAP_Server {
                 } else {
                     /* Default is DIME. */
                     $soap_msg = $this->_makeDIMEMessage($soap_msg);
-                    $header['Content-Type'] = 'application/dime';
+                    $soap_msg['headers']['Content-Type'] = 'application/dime';
                 }
                 if (PEAR::isError($soap_msg)) {
                     return $this->raiseSoapFault($soap_msg);
