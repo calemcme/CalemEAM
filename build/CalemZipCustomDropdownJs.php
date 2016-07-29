@@ -45,7 +45,7 @@ class CalemZipCustomDropdownJs extends CalemZipDirectoryJs {
 	}
 	
 	//Convert files properly
-	public function convert($content, $file) {
+	public function convert($content, $file=null) {
 		$obj=unserialize($content);
 		$ar=$this->encode($obj);
 		$tb=$this->getTableName($file);

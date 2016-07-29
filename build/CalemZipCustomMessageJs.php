@@ -45,7 +45,7 @@ class CalemZipCustomMessageJs extends CalemZipDirectoryJs {
 	}
 	
 	//Convert files properly
-	public function convert($content) {
+	public function convert($content, $p2=null) {
 		$obj=unserialize($content);
 		$js='';
 		foreach ($obj as $key=>$value) {

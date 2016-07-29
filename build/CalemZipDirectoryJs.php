@@ -81,7 +81,7 @@ class CalemZipDirectoryJs extends CalemZipBaseJs {
 		}
 	}	
 	
-	public function convert($js) {
+	public function convert($js, $p2=null) {
 		return $js;	
 	}
 	

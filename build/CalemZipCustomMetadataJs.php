@@ -45,7 +45,7 @@ class CalemZipCustomMetadataJs extends CalemZipDirectoryJs {
 	}
 	
 	//Convert files properly
-	public function convert($content) {
+	public function convert($content, $p2=null) {
 		$obj=unserialize($content);
 		return "CalemMetadataCustom['" . $obj['table_name'] . "']=" . json_encode($obj) . CALEM_SEP_LFCR;
 	}	

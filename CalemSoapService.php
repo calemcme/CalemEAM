@@ -49,7 +49,7 @@ require_once 'SOAP/Parser.php';
 		$calemSoapRequest->sendFault(CALEM_SF_NO_POSTDATA);
 	}
 	//Processing postData
-	$parser=&new SOAP_Parser($postData);
+	$parser=new SOAP_Parser($postData);
  	$request_headers = $parser->getHeaders();
  	if ($request_headers) {
  		if (!is_a($request_headers, 'SOAP_Value')) {
