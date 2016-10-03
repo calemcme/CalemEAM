@@ -1,4 +1,16 @@
 ===========================================
+Calem Community Edition R2.1e Release Notes
+October 2016
+
+NOTE:
+Calem Community Edition is licensed under CalemEAM Public License.
+You must agree and comply with the license terms in order to
+use Calem Community Edition.
+
+Calem Community Edition R2.1e includes the following change:
+- Unable to create or update user record.
+
+===========================================
 Calem Community Edition R2.1d Release Notes
 July 2016
 
