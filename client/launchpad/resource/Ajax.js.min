@@ -194,7 +194,7 @@ sd._methodEl.setAttribute("xmlns:"+namespaceId,namespace);bodyEl.appendChild(sd.
 return null;}else{if(faultEl!=null&&faultEl.nodeName!=(el.prefix+":Fault"))
 return null;}
 return new AjxSoapFault(faultEl);};AjxSoapDoc.prototype.setMethodAttribute=function(name,value){this._methodEl.setAttribute(name,value);};AjxSoapDoc.prototype.set=function(name,value,parent){var doc=this.getDoc();var p=name?doc.createElement(name):doc.createDocumentFragment();if(value!=null){if(typeof value=="object"){for(i in value)
-this.set(i,value[i],p);}else{if(AjxEnv.isSafari)value=AjxStringUtil.xmlEncode(value);p.appendChild(doc.createTextNode(value));}}
+this.set(i,value[i],p);}else{p.appendChild(doc.createTextNode(value));}}
 if(!parent)
 parent=this._methodEl;return parent.appendChild(p);};AjxSoapDoc.prototype.getMethod=function(){return this._methodEl;};AjxSoapDoc.prototype.createHeaderElement=function(){var d=this._xmlDoc.getDoc();var envEl=d.firstChild;var header=this.getHeader();if(header!=null){throw new AjxSoapException("SOAP header already exists",AjxSoapException.ELEMENT_EXISTS,"AjxSoapDoc.prototype.createHeaderElement");}
 header=d.createElement("soap:Header")
