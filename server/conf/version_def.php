@@ -23,8 +23,8 @@ if (!defined('_CALEM_DIR_')) die("Access denied at ".__FILE__);
 
 $_CALEM_version=array(
 	'id'=>VERSION_ID,
-	'vid'=>'r2-1-0d',
-	'note'=>'Calem Community Edition r2.1d',
+	'vid'=>'r2-1-0e',
+	'note'=>'Calem Community Edition r2.1e',
 	'props'=>array(
 	)	
 );
